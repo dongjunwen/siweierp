@@ -33,9 +33,9 @@ public class SwaggerConfig  {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("思维纺织ERP测试接口")
-                .termsOfServiceUrl("https://XXXX")
+                .termsOfServiceUrl("https://github.com/dongjunwen/siweierp")
                 .description("思维纺织ERP后台接口")
-                .contact(new Contact("思维纺织ER","https://XXXX","704434431@qq.com"))
+                .contact(new Contact("思维纺织ER","https://github.com/dongjunwen/siweierp","704434431@qq.com"))
                 .version("1.0.0")
                 .build();
     }
