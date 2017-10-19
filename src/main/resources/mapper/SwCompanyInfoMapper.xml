@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fangxin.siwei.fangzhi.mapper.SwCompanyInfoMapper">
+  <resultMap id="BaseResultMap" type="com.fangxin.siwei.fangzhi.modal.SwCompanyInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="comp_no" jdbcType="VARCHAR" property="compNo" />
+    <result column="comp_name" jdbcType="VARCHAR" property="compName" />
+    <result column="contact_name" jdbcType="VARCHAR" property="contactName" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="telphone" jdbcType="VARCHAR" property="telphone" />
+    <result column="tax" jdbcType="VARCHAR" property="tax" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="addr" jdbcType="VARCHAR" property="addr" />
+    <result column="is_self" jdbcType="CHAR" property="isSelf" />
+    <result column="is_valid" jdbcType="CHAR" property="isValid" />
+    <result column="memo" jdbcType="VARCHAR" property="memo" />
+    <result column="create_no" jdbcType="VARCHAR" property="createNo" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="modi_no" jdbcType="VARCHAR" property="modiNo" />
+    <result column="modi_time" jdbcType="TIMESTAMP" property="modiTime" />
+    <result column="version" jdbcType="INTEGER" property="version" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, comp_no, comp_name, contact_name, mobile, telphone, tax, email, addr, is_self, 
+    is_valid, memo, create_no, create_time, modi_no, modi_time, version
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sw_company_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sw_company_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fangxin.siwei.fangzhi.modal.SwCompanyInfo">
+    insert into sw_company_info (id, comp_no, comp_name, 
+      contact_name, mobile, telphone, 
+      tax, email, addr, is_self, 
+      is_valid, memo, create_no, 
+      create_time, modi_no, modi_time, 
+      version)
+    values (#{id,jdbcType=INTEGER}, #{compNo,jdbcType=VARCHAR}, #{compName,jdbcType=VARCHAR}, 
+      #{contactName,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{telphone,jdbcType=VARCHAR}, 
+      #{tax,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{addr,jdbcType=VARCHAR}, #{isSelf,jdbcType=CHAR}, 
+      #{isValid,jdbcType=CHAR}, #{memo,jdbcType=VARCHAR}, #{createNo,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{modiNo,jdbcType=VARCHAR}, #{modiTime,jdbcType=TIMESTAMP}, 
+      #{version,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fangxin.siwei.fangzhi.modal.SwCompanyInfo">
+    insert into sw_company_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="compNo != null">
+        comp_no,
+      </if>
+      <if test="compName != null">
+        comp_name,
+      </if>
+      <if test="contactName != null">
+        contact_name,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="telphone != null">
+        telphone,
+      </if>
+      <if test="tax != null">
+        tax,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="addr != null">
+        addr,
+      </if>
+      <if test="isSelf != null">
+        is_self,
+      </if>
+      <if test="isValid != null">
+        is_valid,
+      </if>
+      <if test="memo != null">
+        memo,
+      </if>
+      <if test="createNo != null">
+        create_no,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="modiNo != null">
+        modi_no,
+      </if>
+      <if test="modiTime != null">
+        modi_time,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="compNo != null">
+        #{compNo,jdbcType=VARCHAR},
+      </if>
+      <if test="compName != null">
+        #{compName,jdbcType=VARCHAR},
+      </if>
+      <if test="contactName != null">
+        #{contactName,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="telphone != null">
+        #{telphone,jdbcType=VARCHAR},
+      </if>
+      <if test="tax != null">
+        #{tax,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="addr != null">
+        #{addr,jdbcType=VARCHAR},
+      </if>
+      <if test="isSelf != null">
+        #{isSelf,jdbcType=CHAR},
+      </if>
+      <if test="isValid != null">
+        #{isValid,jdbcType=CHAR},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="createNo != null">
+        #{createNo,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modiNo != null">
+        #{modiNo,jdbcType=VARCHAR},
+      </if>
+      <if test="modiTime != null">
+        #{modiTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fangxin.siwei.fangzhi.modal.SwCompanyInfo">
+    update sw_company_info
+    <set>
+      <if test="compNo != null">
+        comp_no = #{compNo,jdbcType=VARCHAR},
+      </if>
+      <if test="compName != null">
+        comp_name = #{compName,jdbcType=VARCHAR},
+      </if>
+      <if test="contactName != null">
+        contact_name = #{contactName,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="telphone != null">
+        telphone = #{telphone,jdbcType=VARCHAR},
+      </if>
+      <if test="tax != null">
+        tax = #{tax,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="addr != null">
+        addr = #{addr,jdbcType=VARCHAR},
+      </if>
+      <if test="isSelf != null">
+        is_self = #{isSelf,jdbcType=CHAR},
+      </if>
+      <if test="isValid != null">
+        is_valid = #{isValid,jdbcType=CHAR},
+      </if>
+      <if test="memo != null">
+        memo = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="createNo != null">
+        create_no = #{createNo,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modiNo != null">
+        modi_no = #{modiNo,jdbcType=VARCHAR},
+      </if>
+      <if test="modiTime != null">
+        modi_time = #{modiTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fangxin.siwei.fangzhi.modal.SwCompanyInfo">
+    update sw_company_info
+    set comp_no = #{compNo,jdbcType=VARCHAR},
+      comp_name = #{compName,jdbcType=VARCHAR},
+      contact_name = #{contactName,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      telphone = #{telphone,jdbcType=VARCHAR},
+      tax = #{tax,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      addr = #{addr,jdbcType=VARCHAR},
+      is_self = #{isSelf,jdbcType=CHAR},
+      is_valid = #{isValid,jdbcType=CHAR},
+      memo = #{memo,jdbcType=VARCHAR},
+      create_no = #{createNo,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modi_no = #{modiNo,jdbcType=VARCHAR},
+      modi_time = #{modiTime,jdbcType=TIMESTAMP},
+      version = #{version,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

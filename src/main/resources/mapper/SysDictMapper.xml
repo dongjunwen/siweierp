@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fangxin.siwei.fangzhi.mapper.SysDictMapper">
+  <resultMap id="BaseResultMap" type="com.fangxin.siwei.fangzhi.modal.SysDict">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="dict_type" jdbcType="VARCHAR" property="dictType" />
+    <result column="dict_code" jdbcType="VARCHAR" property="dictCode" />
+    <result column="dict_name" jdbcType="VARCHAR" property="dictName" />
+    <result column="dict_value" jdbcType="VARCHAR" property="dictValue" />
+    <result column="dict_desc" jdbcType="VARCHAR" property="dictDesc" />
+    <result column="fh_dict_code" jdbcType="VARCHAR" property="fhDictCode" />
+    <result column="memo" jdbcType="VARCHAR" property="memo" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, dict_type, dict_code, dict_name, dict_value, dict_desc, fh_dict_code, memo
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_dict
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sys_dict
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fangxin.siwei.fangzhi.modal.SysDict">
+    insert into sys_dict (id, dict_type, dict_code, 
+      dict_name, dict_value, dict_desc, 
+      fh_dict_code, memo)
+    values (#{id,jdbcType=INTEGER}, #{dictType,jdbcType=VARCHAR}, #{dictCode,jdbcType=VARCHAR}, 
+      #{dictName,jdbcType=VARCHAR}, #{dictValue,jdbcType=VARCHAR}, #{dictDesc,jdbcType=VARCHAR}, 
+      #{fhDictCode,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fangxin.siwei.fangzhi.modal.SysDict">
+    insert into sys_dict
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="dictType != null">
+        dict_type,
+      </if>
+      <if test="dictCode != null">
+        dict_code,
+      </if>
+      <if test="dictName != null">
+        dict_name,
+      </if>
+      <if test="dictValue != null">
+        dict_value,
+      </if>
+      <if test="dictDesc != null">
+        dict_desc,
+      </if>
+      <if test="fhDictCode != null">
+        fh_dict_code,
+      </if>
+      <if test="memo != null">
+        memo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="dictType != null">
+        #{dictType,jdbcType=VARCHAR},
+      </if>
+      <if test="dictCode != null">
+        #{dictCode,jdbcType=VARCHAR},
+      </if>
+      <if test="dictName != null">
+        #{dictName,jdbcType=VARCHAR},
+      </if>
+      <if test="dictValue != null">
+        #{dictValue,jdbcType=VARCHAR},
+      </if>
+      <if test="dictDesc != null">
+        #{dictDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="fhDictCode != null">
+        #{fhDictCode,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fangxin.siwei.fangzhi.modal.SysDict">
+    update sys_dict
+    <set>
+      <if test="dictType != null">
+        dict_type = #{dictType,jdbcType=VARCHAR},
+      </if>
+      <if test="dictCode != null">
+        dict_code = #{dictCode,jdbcType=VARCHAR},
+      </if>
+      <if test="dictName != null">
+        dict_name = #{dictName,jdbcType=VARCHAR},
+      </if>
+      <if test="dictValue != null">
+        dict_value = #{dictValue,jdbcType=VARCHAR},
+      </if>
+      <if test="dictDesc != null">
+        dict_desc = #{dictDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="fhDictCode != null">
+        fh_dict_code = #{fhDictCode,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        memo = #{memo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fangxin.siwei.fangzhi.modal.SysDict">
+    update sys_dict
+    set dict_type = #{dictType,jdbcType=VARCHAR},
+      dict_code = #{dictCode,jdbcType=VARCHAR},
+      dict_name = #{dictName,jdbcType=VARCHAR},
+      dict_value = #{dictValue,jdbcType=VARCHAR},
+      dict_desc = #{dictDesc,jdbcType=VARCHAR},
+      fh_dict_code = #{fhDictCode,jdbcType=VARCHAR},
+      memo = #{memo,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
