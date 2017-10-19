@@ -11,7 +11,7 @@
             <property name="suppressAllComments" value="true"/>
         </commentGenerator>
         <!--数据库链接地址账号密码-->
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://127.0.0.1:3306/wm_report" userId="root" password="root">
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://127.0.0.1:3306/sw_db" userId="root" password="root">
         </jdbcConnection>
         <javaTypeResolver>
             <property name="forceBigDecimals" value="false"/>
@@ -35,14 +35,23 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
         <!--生成对应表及类名-->
-        <table tableName="t_sys_user"
-               domainObjectName="TSysUser"
+
+
+        <table tableName="sw_depart_employee"
+               domainObjectName="SwDepartEmployee"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByExample="false"
                enableSelectByExample="false"
                selectByExampleQueryId="false">
-
         </table>
+
+       <!-- <table tableName="bill_refund_log" enableCountByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="true"
+               enableInsert="true" enableUpdateByPrimaryKey="true"
+               enableDeleteByPrimaryKey="true">
+            <property name="useActualColumnNames" value="false" />
+        </table>-->
     </context>
 </generatorConfiguration>  

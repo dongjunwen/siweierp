@@ -7,6 +7,7 @@ import org.springframework.core.Ordered;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
+import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -22,6 +23,10 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
      */
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new MyInterceptor()).addPathPatterns("/api/**");
+    }
+    @Override
+    public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
+        configurer.favorPathExtension(false);
     }
 
     private CorsConfiguration buildConfig() {

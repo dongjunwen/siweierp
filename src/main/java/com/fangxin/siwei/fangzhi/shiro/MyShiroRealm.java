@@ -1,21 +1,26 @@
 package com.fangxin.siwei.fangzhi.shiro;
 
 
+import com.fangxin.siwei.fangzhi.modal.SysUser;
 import com.fangxin.siwei.fangzhi.modal.User;
 import com.fangxin.siwei.fangzhi.service.UserService;
+import com.fangxin.siwei.fangzhi.service.system.SysUserService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 
+
 /**
- * Created by Administrator on 2017/8/2.
- */
+ * @Date:2017/10/19 0019 15:08
+ * @Author lu.dong
+ * @Description：
+ **/
 public class MyShiroRealm extends AuthorizingRealm{
 
     @Autowired
-    UserService userService;
+    SysUserService sysUserService;
 
     /**
      * 登录认证
@@ -28,10 +33,10 @@ public class MyShiroRealm extends AuthorizingRealm{
         //存放登录信息
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
         String username = token.getUsername();
-        User user = userService.login(username);
-        if(user!=null){
+        SysUser sysUser = sysUserService.login(username);
+        if(sysUser!=null){
             //放入shiro.调用CredentialsMatcher检验密码
-            return new SimpleAuthenticationInfo(user, user.getPassWord(), getName());
+            return new SimpleAuthenticationInfo(sysUser, sysUser.getPassword(), getName());
         }
         return null;
     }

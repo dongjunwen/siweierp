@@ -20,6 +20,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.Date;
 import java.util.Map;
@@ -29,8 +30,9 @@ import java.util.Map;
  * Restful
  */
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api/userOld")
 @Api(tags = "用户",description = "用户相关api")
+@ApiIgnore
 public class UserController {
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 

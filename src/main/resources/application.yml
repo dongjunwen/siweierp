@@ -15,7 +15,7 @@ spring.session.store-type: none
 spring:
     datasource:
         driver-class-name: com.mysql.jdbc.Driver
-        url: jdbc:mysql://127.0.0.1:3306/trade?useSSL=false&useUnicode=true&characterEncoding=utf8
+        url: jdbc:mysql://127.0.0.1:3306/sw_db?useSSL=false&useUnicode=true&characterEncoding=utf8
         username: root
         password: root
         # 使用druid数据源

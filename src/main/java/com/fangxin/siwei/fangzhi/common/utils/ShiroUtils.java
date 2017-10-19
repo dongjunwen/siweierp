@@ -1,4 +1,5 @@
 package com.fangxin.siwei.fangzhi.common.utils;
+import com.fangxin.siwei.fangzhi.modal.SysUser;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
@@ -13,6 +14,20 @@ public class ShiroUtils {
 
 	public static Session getSession() {
 		return SecurityUtils.getSubject().getSession();
+	}
+
+	public static SysUser getCurrentUser() {
+		 SysUser _sysUser=(SysUser)SecurityUtils.getSubject().getPrincipal();
+		 return  _sysUser;
+	}
+
+	public static String  getCurrentUserNo() {
+		SysUser _sysUser=getCurrentUser();
+		if (_sysUser==null){
+			return "system";
+		}else{
+			return  _sysUser.getUserNo();
+		}
 	}
 
 	public static Subject getSubject() {
