@@ -2,6 +2,7 @@ package com.fangxin.siwei.fangzhi.service.system;
 
 import com.fangxin.siwei.fangzhi.common.result.Result;
 import com.fangxin.siwei.fangzhi.modal.SysUser;
+import com.fangxin.siwei.fangzhi.modal.User;
 import com.fangxin.siwei.fangzhi.vo.SysUserVo;
 
 /**
@@ -30,4 +31,17 @@ public interface SysUserService {
      * @return
      */
     Result<Integer> updateUser(SysUserVo sysUserVo);
+
+    /**
+     * 按照用户号删除用户
+     * @param userNo
+     */
+    void delUser(String userNo);
+
+    /**
+     * 按照用户号获取用户
+     * @param userNo
+     * @return
+     */
+    SysUser getUserById(String userNo);
 }

@@ -4,6 +4,8 @@ import com.fangxin.siwei.fangzhi.common.enums.ResultCode;
 import com.fangxin.siwei.fangzhi.common.result.Result;
 import com.fangxin.siwei.fangzhi.common.validator.ValidatorUtil;
 import com.fangxin.siwei.fangzhi.common.validator.group.AddGroup;
+import com.fangxin.siwei.fangzhi.modal.SysUser;
+import com.fangxin.siwei.fangzhi.modal.User;
 import com.fangxin.siwei.fangzhi.service.system.SysUserService;
 import com.fangxin.siwei.fangzhi.vo.SysUserVo;
 import io.swagger.annotations.Api;
@@ -13,10 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @Date:2017/10/19 0019 15:05
@@ -66,5 +65,22 @@ public class SysUserontroller {
             return Result.newError(ResultCode.FAIL);
         }
     }
+
+    @RequestMapping(value = "/{userNo}",method = RequestMethod.DELETE)
+    @ApiOperation(value="删除用户", notes="根据url的用户编号来指定删除对象")
+    @ApiImplicitParam(name = "userNo", value = "用户编号", required = true, dataType = "string",paramType = "path")
+    public Result<String>  delUser(@PathVariable("userNo")String userNo){
+        sysUserService.delUser(userNo);
+        return Result.newSuccess("已删除");
+    }
+
+    @RequestMapping(value = "/{userNo}",method = RequestMethod.GET)
+    @ApiOperation(value="获取用户详细信息", notes="根据url的用户编号来获取用户详细信息")
+    @ApiImplicitParam(name = "userNo", value = "用户编号", required = true, dataType = "string",paramType = "path")
+    public Result<SysUser> getUserById(@PathVariable("userNo")String userNo){
+        SysUser user = sysUserService.getUserById(userNo);
+        return Result.newSuccess(user);
+    }
+
 
 }

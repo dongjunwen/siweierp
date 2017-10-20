@@ -16,4 +16,6 @@ public interface SysUserMapper  {
     int updateByPrimaryKey(SysUser record);
 
     SysUser selectByUserNo(String userNo);
+
+    void deleteByUserNo(String userNo);
 }

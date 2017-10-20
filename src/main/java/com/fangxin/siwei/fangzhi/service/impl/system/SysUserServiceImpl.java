@@ -7,11 +7,8 @@ import com.fangxin.siwei.fangzhi.common.utils.MD5Util;
 import com.fangxin.siwei.fangzhi.common.utils.ShiroUtils;
 import com.fangxin.siwei.fangzhi.mapper.SysUserMapper;
 import com.fangxin.siwei.fangzhi.modal.SysUser;
-import com.fangxin.siwei.fangzhi.modal.User;
-import com.fangxin.siwei.fangzhi.service.AbstractService;
 import com.fangxin.siwei.fangzhi.service.system.SysUserService;
 import com.fangxin.siwei.fangzhi.vo.SysUserVo;
-import io.swagger.models.auth.In;
 import org.apache.commons.beanutils.BeanUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -69,6 +66,15 @@ public class SysUserServiceImpl  implements SysUserService {
         return Result.newSuccess(sysUserMapper.updateByPrimaryKeySelective(sysUser));
     }
 
+    @Override
+    public void delUser(String userNo) {
+        sysUserMapper.deleteByUserNo(userNo);
+    }
+
+    @Override
+    public SysUser getUserById(String userNo) {
+        return sysUserMapper.selectByUserNo(userNo);
+    }
 
     private void convertVoToEntity(SysUser sysUser,SysUserVo sysUserVo) {
         try {
