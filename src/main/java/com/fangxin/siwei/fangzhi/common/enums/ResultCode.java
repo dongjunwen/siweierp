@@ -21,7 +21,8 @@ public enum ResultCode {
     SUCCESS("200","操作成功"),
     FAIL("500","系统异常"),
 	USER_NO_LOGGED_IN("510","用户未登录"),
-	FOR_UNAUTHORIZED("511","用户未授权");
+	FOR_UNAUTHORIZED("511","用户未授权"),
+    USERNAME_OR_PASS_ERR("512","用户名或密码错误");
 
     String code;
     String message;

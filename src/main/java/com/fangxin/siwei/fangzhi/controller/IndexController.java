@@ -1,5 +1,7 @@
 package com.fangxin.siwei.fangzhi.controller;
 
+import com.fangxin.siwei.fangzhi.common.enums.ResultCode;
+import com.fangxin.siwei.fangzhi.common.result.Result;
 import com.fangxin.siwei.fangzhi.common.validator.Assert;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -39,7 +41,7 @@ public class IndexController {
             @ApiImplicitParam(name = "name",value = "用户名",paramType = "form"),
             @ApiImplicitParam(name = "password",value = "用户密码",paramType = "form")
     })
-    public ResponseEntity<String> login(String name, String password, RedirectAttributes redirectAttributes){
+    public Result<String> login(String name, String password, RedirectAttributes redirectAttributes){
         Assert.isBlank(name,"用户名不能为空");
         Assert.isBlank(password,"密码不能为空");
         //模拟登录
@@ -47,17 +49,18 @@ public class IndexController {
         Subject currentUser  = SecurityUtils.getSubject();
         try {
             currentUser.login(token);
-            return ResponseEntity.ok(name+"登录成功!");
+            return Result.newSuccess(name+"登录成功!");
         }catch(Exception e){
-            return new ResponseEntity<String>("用户名或密码错误", HttpStatus.UNPROCESSABLE_ENTITY);
+            //return new ResponseEntity<String>("用户名或密码错误", HttpStatus.UNPROCESSABLE_ENTITY);
+            return Result.newError(ResultCode.USERNAME_OR_PASS_ERR);
         }
     }
 
     @ApiOperation(value = "退出登录")
     @RequestMapping(value="/logout",method=RequestMethod.GET)
-    public ResponseEntity<String> logout(){
+    public Result<String> logout(){
         Subject subject = SecurityUtils.getSubject();
         subject.logout();
-        return ResponseEntity.ok("已退出");
+        return Result.newSuccess("已退出!");
     }
 }

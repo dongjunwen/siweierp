@@ -44,9 +44,9 @@ public class SwCompanyInfoController {
             if(!_result.isSuccess()){
                 return Result.newError(_result.getCode(),_result.getMessage());
             }
-            return  Result.newSuccess("添加成功");
+            return  Result.newSuccess("添加公司成功");
         }catch (Exception e){
-            logger.error("添加异常!{}",e);
+            logger.error("添加公司异常!{}",e);
             return Result.newError(ResultCode.FAIL);
         }
     }
@@ -59,15 +59,15 @@ public class SwCompanyInfoController {
             if (!_result.isSuccess()) {
                 return Result.newError(_result.getCode(), _result.getMessage());
             }
-            return Result.newSuccess("修改成功");
+            return Result.newSuccess("修改公司成功");
         } catch (Exception e) {
-            logger.error("修改异常!{}", e);
+            logger.error("修改公司异常!{}", e);
             return Result.newError(ResultCode.FAIL);
         }
     }
 
     @RequestMapping(value = "/{compNo}",method = RequestMethod.DELETE)
-    @ApiOperation(value="删除用户", notes="根据url的compNo来指定删除对象")
+    @ApiOperation(value="删除公司", notes="根据url的compNo来指定删除对象")
     @ApiImplicitParam(name = "compNo", value = "公司编号", required = true, dataType = "string",paramType = "path")
     public Result<String> delUser(@PathVariable("compNo")String compNo){
         try {
@@ -75,9 +75,9 @@ public class SwCompanyInfoController {
             if (!_result.isSuccess()) {
                 return Result.newError(_result.getCode(), _result.getMessage());
             }
-            return Result.newSuccess("删除成功");
+            return Result.newSuccess("删除公司成功");
         }catch (Exception e){
-            logger.error("删除异常!{}", e);
+            logger.error("删除公司异常!{}", e);
             return Result.newError(ResultCode.FAIL);
         }
     }
