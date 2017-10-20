@@ -1,37 +1,39 @@
 package com.fangxin.siwei.fangzhi.modal;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
-import javax.persistence.Id;
-import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Date;
+@ApiModel(value = "用户实体 SysUser")
 public class SysUser implements Serializable {
+
     private Integer id;
-
+    @ApiModelProperty(value = "用户号")
     private String userNo;
-
+    @ApiModelProperty(value = "用户名")
     private String userName;
-
+    @ApiModelProperty(value = "昵称")
     private String nickName;
-
+    @ApiModelProperty(value = "手机号")
     private Integer phoneNum;
-
+    @ApiModelProperty(value = "邮箱地址")
     private String emailAddr;
-
+    @ApiModelProperty(value = "密码")
     private String password;
-
+    @ApiModelProperty(value = "状态 Y:有效 N:无效")
     private String status;
-
+    @ApiModelProperty(value = "备注")
     private String memo;
-
+    @ApiModelProperty(value = "最后一次登录时间")
     private Date lastLoginTime;
-
+    @ApiModelProperty(value = "创建人")
     private String createNo;
-
+    @ApiModelProperty(value = "创建时间")
     private Date createTime;
-
+    @ApiModelProperty(value = "修改人")
     private String modiNo;
-
+    @ApiModelProperty(value = "修改时间")
     private Date modiTime;
 
     private Integer version;

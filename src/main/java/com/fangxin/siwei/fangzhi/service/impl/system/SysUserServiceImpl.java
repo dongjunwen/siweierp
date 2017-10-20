@@ -63,7 +63,7 @@ public class SysUserServiceImpl  implements SysUserService {
         convertVoToEntity(sysUser,sysUserVo);
         sysUser.setModiNo(ShiroUtils.getCurrentUserNo());
         sysUser.setModiTime(new Date());
-        return Result.newSuccess(sysUserMapper.updateByPrimaryKeySelective(sysUser));
+        return Result.newSuccess(sysUserMapper.updateByUserNo(sysUser));
     }
 
     @Override

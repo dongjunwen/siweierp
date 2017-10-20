@@ -4,6 +4,7 @@ package com.fangxin.siwei.fangzhi.common.validator;
  * Created by Administrator on 2017/8/9.
  */
 
+import com.fangxin.siwei.fangzhi.common.enums.ResultCode;
 import com.fangxin.siwei.fangzhi.common.exception.RRException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatus;
@@ -37,10 +38,11 @@ public class ValidatorUtil{
      */
     public static void validateEntity(Object object, Class<?>... groups){
         if(object==null){
-            throw new RRException("参数不能为空", HttpStatus.UNPROCESSABLE_ENTITY);
+          //  throw new RRException("参数不能为空", HttpStatus.UNPROCESSABLE_ENTITY);
+            throw new RRException( ResultCode.COMMON_PARAM_NULL.getCode(),"参数不能为空");
         }
 
-        Set<ConstraintViolation<Object>> constraintViolations = validator.validate(object, groups);
+        Set<ConstraintViolation<Object>> constraintViolations = validator.validate(object);
         if (!constraintViolations.isEmpty()) {
             StringBuilder msg = new StringBuilder();
             for(ConstraintViolation<Object> constraint:  constraintViolations){
@@ -49,7 +51,8 @@ public class ValidatorUtil{
                 }
                 msg.append(constraint.getMessage());
             }
-            throw new RRException(msg.toString(), HttpStatus.UNPROCESSABLE_ENTITY);
+            //throw new RRException(msg.toString(), HttpStatus.UNPROCESSABLE_ENTITY);
+            throw new RRException( ResultCode.COMMON_PARAM_INVALID.getCode(),msg.toString());
         }
     }
 }

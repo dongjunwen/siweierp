@@ -1,6 +1,7 @@
 package com.fangxin.siwei.fangzhi.common.exception;
 
 import com.alibaba.fastjson.JSONObject;
+import com.fangxin.siwei.fangzhi.common.result.Result;
 import org.apache.shiro.authz.AuthorizationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,10 +26,15 @@ public class RRExceptionHandler {
 	/**
 	 * 自定义异常
 	 */
-	@ExceptionHandler(RRException.class)
+	/*@ExceptionHandler(RRException.class)
 	public ResponseEntity<JSONObject> handleRRException(RRException e){
 		ResponseEntity responseEntity = new ResponseEntity(e.getErr(),e.getStatus());
 		return responseEntity;
+	}*/
+
+	@ExceptionHandler(RRException.class)
+	public Result<JSONObject> handleRRException(RRException e){
+		return Result.newError(e.getCode(),e.getErr());
 	}
 
 	/**

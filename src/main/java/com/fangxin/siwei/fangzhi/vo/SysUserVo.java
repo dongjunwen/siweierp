@@ -6,13 +6,14 @@ import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.validator.constraints.NotBlank;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * @Date:2017/10/19 0019 15:26
  * @Author lu.dong
  * @Description：
  **/
-@ApiModel(value = "用户操作实体")
+@ApiModel(value = "用户操作实体 SysUserVo")
 public class SysUserVo implements Serializable {
     @NotBlank(message = "登录号不能为空",groups = {AddGroup.class})
     @ApiModelProperty(value = "登录号",required =true )
@@ -28,18 +29,8 @@ public class SysUserVo implements Serializable {
     private String emailAddr;
     @ApiModelProperty(value = "备注",required = false)
     private String memo;
+    private Date lastLoginTime;
 
-    public SysUserVo() {
-    }
-
-    public SysUserVo(String userNo, String password, String nickName, Integer phoneNum, String emailAddr, String memo) {
-        this.userNo = userNo;
-        this.password = password;
-        this.nickName = nickName;
-        this.phoneNum = phoneNum;
-        this.emailAddr = emailAddr;
-        this.memo = memo;
-    }
 
     public String getUserNo() {
         return userNo;
@@ -89,15 +80,11 @@ public class SysUserVo implements Serializable {
         this.memo = memo;
     }
 
-    @Override
-    public String toString() {
-        return "SysUserVo{" +
-                "userNo='" + userNo + '\'' +
-                ", password='" + password + '\'' +
-                ", nickName='" + nickName + '\'' +
-                ", phoneNum=" + phoneNum +
-                ", emailAddr='" + emailAddr + '\'' +
-                ", memo='" + memo + '\'' +
-                '}';
+    public Date getLastLoginTime() {
+        return lastLoginTime;
+    }
+
+    public void setLastLoginTime(Date lastLoginTime) {
+        this.lastLoginTime = lastLoginTime;
     }
 }

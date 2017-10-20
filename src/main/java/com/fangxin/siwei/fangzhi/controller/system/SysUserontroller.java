@@ -17,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
+
 /**
  * @Date:2017/10/19 0019 15:05
  * @Author lu.dong
@@ -31,7 +33,7 @@ public class SysUserontroller {
     @Autowired
     SysUserService sysUserService;
 
-    @RequestMapping(value = "createUser",method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     @ApiOperation(value="创建用户", notes="根据User对象创建用户")
     @ApiImplicitParam(name = "sysUserVo", value = "用户操作实体 sysUserVo",dataTypeClass = SysUserVo.class)
     public Result<String> createUser(@RequestBody SysUserVo sysUserVo){
@@ -49,12 +51,13 @@ public class SysUserontroller {
     }
 
 
-    @RequestMapping(value = "updateUser",method = RequestMethod.POST)
+    @RequestMapping(value = "updateUser",method = RequestMethod.PUT)
     @ApiOperation(value="修改用户", notes="根据User对象修改用户")
     @ApiImplicitParam(name = "sysUserVo", value = "用户操作实体 sysUserVo",dataTypeClass = SysUserVo.class)
     public Result<String> updateUser(@RequestBody SysUserVo sysUserVo) {
         ValidatorUtil.validateEntity(sysUserVo, AddGroup.class);//校验用户实体字段，
         try {
+            sysUserVo.setLastLoginTime(new Date());
             Result<Integer> _result = sysUserService.updateUser(sysUserVo);
             if (!_result.isSuccess()) {
                 return Result.newError(_result.getCode(), _result.getMessage());

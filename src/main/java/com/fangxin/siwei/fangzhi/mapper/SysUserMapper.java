@@ -18,4 +18,6 @@ public interface SysUserMapper  {
     SysUser selectByUserNo(String userNo);
 
     int deleteByUserNo(String userNo);
+
+    int updateByUserNo(SysUser sysUser);
 }
