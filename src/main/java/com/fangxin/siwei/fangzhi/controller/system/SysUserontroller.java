@@ -11,6 +11,7 @@ import com.fangxin.siwei.fangzhi.vo.SysUserVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,8 +36,7 @@ public class SysUserontroller {
 
     @RequestMapping(method = RequestMethod.POST)
     @ApiOperation(value="创建用户", notes="根据User对象创建用户")
-    @ApiImplicitParam(name = "sysUserVo", value = "用户操作实体 sysUserVo",dataTypeClass = SysUserVo.class)
-    public Result<String> createUser(@RequestBody SysUserVo sysUserVo){
+    public Result<String> createUser(@ApiParam(name = "sysUserVo", value = "用户操作实体 sysUserVo",required = true) @RequestBody SysUserVo sysUserVo){
         ValidatorUtil.validateEntity(sysUserVo, AddGroup.class);//校验用户实体字段，
         try{
             Result<Integer> _result=sysUserService.createUser(sysUserVo);

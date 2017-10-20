@@ -38,8 +38,8 @@ public class SwCompanyInfoController {
     /** restful api 增删改查*/
     @RequestMapping(method = RequestMethod.POST)
     @ApiOperation(value="创建公司", notes="根据公司对象创建公司")
-    @ApiImplicitParam(name = "swCompInfoVo", value = "公司信息实体 swCompInfoVo",dataTypeClass = SwCompInfoVo.class)
-    public Result<String> create(SwCompInfoVo swCompInfoVo){
+    //@ApiImplicitParam(name = "swCompInfoVo", value = "公司信息实体 swCompInfoVo",dataTypeClass = SwCompInfoVo.class)
+    public Result<String> create(@ApiParam(name = "swCompInfoVo", value = "公司信息实体 swCompInfoVo", required = true) @RequestBody SwCompInfoVo swCompInfoVo){
         ValidatorUtil.validateEntity(swCompInfoVo, AddGroup.class);//校验
         try{
             Result<Integer> _result= swCompanyInfoService.create(swCompInfoVo);
@@ -104,7 +104,7 @@ public class SwCompanyInfoController {
             @ApiImplicitParam(name = "filter",value = "通用表过滤器。发送JSON键/值对，如<code>{“key”:“value”}</code>。", paramType = "query",dataTypeClass = JSON.class)
 
     })
-    public Result<PageUitls<SwCompanyInfo>> getUserList(@RequestParam @ApiParam(hidden = true) Map<String,String> params){
+    public Result<PageUitls<SwCompanyInfo>> findList(@RequestParam @ApiParam(hidden = true) Map<String,String> params){
         Page<SwCompanyInfo> page =  swCompanyInfoService.findList(params);
         return Result.newSuccess(new PageUitls<SwCompanyInfo>(page));
     }
