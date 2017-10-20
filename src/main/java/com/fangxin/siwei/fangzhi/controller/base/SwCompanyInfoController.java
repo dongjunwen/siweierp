@@ -14,10 +14,8 @@ import io.swagger.annotations.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.Map;
 
 /**
@@ -30,7 +28,7 @@ import java.util.Map;
 @Api(tags = "基础资料",description = "公司相关api")
 public class SwCompanyInfoController {
 
-    private static final Logger logger = LoggerFactory.getLogger(SwCompanyInfoController.class);
+    private final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
     SwCompanyInfoService swCompanyInfoService;

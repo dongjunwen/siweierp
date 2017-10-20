@@ -1,6 +1,9 @@
 package com.fangxin.siwei.fangzhi.modal;
 
+import javax.persistence.Id;
+
 public class SysDict {
+    @Id
     private Integer id;
 
     private String dictType;

@@ -1,17 +1,12 @@
 package com.fangxin.siwei.fangzhi.mapper;
 
+import com.fangxin.siwei.fangzhi.common.utils.MyMapper;
 import com.fangxin.siwei.fangzhi.modal.SwMaterialInfo;
 
-public interface SwMaterialInfoMapper {
-    int deleteByPrimaryKey(Integer id);
+public interface SwMaterialInfoMapper extends MyMapper<SwMaterialInfo>{
+    
 
-    int insert(SwMaterialInfo record);
+    SwMaterialInfo selectByMaterialNo(String departNo);
 
-    int insertSelective(SwMaterialInfo record);
-
-    SwMaterialInfo selectByPrimaryKey(Integer id);
-
-    int updateByPrimaryKeySelective(SwMaterialInfo record);
-
-    int updateByPrimaryKey(SwMaterialInfo record);
+    int updateByMateialNo(SwMaterialInfo swDepartInfo);
 }

@@ -1,17 +1,12 @@
 package com.fangxin.siwei.fangzhi.mapper;
 
+import com.fangxin.siwei.fangzhi.common.utils.MyMapper;
 import com.fangxin.siwei.fangzhi.modal.SwDepartInfo;
 
-public interface SwDepartInfoMapper {
-    int deleteByPrimaryKey(Integer id);
+public interface SwDepartInfoMapper extends MyMapper<SwDepartInfo> {
+   
 
-    int insert(SwDepartInfo record);
+    SwDepartInfo selectByDepartNo(String departNo);
 
-    int insertSelective(SwDepartInfo record);
-
-    SwDepartInfo selectByPrimaryKey(Integer id);
-
-    int updateByPrimaryKeySelective(SwDepartInfo record);
-
-    int updateByPrimaryKey(SwDepartInfo record);
+    int updateByCompNo(SwDepartInfo swDepartInfo);
 }

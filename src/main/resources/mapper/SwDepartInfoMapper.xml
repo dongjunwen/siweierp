@@ -18,105 +18,17 @@
     id, depart_no, depart_name, fh_depart_no, comp_no, memo, create_no, create_time, 
     modi_no, modi_time, version
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+  <select id="selectByDepartNo" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select
     <include refid="Base_Column_List" />
     from sw_depart_info
-    where id = #{id,jdbcType=INTEGER}
+    where depart_no = #{departNo,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from sw_depart_info
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.fangxin.siwei.fangzhi.modal.SwDepartInfo">
-    insert into sw_depart_info (id, depart_no, depart_name, 
-      fh_depart_no, comp_no, memo, 
-      create_no, create_time, modi_no, 
-      modi_time, version)
-    values (#{id,jdbcType=INTEGER}, #{departNo,jdbcType=VARCHAR}, #{departName,jdbcType=VARCHAR}, 
-      #{fhDepartNo,jdbcType=VARCHAR}, #{compNo,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR}, 
-      #{createNo,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{modiNo,jdbcType=VARCHAR}, 
-      #{modiTime,jdbcType=TIMESTAMP}, #{version,jdbcType=INTEGER})
-  </insert>
-  <insert id="insertSelective" parameterType="com.fangxin.siwei.fangzhi.modal.SwDepartInfo">
-    insert into sw_depart_info
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="departNo != null">
-        depart_no,
-      </if>
-      <if test="departName != null">
-        depart_name,
-      </if>
-      <if test="fhDepartNo != null">
-        fh_depart_no,
-      </if>
-      <if test="compNo != null">
-        comp_no,
-      </if>
-      <if test="memo != null">
-        memo,
-      </if>
-      <if test="createNo != null">
-        create_no,
-      </if>
-      <if test="createTime != null">
-        create_time,
-      </if>
-      <if test="modiNo != null">
-        modi_no,
-      </if>
-      <if test="modiTime != null">
-        modi_time,
-      </if>
-      <if test="version != null">
-        version,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="departNo != null">
-        #{departNo,jdbcType=VARCHAR},
-      </if>
-      <if test="departName != null">
-        #{departName,jdbcType=VARCHAR},
-      </if>
-      <if test="fhDepartNo != null">
-        #{fhDepartNo,jdbcType=VARCHAR},
-      </if>
-      <if test="compNo != null">
-        #{compNo,jdbcType=VARCHAR},
-      </if>
-      <if test="memo != null">
-        #{memo,jdbcType=VARCHAR},
-      </if>
-      <if test="createNo != null">
-        #{createNo,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="modiNo != null">
-        #{modiNo,jdbcType=VARCHAR},
-      </if>
-      <if test="modiTime != null">
-        #{modiTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="version != null">
-        #{version,jdbcType=INTEGER},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.fangxin.siwei.fangzhi.modal.SwDepartInfo">
+
+  <update id="updateByCompNo" parameterType="com.fangxin.siwei.fangzhi.modal.SwDepartInfo">
     update sw_depart_info
     <set>
-      <if test="departNo != null">
-        depart_no = #{departNo,jdbcType=VARCHAR},
-      </if>
+
       <if test="departName != null">
         depart_name = #{departName,jdbcType=VARCHAR},
       </if>
@@ -145,20 +57,8 @@
         version = #{version,jdbcType=INTEGER},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where
+    depart_no = #{departNo,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.fangxin.siwei.fangzhi.modal.SwDepartInfo">
-    update sw_depart_info
-    set depart_no = #{departNo,jdbcType=VARCHAR},
-      depart_name = #{departName,jdbcType=VARCHAR},
-      fh_depart_no = #{fhDepartNo,jdbcType=VARCHAR},
-      comp_no = #{compNo,jdbcType=VARCHAR},
-      memo = #{memo,jdbcType=VARCHAR},
-      create_no = #{createNo,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      modi_no = #{modiNo,jdbcType=VARCHAR},
-      modi_time = #{modiTime,jdbcType=TIMESTAMP},
-      version = #{version,jdbcType=INTEGER}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+
 </mapper>

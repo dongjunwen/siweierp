@@ -1,17 +1,12 @@
 package com.fangxin.siwei.fangzhi.mapper;
 
+import com.fangxin.siwei.fangzhi.common.utils.MyMapper;
+import com.fangxin.siwei.fangzhi.modal.SwDepartInfo;
 import com.fangxin.siwei.fangzhi.modal.SwFormularInfo;
 
-public interface SwFormularInfoMapper {
-    int deleteByPrimaryKey(Integer id);
+public interface SwFormularInfoMapper extends MyMapper<SwFormularInfo>{
 
-    int insert(SwFormularInfo record);
+    SwFormularInfo selectByFormularNo(String formularNo);
 
-    int insertSelective(SwFormularInfo record);
-
-    SwFormularInfo selectByPrimaryKey(Integer id);
-
-    int updateByPrimaryKeySelective(SwFormularInfo record);
-
-    int updateByPrimaryKey(SwFormularInfo record);
+    int updateByFormularNo(SwFormularInfo swFormularInfo);
 }

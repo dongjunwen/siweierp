@@ -3,11 +3,12 @@ package com.fangxin.siwei.fangzhi.modal;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Date;
 @ApiModel(value = "用户实体 SysUser")
 public class SysUser implements Serializable {
-
+    @Id
     private Integer id;
     @ApiModelProperty(value = "用户号")
     private String userNo;

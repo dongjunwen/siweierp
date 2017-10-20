@@ -1,8 +1,10 @@
 package com.fangxin.siwei.fangzhi.modal;
 
+import javax.persistence.Id;
 import java.util.Date;
 
 public class SysUserRole {
+    @Id
     private Integer id;
 
     private String userNo;

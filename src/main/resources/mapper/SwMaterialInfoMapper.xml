@@ -20,119 +20,17 @@
     id, material_no, material_name, material_type, spec, pattern, unit, memo, create_no, 
     create_time, modi_no, modi_time, version
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByMaterialNo" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from sw_material_info
-    where id = #{id,jdbcType=INTEGER}
+    where material_no = #{materialNo,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from sw_material_info
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.fangxin.siwei.fangzhi.modal.SwMaterialInfo">
-    insert into sw_material_info (id, material_no, material_name, 
-      material_type, spec, pattern, 
-      unit, memo, create_no, 
-      create_time, modi_no, modi_time, 
-      version)
-    values (#{id,jdbcType=INTEGER}, #{materialNo,jdbcType=VARCHAR}, #{materialName,jdbcType=VARCHAR}, 
-      #{materialType,jdbcType=VARCHAR}, #{spec,jdbcType=VARCHAR}, #{pattern,jdbcType=VARCHAR}, 
-      #{unit,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR}, #{createNo,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{modiNo,jdbcType=VARCHAR}, #{modiTime,jdbcType=TIMESTAMP}, 
-      #{version,jdbcType=INTEGER})
-  </insert>
-  <insert id="insertSelective" parameterType="com.fangxin.siwei.fangzhi.modal.SwMaterialInfo">
-    insert into sw_material_info
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="materialNo != null">
-        material_no,
-      </if>
-      <if test="materialName != null">
-        material_name,
-      </if>
-      <if test="materialType != null">
-        material_type,
-      </if>
-      <if test="spec != null">
-        spec,
-      </if>
-      <if test="pattern != null">
-        pattern,
-      </if>
-      <if test="unit != null">
-        unit,
-      </if>
-      <if test="memo != null">
-        memo,
-      </if>
-      <if test="createNo != null">
-        create_no,
-      </if>
-      <if test="createTime != null">
-        create_time,
-      </if>
-      <if test="modiNo != null">
-        modi_no,
-      </if>
-      <if test="modiTime != null">
-        modi_time,
-      </if>
-      <if test="version != null">
-        version,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="materialNo != null">
-        #{materialNo,jdbcType=VARCHAR},
-      </if>
-      <if test="materialName != null">
-        #{materialName,jdbcType=VARCHAR},
-      </if>
-      <if test="materialType != null">
-        #{materialType,jdbcType=VARCHAR},
-      </if>
-      <if test="spec != null">
-        #{spec,jdbcType=VARCHAR},
-      </if>
-      <if test="pattern != null">
-        #{pattern,jdbcType=VARCHAR},
-      </if>
-      <if test="unit != null">
-        #{unit,jdbcType=VARCHAR},
-      </if>
-      <if test="memo != null">
-        #{memo,jdbcType=VARCHAR},
-      </if>
-      <if test="createNo != null">
-        #{createNo,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="modiNo != null">
-        #{modiNo,jdbcType=VARCHAR},
-      </if>
-      <if test="modiTime != null">
-        #{modiTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="version != null">
-        #{version,jdbcType=INTEGER},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.fangxin.siwei.fangzhi.modal.SwMaterialInfo">
+
+  <update id="updateByMateialNo" parameterType="com.fangxin.siwei.fangzhi.modal.SwMaterialInfo">
     update sw_material_info
     <set>
-      <if test="materialNo != null">
-        material_no = #{materialNo,jdbcType=VARCHAR},
-      </if>
+
       <if test="materialName != null">
         material_name = #{materialName,jdbcType=VARCHAR},
       </if>
@@ -167,22 +65,8 @@
         version = #{version,jdbcType=INTEGER},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where
+    material_no = #{materialNo,jdbcType=VARCHAR},
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.fangxin.siwei.fangzhi.modal.SwMaterialInfo">
-    update sw_material_info
-    set material_no = #{materialNo,jdbcType=VARCHAR},
-      material_name = #{materialName,jdbcType=VARCHAR},
-      material_type = #{materialType,jdbcType=VARCHAR},
-      spec = #{spec,jdbcType=VARCHAR},
-      pattern = #{pattern,jdbcType=VARCHAR},
-      unit = #{unit,jdbcType=VARCHAR},
-      memo = #{memo,jdbcType=VARCHAR},
-      create_no = #{createNo,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      modi_no = #{modiNo,jdbcType=VARCHAR},
-      modi_time = #{modiTime,jdbcType=TIMESTAMP},
-      version = #{version,jdbcType=INTEGER}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+
 </mapper>
