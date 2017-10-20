@@ -23,4 +23,11 @@ public interface SysUserService {
      * @return
      */
     SysUser login(String userNo);
+
+    /**
+     * 修改用户信息
+     * @param sysUserVo
+     * @return
+     */
+    Result<Integer> updateUser(SysUserVo sysUserVo);
 }

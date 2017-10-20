@@ -1,6 +1,7 @@
 package com.fangxin.siwei.fangzhi.service.impl.system;
 
 import com.fangxin.siwei.fangzhi.common.enums.ResultCode;
+import com.fangxin.siwei.fangzhi.common.exception.RRException;
 import com.fangxin.siwei.fangzhi.common.result.Result;
 import com.fangxin.siwei.fangzhi.common.utils.MD5Util;
 import com.fangxin.siwei.fangzhi.common.utils.ShiroUtils;
@@ -32,23 +33,15 @@ public class SysUserServiceImpl  implements SysUserService {
     @Autowired
     SysUserMapper sysUserMapper;
 
-
     @Override
     public Result<Integer> createUser(SysUserVo sysUserVo) {
-        SysUser sysUser=new SysUser();
+
         SysUser _sysUser=sysUserMapper.selectByUserNo(sysUserVo.getUserNo());
         if(_sysUser!=null){
             return  Result.newError(ResultCode.COMMON_DATA_EXISTS.getCode(),"账户已存在!");
         }
-        try {
-            BeanUtils.copyProperties(sysUser,sysUserVo);
-        } catch (IllegalAccessException e) {
-            logger.error("sysUser转换语法错误:{}",e);
-            return  Result.newError(ResultCode.FAIL.getCode(),"sysUser转换语法错误");
-        } catch (InvocationTargetException e) {
-            logger.error("sysUser转换目标错误:{}",e);
-            return  Result.newError(ResultCode.FAIL.getCode(),"sysUser转换目标错误");
-        }
+        SysUser sysUser=new SysUser();
+        convertVoToEntity(sysUser,sysUserVo);
         sysUser.setPassword(MD5Util.getMD5(sysUser.getPassword()));
         sysUser.setCreateNo(ShiroUtils.getCurrentUserNo());
         sysUser.setCreateTime(new Date());
@@ -62,5 +55,31 @@ public class SysUserServiceImpl  implements SysUserService {
         return sysUserMapper.selectByUserNo(userNo);
     }
 
+    @Override
+    public Result<Integer> updateUser(SysUserVo sysUserVo) {
+
+        SysUser _sysUser=sysUserMapper.selectByUserNo(sysUserVo.getUserNo());
+        if(_sysUser!=null){
+            return  Result.newError(ResultCode.COMMON_DATA_NOT_EXISTS.getCode(),"账户不存在!");
+        }
+        SysUser sysUser=new SysUser();
+        convertVoToEntity(sysUser,sysUserVo);
+        sysUser.setModiNo(ShiroUtils.getCurrentUserNo());
+        sysUser.setModiTime(new Date());
+        return Result.newSuccess(sysUserMapper.updateByPrimaryKeySelective(sysUser));
+    }
+
+
+    private void convertVoToEntity(SysUser sysUser,SysUserVo sysUserVo) {
+        try {
+           BeanUtils.copyProperties(sysUser,sysUserVo);
+        } catch (IllegalAccessException e) {
+            logger.error("sysUser转换语法错误:{}",e);
+            throw new RRException(ResultCode.COMMON_PARAM_INVALID.getMessage());
+        } catch (InvocationTargetException e) {
+            logger.error("sysUser转换目标错误:{}",e);
+            throw new RRException(ResultCode.COMMON_PARAM_INVALID.getMessage());
+        }
+    }
 
 }

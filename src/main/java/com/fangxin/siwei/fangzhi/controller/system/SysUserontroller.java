@@ -32,7 +32,6 @@ public class SysUserontroller {
     @Autowired
     SysUserService sysUserService;
 
-    /** restful api 增删改查*/
     @RequestMapping(value = "createUser",method = RequestMethod.POST)
     @ApiOperation(value="创建用户", notes="根据User对象创建用户")
     @ApiImplicitParam(name = "sysUserVo", value = "用户操作实体 sysUserVo",dataTypeClass = SysUserVo.class)
@@ -48,8 +47,24 @@ public class SysUserontroller {
             logger.error("用户添加异常!{}",e);
             return Result.newError(ResultCode.FAIL);
         }
+    }
 
 
+    @RequestMapping(value = "updateUser",method = RequestMethod.POST)
+    @ApiOperation(value="修改用户", notes="根据User对象修改用户")
+    @ApiImplicitParam(name = "sysUserVo", value = "用户操作实体 sysUserVo",dataTypeClass = SysUserVo.class)
+    public Result<String> updateUser(@RequestBody SysUserVo sysUserVo) {
+        ValidatorUtil.validateEntity(sysUserVo, AddGroup.class);//校验用户实体字段，
+        try {
+            Result<Integer> _result = sysUserService.updateUser(sysUserVo);
+            if (!_result.isSuccess()) {
+                return Result.newError(_result.getCode(), _result.getMessage());
+            }
+            return Result.newSuccess("修改账号成功");
+        } catch (Exception e) {
+            logger.error("用户修改异常!{}", e);
+            return Result.newError(ResultCode.FAIL);
+        }
     }
 
 }
