@@ -11,15 +11,13 @@ Markdown is a lightweight and easy-to-use syntax for styling your writing. It in
 ```markdown
 Syntax highlighted code block
 
-# Header 1
-## Header 2
-### Header 3
+# 使用前准备工作
+-JDK1.7及以上
+-MAVEN
+-MySql5.7及以上
 
-- Bulleted
-- List
-
-1. Numbered
-2. List
+1. 文档资料位于：siweierp\src\main\resources\doc目录下
+2. 
 
 **Bold** and _Italic_ and `Code` text
 
