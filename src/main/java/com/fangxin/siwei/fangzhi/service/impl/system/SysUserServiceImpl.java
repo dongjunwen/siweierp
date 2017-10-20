@@ -56,7 +56,7 @@ public class SysUserServiceImpl  implements SysUserService {
     public Result<Integer> updateUser(SysUserVo sysUserVo) {
 
         SysUser _sysUser=sysUserMapper.selectByUserNo(sysUserVo.getUserNo());
-        if(_sysUser!=null){
+        if(_sysUser==null){
             return  Result.newError(ResultCode.COMMON_DATA_NOT_EXISTS.getCode(),"账户不存在!");
         }
         SysUser sysUser=new SysUser();
@@ -69,7 +69,7 @@ public class SysUserServiceImpl  implements SysUserService {
     @Override
     public  Result<Integer> delUser(String userNo) {
         SysUser _sysUser=sysUserMapper.selectByUserNo(userNo);
-        if(_sysUser!=null){
+        if(_sysUser==null){
             return  Result.newError(ResultCode.COMMON_DATA_NOT_EXISTS.getCode(),"账户不存在!");
         }
         return Result.newSuccess(sysUserMapper.deleteByUserNo(userNo));
