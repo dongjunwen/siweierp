@@ -67,7 +67,7 @@ public class SwMaterialInfoController {
     }
 
     @RequestMapping(value = "/{materialNo}",method = RequestMethod.DELETE)
-    @ApiOperation(value="删除用户", notes="根据url的materialNo来指定删除对象")
+    @ApiOperation(value="删除物料", notes="根据url的materialNo来指定删除对象")
     @ApiImplicitParam(name = "materialNo", value = "物料编号", required = true, dataType = "string",paramType = "path")
     public Result<String> delUser(@PathVariable("materialNo")String materialNo){
         try {
