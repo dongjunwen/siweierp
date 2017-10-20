@@ -17,5 +17,5 @@ public interface SysUserMapper  {
 
     SysUser selectByUserNo(String userNo);
 
-    void deleteByUserNo(String userNo);
+    int deleteByUserNo(String userNo);
 }

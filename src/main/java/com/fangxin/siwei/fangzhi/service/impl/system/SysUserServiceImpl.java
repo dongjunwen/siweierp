@@ -67,8 +67,12 @@ public class SysUserServiceImpl  implements SysUserService {
     }
 
     @Override
-    public void delUser(String userNo) {
-        sysUserMapper.deleteByUserNo(userNo);
+    public  Result<Integer> delUser(String userNo) {
+        SysUser _sysUser=sysUserMapper.selectByUserNo(userNo);
+        if(_sysUser!=null){
+            return  Result.newError(ResultCode.COMMON_DATA_NOT_EXISTS.getCode(),"账户不存在!");
+        }
+        return Result.newSuccess(sysUserMapper.deleteByUserNo(userNo));
     }
 
     @Override

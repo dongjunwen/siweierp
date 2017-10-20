@@ -70,7 +70,15 @@ public class SysUserontroller {
     @ApiOperation(value="删除用户", notes="根据url的用户编号来指定删除对象")
     @ApiImplicitParam(name = "userNo", value = "用户编号", required = true, dataType = "string",paramType = "path")
     public Result<String>  delUser(@PathVariable("userNo")String userNo){
-        sysUserService.delUser(userNo);
+        try {
+            Result<Integer> _result =  sysUserService.delUser(userNo);
+            if (!_result.isSuccess()) {
+                return Result.newError(_result.getCode(), _result.getMessage());
+            }
+        }catch (Exception e){
+            logger.error("用户删除异常!{}", e);
+            return Result.newError(ResultCode.FAIL);
+        }
         return Result.newSuccess("已删除");
     }
 

@@ -36,7 +36,7 @@ public interface SysUserService {
      * 按照用户号删除用户
      * @param userNo
      */
-    void delUser(String userNo);
+    Result<Integer> delUser(String userNo);
 
     /**
      * 按照用户号获取用户
