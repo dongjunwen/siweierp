@@ -46,7 +46,8 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName("forward:swagger/index.html");
+        //registry.addViewController("/").setViewName("forward:swagger/index.html");
+        registry.addViewController("/").setViewName("forward:web/index.html");
         registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
         super.addViewControllers(registry);
     }
