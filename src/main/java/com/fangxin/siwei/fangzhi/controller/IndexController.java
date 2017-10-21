@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import springfox.documentation.annotations.ApiIgnore;
 
@@ -29,11 +30,12 @@ import springfox.documentation.annotations.ApiIgnore;
 @Api(tags = "首页",description ="App相关操作接口定义类")
 //@ApiIgnore
 public class IndexController {
-   /* @ApiOperation(value = "Api首页",notes = "所有api接口")
-    @RequestMapping(value = "/",method = RequestMethod.GET)
-    public String index(){
-        return "swagger/index.html";
-    }*/
+
+    @ApiOperation(value = "Api首页",notes = "所有api接口")
+    @RequestMapping(value = "/swagger",method = RequestMethod.GET)
+    public ModelAndView index(){
+        return new ModelAndView("swagger/index.html");
+    }
 
     @ApiOperation(value = "登录",notes = "登录接口")
     @RequestMapping(value = "/login",method = RequestMethod.POST)
