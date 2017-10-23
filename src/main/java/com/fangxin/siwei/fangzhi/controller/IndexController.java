@@ -37,6 +37,12 @@ public class IndexController {
         return new ModelAndView("swagger/index.html");
     }
 
+    @ApiOperation(value = "登录首页",notes = "登录首页")
+    @RequestMapping(value = "/loginIndex",method = RequestMethod.GET)
+    public ModelAndView loginIndex(){
+        return new ModelAndView("web/loginIndex.html");
+    }
+
     @ApiOperation(value = "登录",notes = "登录接口")
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     @ApiImplicitParams({

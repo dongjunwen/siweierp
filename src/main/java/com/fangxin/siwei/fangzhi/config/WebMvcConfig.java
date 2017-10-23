@@ -7,10 +7,7 @@ import org.springframework.core.Ordered;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
-import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.*;
 
 /**
  * Created by Administrator on 2017/8/1.
@@ -27,6 +24,12 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
     @Override
     public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
         configurer.favorPathExtension(false);
+    }
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        //将所有/static/** 访问都映射到classpath:/static/ 目录下
+        registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
     }
 
     private CorsConfiguration buildConfig() {
@@ -47,7 +50,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         //registry.addViewController("/").setViewName("forward:swagger/index.html");
-        registry.addViewController("/").setViewName("forward:web/index.html");
+        registry.addViewController("/").setViewName("forward:loginIndex");
         registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
         super.addViewControllers(registry);
     }
