@@ -26,7 +26,7 @@ public class ShiroUtils {
 	public static String  getCurrentUserNo() {
 		SysUser _sysUser=getCurrentUser();
 		if (_sysUser==null){
-			return "admin";
+			return "system";
 		}else{
 			return  _sysUser.getUserNo();
 		}

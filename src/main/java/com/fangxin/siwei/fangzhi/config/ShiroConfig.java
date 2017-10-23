@@ -68,16 +68,17 @@ public class ShiroConfig {
         ShiroFilterFactoryBean bean=new ShiroFilterFactoryBean();
         bean.setSecurityManager(manager);
         //配置登录的url和登录成功的url和无权限
-        bean.setLoginUrl("/loginIndex");
+       // bean.setLoginUrl("/loginIndex");
      //   bean.setSuccessUrl("/index");
-        bean.setUnauthorizedUrl("/403");
+     //   bean.setUnauthorizedUrl("/403");
         //配置访问权限
         LinkedHashMap<String, String> filterChainDefinitionMap=new LinkedHashMap<>();
+        /**filterChainDefinitionMap.put("login", "anon"); //表示可以匿名访问
         filterChainDefinitionMap.put("loginIndex", "anon"); //表示可以匿名访问
         filterChainDefinitionMap.put("logout", "anon"); //表示可以匿名访问
         filterChainDefinitionMap.put("/druid*//*","anon");
-        filterChainDefinitionMap.put("/swagger*//*","anon");
-        filterChainDefinitionMap.put("/*", "authc");//表示需要认证才可以访问
+        filterChainDefinitionMap.put("/swagger*//*","anon");**/
+        filterChainDefinitionMap.put("/api/*", "authc");//表示需要认证才可以访问
 
         bean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return bean;
