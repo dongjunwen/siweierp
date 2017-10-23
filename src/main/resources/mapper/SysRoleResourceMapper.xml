@@ -14,80 +14,15 @@
   <sql id="Base_Column_List">
     id, role_code, source_no, create_no, create_time, modi_no, modi_time, version
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByUserNo" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from sys_role_resource
-    where id = #{id,jdbcType=INTEGER}
+    from sys_role_resource as a JOIN  sys_role as b on a.role_code=b.role_code
+    join sys_user as c on b.user_no=c.user_no
+    where c.user_no = #{userNo,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from sys_role_resource
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.fangxin.siwei.fangzhi.modal.SysRoleResource">
-    insert into sys_role_resource (id, role_code, source_no, 
-      create_no, create_time, modi_no, 
-      modi_time, version)
-    values (#{id,jdbcType=INTEGER}, #{roleCode,jdbcType=VARCHAR}, #{sourceNo,jdbcType=VARCHAR}, 
-      #{createNo,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{modiNo,jdbcType=VARCHAR}, 
-      #{modiTime,jdbcType=TIMESTAMP}, #{version,jdbcType=INTEGER})
-  </insert>
-  <insert id="insertSelective" parameterType="com.fangxin.siwei.fangzhi.modal.SysRoleResource">
-    insert into sys_role_resource
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="roleCode != null">
-        role_code,
-      </if>
-      <if test="sourceNo != null">
-        source_no,
-      </if>
-      <if test="createNo != null">
-        create_no,
-      </if>
-      <if test="createTime != null">
-        create_time,
-      </if>
-      <if test="modiNo != null">
-        modi_no,
-      </if>
-      <if test="modiTime != null">
-        modi_time,
-      </if>
-      <if test="version != null">
-        version,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="roleCode != null">
-        #{roleCode,jdbcType=VARCHAR},
-      </if>
-      <if test="sourceNo != null">
-        #{sourceNo,jdbcType=VARCHAR},
-      </if>
-      <if test="createNo != null">
-        #{createNo,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="modiNo != null">
-        #{modiNo,jdbcType=VARCHAR},
-      </if>
-      <if test="modiTime != null">
-        #{modiTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="version != null">
-        #{version,jdbcType=INTEGER},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.fangxin.siwei.fangzhi.modal.SysRoleResource">
+
+ <!-- <update id="updateByPrimaryKeySelective" parameterType="com.fangxin.siwei.fangzhi.modal.SysRoleResource">
     update sys_role_resource
     <set>
       <if test="roleCode != null">
@@ -114,15 +49,5 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.fangxin.siwei.fangzhi.modal.SysRoleResource">
-    update sys_role_resource
-    set role_code = #{roleCode,jdbcType=VARCHAR},
-      source_no = #{sourceNo,jdbcType=VARCHAR},
-      create_no = #{createNo,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      modi_no = #{modiNo,jdbcType=VARCHAR},
-      modi_time = #{modiTime,jdbcType=TIMESTAMP},
-      version = #{version,jdbcType=INTEGER}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+ -->
 </mapper>

@@ -18,7 +18,7 @@
     id, role_code, role_name, status, if_admin, memo, create_no, create_time, modi_no, 
     modi_time, version
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+ <!-- <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from sys_role
@@ -160,5 +160,5 @@
       modi_time = #{modiTime,jdbcType=TIMESTAMP},
       version = #{version,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
-  </update>
+  </update>-->
 </mapper>

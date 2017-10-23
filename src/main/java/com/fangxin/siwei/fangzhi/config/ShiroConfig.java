@@ -69,7 +69,7 @@ public class ShiroConfig {
         bean.setSecurityManager(manager);
         //配置登录的url和登录成功的url和无权限
         bean.setLoginUrl("/loginIndex");
-        bean.setSuccessUrl("/index");
+     //   bean.setSuccessUrl("/index");
         bean.setUnauthorizedUrl("/403");
         //配置访问权限
         LinkedHashMap<String, String> filterChainDefinitionMap=new LinkedHashMap<>();

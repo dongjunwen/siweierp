@@ -39,9 +39,11 @@ CREATE TABLE `sw_company_info` (
   `modi_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   `version` int(11) DEFAULT '0' COMMENT '版本号',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='公司信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='公司信息表';
 
 /*Data for the table `sw_company_info` */
+
+insert  into `sw_company_info`(`id`,`comp_no`,`comp_name`,`contact_name`,`mobile`,`telphone`,`tax`,`email`,`addr`,`is_self`,`is_valid`,`memo`,`create_no`,`create_time`,`modi_no`,`modi_time`,`version`) values (1,'XXXhjjjj','艾弗森的','齐威王','1233444','12122112','1221','1221','12122222222222','N','N',NULL,'system','2017-10-20 15:41:10','system','2017-10-20 15:41:10',0),(2,'aaaaaa','艾弗森的','齐威王','1233444','12122112','1221','1221','12122222222222','N','N',NULL,'system','2017-10-20 15:44:33','system','2017-10-20 15:44:33',0),(3,'asd','艾弗森的','齐威王','1233444','12122112','1221','1221','12122222222222','N','N',NULL,'system','2017-10-20 15:44:39','system','2017-10-20 15:44:39',0),(4,'asd12','艾弗森的','齐威王','1233444','12122112','1221','1221','12122222222222','N','N',NULL,'system','2017-10-20 15:44:44','system','2017-10-20 15:44:44',0),(5,'XXXx1122222','XX实业科技有限公司','张三','12333','1','111','XX@qq.com','广兰路','N','N',NULL,'system','2017-10-20 16:36:20','system','2017-10-20 16:36:20',0),(6,'XXXx1121222','XX实业科技有限公司','张三','12333','1','111','XX@qq.com','广兰路','N','N',NULL,'system','2017-10-20 16:36:30','system','2017-10-20 16:36:30',0),(7,'XXXx11212333','XX实业科技有限公司','张三','12333','1','111','XX@qq.com','广兰路','N','N',NULL,'system','2017-10-20 16:36:35','system','2017-10-20 16:36:35',0);
 
 /*Table structure for table `sw_deliver_base` */
 
@@ -302,6 +304,7 @@ CREATE TABLE `sys_resource` (
   `req_url` varchar(512) DEFAULT NULL COMMENT '地址路径',
   `rsource_icon` varchar(64) DEFAULT NULL COMMENT '资源图标',
   `sort_order` int(11) DEFAULT NULL COMMENT '排序规则',
+  `level` int(11) DEFAULT NULL COMMENT '资源级别',
   `if_visible` char(1) DEFAULT 'Y' COMMENT '是否显示 Y:显示 N:不显示',
   `memo` varchar(64) DEFAULT NULL COMMENT '备注',
   `create_no` varchar(32) DEFAULT NULL COMMENT '创建人',
@@ -310,9 +313,11 @@ CREATE TABLE `sys_resource` (
   `modi_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   `version` int(11) DEFAULT '0' COMMENT '版本号',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='资源表';
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COMMENT='资源表';
 
 /*Data for the table `sys_resource` */
+
+insert  into `sys_resource`(`id`,`source_no`,`source_name`,`fh_source_no`,`source_type`,`req_url`,`rsource_icon`,`sort_order`,`level`,`if_visible`,`memo`,`create_no`,`create_time`,`modi_no`,`modi_time`,`version`) values (1,'order','业务订单',NULL,'MENU',NULL,NULL,1,1,'Y',NULL,NULL,NULL,NULL,'2017-10-23 17:28:40',0),(2,'stock','仓采管理',NULL,'MENU',NULL,NULL,2,1,'Y',NULL,NULL,NULL,NULL,'2017-10-23 17:28:40',0),(3,'produce','生产制造',NULL,'MENU',NULL,NULL,4,1,'Y',NULL,NULL,NULL,NULL,'2017-10-23 17:28:41',0),(4,'coloring','染色管理',NULL,'MENU',NULL,NULL,5,1,'Y',NULL,NULL,NULL,NULL,'2017-10-23 17:28:42',0),(5,'base','基础资料',NULL,'MENU',NULL,NULL,6,1,'Y',NULL,NULL,NULL,NULL,'2017-10-23 17:28:42',0),(6,'system','系统管理',NULL,'MENU',NULL,NULL,7,1,'Y',NULL,NULL,NULL,NULL,'2017-10-23 17:28:43',0),(7,'orderCreate','创建订单合同','order','MENU','XXXX',NULL,1,2,'Y',NULL,NULL,NULL,NULL,'2017-10-23 17:28:44',0),(8,'orderAudit01','订单初审','order','MENU','XXXX',NULL,2,2,'Y',NULL,NULL,NULL,NULL,'2017-10-23 17:28:45',0),(9,'orderAudit02','订单终审','order','MENU','XXXX',NULL,3,2,'Y',NULL,NULL,NULL,NULL,'2017-10-23 17:28:45',0),(10,'orderQuery','订单查询','order','MENU','XXXX',NULL,4,2,'Y',NULL,NULL,NULL,NULL,'2017-10-23 17:28:46',0),(11,'deliverCreate','创建发货单','order','MENU','XXXX',NULL,5,2,'Y',NULL,NULL,NULL,NULL,'2017-10-23 17:28:46',0),(12,'deliverAudit01','发货单初审','order','MENU','XXXX',NULL,6,2,'Y',NULL,NULL,NULL,NULL,'2017-10-23 17:28:47',0),(13,'deliverAudit02','发货单终审','order','MENU','XXXX',NULL,7,2,'Y',NULL,NULL,NULL,NULL,'2017-10-23 17:28:47',0),(14,'deliverQuery','发货单查询','order','MENU','XXXX',NULL,8,2,'Y',NULL,NULL,NULL,NULL,'2017-10-23 17:28:48',0),(15,'materialInfo','物料信息','base','MENU','XXXX',NULL,1,2,'Y',NULL,NULL,NULL,NULL,'2017-10-23 17:28:48',0),(16,'formularInfo','公式信息','base','MENU','XXXX',NULL,2,2,'Y',NULL,NULL,NULL,NULL,'2017-10-23 17:28:49',0),(17,'compInfo','公司资料','base','MENU','XXXX',NULL,3,2,'Y',NULL,NULL,NULL,NULL,'2017-10-23 17:28:49',0),(18,'departInfo','部门信息','base','MENU','XXXX',NULL,4,2,'Y',NULL,NULL,NULL,NULL,'2017-10-23 17:28:50',0);
 
 /*Table structure for table `sys_role` */
 
@@ -331,9 +336,11 @@ CREATE TABLE `sys_role` (
   `modi_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   `version` int(11) DEFAULT '0' COMMENT '版本号',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='角色表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='角色表';
 
 /*Data for the table `sys_role` */
+
+insert  into `sys_role`(`id`,`role_code`,`role_name`,`status`,`if_admin`,`memo`,`create_no`,`create_time`,`modi_no`,`modi_time`,`version`) values (1,'admin','超级管理员','Y','Y',NULL,NULL,NULL,NULL,'2017-10-23 17:08:50',0);
 
 /*Table structure for table `sys_role_resource` */
 
@@ -349,9 +356,11 @@ CREATE TABLE `sys_role_resource` (
   `modi_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   `version` int(11) DEFAULT '0' COMMENT '版本号',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='角色资源表';
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8 COMMENT='角色资源表';
 
 /*Data for the table `sys_role_resource` */
+
+insert  into `sys_role_resource`(`id`,`role_code`,`source_no`,`create_no`,`create_time`,`modi_no`,`modi_time`,`version`) values (1,'admin','order',NULL,NULL,NULL,'2017-10-23 17:10:39',0),(2,'admin','stock',NULL,NULL,NULL,'2017-10-23 17:10:39',0),(3,'admin','produce',NULL,NULL,NULL,'2017-10-23 17:10:39',0),(4,'admin','coloring',NULL,NULL,NULL,'2017-10-23 17:10:39',0),(5,'admin','base',NULL,NULL,NULL,'2017-10-23 17:10:39',0),(6,'admin','system',NULL,NULL,NULL,'2017-10-23 17:10:39',0),(7,'admin','orderCreate',NULL,NULL,NULL,'2017-10-23 17:10:39',0),(8,'admin','orderAudit01',NULL,NULL,NULL,'2017-10-23 17:10:39',0),(9,'admin','orderAudit02',NULL,NULL,NULL,'2017-10-23 17:10:39',0),(10,'admin','orderQuery',NULL,NULL,NULL,'2017-10-23 17:10:39',0),(11,'admin','deliverCreate',NULL,NULL,NULL,'2017-10-23 17:10:39',0),(12,'admin','deliverAudit01',NULL,NULL,NULL,'2017-10-23 17:10:39',0),(13,'admin','deliverAudit02',NULL,NULL,NULL,'2017-10-23 17:10:39',0),(14,'admin','deliverQuery',NULL,NULL,NULL,'2017-10-23 17:10:39',0),(15,'admin','materialInfo',NULL,NULL,NULL,'2017-10-23 17:10:39',0),(16,'admin','formularInfo',NULL,NULL,NULL,'2017-10-23 17:10:39',0),(17,'admin','compInfo',NULL,NULL,NULL,'2017-10-23 17:10:39',0),(18,'admin','departInfo',NULL,NULL,NULL,'2017-10-23 17:10:39',0);
 
 /*Table structure for table `sys_user` */
 
@@ -375,11 +384,11 @@ CREATE TABLE `sys_user` (
   `version` int(11) DEFAULT '0' COMMENT '版本号',
   PRIMARY KEY (`id`),
   UNIQUE KEY `uniq_index_userNo` (`user_no`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COMMENT='用户表';
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COMMENT='用户表';
 
 /*Data for the table `sys_user` */
 
-insert  into `sys_user`(`id`,`user_no`,`user_name`,`nick_name`,`phone_num`,`email_addr`,`password`,`status`,`memo`,`last_login_time`,`create_no`,`create_time`,`modi_no`,`modi_time`,`version`) values (6,'zhangsan',NULL,'张三',15222222,'XXX@qq.com','e10adc3949ba59abbe56e057f20f883e',NULL,'test',NULL,'system','2017-10-19 17:40:51','system','2017-10-19 17:40:51',0),(10,'zhangsan1',NULL,'张三',15222222,'XXX@qq.com','e10adc3949ba59abbe56e057f20f883e',NULL,'test',NULL,'system','2017-10-19 17:46:49','system','2017-10-19 17:46:49',0);
+insert  into `sys_user`(`id`,`user_no`,`user_name`,`nick_name`,`phone_num`,`email_addr`,`password`,`status`,`memo`,`last_login_time`,`create_no`,`create_time`,`modi_no`,`modi_time`,`version`) values (11,'zhangsan1',NULL,'张三',15222222,'XXX@qq.com','e10adc3949ba59abbe56e057f20f883e',NULL,'test',NULL,'system','2017-10-20 11:14:18','system','2017-10-20 11:14:18',0),(12,'zhangsan',NULL,'张三',15222222,'XXX@qq.com','e10adc3949ba59abbe56e057f20f883e',NULL,'test',NULL,'system','2017-10-20 11:14:26','system','2017-10-20 11:14:26',0),(13,'admin',NULL,'管理员',15222222,'XXX@qq.com','e10adc3949ba59abbe56e057f20f883e',NULL,'test',NULL,'system','2017-10-20 11:14:34','system','2017-10-20 11:14:34',0),(14,'admin1',NULL,'管理员1',15222222,'XXX@qq.com','e10adc3949ba59abbe56e057f20f883e',NULL,'test',NULL,'system','2017-10-20 11:14:40','system','2017-10-20 11:14:40',0),(15,'admin2',NULL,'管理员2',15222222,'XXX@qq.com','e10adc3949ba59abbe56e057f20f883e',NULL,'test',NULL,'system','2017-10-20 11:14:45','system','2017-10-20 11:14:45',0),(16,'admin3',NULL,'管理员3',15222222,'XXX@qq.com','e10adc3949ba59abbe56e057f20f883e',NULL,'test',NULL,'system','2017-10-20 11:14:51','system','2017-10-20 11:14:51',0),(17,'admin4',NULL,'管理员4',15222222,'XXX@qq.com','e10adc3949ba59abbe56e057f20f883e',NULL,'test',NULL,'system','2017-10-20 11:16:59','system','2017-10-20 11:16:59',0);
 
 /*Table structure for table `sys_user_role` */
 
@@ -395,9 +404,11 @@ CREATE TABLE `sys_user_role` (
   `modi_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   `version` int(11) DEFAULT '0' COMMENT '版本号',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户角色表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='用户角色表';
 
 /*Data for the table `sys_user_role` */
+
+insert  into `sys_user_role`(`id`,`user_no`,`role_code`,`create_no`,`create_time`,`modi_no`,`modi_time`,`version`) values (1,'admin','admin',NULL,NULL,NULL,'2017-10-23 17:11:40',0);
 
 /*Table structure for table `users` */
 

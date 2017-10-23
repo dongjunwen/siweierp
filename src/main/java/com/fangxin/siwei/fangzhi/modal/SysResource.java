@@ -23,6 +23,8 @@ public class SysResource {
 
     private String ifVisible;
 
+    private Integer level;
+
     private String memo;
 
     private String createNo;
@@ -153,5 +155,13 @@ public class SysResource {
 
     public void setVersion(Integer version) {
         this.version = version;
+    }
+
+    public Integer getLevel() {
+        return level;
+    }
+
+    public void setLevel(Integer level) {
+        this.level = level;
     }
 }

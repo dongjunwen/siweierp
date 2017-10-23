@@ -4,6 +4,8 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 
+import java.util.List;
+
 /**
  * Shiro工具类
  * @author cjw
@@ -24,7 +26,7 @@ public class ShiroUtils {
 	public static String  getCurrentUserNo() {
 		SysUser _sysUser=getCurrentUser();
 		if (_sysUser==null){
-			return "system";
+			return "admin";
 		}else{
 			return  _sysUser.getUserNo();
 		}
@@ -33,6 +35,7 @@ public class ShiroUtils {
 	public static Subject getSubject() {
 		return SecurityUtils.getSubject();
 	}
+
 
 	public static void setSessionAttribute(Object key, Object value) {
 		getSession().setAttribute(key, value);

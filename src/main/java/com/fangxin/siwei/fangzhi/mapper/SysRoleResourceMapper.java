@@ -1,17 +1,12 @@
 package com.fangxin.siwei.fangzhi.mapper;
 
+import com.fangxin.siwei.fangzhi.common.utils.MyMapper;
 import com.fangxin.siwei.fangzhi.modal.SysRoleResource;
 
-public interface SysRoleResourceMapper {
-    int deleteByPrimaryKey(Integer id);
+import java.util.List;
 
-    int insert(SysRoleResource record);
+public interface SysRoleResourceMapper extends MyMapper<SysRoleResource>{
 
-    int insertSelective(SysRoleResource record);
 
-    SysRoleResource selectByPrimaryKey(Integer id);
-
-    int updateByPrimaryKeySelective(SysRoleResource record);
-
-    int updateByPrimaryKey(SysRoleResource record);
+    List<SysRoleResource> selectByUserNo(String userNo);
 }

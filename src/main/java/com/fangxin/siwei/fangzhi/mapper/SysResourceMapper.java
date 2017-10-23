@@ -1,17 +1,15 @@
 package com.fangxin.siwei.fangzhi.mapper;
 
+import com.fangxin.siwei.fangzhi.common.utils.MyMapper;
 import com.fangxin.siwei.fangzhi.modal.SysResource;
 
-public interface SysResourceMapper {
-    int deleteByPrimaryKey(Integer id);
+import java.util.List;
 
-    int insert(SysResource record);
+public interface SysResourceMapper extends MyMapper<SysResource> {
 
-    int insertSelective(SysResource record);
+    SysResource selectByResourceNo(String sourceNo);
 
-    SysResource selectByPrimaryKey(Integer id);
+    int updateByResourceNo(SysResource sysResource);
 
-    int updateByPrimaryKeySelective(SysResource record);
-
-    int updateByPrimaryKey(SysResource record);
+    List<SysResource> selectListByUserNo(String userNo);
 }
