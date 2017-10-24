@@ -2,6 +2,7 @@ package com.fangxin.siwei.fangzhi.config;
 
 import com.fangxin.siwei.fangzhi.shiro.MyCredentialsMatcher;
 import com.fangxin.siwei.fangzhi.shiro.MyShiroRealm;
+import com.fangxin.siwei.fangzhi.shiro.AccessFilter;
 import org.apache.shiro.authc.credential.CredentialsMatcher;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.mgt.SecurityManager;
@@ -13,7 +14,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.servlet.Filter;
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2017/8/2.
@@ -68,17 +71,23 @@ public class ShiroConfig {
         ShiroFilterFactoryBean bean=new ShiroFilterFactoryBean();
         bean.setSecurityManager(manager);
         //配置登录的url和登录成功的url和无权限
-       // bean.setLoginUrl("/loginIndex");
+        bean.setLoginUrl("/loginIndex");
      //   bean.setSuccessUrl("/index");
-     //   bean.setUnauthorizedUrl("/403");
+        bean.setUnauthorizedUrl("/403");
+        //自定义拦截器
+        Map<String, Filter> filtersMap = new LinkedHashMap<String, Filter>();
+        //限制同一帐号同时在线的个数。
+        filtersMap.put("accessFilter", new AccessFilter());
+        bean.setFilters(filtersMap);
         //配置访问权限
         LinkedHashMap<String, String> filterChainDefinitionMap=new LinkedHashMap<>();
-        /**filterChainDefinitionMap.put("login", "anon"); //表示可以匿名访问
+        filterChainDefinitionMap.put("login", "anon"); //表示可以匿名访问
         filterChainDefinitionMap.put("loginIndex", "anon"); //表示可以匿名访问
         filterChainDefinitionMap.put("logout", "anon"); //表示可以匿名访问
-        filterChainDefinitionMap.put("/druid*//*","anon");
-        filterChainDefinitionMap.put("/swagger*//*","anon");**/
+        filterChainDefinitionMap.put("/druid/**","anon");
+        filterChainDefinitionMap.put("/swagger/**","anon");
         filterChainDefinitionMap.put("/api/**", "authc");//表示需要认证才可以访问
+        filterChainDefinitionMap.put("/api/**","accessFilter");
 
         bean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return bean;

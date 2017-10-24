@@ -43,6 +43,12 @@ public class IndexController {
         return new ModelAndView("web/loginIndex.html");
     }
 
+    @ApiOperation(value = "无权限页面",notes = "无权限页面")
+    @RequestMapping(value = "/403",method = RequestMethod.GET)
+    public ModelAndView Error403(){
+        return new ModelAndView("web/403.html");
+    }
+
     @ApiOperation(value = "登录",notes = "登录接口")
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     @ApiImplicitParams({
