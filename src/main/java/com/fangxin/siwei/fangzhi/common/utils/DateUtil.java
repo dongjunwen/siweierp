@@ -28,6 +28,8 @@ public class DateUtil {
      */
     public static final String DATE_TIME_PATTERN = "yyyy-MM-dd HH:mm:ss";
 
+    public static final String DATETIME_PATTERN = "yyyyMMddHHmmss";
+
     /**
      * 时间格式(HH:mm:ss)
      */
@@ -336,6 +338,10 @@ public class DateUtil {
      */
     public static String formatCurrentDateTime() {
         return format(new Date(), DATE_TIME_PATTERN);
+    }
+
+    public static String formatCurrentDateTime1() {
+        return format(new Date(), DATETIME_PATTERN);
     }
 
     /**
