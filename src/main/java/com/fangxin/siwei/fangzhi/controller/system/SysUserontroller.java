@@ -5,9 +5,8 @@ import com.fangxin.siwei.fangzhi.common.result.Result;
 import com.fangxin.siwei.fangzhi.common.validator.ValidatorUtil;
 import com.fangxin.siwei.fangzhi.common.validator.group.AddGroup;
 import com.fangxin.siwei.fangzhi.modal.SysUser;
-import com.fangxin.siwei.fangzhi.modal.User;
 import com.fangxin.siwei.fangzhi.service.system.SysUserService;
-import com.fangxin.siwei.fangzhi.vo.SysUserVo;
+import com.fangxin.siwei.fangzhi.vo.system.SysUserVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -15,7 +14,6 @@ import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;

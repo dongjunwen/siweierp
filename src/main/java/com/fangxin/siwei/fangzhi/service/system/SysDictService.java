@@ -2,7 +2,7 @@ package com.fangxin.siwei.fangzhi.service.system;
 
 import com.fangxin.siwei.fangzhi.common.result.Result;
 import com.fangxin.siwei.fangzhi.modal.SysDict;
-import com.fangxin.siwei.fangzhi.vo.SysDictVo;
+import com.fangxin.siwei.fangzhi.vo.system.SysDictVo;
 import com.github.pagehelper.Page;
 
 import java.util.List;

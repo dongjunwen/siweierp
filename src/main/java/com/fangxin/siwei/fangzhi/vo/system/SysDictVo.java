@@ -1,4 +1,4 @@
-package com.fangxin.siwei.fangzhi.vo;
+package com.fangxin.siwei.fangzhi.vo.system;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

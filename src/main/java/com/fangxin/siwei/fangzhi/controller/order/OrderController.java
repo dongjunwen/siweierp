@@ -5,11 +5,8 @@ import com.fangxin.siwei.fangzhi.common.result.Result;
 import com.fangxin.siwei.fangzhi.common.validator.ValidatorUtil;
 import com.fangxin.siwei.fangzhi.common.validator.group.AddGroup;
 import com.fangxin.siwei.fangzhi.service.order.SwOrderService;
-import com.fangxin.siwei.fangzhi.service.system.SysDictService;
 import com.fangxin.siwei.fangzhi.vo.SwOrderVo;
-import com.fangxin.siwei.fangzhi.vo.SysDictVo;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
@@ -41,6 +38,7 @@ public class OrderController {
     //@ApiImplicitParam(name = "swOrderVo", value = "订单合同信息实体 swOrderVo",dataTypeClass = SysDictVo.class)
     public Result<String> create(@ApiParam(name = "swOrderVo", value = "订单合同信息实体 swOrderVo", required = true) @RequestBody SwOrderVo swOrderVo){
         ValidatorUtil.validateEntity(swOrderVo, AddGroup.class);//校验
+        ValidatorUtil.validateEntity(swOrderVo.getSwOrderBaseVo(), AddGroup.class);//校验
         try{
             Result<Integer> _result= swOrderService.create(swOrderVo);
             if(!_result.isSuccess()){

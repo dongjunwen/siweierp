@@ -8,7 +8,7 @@ import com.fangxin.siwei.fangzhi.common.validator.ValidatorUtil;
 import com.fangxin.siwei.fangzhi.common.validator.group.AddGroup;
 import com.fangxin.siwei.fangzhi.modal.SysDict;
 import com.fangxin.siwei.fangzhi.service.system.SysDictService;
-import com.fangxin.siwei.fangzhi.vo.SysDictVo;
+import com.fangxin.siwei.fangzhi.vo.system.SysDictVo;
 import com.github.pagehelper.Page;
 import io.swagger.annotations.*;
 import org.slf4j.Logger;

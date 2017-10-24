@@ -1,4 +1,4 @@
-package com.fangxin.siwei.fangzhi.vo;
+package com.fangxin.siwei.fangzhi.vo.system;
 
 import com.fangxin.siwei.fangzhi.common.validator.group.AddGroup;
 import io.swagger.annotations.ApiModel;

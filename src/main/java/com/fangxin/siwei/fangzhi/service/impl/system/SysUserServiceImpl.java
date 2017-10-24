@@ -8,7 +8,7 @@ import com.fangxin.siwei.fangzhi.common.utils.ShiroUtils;
 import com.fangxin.siwei.fangzhi.mapper.SysUserMapper;
 import com.fangxin.siwei.fangzhi.modal.SysUser;
 import com.fangxin.siwei.fangzhi.service.system.SysUserService;
-import com.fangxin.siwei.fangzhi.vo.SysUserVo;
+import com.fangxin.siwei.fangzhi.vo.system.SysUserVo;
 import org.apache.commons.beanutils.BeanUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

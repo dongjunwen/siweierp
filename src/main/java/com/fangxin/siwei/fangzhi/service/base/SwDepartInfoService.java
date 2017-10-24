@@ -2,7 +2,7 @@ package com.fangxin.siwei.fangzhi.service.base;
 
 import com.fangxin.siwei.fangzhi.common.result.Result;
 import com.fangxin.siwei.fangzhi.modal.SwDepartInfo;
-import com.fangxin.siwei.fangzhi.vo.SwDepartInfoVo;
+import com.fangxin.siwei.fangzhi.vo.base.SwDepartInfoVo;
 import com.github.pagehelper.Page;
 
 import java.util.Map; /**

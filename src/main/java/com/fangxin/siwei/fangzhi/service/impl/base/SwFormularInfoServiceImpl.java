@@ -9,7 +9,7 @@ import com.fangxin.siwei.fangzhi.mapper.SwFormularInfoMapper;
 import com.fangxin.siwei.fangzhi.modal.SwFormularInfo;
 import com.fangxin.siwei.fangzhi.service.AbstractService;
 import com.fangxin.siwei.fangzhi.service.base.SwFormularInfoService;
-import com.fangxin.siwei.fangzhi.vo.SwFormularInfoVo;
+import com.fangxin.siwei.fangzhi.vo.base.SwFormularInfoVo;
 import com.github.pagehelper.Page;
 import org.apache.commons.beanutils.BeanUtils;
 import org.slf4j.Logger;

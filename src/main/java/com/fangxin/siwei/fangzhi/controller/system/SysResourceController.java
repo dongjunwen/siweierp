@@ -9,7 +9,7 @@ import com.fangxin.siwei.fangzhi.common.validator.ValidatorUtil;
 import com.fangxin.siwei.fangzhi.common.validator.group.AddGroup;
 import com.fangxin.siwei.fangzhi.modal.SysResource;
 import com.fangxin.siwei.fangzhi.service.system.SysResourceService;
-import com.fangxin.siwei.fangzhi.vo.SysResourceVo;
+import com.fangxin.siwei.fangzhi.vo.system.SysResourceVo;
 import com.github.pagehelper.Page;
 import io.swagger.annotations.*;
 import org.slf4j.Logger;

@@ -2,7 +2,7 @@ package com.fangxin.siwei.fangzhi.service.base;
 
 import com.fangxin.siwei.fangzhi.common.result.Result;
 import com.fangxin.siwei.fangzhi.modal.SwMaterialInfo;
-import com.fangxin.siwei.fangzhi.vo.SwMaterialInfoVo;
+import com.fangxin.siwei.fangzhi.vo.base.SwMaterialInfoVo;
 import com.github.pagehelper.Page;
 
 import java.util.Map; /**

@@ -1,9 +1,8 @@
 package com.fangxin.siwei.fangzhi.service.system;
 
 import com.fangxin.siwei.fangzhi.common.result.Result;
-import com.fangxin.siwei.fangzhi.modal.SwCompanyInfo;
 import com.fangxin.siwei.fangzhi.modal.SysResource;
-import com.fangxin.siwei.fangzhi.vo.SysResourceVo;
+import com.fangxin.siwei.fangzhi.vo.system.SysResourceVo;
 import com.github.pagehelper.Page;
 
 import java.util.List;

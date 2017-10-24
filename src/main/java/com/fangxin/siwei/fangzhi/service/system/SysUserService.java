@@ -2,8 +2,7 @@ package com.fangxin.siwei.fangzhi.service.system;
 
 import com.fangxin.siwei.fangzhi.common.result.Result;
 import com.fangxin.siwei.fangzhi.modal.SysUser;
-import com.fangxin.siwei.fangzhi.modal.User;
-import com.fangxin.siwei.fangzhi.vo.SysUserVo;
+import com.fangxin.siwei.fangzhi.vo.system.SysUserVo;
 
 /**
  * @Date:2017/10/19 0019 15:07

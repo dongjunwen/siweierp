@@ -4,15 +4,11 @@ import com.fangxin.siwei.fangzhi.common.enums.ResultCode;
 import com.fangxin.siwei.fangzhi.common.exception.RRException;
 import com.fangxin.siwei.fangzhi.common.result.Result;
 import com.fangxin.siwei.fangzhi.common.utils.Common;
-import com.fangxin.siwei.fangzhi.common.utils.ShiroUtils;
 import com.fangxin.siwei.fangzhi.mapper.SysDictMapper;
-import com.fangxin.siwei.fangzhi.modal.SwCompanyInfo;
 import com.fangxin.siwei.fangzhi.modal.SysDict;
-import com.fangxin.siwei.fangzhi.modal.SysResource;
 import com.fangxin.siwei.fangzhi.service.AbstractService;
 import com.fangxin.siwei.fangzhi.service.system.SysDictService;
-import com.fangxin.siwei.fangzhi.vo.SysDictVo;
-import com.fangxin.siwei.fangzhi.vo.SysResourceVo;
+import com.fangxin.siwei.fangzhi.vo.system.SysDictVo;
 import com.github.pagehelper.Page;
 import org.apache.commons.beanutils.BeanUtils;
 import org.slf4j.Logger;
@@ -22,7 +18,6 @@ import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Condition;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
