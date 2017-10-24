@@ -1,17 +1,14 @@
 package com.fangxin.siwei.fangzhi.mapper;
 
+import com.fangxin.siwei.fangzhi.common.utils.MyMapper;
 import com.fangxin.siwei.fangzhi.modal.SysDict;
+import org.apache.ibatis.annotations.Param;
 
-public interface SysDictMapper {
-    int deleteByPrimaryKey(Integer id);
+import java.util.List;
 
-    int insert(SysDict record);
+public interface SysDictMapper extends MyMapper<SysDict> {
 
-    int insertSelective(SysDict record);
+    SysDict selectByUniqNo(@Param("dictType") String dictType, @Param("dictCode")String dictCode);
 
-    SysDict selectByPrimaryKey(Integer id);
-
-    int updateByPrimaryKeySelective(SysDict record);
-
-    int updateByPrimaryKey(SysDict record);
+    List<SysDict> selectByDictType(String dictType);
 }
