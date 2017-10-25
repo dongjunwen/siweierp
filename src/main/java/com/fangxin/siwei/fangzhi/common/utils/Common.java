@@ -144,12 +144,19 @@ public class Common {
             condition.setOrderByClause(orderByClause);
         }
 
+        String timeCond1=params.get("timeCond1");
         if(StringUtils.isNotBlank(startTime)&&StringUtils.isNotBlank(endTime)){
-            criteria.andBetween("CREATED_TIME",DateUtil.stampToDate(startTime),DateUtil.stampToDate(endTime));
+            startTime=startTime+" 00:00:00";
+            endTime=endTime+" 23:59:59";
+           // criteria.andBetween(timeCond1,startTime,endTime);
+            criteria.andCondition(timeCond1+" >= '"+startTime+"'");
+            criteria.andCondition(timeCond1+" <= '"+endTime+"'");
         }else if(StringUtils.isNotBlank(startTime)){
-            criteria.andCondition("CREATED_TIME >= '"+DateUtil.stampToDate(startTime)+"'");
+            startTime=startTime+" 00:00:00";
+            criteria.andCondition(timeCond1+" >= '"+startTime+"'");
         }else if(StringUtils.isNotBlank(endTime)){
-            criteria.andCondition("CREATED_TIME <= '"+DateUtil.stampToDate(endTime)+"'");
+            endTime=endTime+" 23:59:59";
+            criteria.andCondition(timeCond1+" <= '"+endTime+"'");
         }
         PageHelper.startPage(pageNum, pageSize);
         return condition;

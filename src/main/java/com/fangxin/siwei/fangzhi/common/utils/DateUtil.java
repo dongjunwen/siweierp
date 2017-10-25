@@ -573,12 +573,16 @@ public class DateUtil {
     /*
     * 将时间转换为时间戳
     */
-    public static String dateToStamp(String s) throws ParseException{
+    public static String dateToStamp(String s){
         String res;
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date date = simpleDateFormat.parse(s);
-        long ts = date.getTime();
-        res = String.valueOf(ts);
+        try{
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date date = simpleDateFormat.parse(s);
+            long ts = date.getTime();
+            res = String.valueOf(ts);
+        }catch (Exception e){
+            throw new RRException("请检查时间是否是时间搓类型");
+        }
         return res;
     }
 
@@ -598,6 +602,8 @@ public class DateUtil {
 
         return res;
     }
+
+
 
     public static void main(String[] args) {
         String s = stampToDate("1502964348398");

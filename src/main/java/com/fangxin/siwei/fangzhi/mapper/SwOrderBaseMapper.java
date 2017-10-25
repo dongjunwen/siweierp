@@ -1,17 +1,8 @@
 package com.fangxin.siwei.fangzhi.mapper;
 
+import com.fangxin.siwei.fangzhi.common.utils.MyMapper;
 import com.fangxin.siwei.fangzhi.modal.SwOrderBase;
 
-public interface SwOrderBaseMapper {
-    int deleteByPrimaryKey(Integer id);
+public interface SwOrderBaseMapper extends MyMapper<SwOrderBase>{
 
-    int insert(SwOrderBase record);
-
-    int insertSelective(SwOrderBase record);
-
-    SwOrderBase selectByPrimaryKey(Integer id);
-
-    int updateByPrimaryKeySelective(SwOrderBase record);
-
-    int updateByPrimaryKey(SwOrderBase record);
 }

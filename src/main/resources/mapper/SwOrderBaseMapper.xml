@@ -39,7 +39,7 @@
     supply_mobile, supply_phone, supply_tax, supply_addr, create_no, create_time, modi_no, 
     modi_time, version
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <!--<select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from sw_order_base
@@ -373,5 +373,5 @@
       modi_time = #{modiTime,jdbcType=TIMESTAMP},
       version = #{version,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
-  </update>
+  </update>-->
 </mapper>
