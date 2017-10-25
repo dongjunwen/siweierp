@@ -8,8 +8,10 @@ import java.util.Objects;
  * @Description：审核动作
  **/
 public enum AuditActionEnum {
+    APPLY("APPLY", "申请"),
     AUDIT_PASS("AUDIT_PASS", "通过"),
-    AUDIT_REFUSE("AUDIT_REFUSE", "拒绝");
+    AUDIT_REFUSE("AUDIT_REFUSE", "拒绝"),
+    CANCEL("CANCEL", "作废");
 
     String code;
     String message;

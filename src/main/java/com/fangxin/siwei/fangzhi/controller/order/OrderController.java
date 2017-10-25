@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.fangxin.siwei.fangzhi.common.enums.ResultCode;
 import com.fangxin.siwei.fangzhi.common.result.Result;
 import com.fangxin.siwei.fangzhi.common.utils.PageUitls;
+import com.fangxin.siwei.fangzhi.common.utils.ShiroUtils;
 import com.fangxin.siwei.fangzhi.common.validator.ValidatorUtil;
 import com.fangxin.siwei.fangzhi.common.validator.group.AddGroup;
 import com.fangxin.siwei.fangzhi.service.order.SwOrderService;
@@ -77,6 +78,8 @@ public class OrderController {
     public Result<String> audit(@ApiParam(name = "swOrderAuditVo", value = "订单审核 swOrderAuditVo", required = true) @RequestBody SwOrderAuditVo swOrderAuditVo){
         ValidatorUtil.validateEntity(swOrderAuditVo, AddGroup.class);//校验
         try{
+            swOrderAuditVo.setAuditUserNo(ShiroUtils.getCurrentUserNo());
+            swOrderAuditVo.setAuditUserName(ShiroUtils.getCurrentUserName());
             Result<Integer> _result= swOrderService.audit(swOrderAuditVo);
             if(!_result.isSuccess()){
                 return Result.newError(_result.getCode(),_result.getMessage());

@@ -183,7 +183,7 @@ public class SwOrderServiceImpl extends AbstractService<SwOrderBase> implements 
     private Result<SysAuditConfig> beginAudit(String sourceNo, SwOrderAuditVo swOrderAuditVo) {
         AuditingParam auditingParam=new AuditingParam();
         auditingParam.setSourceNo(sourceNo);
-        auditingParam.setAuditType(AuditTypeEnum.ORDER.getCode());
+        auditingParam.setAuditType(AuditTypeEnum.ORDER);
         auditingParam.setCurrentStage(swOrderAuditVo.getOrderStatus().getCode());
         auditingParam.setAuditAction(swOrderAuditVo.getAuditAction().getCode());
         auditingParam.setAuditUserNo(swOrderAuditVo.getAuditUserNo());

@@ -32,6 +32,15 @@ public class ShiroUtils {
 		}
 	}
 
+	public static String  getCurrentUserName() {
+		SysUser _sysUser=getCurrentUser();
+		if (_sysUser==null){
+			return "system";
+		}else{
+			return  _sysUser.getUserName();
+		}
+	}
+
 	public static Subject getSubject() {
 		return SecurityUtils.getSubject();
 	}

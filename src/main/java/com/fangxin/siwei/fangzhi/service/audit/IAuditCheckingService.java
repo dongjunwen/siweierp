@@ -1,6 +1,7 @@
 package com.fangxin.siwei.fangzhi.service.audit;
 
 
+import com.fangxin.siwei.fangzhi.common.enums.AuditTypeEnum;
 import com.fangxin.siwei.fangzhi.common.result.Result;
 
 /**
@@ -13,6 +14,8 @@ import com.fangxin.siwei.fangzhi.common.result.Result;
  * @date 2016年12月26日
  */
 public interface IAuditCheckingService {
+
+	AuditTypeEnum getAuditType();
 
 	/**
 	 * 审核检查流程

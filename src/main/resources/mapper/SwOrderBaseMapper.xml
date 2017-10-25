@@ -39,6 +39,12 @@
     supply_mobile, supply_phone, supply_tax, supply_addr, create_no, create_time, modi_no,
     modi_time, version
   </sql>
+  <select id="selectByOrderNo" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sw_order_base
+    where order_no = #{orderNo,jdbcType=VARCHAR}
+  </select>
   <update id="updateByOrderNo" parameterType="com.fangxin.siwei.fangzhi.modal.SwOrderBase">
     update sw_order_base
     <set>

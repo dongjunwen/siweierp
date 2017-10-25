@@ -7,10 +7,7 @@ import com.fangxin.siwei.fangzhi.mapper.SysAuditConfigMapper;
 import com.fangxin.siwei.fangzhi.mapper.SysAuditLogMapper;
 import com.fangxin.siwei.fangzhi.modal.SysAuditConfig;
 import com.fangxin.siwei.fangzhi.modal.SysAuditLog;
-import com.fangxin.siwei.fangzhi.service.audit.AuditingParam;
-import com.fangxin.siwei.fangzhi.service.audit.CurrentStageSearchServiceParam;
-import com.fangxin.siwei.fangzhi.service.audit.IAuditCheckingService;
-import com.fangxin.siwei.fangzhi.service.audit.IAuditingService;
+import com.fangxin.siwei.fangzhi.service.audit.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,7 +34,7 @@ public class AuditingServiceImpl implements IAuditingService {
 	@Autowired
 	private SysAuditLogMapper sysAuditLogMapper;
 	@Resource
-	private Map<String, IAuditCheckingService> auditCheckingMapping;
+	private AuditCheckingFactory auditCheckingFactory;
 
 	@Transactional
 	@Override
@@ -50,14 +47,15 @@ public class AuditingServiceImpl implements IAuditingService {
 		}
 		
 		Result<String> checkingRet = null;
-		if(this.auditCheckingMapping.containsKey(param.getAuditType())){
+		IAuditCheckingService checkingServiceImpl=this.auditCheckingFactory.getAuditCheckingMapping(param.getAuditType());
+		if(checkingServiceImpl!=null){
 			CurrentStageSearchServiceParam searchParamDTO = new CurrentStageSearchServiceParam();
 			{
 				searchParamDTO.setAuditAction(param.getAuditAction());
-				searchParamDTO.setAuditType(param.getAuditType());
+				searchParamDTO.setAuditType(param.getAuditType().getCode());
 				searchParamDTO.setSourceNo(param.getSourceNo());
 			}
-			checkingRet = this.auditCheckingMapping.get(param.getAuditType()).checking(searchParamDTO);
+			checkingRet = checkingServiceImpl.checking(searchParamDTO);
 			if(!Objects.equals(ResultCode.SUCCESS.getCode(), checkingRet.getCode())){
 				result.setErrorCode(ResultCode.AUDIT_CHECKING_ERROR);
 				result.setMessage("单号为"+param.getSourceNo()+"的"+ResultCode.AUDIT_CHECKING_ERROR.getMessage());
@@ -75,7 +73,7 @@ public class AuditingServiceImpl implements IAuditingService {
 			result.setMessage("单号为"+param.getSourceNo()+"的当前状态不能再操作!");
 			return result;
 		}
-		SysAuditConfig expAuditConfig = this.sysAuditConfigMapper.findNextStage(param.getAuditType(), checkingRet.getData(), param.getAuditAction());
+		SysAuditConfig expAuditConfig = this.sysAuditConfigMapper.findNextStage(param.getAuditType().getCode(), checkingRet.getData(), param.getAuditAction());
 		if(expAuditConfig == null) {
 			result.setErrorCode(ResultCode.AUDIT_ERROR_NO_CONFIG);
 			result.setMessage("单号为"+param.getSourceNo()+"的"+ResultCode.AUDIT_ERROR_NO_CONFIG.getMessage());

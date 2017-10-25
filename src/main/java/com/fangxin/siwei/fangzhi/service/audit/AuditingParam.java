@@ -1,5 +1,7 @@
 package com.fangxin.siwei.fangzhi.service.audit;
 
+import com.fangxin.siwei.fangzhi.common.enums.AuditTypeEnum;
+
 /**
  * 
  * Title:
@@ -17,7 +19,7 @@ public class AuditingParam {
 	/**
 	 * 审核类型
 	 */
-    private String auditType;
+    private AuditTypeEnum auditType;
 	/**
 	 * 审核动作
 	 */
@@ -47,10 +49,7 @@ public class AuditingParam {
 		return auditDesc;
 	}
 	
-	public String getAuditType() {
-		return auditType;
-	}
-	
+
 	public String getAuditUserName() {
 		return auditUserName;
 	}
@@ -75,10 +74,7 @@ public class AuditingParam {
 		this.auditDesc = auditDesc;
 	}
 	
-	public void setAuditType(String auditType) {
-		this.auditType = auditType;
-	}
-	
+
 	public void setAuditUserName(String auditUserName) {
 		this.auditUserName = auditUserName;
 	}
@@ -93,5 +89,13 @@ public class AuditingParam {
 	
 	public void setSourceNo(String sourceNo) {
 		this.sourceNo = sourceNo;
+	}
+
+	public AuditTypeEnum getAuditType() {
+		return auditType;
+	}
+
+	public void setAuditType(AuditTypeEnum auditType) {
+		this.auditType = auditType;
 	}
 }

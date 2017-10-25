@@ -19,10 +19,6 @@ public class SysAuditConfig {
 
     private String nextStage;
 
-    private String auditUserNo;
-
-    private String auditUserName;
-
     private Date createTime;
 
     private Date modiTime;
@@ -89,22 +85,6 @@ public class SysAuditConfig {
 
     public void setNextStage(String nextStage) {
         this.nextStage = nextStage == null ? null : nextStage.trim();
-    }
-
-    public String getAuditUserNo() {
-        return auditUserNo;
-    }
-
-    public void setAuditUserNo(String auditUserNo) {
-        this.auditUserNo = auditUserNo == null ? null : auditUserNo.trim();
-    }
-
-    public String getAuditUserName() {
-        return auditUserName;
-    }
-
-    public void setAuditUserName(String auditUserName) {
-        this.auditUserName = auditUserName == null ? null : auditUserName.trim();
     }
 
     public Date getCreateTime() {

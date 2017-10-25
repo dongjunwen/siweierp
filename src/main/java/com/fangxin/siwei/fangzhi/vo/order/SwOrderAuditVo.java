@@ -18,7 +18,7 @@ public class SwOrderAuditVo {
      * 审核单号
      */
     @ApiModelProperty(value = "订单号列表",required =false )
-    private List orderNos;
+    private List<String> orderNos;
     /**
      * 审核动作
      */
@@ -35,11 +35,11 @@ public class SwOrderAuditVo {
     private String auditUserName;
 
 
-    public List getOrderNos() {
+    public List<String> getOrderNos() {
         return orderNos;
     }
 
-    public void setOrderNos(List orderNos) {
+    public void setOrderNos(List<String> orderNos) {
         this.orderNos = orderNos;
     }
 
@@ -82,4 +82,6 @@ public class SwOrderAuditVo {
     public void setAuditUserName(String auditUserName) {
         this.auditUserName = auditUserName;
     }
+
+
 }
