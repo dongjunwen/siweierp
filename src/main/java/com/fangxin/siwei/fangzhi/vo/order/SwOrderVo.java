@@ -1,7 +1,5 @@
-package com.fangxin.siwei.fangzhi.vo;
+package com.fangxin.siwei.fangzhi.vo.order;
 
-import com.fangxin.siwei.fangzhi.vo.SwOrderBaseVo;
-import com.fangxin.siwei.fangzhi.vo.SwOrderDetailVo;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 

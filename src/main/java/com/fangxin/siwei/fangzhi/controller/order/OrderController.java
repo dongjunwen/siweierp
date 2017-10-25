@@ -6,13 +6,11 @@ import com.fangxin.siwei.fangzhi.common.result.Result;
 import com.fangxin.siwei.fangzhi.common.utils.PageUitls;
 import com.fangxin.siwei.fangzhi.common.validator.ValidatorUtil;
 import com.fangxin.siwei.fangzhi.common.validator.group.AddGroup;
-import com.fangxin.siwei.fangzhi.modal.SwFormularInfo;
-import com.fangxin.siwei.fangzhi.modal.SwOrderBase;
 import com.fangxin.siwei.fangzhi.service.order.SwOrderService;
-import com.fangxin.siwei.fangzhi.vo.SwOrderVo;
+import com.fangxin.siwei.fangzhi.vo.order.SwOrderAuditVo;
+import com.fangxin.siwei.fangzhi.vo.order.SwOrderVo;
 import com.fangxin.siwei.fangzhi.vo.result.SwOrderResultVo;
 import com.github.pagehelper.Page;
-import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -70,5 +68,23 @@ public class OrderController {
     public Result<PageUitls<SwOrderResultVo>> findList(@RequestParam @ApiParam(hidden = true) Map<String,String> params){
         Page<SwOrderResultVo> page =  swOrderService.findList(params);
         return Result.newSuccess(new PageUitls<SwOrderResultVo>(page));
+    }
+
+
+    @RequestMapping(value = "/audit",method = RequestMethod.POST)
+    @ApiOperation(value="审核订单", notes="初审、终审接口")
+    //@ApiImplicitParam(name = "swOrderVo", value = "订单合同信息实体 swOrderVo",dataTypeClass = SysDictVo.class)
+    public Result<String> audit(@ApiParam(name = "swOrderAuditVo", value = "订单审核 swOrderAuditVo", required = true) @RequestBody SwOrderAuditVo swOrderAuditVo){
+        ValidatorUtil.validateEntity(swOrderAuditVo, AddGroup.class);//校验
+        try{
+            Result<Integer> _result= swOrderService.audit(swOrderAuditVo);
+            if(!_result.isSuccess()){
+                return Result.newError(_result.getCode(),_result.getMessage());
+            }
+            return  Result.newSuccess("审核订单合同成功");
+        }catch (Exception e){
+            logger.error("审核订单合同异常!{}",e);
+            return Result.newError(ResultCode.FAIL);
+        }
     }
 }

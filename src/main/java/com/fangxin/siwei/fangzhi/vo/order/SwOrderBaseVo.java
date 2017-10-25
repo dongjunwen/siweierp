@@ -1,4 +1,4 @@
-package com.fangxin.siwei.fangzhi.vo;
+package com.fangxin.siwei.fangzhi.vo.order;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -17,10 +17,10 @@ public class SwOrderBaseVo {
     @Length(max = 16,message = "付款方式长度不能超过16")
     @ApiModelProperty(value = "付款方式",required =false )
     private String payWay;
-    @Pattern(regexp="yyyy-MM-dd", message="订货日期格式不正确，正确的格式类似于1998-04-13")
+    @Pattern(regexp="[0-9]{4}-[0-9]{2}-[0-9]{2}", message="订货日期格式不正确，正确的格式类似于1998-04-13")
     @ApiModelProperty(value = "订货日期",required =false )
     private String goodDate;
-    @Pattern(regexp="yyyy-MM-dd", message="订货日期格式不正确，正确的格式类似于1998-04-13")
+    @Pattern(regexp="[0-9]{4}-[0-9]{2}-[0-9]{2}", message="订货日期格式不正确，正确的格式类似于1998-04-13")
     @ApiModelProperty(value = "交货日期",required =false )
     private String finishDate;
     @Length(max = 16,message = "单据类型长度不能超过16")
@@ -29,9 +29,6 @@ public class SwOrderBaseVo {
     @Length(max = 16,message = "销售类型长度不能超过16")
     @ApiModelProperty(value = "销售类型",required =false )
     private String saleType;
-    @Length(max = 16,message = "订单状态长度不能超过16")
-    @ApiModelProperty(value = "订单状态",required =false )
-    private String orderStatus;
     @Length(max = 32,message = "备注长度不能超过32")
     @ApiModelProperty(value = "备注",required =false )
     private String memo;
@@ -116,14 +113,6 @@ public class SwOrderBaseVo {
 
     public void setSaleType(String saleType) {
         this.saleType = saleType;
-    }
-
-    public String getOrderStatus() {
-        return orderStatus;
-    }
-
-    public void setOrderStatus(String orderStatus) {
-        this.orderStatus = orderStatus;
     }
 
     public String getMemo() {

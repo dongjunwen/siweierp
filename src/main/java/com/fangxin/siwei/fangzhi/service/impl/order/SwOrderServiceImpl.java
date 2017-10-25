@@ -1,5 +1,7 @@
 package com.fangxin.siwei.fangzhi.service.impl.order;
 
+import com.fangxin.siwei.fangzhi.common.enums.AuditTypeEnum;
+import com.fangxin.siwei.fangzhi.common.enums.OrderStatus;
 import com.fangxin.siwei.fangzhi.common.enums.ResultCode;
 import com.fangxin.siwei.fangzhi.common.exception.RRException;
 import com.fangxin.siwei.fangzhi.common.result.Result;
@@ -9,19 +11,19 @@ import com.fangxin.siwei.fangzhi.common.utils.ShiroUtils;
 import com.fangxin.siwei.fangzhi.common.utils.UUIDUtils;
 import com.fangxin.siwei.fangzhi.mapper.SwOrderBaseMapper;
 import com.fangxin.siwei.fangzhi.mapper.SwOrderDetailMapper;
-import com.fangxin.siwei.fangzhi.modal.SwCompanyInfo;
 import com.fangxin.siwei.fangzhi.modal.SwOrderBase;
 import com.fangxin.siwei.fangzhi.modal.SwOrderDetail;
-import com.fangxin.siwei.fangzhi.modal.SysResource;
+import com.fangxin.siwei.fangzhi.modal.SysAuditConfig;
 import com.fangxin.siwei.fangzhi.service.AbstractService;
+import com.fangxin.siwei.fangzhi.service.audit.AuditingParam;
+import com.fangxin.siwei.fangzhi.service.audit.IAuditingService;
 import com.fangxin.siwei.fangzhi.service.order.SwOrderService;
-import com.fangxin.siwei.fangzhi.vo.SwOrderBaseVo;
-import com.fangxin.siwei.fangzhi.vo.SwOrderDetailVo;
-import com.fangxin.siwei.fangzhi.vo.SwOrderVo;
+import com.fangxin.siwei.fangzhi.vo.order.SwOrderAuditVo;
+import com.fangxin.siwei.fangzhi.vo.order.SwOrderBaseVo;
+import com.fangxin.siwei.fangzhi.vo.order.SwOrderDetailVo;
+import com.fangxin.siwei.fangzhi.vo.order.SwOrderVo;
 import com.fangxin.siwei.fangzhi.vo.result.SwOrderResultVo;
 import com.github.pagehelper.Page;
-import com.github.pagehelper.PageInfo;
-import com.google.common.collect.Lists;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.Converter;
@@ -54,6 +56,8 @@ public class SwOrderServiceImpl extends AbstractService<SwOrderBase> implements 
     SwOrderBaseMapper swOrderBaseMapper;
     @Autowired
     SwOrderDetailMapper swOrderDetailMapper;
+    @Autowired
+    IAuditingService auditingService;
 
     @Transactional
     @Override
@@ -65,6 +69,7 @@ public class SwOrderServiceImpl extends AbstractService<SwOrderBase> implements 
         String orderNo= UUIDUtils.genUUID("D");
         swOrderBase.setOrderNo(orderNo);
         swOrderBase.setOrderDate(new Date());
+        swOrderBase.setOrderStatus(OrderStatus.WAIT_AUDIT.getCode());
         swOrderBase.setCreateNo(ShiroUtils.getCurrentUserNo());
         swOrderBase.setCreateTime(new Date());
         swOrderBase.setModiNo(ShiroUtils.getCurrentUserNo());
@@ -86,20 +91,6 @@ public class SwOrderServiceImpl extends AbstractService<SwOrderBase> implements 
         return Result.newSuccess(flag);
     }
 
-    @Override
-    public Page<SwOrderResultVo> findList(Map<String, String> params) {
-        //日期查询条件
-        params.put("timeCond1","good_date");
-        Condition serviceCondition = Common.getServiceCondition(params, SwOrderBase.class);
-        List<SwOrderBase> swOrderBases = findByCondition(serviceCondition);
-        Page<SwOrderResultVo> swOrderResultVos= new Page<SwOrderResultVo>();
-        for(SwOrderBase swOrderBase: swOrderBases){
-            SwOrderResultVo swOrderResultVo=new SwOrderResultVo();
-            convertEntityTVo(swOrderResultVo,swOrderBase);
-            swOrderResultVos.add(swOrderResultVo);
-        }
-        return swOrderResultVos;
-    }
 
 
     private void convertVoToEntityDetail(SwOrderDetail swOrderDetail, SwOrderDetailVo swOrderDetailVo) {
@@ -138,6 +129,68 @@ public class SwOrderServiceImpl extends AbstractService<SwOrderBase> implements 
         }
     }
 
+
+    @Override
+    public Page<SwOrderResultVo> findList(Map<String, String> params) {
+        //日期查询条件
+        params.put("timeCond1","good_date");
+        Condition serviceCondition = Common.getServiceCondition(params, SwOrderBase.class);
+        List<SwOrderBase> swOrderBases = findByCondition(serviceCondition);
+        Page<SwOrderResultVo> swOrderResultVos= new Page<SwOrderResultVo>();
+        for(SwOrderBase swOrderBase: swOrderBases){
+            SwOrderResultVo swOrderResultVo=new SwOrderResultVo();
+            convertEntityTVo(swOrderResultVo,swOrderBase);
+            swOrderResultVos.add(swOrderResultVo);
+        }
+        return swOrderResultVos;
+    }
+
+    @Override
+    public Result<Integer> audit(SwOrderAuditVo swOrderAuditVo) {
+        Result _orderAudit=Result.newSuccess();
+        List<String> orderNos=swOrderAuditVo.getOrderNos();
+        try{
+            Result<SysAuditConfig> _resultAudit=null;
+            for(String orderNo:orderNos){
+                _resultAudit=singleAudit(orderNo,swOrderAuditVo);
+                if(!_resultAudit.isSuccess()){
+                    break;
+                }
+            }
+            _orderAudit.setError(_resultAudit.getCode(),_resultAudit.getMessage());
+        }catch (Exception e){
+            logger.error("[业务订单审核]发生异常!e:{}",e);
+            _orderAudit.setErrorCode(ResultCode.FAIL);
+        }
+        return _orderAudit;
+    }
+
+    private   Result<SysAuditConfig> singleAudit(String orderNo,SwOrderAuditVo swOrderAuditVo) {
+        Result<SysAuditConfig> _result=beginAudit(orderNo,swOrderAuditVo);
+        if(_result.isSuccess()){
+            SysAuditConfig sysAuditConfig=_result.getData();
+            SwOrderBase swOrderBase=new SwOrderBase();
+            swOrderBase.setOrderNo(orderNo);
+            swOrderBase.setOrderStatus(sysAuditConfig.getNextStage());
+            swOrderBase.setModiNo(swOrderAuditVo.getAuditUserNo());
+            swOrderBase.setModiTime(new Date());
+            swOrderBaseMapper.updateByOrderNo(swOrderBase);
+        }
+        return _result;
+
+    }
+
+    private Result<SysAuditConfig> beginAudit(String sourceNo, SwOrderAuditVo swOrderAuditVo) {
+        AuditingParam auditingParam=new AuditingParam();
+        auditingParam.setSourceNo(sourceNo);
+        auditingParam.setAuditType(AuditTypeEnum.ORDER.getCode());
+        auditingParam.setCurrentStage(swOrderAuditVo.getOrderStatus().getCode());
+        auditingParam.setAuditAction(swOrderAuditVo.getAuditAction().getCode());
+        auditingParam.setAuditUserNo(swOrderAuditVo.getAuditUserNo());
+        auditingParam.setAuditUserName(swOrderAuditVo.getAuditUserName());
+        auditingParam.setAuditDesc(swOrderAuditVo.getAuditDesc());
+        return auditingService.auditing(auditingParam);
+    }
 
     private void convertEntityTVo(SwOrderResultVo swOrderResultVo, SwOrderBase swOrderBase) {
 

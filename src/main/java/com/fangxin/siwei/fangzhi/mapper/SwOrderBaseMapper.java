@@ -5,4 +5,5 @@ import com.fangxin.siwei.fangzhi.modal.SwOrderBase;
 
 public interface SwOrderBaseMapper extends MyMapper<SwOrderBase>{
 
+    int updateByOrderNo(SwOrderBase swOrderBase);
 }

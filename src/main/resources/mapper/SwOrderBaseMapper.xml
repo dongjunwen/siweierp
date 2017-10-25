@@ -36,9 +36,96 @@
     id, order_no, order_date, pay_way, good_date, finish_date, order_type, sale_type, 
     order_status, memo, cust_comp_no, cust_comp_name, cust_contact_name, cust_mobile, 
     custt_phone, cust_tax, cust_addr, supply_comp_no, supply_comp_name, supply_contact_name, 
-    supply_mobile, supply_phone, supply_tax, supply_addr, create_no, create_time, modi_no, 
+    supply_mobile, supply_phone, supply_tax, supply_addr, create_no, create_time, modi_no,
     modi_time, version
   </sql>
+  <update id="updateByOrderNo" parameterType="com.fangxin.siwei.fangzhi.modal.SwOrderBase">
+    update sw_order_base
+    <set>
+      <if test="orderDate != null">
+        order_date = #{orderDate,jdbcType=DATE},
+      </if>
+      <if test="payWay != null">
+        pay_way = #{payWay,jdbcType=VARCHAR},
+      </if>
+      <if test="goodDate != null">
+        good_date = #{goodDate,jdbcType=DATE},
+      </if>
+      <if test="finishDate != null">
+        finish_date = #{finishDate,jdbcType=DATE},
+      </if>
+      <if test="orderType != null">
+        order_type = #{orderType,jdbcType=VARCHAR},
+      </if>
+      <if test="saleType != null">
+        sale_type = #{saleType,jdbcType=VARCHAR},
+      </if>
+      <if test="orderStatus != null">
+        order_status = #{orderStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        memo = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="custCompNo != null">
+        cust_comp_no = #{custCompNo,jdbcType=VARCHAR},
+      </if>
+      <if test="custCompName != null">
+        cust_comp_name = #{custCompName,jdbcType=VARCHAR},
+      </if>
+      <if test="custContactName != null">
+        cust_contact_name = #{custContactName,jdbcType=VARCHAR},
+      </if>
+      <if test="custMobile != null">
+        cust_mobile = #{custMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="custtPhone != null">
+        custt_phone = #{custtPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="custTax != null">
+        cust_tax = #{custTax,jdbcType=VARCHAR},
+      </if>
+      <if test="custAddr != null">
+        cust_addr = #{custAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="supplyCompNo != null">
+        supply_comp_no = #{supplyCompNo,jdbcType=VARCHAR},
+      </if>
+      <if test="supplyCompName != null">
+        supply_comp_name = #{supplyCompName,jdbcType=VARCHAR},
+      </if>
+      <if test="supplyContactName != null">
+        supply_contact_name = #{supplyContactName,jdbcType=VARCHAR},
+      </if>
+      <if test="supplyMobile != null">
+        supply_mobile = #{supplyMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="supplyPhone != null">
+        supply_phone = #{supplyPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="supplyTax != null">
+        supply_tax = #{supplyTax,jdbcType=VARCHAR},
+      </if>
+      <if test="supplyAddr != null">
+        supply_addr = #{supplyAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="createNo != null">
+        create_no = #{createNo,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modiNo != null">
+        modi_no = #{modiNo,jdbcType=VARCHAR},
+      </if>
+      <if test="modiTime != null">
+        modi_time = #{modiTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=INTEGER},
+      </if>
+    </set>
+    where  order_no = #{orderNo,jdbcType=VARCHAR}
+  </update>
   <!--<select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
