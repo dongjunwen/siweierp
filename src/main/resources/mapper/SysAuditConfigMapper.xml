@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fangxin.siwei.fangzhi.mapper.SysAuditConfigMapper">
+  <resultMap id="BaseResultMap" type="com.fangxin.siwei.fangzhi.modal.SysAuditConfig">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="audit_no" jdbcType="VARCHAR" property="auditNo" />
+    <result column="audit_type" jdbcType="VARCHAR" property="auditType" />
+    <result column="audit_type_name" jdbcType="VARCHAR" property="auditTypeName" />
+    <result column="audit_action" jdbcType="VARCHAR" property="auditAction" />
+    <result column="audit_action_name" jdbcType="VARCHAR" property="auditActionName" />
+    <result column="current_stage" jdbcType="VARCHAR" property="currentStage" />
+    <result column="next_stage" jdbcType="VARCHAR" property="nextStage" />
+    <result column="audit_user_no" jdbcType="VARCHAR" property="auditUserNo" />
+    <result column="audit_user_name" jdbcType="VARCHAR" property="auditUserName" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="modi_time" jdbcType="TIMESTAMP" property="modiTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, audit_no, audit_type, audit_type_name, audit_action, audit_action_name, current_stage, 
+    next_stage, audit_user_no, audit_user_name, create_time, modi_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_audit_config
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <select id="findNextStage" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sys_audit_config
+    where audit_type = #{auditType,jdbcType=VARCHAR}
+    and current_stage = #{currentStage,jdbcType=VARCHAR}
+    and audit_action = #{auditAction,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sys_audit_config
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fangxin.siwei.fangzhi.modal.SysAuditConfig">
+    insert into sys_audit_config (id, audit_no, audit_type, 
+      audit_type_name, audit_action, audit_action_name, 
+      current_stage, next_stage, audit_user_no, 
+      audit_user_name, create_time, modi_time
+      )
+    values (#{id,jdbcType=INTEGER}, #{auditNo,jdbcType=VARCHAR}, #{auditType,jdbcType=VARCHAR}, 
+      #{auditTypeName,jdbcType=VARCHAR}, #{auditAction,jdbcType=VARCHAR}, #{auditActionName,jdbcType=VARCHAR}, 
+      #{currentStage,jdbcType=VARCHAR}, #{nextStage,jdbcType=VARCHAR}, #{auditUserNo,jdbcType=VARCHAR}, 
+      #{auditUserName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{modiTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.fangxin.siwei.fangzhi.modal.SysAuditConfig">
+    insert into sys_audit_config
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="auditNo != null">
+        audit_no,
+      </if>
+      <if test="auditType != null">
+        audit_type,
+      </if>
+      <if test="auditTypeName != null">
+        audit_type_name,
+      </if>
+      <if test="auditAction != null">
+        audit_action,
+      </if>
+      <if test="auditActionName != null">
+        audit_action_name,
+      </if>
+      <if test="currentStage != null">
+        current_stage,
+      </if>
+      <if test="nextStage != null">
+        next_stage,
+      </if>
+      <if test="auditUserNo != null">
+        audit_user_no,
+      </if>
+      <if test="auditUserName != null">
+        audit_user_name,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="modiTime != null">
+        modi_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="auditNo != null">
+        #{auditNo,jdbcType=VARCHAR},
+      </if>
+      <if test="auditType != null">
+        #{auditType,jdbcType=VARCHAR},
+      </if>
+      <if test="auditTypeName != null">
+        #{auditTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="auditAction != null">
+        #{auditAction,jdbcType=VARCHAR},
+      </if>
+      <if test="auditActionName != null">
+        #{auditActionName,jdbcType=VARCHAR},
+      </if>
+      <if test="currentStage != null">
+        #{currentStage,jdbcType=VARCHAR},
+      </if>
+      <if test="nextStage != null">
+        #{nextStage,jdbcType=VARCHAR},
+      </if>
+      <if test="auditUserNo != null">
+        #{auditUserNo,jdbcType=VARCHAR},
+      </if>
+      <if test="auditUserName != null">
+        #{auditUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modiTime != null">
+        #{modiTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fangxin.siwei.fangzhi.modal.SysAuditConfig">
+    update sys_audit_config
+    <set>
+      <if test="auditNo != null">
+        audit_no = #{auditNo,jdbcType=VARCHAR},
+      </if>
+      <if test="auditType != null">
+        audit_type = #{auditType,jdbcType=VARCHAR},
+      </if>
+      <if test="auditTypeName != null">
+        audit_type_name = #{auditTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="auditAction != null">
+        audit_action = #{auditAction,jdbcType=VARCHAR},
+      </if>
+      <if test="auditActionName != null">
+        audit_action_name = #{auditActionName,jdbcType=VARCHAR},
+      </if>
+      <if test="currentStage != null">
+        current_stage = #{currentStage,jdbcType=VARCHAR},
+      </if>
+      <if test="nextStage != null">
+        next_stage = #{nextStage,jdbcType=VARCHAR},
+      </if>
+      <if test="auditUserNo != null">
+        audit_user_no = #{auditUserNo,jdbcType=VARCHAR},
+      </if>
+      <if test="auditUserName != null">
+        audit_user_name = #{auditUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modiTime != null">
+        modi_time = #{modiTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fangxin.siwei.fangzhi.modal.SysAuditConfig">
+    update sys_audit_config
+    set audit_no = #{auditNo,jdbcType=VARCHAR},
+      audit_type = #{auditType,jdbcType=VARCHAR},
+      audit_type_name = #{auditTypeName,jdbcType=VARCHAR},
+      audit_action = #{auditAction,jdbcType=VARCHAR},
+      audit_action_name = #{auditActionName,jdbcType=VARCHAR},
+      current_stage = #{currentStage,jdbcType=VARCHAR},
+      next_stage = #{nextStage,jdbcType=VARCHAR},
+      audit_user_no = #{auditUserNo,jdbcType=VARCHAR},
+      audit_user_name = #{auditUserName,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modi_time = #{modiTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
