@@ -67,6 +67,7 @@ public class SwDeliverServiceImpl extends AbstractService<SwDeliverBase> impleme
         swDeliverBase.setCreateTime(new Date());
         swDeliverBase.setModiNo(ShiroUtils.getCurrentUserNo());
         swDeliverBase.setModiTime(new Date());
+        swDeliverBase.setVersion(0);
         List<SwDeliverDetailVo> swDeliverDetailVoList=swDeliverVo.getSwDeliverDetailVoList();
         List swDeliverDetails=new ArrayList();
         for(SwDeliverDetailVo swDeliverDetailVo:swDeliverDetailVoList){
@@ -77,6 +78,7 @@ public class SwDeliverServiceImpl extends AbstractService<SwDeliverBase> impleme
             swDeliverDetail.setCreateTime(new Date());
             swDeliverDetail.setModiNo(ShiroUtils.getCurrentUserNo());
             swDeliverDetail.setModiTime(new Date());
+            swDeliverDetail.setVersion(0);
             swDeliverDetails.add(swDeliverDetail);
         }
         int flag=swDeliverBaseMapper.insert(swDeliverBase);
