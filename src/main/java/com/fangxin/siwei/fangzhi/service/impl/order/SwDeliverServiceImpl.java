@@ -81,7 +81,7 @@ public class SwDeliverServiceImpl extends AbstractService<SwDeliverBase> impleme
             swDeliverDetail.setVersion(0);
             swDeliverDetails.add(swDeliverDetail);
         }
-        int flag=swDeliverBaseMapper.insert(swDeliverBase);
+        int flag=swDeliverBaseMapper.insertSelective(swDeliverBase);
         swDeliverDetailMapper.insertBatch(swDeliverDetails);
         return Result.newSuccess(flag);
     }

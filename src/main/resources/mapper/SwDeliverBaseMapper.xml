@@ -29,7 +29,7 @@
     cust_tax, cust_addr, create_no, create_time, modi_no, modi_time, version
   </sql>
 
-  <select id="selectByDeliverNo" parameterType="java.lang.String">
+  <select id="selectByDeliverNo" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from sw_deliver_base
