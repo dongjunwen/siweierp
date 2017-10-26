@@ -70,7 +70,7 @@
       create_no, create_time, modi_no,
       modi_time, version)
     values
-    <foreach collection="list" item="list" index="index" separator=",">
+    <foreach collection="list" index="index" separator="," item="item">
       ( #{item.deilverNo,jdbcType=VARCHAR}, #{item.deilverSeqNo,jdbcType=VARCHAR},
       #{item.orderNo,jdbcType=VARCHAR}, #{item.orderSeqNo,jdbcType=VARCHAR}, #{item.boxNo,jdbcType=VARCHAR},
       #{item.prodNo,jdbcType=VARCHAR}, #{item.prodName,jdbcType=VARCHAR}, #{item.prodType,jdbcType=VARCHAR},

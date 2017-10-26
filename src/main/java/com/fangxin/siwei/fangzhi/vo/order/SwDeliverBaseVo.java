@@ -1,5 +1,10 @@
 package com.fangxin.siwei.fangzhi.vo.order;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.Pattern;
 import java.util.Date;
 
 /**
@@ -7,51 +12,46 @@ import java.util.Date;
  * @Author lu.dong
  * @Description：
  **/
+@ApiModel(value = "发货单Vo SwDeliverBaseVo")
 public class SwDeliverBaseVo {
-    private String deilverNo;
-
+    @Pattern(regexp="[0-9]{4}-[0-9]{2}-[0-9]{2}", message="发货日期格式不正确，正确的格式类似于1998-04-13")
+    @ApiModelProperty(value = "发货日期",required =false )
     private String deilverDate;
-
+    @Length(max = 16,message = "发货方式长度不能超过16")
+    @ApiModelProperty(value = "发货方式",required =false )
     private String deilverWay;
-
+    @Length(max = 32,message = "发货人长度不能超过32")
+    @ApiModelProperty(value = "发货人",required =false )
     private String sendName;
-
+    @Length(max = 1,message = "发货方式长度不能超过1")
+    @ApiModelProperty(value = "是否保价 Y:是 N:否",required =false )
     private String ifGurant;
-
-    private String deilverStatus;
-
+    @Length(max = 32,message = "备注长度不能超过32")
+    @ApiModelProperty(value = "备注",required =false )
     private String memo;
-
+    @Length(max = 32,message = "客户编号长度不能超过32")
+    @ApiModelProperty(value = "客户编号",required =false )
     private String custCompNo;
-
+    @Length(max = 128,message = "客户名称长度不能超过128")
+    @ApiModelProperty(value = "客户名称",required =false )
     private String custCompName;
-
+    @Length(max = 64,message = "客户联系人长度不能超过64")
+    @ApiModelProperty(value = "客户联系人",required =false )
     private String custContactName;
-
+    @Length(max = 16,message = "客户手机长度不能超过16")
+    @ApiModelProperty(value = "客户手机",required =false )
     private String custMobile;
-
-    private String custtPhone;
-
+    @Length(max = 16,message = "客户电话长度不能超过16")
+    @ApiModelProperty(value = "客户电话",required =false )
+    private String custPhone;
+    @Length(max = 16,message = "客户传真长度不能超过16")
+    @ApiModelProperty(value = "客户传真",required =false )
     private String custTax;
-
+    @Length(max = 256,message = "客户地址长度不能超过256")
+    @ApiModelProperty(value = "客户地址",required =false )
     private String custAddr;
 
-    private String createNo;
 
-    private String createTime;
-
-    private String modiNo;
-
-    private String modiTime;
-
-
-    public String getDeilverNo() {
-        return deilverNo;
-    }
-
-    public void setDeilverNo(String deilverNo) {
-        this.deilverNo = deilverNo;
-    }
 
     public String getDeilverDate() {
         return deilverDate;
@@ -83,14 +83,6 @@ public class SwDeliverBaseVo {
 
     public void setIfGurant(String ifGurant) {
         this.ifGurant = ifGurant;
-    }
-
-    public String getDeilverStatus() {
-        return deilverStatus;
-    }
-
-    public void setDeilverStatus(String deilverStatus) {
-        this.deilverStatus = deilverStatus;
     }
 
     public String getMemo() {
@@ -133,12 +125,12 @@ public class SwDeliverBaseVo {
         this.custMobile = custMobile;
     }
 
-    public String getCusttPhone() {
-        return custtPhone;
+    public String getCustPhone() {
+        return custPhone;
     }
 
-    public void setCusttPhone(String custtPhone) {
-        this.custtPhone = custtPhone;
+    public void setCustPhone(String custPhone) {
+        this.custPhone = custPhone;
     }
 
     public String getCustTax() {
@@ -157,7 +149,7 @@ public class SwDeliverBaseVo {
         this.custAddr = custAddr;
     }
 
-    public String getCreateNo() {
+    /*public String getCreateNo() {
         return createNo;
     }
 
@@ -187,5 +179,5 @@ public class SwDeliverBaseVo {
 
     public void setModiTime(String modiTime) {
         this.modiTime = modiTime;
-    }
+    }*/
 }
