@@ -171,7 +171,7 @@ public class SwOrderServiceImpl extends AbstractService<SwOrderBase> implements 
     public SwOrderResultVo getEntityByNo(String orderNo) {
         SwOrderBase swOrderBase=swOrderBaseMapper.selectByOrderNo(orderNo);
         if(swOrderBase==null){
-            throw  new RRException(ResultCode.COMMON_DATA_NOT_EXISTS.getMessage());
+            throw  new RRException(ResultCode.COMMON_DATA_NOT_EXISTS.getCode(),ResultCode.COMMON_DATA_NOT_EXISTS.getMessage());
         }
         SwOrderResultVo swOrderResultVo=new SwOrderResultVo();
         SwOrderBaseResultVo swOrderBaseResultVo=new SwOrderBaseResultVo();
