@@ -29,7 +29,7 @@ import java.util.Map;
  **/
 @RestController
 @RequestMapping("/api/deliver")
-@Api(tags = "业务订单",description = "业务订单相关API")
+@Api(tags = "业务发货单",description = "业务发货单相关API")
 public class DeliverController {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
@@ -75,9 +75,9 @@ public class DeliverController {
 
 
     @RequestMapping(value = "/audit",method = RequestMethod.POST)
-    @ApiOperation(value="审核订单", notes="初审、终审接口")
+    @ApiOperation(value="审核发货单", notes="初审、终审接口")
     //@ApiImplicitParam(name = "swDeliverVo", value = "发货单信息实体 swDeliverVo",dataTypeClass = SysDictVo.class)
-    public Result<String> audit(@ApiParam(name = "swOrderAuditVo", value = "订单审核 swOrderAuditVo", required = true) @RequestBody SwDeliverAuditVo swDeliverAuditVo){
+    public Result<String> audit(@ApiParam(name = "swOrderAuditVo", value = "发货单审核 swOrderAuditVo", required = true) @RequestBody SwDeliverAuditVo swDeliverAuditVo){
         ValidatorUtil.validateEntity(swDeliverAuditVo, AddGroup.class);//校验
         try{
             swDeliverAuditVo.setAuditUserNo(ShiroUtils.getCurrentUserNo());
@@ -95,8 +95,8 @@ public class DeliverController {
 
 
     @RequestMapping(value = "/{deilverNo}",method = RequestMethod.GET)
-    @ApiOperation(value="获取订单详细信息", notes="根据url的用户编号来获取业务订单详细信息")
-    @ApiImplicitParam(name = "deilverNo", value = "订单编号", required = true, dataType = "string",paramType = "path")
+    @ApiOperation(value="获取发货单详细信息", notes="根据url的编号来获取业务发货单详细信息")
+    @ApiImplicitParam(name = "deilverNo", value = "发货单编号", required = true, dataType = "string",paramType = "path")
     public Result<SwDeliverResultVo> getUserById(@PathVariable("deilverNo")String deilverNo){
         SwDeliverResultVo swDeliverResultVo = swDeliverService.getEntityByNo(deilverNo);
         return Result.newSuccess(swDeliverResultVo);

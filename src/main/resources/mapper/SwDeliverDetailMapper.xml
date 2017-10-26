@@ -35,7 +35,7 @@
     where id = #{id,jdbcType=INTEGER}
   </select>
 
-  <select id="selectByDeliverNo" parameterType="java.lang.String">
+  <select id="selectByDeliverNo" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from sw_deliver_detail
