@@ -1,19 +1,10 @@
 package com.fangxin.siwei.fangzhi.mapper;
 
+import com.fangxin.siwei.fangzhi.common.utils.MyMapper;
 import com.fangxin.siwei.fangzhi.modal.SwDeliverBase;
 
-public interface SwDeliverBaseMapper {
-    int deleteByPrimaryKey(Integer id);
+public interface SwDeliverBaseMapper extends MyMapper<SwDeliverBase> {
 
-    int insert(SwDeliverBase record);
-
-    int insertSelective(SwDeliverBase record);
-
-    SwDeliverBase selectByPrimaryKey(Integer id);
-
-    int updateByPrimaryKeySelective(SwDeliverBase record);
-
-    int updateByPrimaryKey(SwDeliverBase record);
 
     int updateByDeliverNo(SwDeliverBase swDeliverBase);
 
