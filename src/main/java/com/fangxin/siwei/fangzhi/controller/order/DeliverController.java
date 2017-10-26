@@ -8,6 +8,7 @@ import com.fangxin.siwei.fangzhi.common.utils.ShiroUtils;
 import com.fangxin.siwei.fangzhi.common.validator.ValidatorUtil;
 import com.fangxin.siwei.fangzhi.common.validator.group.AddGroup;
 import com.fangxin.siwei.fangzhi.service.order.SwDeliverService;
+import com.fangxin.siwei.fangzhi.vo.order.SwDeliverAuditVo;
 import com.fangxin.siwei.fangzhi.vo.result.SwDeliverBaseResutVo;
 import com.fangxin.siwei.fangzhi.vo.order.SwOrderAuditVo;
 import com.fangxin.siwei.fangzhi.vo.order.SwDeliverVo;
@@ -76,12 +77,12 @@ public class DeliverController {
     @RequestMapping(value = "/audit",method = RequestMethod.POST)
     @ApiOperation(value="审核订单", notes="初审、终审接口")
     //@ApiImplicitParam(name = "swDeliverVo", value = "发货单信息实体 swDeliverVo",dataTypeClass = SysDictVo.class)
-    public Result<String> audit(@ApiParam(name = "swOrderAuditVo", value = "订单审核 swOrderAuditVo", required = true) @RequestBody SwOrderAuditVo swOrderAuditVo){
-        ValidatorUtil.validateEntity(swOrderAuditVo, AddGroup.class);//校验
+    public Result<String> audit(@ApiParam(name = "swOrderAuditVo", value = "订单审核 swOrderAuditVo", required = true) @RequestBody SwDeliverAuditVo swDeliverAuditVo){
+        ValidatorUtil.validateEntity(swDeliverAuditVo, AddGroup.class);//校验
         try{
-            swOrderAuditVo.setAuditUserNo(ShiroUtils.getCurrentUserNo());
-            swOrderAuditVo.setAuditUserName(ShiroUtils.getCurrentUserName());
-            Result<Integer> _result= swDeliverService.audit(swOrderAuditVo);
+            swDeliverAuditVo.setAuditUserNo(ShiroUtils.getCurrentUserNo());
+            swDeliverAuditVo.setAuditUserName(ShiroUtils.getCurrentUserName());
+            Result<Integer> _result= swDeliverService.audit(swDeliverAuditVo);
             if(!_result.isSuccess()){
                 return Result.newError(_result.getCode(),_result.getMessage());
             }
