@@ -34,6 +34,12 @@
     from sw_deliver_base
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectByDeliverNo" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List" />
+    from sw_deliver_base
+    where deilver_no = #{deilverNo,jdbcType=VARCHAR}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from sw_deliver_base
     where id = #{id,jdbcType=INTEGER}
@@ -266,5 +272,69 @@
       modi_time = #{modiTime,jdbcType=TIMESTAMP},
       version = #{version,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateByDeliverNo" >
+    update sw_deliver_base
+    <set>
+      <if test="deilverDate != null">
+        deilver_date = #{deilverDate,jdbcType=DATE},
+      </if>
+      <if test="deilverWay != null">
+        deilver_way = #{deilverWay,jdbcType=VARCHAR},
+      </if>
+      <if test="sendName != null">
+        send_name = #{sendName,jdbcType=VARCHAR},
+      </if>
+      <if test="ifGurant != null">
+        if_gurant = #{ifGurant,jdbcType=CHAR},
+      </if>
+      <if test="deilverStatus != null">
+        deilver_status = #{deilverStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        memo = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="custCompNo != null">
+        cust_comp_no = #{custCompNo,jdbcType=VARCHAR},
+      </if>
+      <if test="custCompName != null">
+        cust_comp_name = #{custCompName,jdbcType=VARCHAR},
+      </if>
+      <if test="custContactName != null">
+        cust_contact_name = #{custContactName,jdbcType=VARCHAR},
+      </if>
+      <if test="custMobile != null">
+        cust_mobile = #{custMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="custtPhone != null">
+        custt_phone = #{custtPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="custTax != null">
+        cust_tax = #{custTax,jdbcType=VARCHAR},
+      </if>
+      <if test="custAddr != null">
+        cust_addr = #{custAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="createNo != null">
+        create_no = #{createNo,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modiNo != null">
+        modi_no = #{modiNo,jdbcType=VARCHAR},
+      </if>
+      <if test="modiTime != null">
+        modi_time = #{modiTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        version = version+1
+      </if>
+    </set>
+    where   deilver_no = #{deilverNo,jdbcType=VARCHAR}
+    <if test="version != null">
+    and  version = #{version,jdbcType=VARCHAR}
+    </if>
   </update>
 </mapper>

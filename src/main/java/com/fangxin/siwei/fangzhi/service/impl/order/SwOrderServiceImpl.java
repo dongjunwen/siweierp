@@ -22,7 +22,7 @@ import com.fangxin.siwei.fangzhi.vo.order.SwOrderAuditVo;
 import com.fangxin.siwei.fangzhi.vo.order.SwOrderBaseVo;
 import com.fangxin.siwei.fangzhi.vo.order.SwOrderDetailVo;
 import com.fangxin.siwei.fangzhi.vo.order.SwOrderVo;
-import com.fangxin.siwei.fangzhi.vo.result.SwORderDetailResultVo;
+import com.fangxin.siwei.fangzhi.vo.result.SwOrderDetailResultVo;
 import com.fangxin.siwei.fangzhi.vo.result.SwOrderBaseResultVo;
 import com.fangxin.siwei.fangzhi.vo.result.SwOrderResultVo;
 import com.github.pagehelper.Page;
@@ -178,9 +178,9 @@ public class SwOrderServiceImpl extends AbstractService<SwOrderBase> implements 
         convertEntityTVo(swOrderBaseResultVo,swOrderBase);
         swOrderResultVo.setSwOrderBaseResultVo(swOrderBaseResultVo);
         List<SwOrderDetail> swOrderDetails=swOrderDetailMapper.selectByOrderNo(orderNo);
-        List<SwORderDetailResultVo> swORderDetailResultVos=new ArrayList<>();
+        List<SwOrderDetailResultVo> swORderDetailResultVos=new ArrayList<>();
         for(SwOrderDetail swOrderDetail:swOrderDetails){
-            SwORderDetailResultVo swORderDetailResultVo=new SwORderDetailResultVo();
+            SwOrderDetailResultVo swORderDetailResultVo=new SwOrderDetailResultVo();
             convertDetailEntityTVo(swORderDetailResultVo,swOrderDetail);
             swORderDetailResultVos.add(swORderDetailResultVo);
         }
@@ -188,7 +188,7 @@ public class SwOrderServiceImpl extends AbstractService<SwOrderBase> implements 
         return swOrderResultVo;
     }
 
-    private void convertDetailEntityTVo(SwORderDetailResultVo swORderDetailResultVo, SwOrderDetail swOrderDetail) {
+    private void convertDetailEntityTVo(SwOrderDetailResultVo swORderDetailResultVo, SwOrderDetail swOrderDetail) {
         try {
             BeanUtils.copyProperties(swORderDetailResultVo,swOrderDetail);
             swORderDetailResultVo.setCreateTime(DateUtil.formatDateTime(swOrderDetail.getCreateTime()));

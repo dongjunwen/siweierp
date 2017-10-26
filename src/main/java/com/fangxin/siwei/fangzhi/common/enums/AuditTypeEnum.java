@@ -5,11 +5,12 @@ package com.fangxin.siwei.fangzhi.common.enums;
  * Created by donglu
  * Date: 2017/2/10.
  * Time: 17:32
- * Desc:
+ * Desc:审核类型
  */
 public enum AuditTypeEnum {
 
-    ORDER("ORDER","业务订单");
+    ORDER("ORDER","业务订单"),
+    DELIVER("DELIVER","发货单");
 
     String code;
     String desc;

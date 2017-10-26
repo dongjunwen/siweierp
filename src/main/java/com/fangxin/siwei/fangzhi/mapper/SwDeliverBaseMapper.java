@@ -14,4 +14,8 @@ public interface SwDeliverBaseMapper {
     int updateByPrimaryKeySelective(SwDeliverBase record);
 
     int updateByPrimaryKey(SwDeliverBase record);
+
+    int updateByDeliverNo(SwDeliverBase swDeliverBase);
+
+    SwDeliverBase selectByDeliverNo(String orderNo);
 }

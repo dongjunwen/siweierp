@@ -34,6 +34,13 @@
     from sw_deliver_detail
     where id = #{id,jdbcType=INTEGER}
   </select>
+
+  <select id="selectByDeliverNo" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List" />
+    from sw_deliver_detail
+    where deilver_no = #{deilverNo,jdbcType=VARCHAR}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from sw_deliver_detail
     where id = #{id,jdbcType=INTEGER}
@@ -53,6 +60,25 @@
       #{prodNum,jdbcType=DECIMAL}, #{prodPrice,jdbcType=DECIMAL}, #{memo,jdbcType=VARCHAR}, 
       #{createNo,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{modiNo,jdbcType=VARCHAR}, 
       #{modiTime,jdbcType=TIMESTAMP}, #{version,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertBatch" parameterType="java.util.List">
+      insert into sw_deliver_detail ( deilver_no, deilver_seq_no,
+      order_no, order_seq_no, box_no,
+      prod_no, prod_name, prod_type,
+      prod_form, prod_long, prod_width,
+      prod_num, prod_price, memo,
+      create_no, create_time, modi_no,
+      modi_time, version)
+    values
+    <foreach collection="list" item="list" index="index" separator=",">
+      ( #{item.deilverNo,jdbcType=VARCHAR}, #{item.deilverSeqNo,jdbcType=VARCHAR},
+      #{item.orderNo,jdbcType=VARCHAR}, #{item.orderSeqNo,jdbcType=VARCHAR}, #{item.boxNo,jdbcType=VARCHAR},
+      #{item.prodNo,jdbcType=VARCHAR}, #{item.prodName,jdbcType=VARCHAR}, #{item.prodType,jdbcType=VARCHAR},
+      #{item.prodForm,jdbcType=VARCHAR}, #{item.prodLong,jdbcType=DECIMAL}, #{item.prodWidth,jdbcType=DECIMAL},
+      #{item.prodNum,jdbcType=DECIMAL}, #{item.prodPrice,jdbcType=DECIMAL}, #{item.memo,jdbcType=VARCHAR},
+      #{item.createNo,jdbcType=VARCHAR}, #{item.createTime,jdbcType=TIMESTAMP}, #{item.modiNo,jdbcType=VARCHAR},
+      #{item.modiTime,jdbcType=TIMESTAMP}, #{item.version,jdbcType=INTEGER})
+    </foreach>
   </insert>
   <insert id="insertSelective" parameterType="com.fangxin.siwei.fangzhi.modal.SwDeliverDetail">
     insert into sw_deliver_detail

@@ -2,6 +2,8 @@ package com.fangxin.siwei.fangzhi.mapper;
 
 import com.fangxin.siwei.fangzhi.modal.SwDeliverDetail;
 
+import java.util.List;
+
 public interface SwDeliverDetailMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +16,8 @@ public interface SwDeliverDetailMapper {
     int updateByPrimaryKeySelective(SwDeliverDetail record);
 
     int updateByPrimaryKey(SwDeliverDetail record);
+
+    void insertBatch(List swDeliverDetails);
+
+    List<SwDeliverDetail> selectByDeliverNo(String orderNo);
 }

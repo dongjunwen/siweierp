@@ -1,9 +1,6 @@
 package com.fangxin.siwei.fangzhi.vo.result;
 
 
-import com.fangxin.siwei.fangzhi.vo.order.SwOrderBaseVo;
-import com.fangxin.siwei.fangzhi.vo.order.SwOrderDetailVo;
-
 import java.util.List;
 
 /**
@@ -15,7 +12,7 @@ public class SwOrderResultVo {
     //基础订单视图
     private SwOrderBaseResultVo swOrderBaseResultVo;
     //详细订单视图
-    private List<SwORderDetailResultVo> swORderDetailResultVos;
+    private List<SwOrderDetailResultVo> swORderDetailResultVos;
 
     public SwOrderBaseResultVo getSwOrderBaseResultVo() {
         return swOrderBaseResultVo;
@@ -25,11 +22,11 @@ public class SwOrderResultVo {
         this.swOrderBaseResultVo = swOrderBaseResultVo;
     }
 
-    public List<SwORderDetailResultVo> getSwORderDetailResultVos() {
+    public List<SwOrderDetailResultVo> getSwORderDetailResultVos() {
         return swORderDetailResultVos;
     }
 
-    public void setSwORderDetailResultVos(List<SwORderDetailResultVo> swORderDetailResultVos) {
+    public void setSwORderDetailResultVos(List<SwOrderDetailResultVo> swORderDetailResultVos) {
         this.swORderDetailResultVos = swORderDetailResultVos;
     }
 }

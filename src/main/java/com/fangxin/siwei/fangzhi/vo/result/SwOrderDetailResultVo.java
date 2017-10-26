@@ -7,7 +7,7 @@ import java.math.BigDecimal;
  * @Author lu.dong
  * @Description：
  **/
-public class SwORderDetailResultVo {
+public class SwOrderDetailResultVo {
 
     private Integer id;
 

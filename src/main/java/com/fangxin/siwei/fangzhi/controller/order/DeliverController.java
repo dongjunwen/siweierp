@@ -7,12 +7,11 @@ import com.fangxin.siwei.fangzhi.common.utils.PageUitls;
 import com.fangxin.siwei.fangzhi.common.utils.ShiroUtils;
 import com.fangxin.siwei.fangzhi.common.validator.ValidatorUtil;
 import com.fangxin.siwei.fangzhi.common.validator.group.AddGroup;
-import com.fangxin.siwei.fangzhi.modal.SysUser;
-import com.fangxin.siwei.fangzhi.service.order.SwOrderService;
+import com.fangxin.siwei.fangzhi.service.order.SwDeliverService;
+import com.fangxin.siwei.fangzhi.vo.result.SwDeliverBaseResutVo;
 import com.fangxin.siwei.fangzhi.vo.order.SwOrderAuditVo;
-import com.fangxin.siwei.fangzhi.vo.order.SwOrderVo;
-import com.fangxin.siwei.fangzhi.vo.result.SwOrderBaseResultVo;
-import com.fangxin.siwei.fangzhi.vo.result.SwOrderResultVo;
+import com.fangxin.siwei.fangzhi.vo.order.SwDeliverVo;
+import com.fangxin.siwei.fangzhi.vo.result.SwDeliverResultVo;
 import com.github.pagehelper.Page;
 import io.swagger.annotations.*;
 import org.slf4j.Logger;
@@ -28,35 +27,35 @@ import java.util.Map;
  * @Description：
  **/
 @RestController
-@RequestMapping("/api/order")
+@RequestMapping("/api/deliver")
 @Api(tags = "业务订单",description = "业务订单相关API")
-public class OrderController {
+public class DeliverController {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
-    SwOrderService swOrderService;
+    SwDeliverService swDeliverService;
 
     @RequestMapping(method = RequestMethod.POST)
-    @ApiOperation(value="创建订单合同", notes="根据订单合同对象创建订单合同")
-    //@ApiImplicitParam(name = "swOrderVo", value = "订单合同信息实体 swOrderVo",dataTypeClass = SysDictVo.class)
-    public Result<String> create(@ApiParam(name = "swOrderVo", value = "订单合同信息实体 swOrderVo", required = true) @RequestBody SwOrderVo swOrderVo){
-        ValidatorUtil.validateEntity(swOrderVo, AddGroup.class);//校验
-        ValidatorUtil.validateEntity(swOrderVo.getSwOrderBaseVo(), AddGroup.class);//校验
+    @ApiOperation(value="创建发货单", notes="根据发货单对象创建发货单")
+    //@ApiImplicitParam(name = "swDeliverVo", value = "发货单信息实体 swDeliverVo",dataTypeClass = SysDictVo.class)
+    public Result<String> create(@ApiParam(name = "swDeliverVo", value = "发货单信息实体 swDeliverVo", required = true) @RequestBody SwDeliverVo swDeliverVo){
+        ValidatorUtil.validateEntity(swDeliverVo, AddGroup.class);//校验
+        ValidatorUtil.validateEntity(swDeliverVo.getSwDeliverBaseVo(), AddGroup.class);//校验
         try{
-            Result<Integer> _result= swOrderService.create(swOrderVo);
+            Result<Integer> _result= swDeliverService.create(swDeliverVo);
             if(!_result.isSuccess()){
                 return Result.newError(_result.getCode(),_result.getMessage());
             }
-            return  Result.newSuccess("添加订单合同成功");
+            return  Result.newSuccess("添加发货单成功");
         }catch (Exception e){
-            logger.error("添加订单合同异常!{}",e);
+            logger.error("添加发货单异常!{}",e);
             return Result.newError(ResultCode.FAIL);
         }
     }
 
 
-    @ApiOperation(value = "订单合同列表")
+    @ApiOperation(value = "发货单列表")
     @RequestMapping(method = RequestMethod.GET)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "currPage",value = "当前页",paramType = "query"),
@@ -68,37 +67,37 @@ public class OrderController {
             @ApiImplicitParam(name = "filter",value = "通用表过滤器。发送JSON键/值对，如<code>{“key”:“value”}</code>。", paramType = "query",dataTypeClass = JSON.class)
 
     })
-    public Result<PageUitls<SwOrderBaseResultVo>> findList(@RequestParam @ApiParam(hidden = true) Map<String,String> params){
-        Page<SwOrderBaseResultVo> page =  swOrderService.findList(params);
-        return Result.newSuccess(new PageUitls<SwOrderBaseResultVo>(page));
+    public Result<PageUitls<SwDeliverBaseResutVo>> findList(@RequestParam @ApiParam(hidden = true) Map<String,String> params){
+        Page<SwDeliverBaseResutVo> page =  swDeliverService.findList(params);
+        return Result.newSuccess(new PageUitls<SwDeliverBaseResutVo>(page));
     }
 
 
     @RequestMapping(value = "/audit",method = RequestMethod.POST)
     @ApiOperation(value="审核订单", notes="初审、终审接口")
-    //@ApiImplicitParam(name = "swOrderVo", value = "订单合同信息实体 swOrderVo",dataTypeClass = SysDictVo.class)
+    //@ApiImplicitParam(name = "swDeliverVo", value = "发货单信息实体 swDeliverVo",dataTypeClass = SysDictVo.class)
     public Result<String> audit(@ApiParam(name = "swOrderAuditVo", value = "订单审核 swOrderAuditVo", required = true) @RequestBody SwOrderAuditVo swOrderAuditVo){
         ValidatorUtil.validateEntity(swOrderAuditVo, AddGroup.class);//校验
         try{
             swOrderAuditVo.setAuditUserNo(ShiroUtils.getCurrentUserNo());
             swOrderAuditVo.setAuditUserName(ShiroUtils.getCurrentUserName());
-            Result<Integer> _result= swOrderService.audit(swOrderAuditVo);
+            Result<Integer> _result= swDeliverService.audit(swOrderAuditVo);
             if(!_result.isSuccess()){
                 return Result.newError(_result.getCode(),_result.getMessage());
             }
-            return  Result.newSuccess("审核订单合同成功");
+            return  Result.newSuccess("审核发货单成功");
         }catch (Exception e){
-            logger.error("审核订单合同异常!{}",e);
+            logger.error("审核发货单异常!{}",e);
             return Result.newError(ResultCode.FAIL);
         }
     }
 
 
-    @RequestMapping(value = "/{orderNo}",method = RequestMethod.GET)
+    @RequestMapping(value = "/{deilverNo}",method = RequestMethod.GET)
     @ApiOperation(value="获取订单详细信息", notes="根据url的用户编号来获取业务订单详细信息")
-    @ApiImplicitParam(name = "orderNo", value = "订单编号", required = true, dataType = "string",paramType = "path")
-    public Result<SwOrderResultVo> getUserById(@PathVariable("orderNo")String orderNo){
-        SwOrderResultVo swOrderResultVo = swOrderService.getEntityByNo(orderNo);
-        return Result.newSuccess(swOrderResultVo);
+    @ApiImplicitParam(name = "deilverNo", value = "订单编号", required = true, dataType = "string",paramType = "path")
+    public Result<SwDeliverResultVo> getUserById(@PathVariable("deilverNo")String deilverNo){
+        SwDeliverResultVo swDeliverResultVo = swDeliverService.getEntityByNo(deilverNo);
+        return Result.newSuccess(swDeliverResultVo);
     }
 }
