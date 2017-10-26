@@ -18,4 +18,6 @@ public interface SwOrderDetailMapper {
     int updateByPrimaryKey(SwOrderDetail record);
 
     int insertBatch(List swOrderDetails);
+
+    List<SwOrderDetail> selectByOrderNo(String orderNo);
 }

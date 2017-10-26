@@ -7,9 +7,11 @@ import com.fangxin.siwei.fangzhi.common.utils.PageUitls;
 import com.fangxin.siwei.fangzhi.common.utils.ShiroUtils;
 import com.fangxin.siwei.fangzhi.common.validator.ValidatorUtil;
 import com.fangxin.siwei.fangzhi.common.validator.group.AddGroup;
+import com.fangxin.siwei.fangzhi.modal.SysUser;
 import com.fangxin.siwei.fangzhi.service.order.SwOrderService;
 import com.fangxin.siwei.fangzhi.vo.order.SwOrderAuditVo;
 import com.fangxin.siwei.fangzhi.vo.order.SwOrderVo;
+import com.fangxin.siwei.fangzhi.vo.result.SwOrderBaseResultVo;
 import com.fangxin.siwei.fangzhi.vo.result.SwOrderResultVo;
 import com.github.pagehelper.Page;
 import io.swagger.annotations.*;
@@ -66,9 +68,9 @@ public class OrderController {
             @ApiImplicitParam(name = "filter",value = "通用表过滤器。发送JSON键/值对，如<code>{“key”:“value”}</code>。", paramType = "query",dataTypeClass = JSON.class)
 
     })
-    public Result<PageUitls<SwOrderResultVo>> findList(@RequestParam @ApiParam(hidden = true) Map<String,String> params){
-        Page<SwOrderResultVo> page =  swOrderService.findList(params);
-        return Result.newSuccess(new PageUitls<SwOrderResultVo>(page));
+    public Result<PageUitls<SwOrderBaseResultVo>> findList(@RequestParam @ApiParam(hidden = true) Map<String,String> params){
+        Page<SwOrderBaseResultVo> page =  swOrderService.findList(params);
+        return Result.newSuccess(new PageUitls<SwOrderBaseResultVo>(page));
     }
 
 
@@ -89,5 +91,14 @@ public class OrderController {
             logger.error("审核订单合同异常!{}",e);
             return Result.newError(ResultCode.FAIL);
         }
+    }
+
+
+    @RequestMapping(value = "/{orderNo}",method = RequestMethod.GET)
+    @ApiOperation(value="获取订单详细信息", notes="根据url的用户编号来获取业务订单详细信息")
+    @ApiImplicitParam(name = "orderNo", value = "订单编号", required = true, dataType = "string",paramType = "path")
+    public Result<SwOrderResultVo> getUserById(@PathVariable("orderNo")String orderNo){
+        SwOrderResultVo swOrderResultVo = swOrderService.getEntityByNo(orderNo);
+        return Result.newSuccess(swOrderResultVo);
     }
 }

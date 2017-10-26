@@ -9,6 +9,7 @@ import com.fangxin.siwei.fangzhi.common.validator.ValidatorUtil;
 import com.fangxin.siwei.fangzhi.common.validator.group.AddGroup;
 import com.fangxin.siwei.fangzhi.modal.SysResource;
 import com.fangxin.siwei.fangzhi.service.system.SysResourceService;
+import com.fangxin.siwei.fangzhi.vo.result.SysResourceResultVo;
 import com.fangxin.siwei.fangzhi.vo.system.SysResourceVo;
 import com.github.pagehelper.Page;
 import io.swagger.annotations.*;
@@ -94,8 +95,8 @@ public class SysResourceController {
     @RequestMapping(value = "/currentUser",method = RequestMethod.GET)
     @ApiOperation(value="根据当前用户获取菜单列表", notes="根据当前用户获取菜单列表")
    // @ApiImplicitParam(name = "sourceNo", value = "菜单资源编号", required = true, dataType = "string",paramType = "path")
-    public Result<List<SysResource>> getListByCurrentUser(){
-        List<SysResource> sysResourceList = sysResourceService.getListByCurrentUser(ShiroUtils.getCurrentUserNo());
+    public Result<List<SysResourceResultVo>> getListByCurrentUser(){
+        List<SysResourceResultVo> sysResourceList = sysResourceService.getListByCurrentUser(ShiroUtils.getCurrentUserNo());
         return Result.newSuccess(sysResourceList);
     }
 

@@ -2,6 +2,7 @@ package com.fangxin.siwei.fangzhi.service.system;
 
 import com.fangxin.siwei.fangzhi.common.result.Result;
 import com.fangxin.siwei.fangzhi.modal.SysResource;
+import com.fangxin.siwei.fangzhi.vo.result.SysResourceResultVo;
 import com.fangxin.siwei.fangzhi.vo.system.SysResourceVo;
 import com.github.pagehelper.Page;
 
@@ -22,5 +23,5 @@ public interface SysResourceService {
 
     Page<SysResource> findList(Map<String, String> params);
 
-    List<SysResource> getListByCurrentUser(String currentUserNo);
+    List<SysResourceResultVo> getListByCurrentUser(String currentUserNo);
 }

@@ -3,6 +3,7 @@ package com.fangxin.siwei.fangzhi.service.order;
 import com.fangxin.siwei.fangzhi.common.result.Result;
 import com.fangxin.siwei.fangzhi.vo.order.SwOrderAuditVo;
 import com.fangxin.siwei.fangzhi.vo.order.SwOrderVo;
+import com.fangxin.siwei.fangzhi.vo.result.SwOrderBaseResultVo;
 import com.fangxin.siwei.fangzhi.vo.result.SwOrderResultVo;
 import com.github.pagehelper.Page;
 
@@ -24,7 +25,7 @@ public interface SwOrderService {
      * @param params
      * @return
      */
-    Page<SwOrderResultVo> findList(Map<String, String> params);
+    Page<SwOrderBaseResultVo> findList(Map<String, String> params);
 
     /**
      * 订单审核
@@ -32,4 +33,11 @@ public interface SwOrderService {
      * @return
      */
     Result<Integer> audit(SwOrderAuditVo swOrderAuditVo);
+
+    /**
+     * 按照订单号查询详情
+     * @param orderNo
+     * @return
+     */
+    SwOrderResultVo getEntityByNo(String orderNo);
 }

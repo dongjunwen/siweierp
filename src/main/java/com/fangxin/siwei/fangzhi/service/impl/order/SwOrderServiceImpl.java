@@ -22,6 +22,8 @@ import com.fangxin.siwei.fangzhi.vo.order.SwOrderAuditVo;
 import com.fangxin.siwei.fangzhi.vo.order.SwOrderBaseVo;
 import com.fangxin.siwei.fangzhi.vo.order.SwOrderDetailVo;
 import com.fangxin.siwei.fangzhi.vo.order.SwOrderVo;
+import com.fangxin.siwei.fangzhi.vo.result.SwORderDetailResultVo;
+import com.fangxin.siwei.fangzhi.vo.result.SwOrderBaseResultVo;
 import com.fangxin.siwei.fangzhi.vo.result.SwOrderResultVo;
 import com.github.pagehelper.Page;
 import org.apache.commons.beanutils.BeanUtils;
@@ -131,18 +133,18 @@ public class SwOrderServiceImpl extends AbstractService<SwOrderBase> implements 
 
 
     @Override
-    public Page<SwOrderResultVo> findList(Map<String, String> params) {
+    public Page<SwOrderBaseResultVo> findList(Map<String, String> params) {
         //日期查询条件
         params.put("timeCond1","good_date");
         Condition serviceCondition = Common.getServiceCondition(params, SwOrderBase.class);
         List<SwOrderBase> swOrderBases = findByCondition(serviceCondition);
-        Page<SwOrderResultVo> swOrderResultVos= new Page<SwOrderResultVo>();
+        Page<SwOrderBaseResultVo> swOrderBaseResultVos= new Page<SwOrderBaseResultVo>();
         for(SwOrderBase swOrderBase: swOrderBases){
-            SwOrderResultVo swOrderResultVo=new SwOrderResultVo();
-            convertEntityTVo(swOrderResultVo,swOrderBase);
-            swOrderResultVos.add(swOrderResultVo);
+            SwOrderBaseResultVo swOrderBaseResultVo=new SwOrderBaseResultVo();
+            convertEntityTVo(swOrderBaseResultVo,swOrderBase);
+            swOrderBaseResultVos.add(swOrderBaseResultVo);
         }
-        return swOrderResultVos;
+        return swOrderBaseResultVos;
     }
 
     @Override
@@ -163,6 +165,42 @@ public class SwOrderServiceImpl extends AbstractService<SwOrderBase> implements 
             _orderAudit.setErrorCode(ResultCode.FAIL);
         }
         return _orderAudit;
+    }
+
+    @Override
+    public SwOrderResultVo getEntityByNo(String orderNo) {
+        SwOrderBase swOrderBase=swOrderBaseMapper.selectByOrderNo(orderNo);
+        if(swOrderBase==null){
+            throw  new RRException(ResultCode.COMMON_DATA_NOT_EXISTS.getMessage());
+        }
+        SwOrderResultVo swOrderResultVo=new SwOrderResultVo();
+        SwOrderBaseResultVo swOrderBaseResultVo=new SwOrderBaseResultVo();
+        convertEntityTVo(swOrderBaseResultVo,swOrderBase);
+        swOrderResultVo.setSwOrderBaseResultVo(swOrderBaseResultVo);
+        List<SwOrderDetail> swOrderDetails=swOrderDetailMapper.selectByOrderNo(orderNo);
+        List<SwORderDetailResultVo> swORderDetailResultVos=new ArrayList<>();
+        for(SwOrderDetail swOrderDetail:swOrderDetails){
+            SwORderDetailResultVo swORderDetailResultVo=new SwORderDetailResultVo();
+            convertDetailEntityTVo(swORderDetailResultVo,swOrderDetail);
+            swORderDetailResultVos.add(swORderDetailResultVo);
+        }
+        swOrderResultVo.setSwORderDetailResultVos(swORderDetailResultVos);
+        return swOrderResultVo;
+    }
+
+    private void convertDetailEntityTVo(SwORderDetailResultVo swORderDetailResultVo, SwOrderDetail swOrderDetail) {
+        try {
+            BeanUtils.copyProperties(swORderDetailResultVo,swOrderDetail);
+            swORderDetailResultVo.setCreateTime(DateUtil.formatDateTime(swOrderDetail.getCreateTime()));
+            swORderDetailResultVo.setModiTime(DateUtil.formatDateTime(swOrderDetail.getModiTime()));
+        } catch (IllegalAccessException e) {
+            logger.error("转换展示DetailVo语法错误:{}",e);
+            throw new RRException(ResultCode.COMMON_PARAM_INVALID.getMessage());
+        } catch (InvocationTargetException e) {
+            logger.error("转换展示DetailVo目标错误:{}",e);
+            throw new RRException(ResultCode.COMMON_PARAM_INVALID.getMessage());
+        }
+
     }
 
     private   Result<SysAuditConfig> singleAudit(String orderNo,SwOrderAuditVo swOrderAuditVo) {
@@ -192,15 +230,15 @@ public class SwOrderServiceImpl extends AbstractService<SwOrderBase> implements 
         return auditingService.auditing(auditingParam);
     }
 
-    private void convertEntityTVo(SwOrderResultVo swOrderResultVo, SwOrderBase swOrderBase) {
+    private void convertEntityTVo(SwOrderBaseResultVo swOrderBaseResultVo, SwOrderBase swOrderBase) {
 
         try {
-            BeanUtils.copyProperties(swOrderResultVo,swOrderBase);
-            swOrderResultVo.setFinishDate(DateUtil.formatDate(swOrderBase.getFinishDate()));
-            swOrderResultVo.setOrderDate(DateUtil.formatDate(swOrderBase.getOrderDate()));
-            swOrderResultVo.setGoodDate(DateUtil.formatDate(swOrderBase.getGoodDate()));
-            swOrderResultVo.setCreateTime(DateUtil.formatDateTime(swOrderBase.getCreateTime()));
-            swOrderResultVo.setModiTime(DateUtil.formatDateTime(swOrderBase.getModiTime()));
+            BeanUtils.copyProperties(swOrderBaseResultVo,swOrderBase);
+            swOrderBaseResultVo.setFinishDate(DateUtil.formatDate(swOrderBase.getFinishDate()));
+            swOrderBaseResultVo.setOrderDate(DateUtil.formatDate(swOrderBase.getOrderDate()));
+            swOrderBaseResultVo.setGoodDate(DateUtil.formatDate(swOrderBase.getGoodDate()));
+            swOrderBaseResultVo.setCreateTime(DateUtil.formatDateTime(swOrderBase.getCreateTime()));
+            swOrderBaseResultVo.setModiTime(DateUtil.formatDateTime(swOrderBase.getModiTime()));
         } catch (IllegalAccessException e) {
             logger.error("转换展示Vo语法错误:{}",e);
             throw new RRException(ResultCode.COMMON_PARAM_INVALID.getMessage());

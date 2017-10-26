@@ -10,6 +10,7 @@ import com.fangxin.siwei.fangzhi.modal.SwCompanyInfo;
 import com.fangxin.siwei.fangzhi.modal.SysResource;
 import com.fangxin.siwei.fangzhi.service.AbstractService;
 import com.fangxin.siwei.fangzhi.service.system.SysResourceService;
+import com.fangxin.siwei.fangzhi.vo.result.SysResourceResultVo;
 import com.fangxin.siwei.fangzhi.vo.system.SysResourceVo;
 import com.github.pagehelper.Page;
 import org.apache.commons.beanutils.BeanUtils;
@@ -20,6 +21,7 @@ import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Condition;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -88,9 +90,24 @@ public class SysResourceServiceImpl extends AbstractService<SysResource> impleme
     }
 
     @Override
-    public List<SysResource> getListByCurrentUser(String currentUserNo) {
+    public List<SysResourceResultVo> getListByCurrentUser(String currentUserNo) {
         List<SysResource> sysResources =sysResourceMapper.selectListByUserNo(currentUserNo);
-        return sysResources;
+        List<SysResourceResultVo> sysResourceResultVos=new ArrayList<>();
+        for(SysResource sysResource:sysResources){
+            SysResourceResultVo sysResourceResultVo=new SysResourceResultVo();
+            sysResourceResultVo.setId(String.valueOf(sysResource.getSourceNo()));
+            sysResourceResultVo.setName(sysResource.getSourceName());
+            sysResourceResultVo.setRoute(sysResource.getReqUrl());
+            if(sysResource.getLevel()==1){
+                sysResourceResultVo.setBpid("1");
+            }else{
+                sysResourceResultVo.setBpid(sysResource.getFhSourceNo());
+                sysResourceResultVo.setMpid(sysResource.getFhSourceNo());
+            }
+            sysResourceResultVo.setIcon(sysResource.getRsourceIcon());
+            sysResourceResultVos.add(sysResourceResultVo);
+        }
+        return sysResourceResultVos;
     }
 
 
