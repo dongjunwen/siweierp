@@ -50,7 +50,7 @@ public class IndexController {
     }
 
     @ApiOperation(value = "登录",notes = "登录接口")
-    @RequestMapping(value = "/login",method = RequestMethod.POST)
+    @RequestMapping(value = "/api/login",method = RequestMethod.POST)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "name",value = "用户名",paramType = "form"),
             @ApiImplicitParam(name = "password",value = "用户密码",paramType = "form")
@@ -71,7 +71,7 @@ public class IndexController {
     }
 
     @ApiOperation(value = "退出登录")
-    @RequestMapping(value="/logout",method=RequestMethod.GET)
+    @RequestMapping(value="/api/logout",method=RequestMethod.GET)
     public Result<String> logout(){
         Subject subject = SecurityUtils.getSubject();
         subject.logout();

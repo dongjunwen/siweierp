@@ -81,9 +81,9 @@ public class ShiroConfig {
         bean.setFilters(filtersMap);
         //配置访问权限
         LinkedHashMap<String, String> filterChainDefinitionMap=new LinkedHashMap<>();
-        filterChainDefinitionMap.put("login", "anon"); //表示可以匿名访问
+        filterChainDefinitionMap.put("/api/login", "anon"); //表示可以匿名访问
         filterChainDefinitionMap.put("loginIndex", "anon"); //表示可以匿名访问
-        filterChainDefinitionMap.put("logout", "anon"); //表示可以匿名访问
+        filterChainDefinitionMap.put("/api/logout", "anon"); //表示可以匿名访问
         filterChainDefinitionMap.put("/druid/**","anon");
         filterChainDefinitionMap.put("/swagger/**","anon");
         filterChainDefinitionMap.put("/api/**", "authc");//表示需要认证才可以访问
