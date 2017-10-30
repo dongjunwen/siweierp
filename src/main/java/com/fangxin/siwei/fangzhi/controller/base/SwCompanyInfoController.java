@@ -9,6 +9,7 @@ import com.fangxin.siwei.fangzhi.common.validator.group.AddGroup;
 import com.fangxin.siwei.fangzhi.modal.SwCompanyInfo;
 import com.fangxin.siwei.fangzhi.service.base.SwCompanyInfoService;
 import com.fangxin.siwei.fangzhi.vo.base.SwCompInfoVo;
+import com.fangxin.siwei.fangzhi.vo.result.SwCompInfoResultVo;
 import com.github.pagehelper.Page;
 import io.swagger.annotations.*;
 import org.slf4j.Logger;
@@ -88,6 +89,14 @@ public class SwCompanyInfoController {
     public Result<SwCompanyInfo> getUserById(@PathVariable("compNo") String compNo){
         SwCompanyInfo swCompanyInfo = swCompanyInfoService.getEntityByNo(compNo);
         return Result.newSuccess(swCompanyInfo);
+    }
+
+    @RequestMapping(value = "/findCompLike/{condStr}",method = RequestMethod.GET)
+    @ApiOperation(value="模糊匹配获取公司信息", notes="按照公司编号或公司名称模糊匹配公司信息")
+    @ApiImplicitParam(name = "condStr", value = "查询条件", required = true, dataType = "string",paramType = "path")
+    public Result<SwCompInfoResultVo> findCompLike(@PathVariable("condStr") String condStr){
+        SwCompInfoResultVo swCompInfoResultVo = swCompanyInfoService.findCompLike(condStr);
+        return Result.newSuccess(swCompInfoResultVo);
     }
 
     @ApiOperation(value = "公司列表")

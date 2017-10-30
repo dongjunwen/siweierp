@@ -10,6 +10,7 @@ import com.fangxin.siwei.fangzhi.modal.SwCompanyInfo;
 import com.fangxin.siwei.fangzhi.service.AbstractService;
 import com.fangxin.siwei.fangzhi.service.base.SwCompanyInfoService;
 import com.fangxin.siwei.fangzhi.vo.base.SwCompInfoVo;
+import com.fangxin.siwei.fangzhi.vo.result.SwCompInfoResultVo;
 import com.github.pagehelper.Page;
 import org.apache.commons.beanutils.BeanUtils;
 import org.slf4j.Logger;
@@ -85,9 +86,19 @@ public class SwCompanyInfoServiceImpl extends AbstractService<SwCompanyInfo> imp
         return (Page<SwCompanyInfo>) companyInfos;
     }
 
+    @Override
+    public SwCompInfoResultVo findCompLike(String condStr) {
+        SwCompanyInfo swCompanyInfo=swCompanyInfoMapper.findCompLike(condStr);
+        SwCompInfoResultVo swCompInfoResultVo=new SwCompInfoResultVo();
+        convertToResultEntity(swCompInfoResultVo,swCompanyInfo);
+        return swCompInfoResultVo;
+    }
 
 
     private void convertVoToEntity(SwCompanyInfo swCompanyInfo, SwCompInfoVo swCompInfoVo) {
+        if(swCompInfoVo==null){
+            return;
+        }
         try {
             BeanUtils.copyProperties(swCompanyInfo,swCompInfoVo);
         } catch (IllegalAccessException e) {
@@ -95,6 +106,21 @@ public class SwCompanyInfoServiceImpl extends AbstractService<SwCompanyInfo> imp
             throw new RRException(ResultCode.COMMON_PARAM_INVALID.getMessage());
         } catch (InvocationTargetException e) {
             logger.error("转换目标错误:{}",e);
+            throw new RRException(ResultCode.COMMON_PARAM_INVALID.getMessage());
+        }
+    }
+
+    private void convertToResultEntity(SwCompInfoResultVo swCompInfoResultVo, SwCompanyInfo swCompanyInfo) {
+        if(swCompanyInfo==null){
+            return;
+        }
+        try {
+            BeanUtils.copyProperties(swCompInfoResultVo,swCompanyInfo);
+        } catch (IllegalAccessException e) {
+            logger.error("转换公司结果实体语法错误:{}",e);
+            throw new RRException(ResultCode.COMMON_PARAM_INVALID.getMessage());
+        } catch (InvocationTargetException e) {
+            logger.error("转换司结果实体目标错误:{}",e);
             throw new RRException(ResultCode.COMMON_PARAM_INVALID.getMessage());
         }
     }

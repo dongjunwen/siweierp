@@ -40,6 +40,15 @@
     join sw_depart_employee as c on b.depart_no=c.depart_no
     where  c.user_no = #{userNo,jdbcType=VARCHAR}
   </select>
+
+  <select id="findCompLike" parameterType="java.lang.String" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    from sw_company_info
+    where  1=1 and
+    (comp_no like CONCAT(#{condStr},'%')  or comp_name  like CONCAT(#{condStr},'%'))
+  </select>
+
   <update id="updateByCompNo" parameterType="com.fangxin.siwei.fangzhi.modal.SwCompanyInfo">
     update sw_company_info
     <set>

@@ -2,6 +2,7 @@ package com.fangxin.siwei.fangzhi.mapper;
 
 import com.fangxin.siwei.fangzhi.common.utils.MyMapper;
 import com.fangxin.siwei.fangzhi.modal.SwCompanyInfo;
+import org.apache.ibatis.annotations.Param;
 
 public interface SwCompanyInfoMapper extends MyMapper<SwCompanyInfo> {
     int deleteByPrimaryKey(Integer id);
@@ -21,4 +22,6 @@ public interface SwCompanyInfoMapper extends MyMapper<SwCompanyInfo> {
     SwCompanyInfo selectByCompNo(String compNo);
 
     SwCompanyInfo selectByUserNo(String loginNo);
+
+    SwCompanyInfo findCompLike(@Param("condStr") String condStr);
 }

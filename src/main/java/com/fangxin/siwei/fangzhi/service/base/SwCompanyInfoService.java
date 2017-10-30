@@ -3,6 +3,7 @@ package com.fangxin.siwei.fangzhi.service.base;
 import com.fangxin.siwei.fangzhi.common.result.Result;
 import com.fangxin.siwei.fangzhi.modal.SwCompanyInfo;
 import com.fangxin.siwei.fangzhi.vo.base.SwCompInfoVo;
+import com.fangxin.siwei.fangzhi.vo.result.SwCompInfoResultVo;
 import com.github.pagehelper.Page;
 
 import java.util.Map; /**
@@ -20,4 +21,6 @@ public interface SwCompanyInfoService {
     SwCompanyInfo getEntityByNo(String compNo);
 
     Page<SwCompanyInfo> findList(Map<String, String> params);
+
+    SwCompInfoResultVo findCompLike(String condStr);
 }
