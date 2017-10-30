@@ -43,7 +43,7 @@ CREATE TABLE `sw_company_info` (
 
 /*Data for the table `sw_company_info` */
 
-insert  into `sw_company_info`(`id`,`comp_no`,`comp_name`,`contact_name`,`mobile`,`telphone`,`tax`,`email`,`addr`,`is_self`,`is_valid`,`memo`,`create_no`,`create_time`,`modi_no`,`modi_time`,`version`) values (1,'XXXhjjjj','艾弗森的','齐威王','1233444','12122112','1221','1221','12122222222222','N','N',NULL,'system','2017-10-20 15:41:10','system','2017-10-20 15:41:10',0),(2,'aaaaaa','艾弗森的','齐威王','1233444','12122112','1221','1221','12122222222222','N','N',NULL,'system','2017-10-20 15:44:33','system','2017-10-20 15:44:33',0),(3,'asd','艾弗森的','齐威王','1233444','12122112','1221','1221','12122222222222','N','N',NULL,'system','2017-10-20 15:44:39','system','2017-10-20 15:44:39',0),(4,'asd12','艾弗森的','齐威王','1233444','12122112','1221','1221','12122222222222','N','N',NULL,'system','2017-10-20 15:44:44','system','2017-10-20 15:44:44',0),(5,'XXXx1122222','XX实业科技有限公司','张三','12333','1','111','XX@qq.com','广兰路','N','N',NULL,'system','2017-10-20 16:36:20','system','2017-10-20 16:36:20',0),(6,'XXXx1121222','XX实业科技有限公司','张三','12333','1','111','XX@qq.com','广兰路','N','N',NULL,'system','2017-10-20 16:36:30','system','2017-10-20 16:36:30',0),(7,'XXXx11212333','XX实业科技有限公司','张三','12333','1','111','XX@qq.com','广兰路','N','N',NULL,'system','2017-10-20 16:36:35','system','2017-10-20 16:36:35',0);
+insert  into `sw_company_info`(`id`,`comp_no`,`comp_name`,`contact_name`,`mobile`,`telphone`,`tax`,`email`,`addr`,`is_self`,`is_valid`,`memo`,`create_no`,`create_time`,`modi_no`,`modi_time`,`version`) values (1,'swSpinComp','山东思维纺织','山东思维纺织','0631-5769674','0631-5769674','0631-5769674','1221','山东省威海市环翠区羊亭裕林工业园5号','Y','Y',NULL,'system','2017-10-20 15:41:10','system','2017-10-30 11:22:41',0),(2,'aaaaaa','艾弗森的','齐威王','1233444','12122112','1221','1221','12122222222222','N','Y',NULL,'system','2017-10-20 15:44:33','system','2017-10-30 11:21:43',0),(3,'asd','艾弗森的','齐威王','1233444','12122112','1221','1221','12122222222222','N','Y',NULL,'system','2017-10-20 15:44:39','system','2017-10-30 11:21:31',0),(4,'asd12','艾弗森的','齐威王','1233444','12122112','1221','1221','12122222222222','N','Y',NULL,'system','2017-10-20 15:44:44','system','2017-10-30 11:21:31',0),(5,'XXXx1122222','XX实业科技有限公司','张三','12333','1','111','XX@qq.com','广兰路','N','Y',NULL,'system','2017-10-20 16:36:20','system','2017-10-30 11:21:32',0),(6,'XXXx1121222','XX实业科技有限公司','张三','12333','1','111','XX@qq.com','广兰路','N','Y',NULL,'system','2017-10-20 16:36:30','system','2017-10-30 11:21:33',0),(7,'XXXx11212333','XX实业科技有限公司','张三','12333','1','111','XX@qq.com','广兰路','N','Y',NULL,'system','2017-10-20 16:36:35','system','2017-10-30 11:21:34',0);
 
 /*Table structure for table `sw_deliver_base` */
 
@@ -123,9 +123,11 @@ CREATE TABLE `sw_depart_employee` (
   `modi_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   `version` int(11) DEFAULT '0' COMMENT '版本号',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='部门员工表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='部门员工表';
 
 /*Data for the table `sw_depart_employee` */
+
+insert  into `sw_depart_employee`(`id`,`depart_no`,`user_no`,`create_no`,`create_time`,`modi_no`,`modi_time`,`version`) values (1,'swBusi','wangfangfang',NULL,'2017-10-30 14:13:57',NULL,'2017-10-30 14:13:55',0);
 
 /*Table structure for table `sw_depart_info` */
 
@@ -144,9 +146,11 @@ CREATE TABLE `sw_depart_info` (
   `modi_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   `version` int(11) DEFAULT '0' COMMENT '版本号',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='部门信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='部门信息表';
 
 /*Data for the table `sw_depart_info` */
+
+insert  into `sw_depart_info`(`id`,`depart_no`,`depart_name`,`fh_depart_no`,`comp_no`,`memo`,`create_no`,`create_time`,`modi_no`,`modi_time`,`version`) values (1,'swBusi','业务部','swManager','swSpinComp',NULL,NULL,NULL,NULL,'2017-10-30 11:22:08',0),(2,'swFinance','财务部','swManager','swSpinComp',NULL,NULL,NULL,NULL,'2017-10-30 11:22:08',0),(3,'swPhurchace','采购部','swManager','swSpinComp',NULL,NULL,NULL,NULL,'2017-10-30 11:22:09',0),(4,'swManager','总经理办公室',NULL,'swSpinComp',NULL,NULL,NULL,NULL,'2017-10-30 11:22:12',0),(5,'swProduce','制造部','swManager','swSpinComp',NULL,NULL,NULL,NULL,'2017-10-30 11:22:14',0);
 
 /*Table structure for table `sw_formular_info` */
 
@@ -395,11 +399,11 @@ CREATE TABLE `sys_role` (
   `modi_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   `version` int(11) DEFAULT '0' COMMENT '版本号',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='角色表';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='角色表';
 
 /*Data for the table `sys_role` */
 
-insert  into `sys_role`(`id`,`role_code`,`role_name`,`status`,`if_admin`,`memo`,`create_no`,`create_time`,`modi_no`,`modi_time`,`version`) values (1,'admin','超级管理员','Y','Y',NULL,NULL,NULL,NULL,'2017-10-23 17:08:50',0);
+insert  into `sys_role`(`id`,`role_code`,`role_name`,`status`,`if_admin`,`memo`,`create_no`,`create_time`,`modi_no`,`modi_time`,`version`) values (1,'admin','超级管理员','Y','Y',NULL,NULL,'2017-10-23 17:08:50',NULL,'2017-10-30 14:12:31',0),(2,'busi','业务员','Y','N',NULL,NULL,'2017-10-23 17:08:50',NULL,'2017-10-30 14:12:31',0),(3,'phurchase','采购员','Y','N',NULL,NULL,'2017-10-23 17:08:50',NULL,'2017-10-23 17:08:50',0),(4,'produceManger','生产主管','Y','N',NULL,NULL,'2017-10-23 17:08:50',NULL,'2017-10-23 17:08:50',0),(5,'producer','生产员工','Y','N',NULL,NULL,'2017-10-23 17:08:50',NULL,'2017-10-23 17:08:50',0);
 
 /*Table structure for table `sys_role_resource` */
 
@@ -430,10 +434,10 @@ CREATE TABLE `sys_user` (
   `user_no` varchar(32) DEFAULT NULL COMMENT '用户编号',
   `user_name` varchar(64) DEFAULT NULL COMMENT '用户名称',
   `nick_name` varchar(64) DEFAULT NULL COMMENT '用户昵称',
-  `phone_num` int(11) DEFAULT NULL COMMENT '手机号',
+  `phone_num` varchar(16) DEFAULT NULL COMMENT '手机号',
   `email_addr` varchar(64) DEFAULT NULL COMMENT '邮箱',
   `password` varchar(128) DEFAULT NULL COMMENT '登录密码',
-  `status` char(1) DEFAULT NULL COMMENT '状态 Y:有效 N:无效',
+  `status` char(1) DEFAULT 'Y' COMMENT '状态 Y:有效 N:无效',
   `memo` varchar(64) DEFAULT NULL COMMENT '备注',
   `last_login_time` datetime DEFAULT NULL COMMENT '最后一次登录时间',
   `create_no` varchar(32) DEFAULT NULL COMMENT '创建人',
@@ -447,7 +451,7 @@ CREATE TABLE `sys_user` (
 
 /*Data for the table `sys_user` */
 
-insert  into `sys_user`(`id`,`user_no`,`user_name`,`nick_name`,`phone_num`,`email_addr`,`password`,`status`,`memo`,`last_login_time`,`create_no`,`create_time`,`modi_no`,`modi_time`,`version`) values (11,'zhangsan1',NULL,'张三',15222222,'XXX@qq.com','e10adc3949ba59abbe56e057f20f883e',NULL,'test',NULL,'system','2017-10-20 11:14:18','system','2017-10-20 11:14:18',0),(12,'zhangsan',NULL,'张三',15222222,'XXX@qq.com','e10adc3949ba59abbe56e057f20f883e',NULL,'test',NULL,'system','2017-10-20 11:14:26','system','2017-10-20 11:14:26',0),(13,'admin',NULL,'管理员',15222222,'XXX@qq.com','e10adc3949ba59abbe56e057f20f883e',NULL,'test',NULL,'system','2017-10-20 11:14:34','system','2017-10-20 11:14:34',0),(14,'admin1',NULL,'管理员1',15222222,'XXX@qq.com','e10adc3949ba59abbe56e057f20f883e',NULL,'test',NULL,'system','2017-10-20 11:14:40','system','2017-10-20 11:14:40',0),(15,'admin2',NULL,'管理员2',15222222,'XXX@qq.com','e10adc3949ba59abbe56e057f20f883e',NULL,'test',NULL,'system','2017-10-20 11:14:45','system','2017-10-20 11:14:45',0),(16,'admin3',NULL,'管理员3',15222222,'XXX@qq.com','e10adc3949ba59abbe56e057f20f883e',NULL,'test',NULL,'system','2017-10-20 11:14:51','system','2017-10-20 11:14:51',0),(17,'admin4',NULL,'管理员4',15222222,'XXX@qq.com','e10adc3949ba59abbe56e057f20f883e',NULL,'test',NULL,'system','2017-10-20 11:16:59','system','2017-10-20 11:16:59',0);
+insert  into `sys_user`(`id`,`user_no`,`user_name`,`nick_name`,`phone_num`,`email_addr`,`password`,`status`,`memo`,`last_login_time`,`create_no`,`create_time`,`modi_no`,`modi_time`,`version`) values (11,'wangfangfang','王芳芳','王芳芳','15166119377','XXX@qq.com','e10adc3949ba59abbe56e057f20f883e','Y','test',NULL,'system','2017-10-20 11:14:18','system','2017-10-30 11:24:50',0),(12,'zhangsan',NULL,'张三','15222222','XXX@qq.com','e10adc3949ba59abbe56e057f20f883e','Y','test',NULL,'system','2017-10-20 11:14:26','system','2017-10-30 11:24:51',0),(13,'admin',NULL,'管理员','15222222','XXX@qq.com','e10adc3949ba59abbe56e057f20f883e','Y','test',NULL,'system','2017-10-20 11:14:34','system','2017-10-30 11:24:52',0),(14,'admin1',NULL,'管理员1','15222222','XXX@qq.com','e10adc3949ba59abbe56e057f20f883e','Y','test',NULL,'system','2017-10-20 11:14:40','system','2017-10-30 11:24:52',0),(15,'admin2',NULL,'管理员2','15222222','XXX@qq.com','e10adc3949ba59abbe56e057f20f883e','Y','test',NULL,'system','2017-10-20 11:14:45','system','2017-10-30 11:24:53',0),(16,'admin3',NULL,'管理员3','15222222','XXX@qq.com','e10adc3949ba59abbe56e057f20f883e','Y','test',NULL,'system','2017-10-20 11:14:51','system','2017-10-30 11:24:54',0),(17,'admin4',NULL,'管理员4','15222222','XXX@qq.com','e10adc3949ba59abbe56e057f20f883e','Y','test',NULL,'system','2017-10-20 11:16:59','system','2017-10-30 11:24:55',0);
 
 /*Table structure for table `sys_user_role` */
 
@@ -463,11 +467,11 @@ CREATE TABLE `sys_user_role` (
   `modi_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   `version` int(11) DEFAULT '0' COMMENT '版本号',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='用户角色表';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='用户角色表';
 
 /*Data for the table `sys_user_role` */
 
-insert  into `sys_user_role`(`id`,`user_no`,`role_code`,`create_no`,`create_time`,`modi_no`,`modi_time`,`version`) values (1,'admin','admin',NULL,NULL,NULL,'2017-10-23 17:11:40',0);
+insert  into `sys_user_role`(`id`,`user_no`,`role_code`,`create_no`,`create_time`,`modi_no`,`modi_time`,`version`) values (1,'admin','admin',NULL,'2017-10-30 14:13:00',NULL,'2017-10-30 14:13:02',0),(2,'wangfangfang','busi',NULL,'2017-10-30 14:13:02',NULL,'2017-10-30 14:13:04',0);
 
 /*Table structure for table `users` */
 
