@@ -77,11 +77,19 @@ public class SwFormularInfoServiceImpl extends AbstractService<SwFormularInfo> i
         return swFormularInfoMapper.selectByFormularNo(formularNo);
     }
 
+
+
     @Override
     public Page<SwFormularInfo> findList(Map<String, String> params) {
         Condition serviceCondition = Common.getServiceCondition(params, SwFormularInfo.class);
         List<SwFormularInfo> swDepartInfos = findByCondition(serviceCondition);
         return (Page<SwFormularInfo>) swDepartInfos;
+    }
+
+    @Override
+    public List<SwFormularInfo> findFormularLike(String condStr) {
+        List<SwFormularInfo> swFormularInfos= swFormularInfoMapper.findFormularLike(condStr);
+        return swFormularInfos;
     }
 
     private void convertVoToEntity( SwFormularInfo swFormularInfo, SwFormularInfoVo swFormularInfoVo) {

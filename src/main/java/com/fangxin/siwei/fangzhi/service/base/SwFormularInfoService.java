@@ -5,6 +5,7 @@ import com.fangxin.siwei.fangzhi.modal.SwFormularInfo;
 import com.fangxin.siwei.fangzhi.vo.base.SwFormularInfoVo;
 import com.github.pagehelper.Page;
 
+import java.util.List;
 import java.util.Map; /**
  * @Date:2017/10/20 0020 17:24
  * @Author lu.dong
@@ -20,4 +21,6 @@ public interface SwFormularInfoService {
     SwFormularInfo getEntityByNo(String formularNo);
 
     Page<SwFormularInfo> findList(Map<String, String> params);
+
+    List<SwFormularInfo> findFormularLike(String condStr);
 }

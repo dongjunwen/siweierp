@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -87,6 +88,15 @@ public class SwFormularInfoController {
     public Result<SwFormularInfo> getUserById(@PathVariable("formularNo") String formularNo){
         SwFormularInfo swFormularInfo = swFormularInfoService.getEntityByNo(formularNo);
         return Result.newSuccess(swFormularInfo);
+    }
+
+
+    @RequestMapping(value = "/findFormularLike/{condStr}",method = RequestMethod.GET)
+    @ApiOperation(value="根据条件模糊匹配公式列表", notes="根据查询条件模糊匹配公式列表")
+    @ApiImplicitParam(name = "condStr", value = "公式编号", required = true, dataType = "string",paramType = "path")
+    public Result<List<SwFormularInfo>> findFormularLike(@PathVariable("condStr") String condStr){
+        List<SwFormularInfo> swFormularInfos = swFormularInfoService.findFormularLike(condStr);
+        return Result.newSuccess(swFormularInfos);
     }
 
     @ApiOperation(value = "公式列表")

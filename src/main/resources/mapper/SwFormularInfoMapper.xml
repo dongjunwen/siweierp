@@ -25,6 +25,15 @@
     where formular_no = #{formularNo,jdbcType=VARCHAR}
   </select>
 
+
+
+  <select id="findFormularLike" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sw_formular_info
+    where  1=1 and (formular_no like CONCAT (#{condStr},'%') or formular_name like CONCAT (#{condStr},'%'))
+  </select>
+
   <update id="updateByFormularNo" parameterType="com.fangxin.siwei.fangzhi.modal.SwFormularInfo">
     update sw_formular_info
     <set>
