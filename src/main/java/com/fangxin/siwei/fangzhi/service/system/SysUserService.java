@@ -2,6 +2,7 @@ package com.fangxin.siwei.fangzhi.service.system;
 
 import com.fangxin.siwei.fangzhi.common.result.Result;
 import com.fangxin.siwei.fangzhi.modal.SysUser;
+import com.fangxin.siwei.fangzhi.vo.result.SysUserResultVo;
 import com.fangxin.siwei.fangzhi.vo.system.SysUserVo;
 
 /**
@@ -43,4 +44,11 @@ public interface SysUserService {
      * @return
      */
     SysUser getUserById(String userNo);
+
+    /**
+     * 按照用户号获取用户信息
+     * @param loginNo
+     * @return
+     */
+    SysUserResultVo getUserInfoByNo(String loginNo);
 }

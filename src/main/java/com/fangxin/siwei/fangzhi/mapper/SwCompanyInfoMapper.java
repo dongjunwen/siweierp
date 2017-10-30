@@ -19,4 +19,6 @@ public interface SwCompanyInfoMapper extends MyMapper<SwCompanyInfo> {
     int updateByCompNo(SwCompanyInfo swCompanyInfo);
 
     SwCompanyInfo selectByCompNo(String compNo);
+
+    SwCompanyInfo selectByUserNo(String loginNo);
 }

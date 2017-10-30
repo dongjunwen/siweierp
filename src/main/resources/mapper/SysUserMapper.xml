@@ -6,7 +6,7 @@
     <result column="user_no" jdbcType="VARCHAR" property="userNo" />
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
     <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
-    <result column="phone_num" jdbcType="INTEGER" property="phoneNum" />
+    <result column="phone_num" jdbcType="VARCHAR" property="phoneNum" />
     <result column="email_addr" jdbcType="VARCHAR" property="emailAddr" />
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="status" jdbcType="CHAR" property="status" />
@@ -52,7 +52,7 @@
       modi_no, modi_time, version
       )
     values (#{id,jdbcType=INTEGER}, #{userNo,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR},
-      #{nickName,jdbcType=VARCHAR}, #{phoneNum,jdbcType=INTEGER}, #{emailAddr,jdbcType=VARCHAR},
+      #{nickName,jdbcType=VARCHAR}, #{phoneNum,jdbcType=VARCHAR}, #{emailAddr,jdbcType=VARCHAR},
       #{password,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{memo,jdbcType=VARCHAR},
       #{lastLoginTime,jdbcType=TIMESTAMP}, #{createNo,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
       #{modiNo,jdbcType=VARCHAR}, #{modiTime,jdbcType=TIMESTAMP}, #{version,jdbcType=INTEGER}
@@ -121,7 +121,7 @@
         #{nickName,jdbcType=VARCHAR},
       </if>
       <if test="phoneNum != null">
-        #{phoneNum,jdbcType=INTEGER},
+        #{phoneNum,jdbcType=VARCHAR},
       </if>
       <if test="emailAddr != null">
         #{emailAddr,jdbcType=VARCHAR},
@@ -168,7 +168,7 @@
         nick_name = #{nickName,jdbcType=VARCHAR},
       </if>
       <if test="phoneNum != null">
-        phone_num = #{phoneNum,jdbcType=INTEGER},
+        phone_num = #{phoneNum,jdbcType=VARCHAR},
       </if>
       <if test="emailAddr != null">
         email_addr = #{emailAddr,jdbcType=VARCHAR},
@@ -208,7 +208,7 @@
     set user_no = #{userNo,jdbcType=VARCHAR},
       user_name = #{userName,jdbcType=VARCHAR},
       nick_name = #{nickName,jdbcType=VARCHAR},
-      phone_num = #{phoneNum,jdbcType=INTEGER},
+      phone_num = #{phoneNum,jdbcType=VARCHAR},
       email_addr = #{emailAddr,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
       status = #{status,jdbcType=CHAR},

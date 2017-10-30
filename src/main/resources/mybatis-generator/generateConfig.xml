@@ -39,7 +39,7 @@
         <!-- 表转代码：tableName：修改表名 -->
 
 
-        <table tableName="sys_audit_log" enableCountByExample="false"
+        <table tableName="sw_depart_employee" enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false"
                enableSelectByExample="false" selectByExampleQueryId="true"
                enableInsert="true" enableUpdateByPrimaryKey="true"

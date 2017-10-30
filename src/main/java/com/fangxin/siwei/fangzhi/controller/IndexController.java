@@ -2,7 +2,11 @@ package com.fangxin.siwei.fangzhi.controller;
 
 import com.fangxin.siwei.fangzhi.common.enums.ResultCode;
 import com.fangxin.siwei.fangzhi.common.result.Result;
+import com.fangxin.siwei.fangzhi.common.utils.ShiroUtils;
 import com.fangxin.siwei.fangzhi.common.validator.Assert;
+import com.fangxin.siwei.fangzhi.modal.SysUser;
+import com.fangxin.siwei.fangzhi.service.system.SysUserService;
+import com.fangxin.siwei.fangzhi.vo.result.SysUserResultVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -10,6 +14,7 @@ import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -30,6 +35,9 @@ import springfox.documentation.annotations.ApiIgnore;
 @Api(tags = "首页",description ="App相关操作接口定义类")
 //@ApiIgnore
 public class IndexController {
+
+    @Autowired
+    SysUserService sysUserService;
 
     @ApiOperation(value = "Api首页",notes = "所有api接口")
     @RequestMapping(value = "/swagger",method = RequestMethod.GET)
@@ -76,5 +84,13 @@ public class IndexController {
         Subject subject = SecurityUtils.getSubject();
         subject.logout();
         return Result.newSuccess("已退出!");
+    }
+
+    @ApiOperation(value = "获取当前登录用户信息")
+    @RequestMapping(value="/api/getCurrentUser",method=RequestMethod.GET)
+    public Result<SysUserResultVo> getCurrentUser(){
+        String loginNo=ShiroUtils.getCurrentUserNo();
+        SysUserResultVo sysUserResultVo= sysUserService.getUserInfoByNo(loginNo);
+        return  Result.newSuccess(sysUserResultVo);
     }
 }

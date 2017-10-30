@@ -11,6 +11,8 @@ public class SysUserRole {
 
     private String roleCode;
 
+    private String roleName;
+
     private String createNo;
 
     private Date createTime;
@@ -83,5 +85,13 @@ public class SysUserRole {
 
     public void setVersion(Integer version) {
         this.version = version;
+    }
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 }

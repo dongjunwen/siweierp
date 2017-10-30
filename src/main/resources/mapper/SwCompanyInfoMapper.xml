@@ -30,6 +30,16 @@
     from sw_company_info
     where  comp_no = #{compNo,jdbcType=VARCHAR}
   </select>
+
+  <select id="selectByUserNo" parameterType="java.lang.String" resultMap="BaseResultMap" >
+    SELECT
+     a.id, a.comp_no, a.comp_name, a.contact_name, a.mobile, a.telphone, a.tax, a.email, a.addr, a.is_self,
+    a.is_valid, a.memo, a.create_no, a.create_time, a.modi_no, a.modi_time, a.version
+    from sw_company_info as a
+    join sw_depart_info as b on a.comp_no=b.comp_no
+    join sw_depart_employee as c on b.depart_no=c.depart_no
+    where  c.user_no = #{userNo,jdbcType=VARCHAR}
+  </select>
   <update id="updateByCompNo" parameterType="com.fangxin.siwei.fangzhi.modal.SwCompanyInfo">
     update sw_company_info
     <set>

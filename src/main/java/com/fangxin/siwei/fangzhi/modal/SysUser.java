@@ -17,7 +17,7 @@ public class SysUser implements Serializable {
     @ApiModelProperty(value = "昵称")
     private String nickName;
     @ApiModelProperty(value = "手机号")
-    private Integer phoneNum;
+    private String phoneNum;
     @ApiModelProperty(value = "邮箱地址")
     private String emailAddr;
     @ApiModelProperty(value = "密码")
@@ -71,11 +71,11 @@ public class SysUser implements Serializable {
         this.nickName = nickName == null ? null : nickName.trim();
     }
 
-    public Integer getPhoneNum() {
+    public String getPhoneNum() {
         return phoneNum;
     }
 
-    public void setPhoneNum(Integer phoneNum) {
+    public void setPhoneNum(String phoneNum) {
         this.phoneNum = phoneNum;
     }
 

@@ -5,6 +5,7 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="user_no" jdbcType="VARCHAR" property="userNo" />
     <result column="role_code" jdbcType="VARCHAR" property="roleCode" />
+    <result column="role_name" jdbcType="VARCHAR" property="roleName" />
     <result column="create_no" jdbcType="VARCHAR" property="createNo" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="modi_no" jdbcType="VARCHAR" property="modiNo" />
@@ -16,9 +17,9 @@
   </sql>
   <select id="selectByUserNo" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
-    <include refid="Base_Column_List" />
-    from sys_user_role
-    where user_no = #{userNo,jdbcType=VARCHAR}
+    a.id,  a.user_no,  a.role_code,b.role_name, a.create_no,  a.create_time,  a.modi_no,  a.modi_time,  a.version
+    from sys_user_role as a join sys_role as b on a.role_code=b.role_code
+    where a.user_no = #{userNo,jdbcType=VARCHAR}
   </select>
 
 

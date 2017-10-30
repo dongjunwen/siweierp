@@ -5,9 +5,15 @@ import com.fangxin.siwei.fangzhi.common.exception.RRException;
 import com.fangxin.siwei.fangzhi.common.result.Result;
 import com.fangxin.siwei.fangzhi.common.utils.MD5Util;
 import com.fangxin.siwei.fangzhi.common.utils.ShiroUtils;
-import com.fangxin.siwei.fangzhi.mapper.SysUserMapper;
+import com.fangxin.siwei.fangzhi.mapper.*;
+import com.fangxin.siwei.fangzhi.modal.SwCompanyInfo;
+import com.fangxin.siwei.fangzhi.modal.SwDepartEmployee;
 import com.fangxin.siwei.fangzhi.modal.SysUser;
+import com.fangxin.siwei.fangzhi.modal.SysUserRole;
 import com.fangxin.siwei.fangzhi.service.system.SysUserService;
+import com.fangxin.siwei.fangzhi.vo.base.SwCompInfoVo;
+import com.fangxin.siwei.fangzhi.vo.result.SwCompInfoResultVo;
+import com.fangxin.siwei.fangzhi.vo.result.SysUserResultVo;
 import com.fangxin.siwei.fangzhi.vo.system.SysUserVo;
 import org.apache.commons.beanutils.BeanUtils;
 import org.slf4j.Logger;
@@ -17,6 +23,7 @@ import org.springframework.stereotype.Service;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @Date:2017/10/19 0019 15:08
@@ -29,6 +36,14 @@ public class SysUserServiceImpl  implements SysUserService {
 
     @Autowired
     SysUserMapper sysUserMapper;
+    @Autowired
+    SwDepartEmployeeMapper swDepartEmployeeMapper;
+    @Autowired
+    SwDepartInfoMapper swDepartInfoMapper;
+    @Autowired
+    SwCompanyInfoMapper swCompanyInfoMapper;
+    @Autowired
+    SysUserRoleMapper sysUserRoleMapper;
 
     @Override
     public Result<Integer> createUser(SysUserVo sysUserVo) {
@@ -78,6 +93,40 @@ public class SysUserServiceImpl  implements SysUserService {
     @Override
     public SysUser getUserById(String userNo) {
         return sysUserMapper.selectByUserNo(userNo);
+    }
+
+    @Override
+    public SysUserResultVo getUserInfoByNo(String loginNo) {
+        SysUserResultVo sysUserResultVo=new SysUserResultVo();
+        SysUser sysUser=getUserById(loginNo);
+        sysUserResultVo.setUserNo(loginNo);
+        sysUserResultVo.setUserName(sysUser.getUserName());
+        sysUserResultVo.setNickName(sysUser.getNickName());
+        sysUserResultVo.setEmailAddr(sysUser.getEmailAddr());
+        sysUserResultVo.setPhoneNum(sysUser.getPhoneNum());
+        List<SysUserRole> sysUserRoles=sysUserRoleMapper.selectByUserNo(loginNo);
+        if(sysUserRoles!=null){
+            sysUserResultVo.setRoleCode(sysUserRoles.get(0).getRoleCode());
+            sysUserResultVo.setRoleName(sysUserRoles.get(0).getRoleName());
+        }
+        List<SwDepartEmployee> swDepartEmployees=swDepartEmployeeMapper.selectByUserNo(loginNo);
+        if(swDepartEmployees!=null){
+            sysUserResultVo.setDepartNo(swDepartEmployees.get(0).getDepartNo());
+            sysUserResultVo.setDepartName(swDepartEmployees.get(0).getDepartName());
+        }
+        SwCompanyInfo swCompanyInfo= swCompanyInfoMapper.selectByUserNo(loginNo);
+        SwCompInfoResultVo swCompInfoResultVo=new SwCompInfoResultVo();
+        if(swCompanyInfo!=null){
+            swCompInfoResultVo.setCompNo(swCompanyInfo.getCompNo());
+            swCompInfoResultVo.setCompName(swCompanyInfo.getCompName());
+            swCompInfoResultVo.setAddr(swCompanyInfo.getAddr());
+            swCompInfoResultVo.setMobile(swCompanyInfo.getMobile());
+            swCompInfoResultVo.setTelphone(swCompanyInfo.getTelphone());
+            swCompInfoResultVo.setTax(swCompanyInfo.getTax());
+            swCompInfoResultVo.setContactName(swCompInfoResultVo.getContactName());
+        }
+        sysUserResultVo.setSwCompInfoResultVo(swCompInfoResultVo);
+        return sysUserResultVo;
     }
 
     private void convertVoToEntity(SysUser sysUser,SysUserVo sysUserVo) {
