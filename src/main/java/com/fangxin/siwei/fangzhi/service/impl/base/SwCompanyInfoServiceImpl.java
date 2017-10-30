@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Condition;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -87,11 +88,15 @@ public class SwCompanyInfoServiceImpl extends AbstractService<SwCompanyInfo> imp
     }
 
     @Override
-    public SwCompInfoResultVo findCompLike(String condStr) {
-        SwCompanyInfo swCompanyInfo=swCompanyInfoMapper.findCompLike(condStr);
-        SwCompInfoResultVo swCompInfoResultVo=new SwCompInfoResultVo();
-        convertToResultEntity(swCompInfoResultVo,swCompanyInfo);
-        return swCompInfoResultVo;
+    public List<SwCompInfoResultVo> findCompLike(String condStr) {
+        List<SwCompanyInfo> swCompanyInfos=swCompanyInfoMapper.findCompLike(condStr);
+        List<SwCompInfoResultVo> swCompInfoResultVos=new ArrayList<SwCompInfoResultVo>();
+        for(SwCompanyInfo swCompanyInfo: swCompanyInfos){
+            SwCompInfoResultVo swCompInfoResultVo=new SwCompInfoResultVo();
+            convertToResultEntity(swCompInfoResultVo,swCompanyInfo);
+            swCompInfoResultVos.add(swCompInfoResultVo);
+        }
+        return swCompInfoResultVos;
     }
 
 
