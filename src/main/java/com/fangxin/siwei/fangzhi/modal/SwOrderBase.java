@@ -33,7 +33,7 @@ public class SwOrderBase {
 
     private String custMobile;
 
-    private String custtPhone;
+    private String custPhone;
 
     private String custTax;
 
@@ -175,12 +175,12 @@ public class SwOrderBase {
         this.custMobile = custMobile == null ? null : custMobile.trim();
     }
 
-    public String getCusttPhone() {
-        return custtPhone;
+    public String getCustPhone() {
+        return custPhone;
     }
 
-    public void setCusttPhone(String custtPhone) {
-        this.custtPhone = custtPhone == null ? null : custtPhone.trim();
+    public void setCustPhone(String custPhone) {
+        this.custPhone = custPhone;
     }
 
     public String getCustTax() {

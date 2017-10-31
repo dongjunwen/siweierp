@@ -16,7 +16,7 @@
     <result column="cust_comp_name" jdbcType="VARCHAR" property="custCompName" />
     <result column="cust_contact_name" jdbcType="VARCHAR" property="custContactName" />
     <result column="cust_mobile" jdbcType="VARCHAR" property="custMobile" />
-    <result column="custt_phone" jdbcType="VARCHAR" property="custtPhone" />
+    <result column="cust_phone" jdbcType="VARCHAR" property="custPhone" />
     <result column="cust_tax" jdbcType="VARCHAR" property="custTax" />
     <result column="cust_addr" jdbcType="VARCHAR" property="custAddr" />
     <result column="supply_comp_no" jdbcType="VARCHAR" property="supplyCompNo" />
@@ -35,7 +35,7 @@
   <sql id="Base_Column_List">
     id, order_no, order_date, pay_way, good_date, finish_date, order_type, sale_type, 
     order_status, memo, cust_comp_no, cust_comp_name, cust_contact_name, cust_mobile, 
-    custt_phone, cust_tax, cust_addr, supply_comp_no, supply_comp_name, supply_contact_name, 
+    cust_phone, cust_tax, cust_addr, supply_comp_no, supply_comp_name, supply_contact_name, 
     supply_mobile, supply_phone, supply_tax, supply_addr, create_no, create_time, modi_no,
     modi_time, version
   </sql>
@@ -84,8 +84,8 @@
       <if test="custMobile != null">
         cust_mobile = #{custMobile,jdbcType=VARCHAR},
       </if>
-      <if test="custtPhone != null">
-        custt_phone = #{custtPhone,jdbcType=VARCHAR},
+      <if test="custPhone != null">
+        cust_phone = #{custPhone,jdbcType=VARCHAR},
       </if>
       <if test="custTax != null">
         cust_tax = #{custTax,jdbcType=VARCHAR},
@@ -147,7 +147,7 @@
       pay_way, good_date, finish_date, 
       order_type, sale_type, order_status, 
       memo, cust_comp_no, cust_comp_name, 
-      cust_contact_name, cust_mobile, custt_phone, 
+      cust_contact_name, cust_mobile, cust_phone, 
       cust_tax, cust_addr, supply_comp_no, 
       supply_comp_name, supply_contact_name, supply_mobile, 
       supply_phone, supply_tax, supply_addr, 
@@ -157,7 +157,7 @@
       #{payWay,jdbcType=VARCHAR}, #{goodDate,jdbcType=DATE}, #{finishDate,jdbcType=DATE}, 
       #{orderType,jdbcType=VARCHAR}, #{saleType,jdbcType=VARCHAR}, #{orderStatus,jdbcType=VARCHAR}, 
       #{memo,jdbcType=VARCHAR}, #{custCompNo,jdbcType=VARCHAR}, #{custCompName,jdbcType=VARCHAR}, 
-      #{custContactName,jdbcType=VARCHAR}, #{custMobile,jdbcType=VARCHAR}, #{custtPhone,jdbcType=VARCHAR}, 
+      #{custContactName,jdbcType=VARCHAR}, #{custMobile,jdbcType=VARCHAR}, #{custPhone,jdbcType=VARCHAR}, 
       #{custTax,jdbcType=VARCHAR}, #{custAddr,jdbcType=VARCHAR}, #{supplyCompNo,jdbcType=VARCHAR}, 
       #{supplyCompName,jdbcType=VARCHAR}, #{supplyContactName,jdbcType=VARCHAR}, #{supplyMobile,jdbcType=VARCHAR}, 
       #{supplyPhone,jdbcType=VARCHAR}, #{supplyTax,jdbcType=VARCHAR}, #{supplyAddr,jdbcType=VARCHAR}, 
@@ -209,8 +209,8 @@
       <if test="custMobile != null">
         cust_mobile,
       </if>
-      <if test="custtPhone != null">
-        custt_phone,
+      <if test="custPhone != null">
+        cust_phone,
       </if>
       <if test="custTax != null">
         cust_tax,
@@ -298,8 +298,8 @@
       <if test="custMobile != null">
         #{custMobile,jdbcType=VARCHAR},
       </if>
-      <if test="custtPhone != null">
-        #{custtPhone,jdbcType=VARCHAR},
+      <if test="custPhone != null">
+        #{custPhone,jdbcType=VARCHAR},
       </if>
       <if test="custTax != null">
         #{custTax,jdbcType=VARCHAR},
@@ -387,8 +387,8 @@
       <if test="custMobile != null">
         cust_mobile = #{custMobile,jdbcType=VARCHAR},
       </if>
-      <if test="custtPhone != null">
-        custt_phone = #{custtPhone,jdbcType=VARCHAR},
+      <if test="custPhone != null">
+        cust_phone = #{custPhone,jdbcType=VARCHAR},
       </if>
       <if test="custTax != null">
         cust_tax = #{custTax,jdbcType=VARCHAR},
@@ -450,7 +450,7 @@
       cust_comp_name = #{custCompName,jdbcType=VARCHAR},
       cust_contact_name = #{custContactName,jdbcType=VARCHAR},
       cust_mobile = #{custMobile,jdbcType=VARCHAR},
-      custt_phone = #{custtPhone,jdbcType=VARCHAR},
+      cust_phone = #{custPhone,jdbcType=VARCHAR},
       cust_tax = #{custTax,jdbcType=VARCHAR},
       cust_addr = #{custAddr,jdbcType=VARCHAR},
       supply_comp_no = #{supplyCompNo,jdbcType=VARCHAR},
