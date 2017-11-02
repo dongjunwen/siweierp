@@ -34,6 +34,13 @@
     from sw_purchase_detail
     where id = #{id,jdbcType=INTEGER}
   </select>
+
+  <select id="selectByPurNo" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sw_purchase_detail
+    where pur_no = #{purNo,jdbcType=VARCHAR}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from sw_purchase_detail
     where id = #{id,jdbcType=INTEGER}
@@ -53,6 +60,27 @@
       #{price,jdbcType=DECIMAL}, #{amt,jdbcType=DECIMAL}, #{memo,jdbcType=VARCHAR}, #{createNo,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=TIMESTAMP}, #{modiNo,jdbcType=VARCHAR}, #{modiTime,jdbcType=TIMESTAMP}, 
       #{version,jdbcType=INTEGER})
+  </insert>
+
+  <insert id="insertBatch" parameterType="java.util.List" >
+      insert into sw_purchase_detail ( pur_no, pur_seq_no,
+      order_no, order_seq_no, material_no,
+      material_name, material_type, spec,
+      pattern, unit, num,
+      price, amt, memo, create_no,
+      create_time, modi_no, modi_time,
+      version)
+    values
+    <foreach collection="list" index="index" item="item" separator=",">
+      ( #{item.purNo,jdbcType=VARCHAR}, #{item.purSeqNo,jdbcType=VARCHAR},
+      #{item.orderNo,jdbcType=VARCHAR}, #{item.orderSeqNo,jdbcType=VARCHAR}, #{item.materialNo,jdbcType=VARCHAR},
+      #{item.materialName,jdbcType=VARCHAR}, #{item.materialType,jdbcType=VARCHAR}, #{item.spec,jdbcType=VARCHAR},
+      #{item.pattern,jdbcType=VARCHAR}, #{item.unit,jdbcType=VARCHAR}, #{item.num,jdbcType=DECIMAL},
+      #{item.price,jdbcType=DECIMAL}, #{item.amt,jdbcType=DECIMAL}, #{item.memo,jdbcType=VARCHAR}, #{item.createNo,jdbcType=VARCHAR},
+      #{item.createTime,jdbcType=TIMESTAMP}, #{item.modiNo,jdbcType=VARCHAR}, #{item.modiTime,jdbcType=TIMESTAMP},
+      #{item.version,jdbcType=INTEGER})
+    </foreach>
+
   </insert>
   <insert id="insertSelective" parameterType="com.fangxin.siwei.fangzhi.modal.SwPurchaseDetail">
     insert into sw_purchase_detail

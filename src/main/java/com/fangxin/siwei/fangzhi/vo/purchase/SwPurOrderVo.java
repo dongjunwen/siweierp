@@ -3,6 +3,8 @@ package com.fangxin.siwei.fangzhi.vo.purchase;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import java.util.List;
+
 /**
  * @Date:2017/11/1 0001 13:43
  * @Author lu.dong
@@ -13,7 +15,7 @@ public class SwPurOrderVo {
     @ApiModelProperty(value = "基础数据",required =false )
     private SwPurOrderBaseVo swPurOrderBaseVo;
     @ApiModelProperty(value = "明细数据",required =false )
-    private SwPurOrderDetailVo swPurOrderDetailVo;
+    private List<SwPurOrderDetailVo> swPurOrderDetailVo;
 
     public SwPurOrderBaseVo getSwPurOrderBaseVo() {
         return swPurOrderBaseVo;
@@ -23,11 +25,11 @@ public class SwPurOrderVo {
         this.swPurOrderBaseVo = swPurOrderBaseVo;
     }
 
-    public SwPurOrderDetailVo getSwPurOrderDetailVo() {
+    public List<SwPurOrderDetailVo> getSwPurOrderDetailVo() {
         return swPurOrderDetailVo;
     }
 
-    public void setSwPurOrderDetailVo(SwPurOrderDetailVo swPurOrderDetailVo) {
+    public void setSwPurOrderDetailVo(List<SwPurOrderDetailVo> swPurOrderDetailVo) {
         this.swPurOrderDetailVo = swPurOrderDetailVo;
     }
 }

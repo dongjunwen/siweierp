@@ -280,4 +280,74 @@
       version = #{version,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>-->
+  <select id="selectByPurNo" resultMap="BaseResultMap" parameterType="java.lang.String">
+     SELECT
+    <include refid="Base_Column_List" />
+    from sw_purchase_base
+    where pur_no = #{purNo,jdbcType=VARCHAR}
+  </select>
+  <update id="updateByPurNo" parameterType="com.fangxin.siwei.fangzhi.modal.SwPurchaseBase">
+    update sw_purchase_base
+    <set>
+
+      <if test="purDate != null">
+        pur_date = #{purDate,jdbcType=DATE},
+      </if>
+      <if test="expectDate != null">
+        expect_date = #{expectDate,jdbcType=DATE},
+      </if>
+      <if test="respName != null">
+        resp_name = #{respName,jdbcType=VARCHAR},
+      </if>
+      <if test="supplyCompNo != null">
+        supply_comp_no = #{supplyCompNo,jdbcType=VARCHAR},
+      </if>
+      <if test="supplyCompName != null">
+        supply_comp_name = #{supplyCompName,jdbcType=VARCHAR},
+      </if>
+      <if test="supplyContactName != null">
+        supply_contact_name = #{supplyContactName,jdbcType=VARCHAR},
+      </if>
+      <if test="supplyMobile != null">
+        supply_mobile = #{supplyMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="supplyPhone != null">
+        supply_phone = #{supplyPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="supplyTax != null">
+        supply_tax = #{supplyTax,jdbcType=VARCHAR},
+      </if>
+      <if test="supplyAddr != null">
+        supply_addr = #{supplyAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="purAmt != null">
+        pur_amt = #{purAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="purNum != null">
+        pur_num = #{purNum,jdbcType=DECIMAL},
+      </if>
+      <if test="purStatus != null">
+        pur_status = #{purStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        memo = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="createNo != null">
+        create_no = #{createNo,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modiNo != null">
+        modi_no = #{modiNo,jdbcType=VARCHAR},
+      </if>
+      <if test="modiTime != null">
+        modi_time = #{modiTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=INTEGER},
+      </if>
+    </set>
+    where 1=1 and pur_no = #{purNo,jdbcType=VARCHAR}
+  </update>
 </mapper>

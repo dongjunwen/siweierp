@@ -1,5 +1,6 @@
 package com.fangxin.siwei.fangzhi.service.impl.order;
 
+import com.fangxin.siwei.fangzhi.common.constant.ConstantKey;
 import com.fangxin.siwei.fangzhi.common.enums.AuditTypeEnum;
 import com.fangxin.siwei.fangzhi.common.enums.DeliverStatus;
 import com.fangxin.siwei.fangzhi.common.enums.ResultCode;
@@ -59,7 +60,7 @@ public class SwDeliverServiceImpl extends AbstractService<SwDeliverBase> impleme
         SwDeliverBaseVo swDeliverBaseVo= swDeliverVo.getSwDeliverBaseVo();
         SwDeliverBase swDeliverBase=new SwDeliverBase();
         convertVoToEntity(swDeliverBase,swDeliverBaseVo);
-        String deliverNo= UUIDUtils.genUUID("F");
+        String deliverNo= UUIDUtils.genUUID(ConstantKey.DELIVER_KEY_PRE);
         swDeliverBase.setDeilverNo(deliverNo);
         swDeliverBase.setDeilverDate(new Date());
         swDeliverBase.setDeilverStatus(DeliverStatus.WAIT_APPLY.getCode());

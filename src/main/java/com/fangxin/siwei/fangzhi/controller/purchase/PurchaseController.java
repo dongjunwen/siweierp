@@ -8,7 +8,7 @@ import com.fangxin.siwei.fangzhi.common.utils.ShiroUtils;
 import com.fangxin.siwei.fangzhi.common.validator.ValidatorUtil;
 import com.fangxin.siwei.fangzhi.common.validator.group.AddGroup;
 import com.fangxin.siwei.fangzhi.service.purchase.PurchaseService;
-import com.fangxin.siwei.fangzhi.vo.order.SwOrderAuditVo;
+import com.fangxin.siwei.fangzhi.vo.purchase.SwPurAuditVo;
 import com.fangxin.siwei.fangzhi.vo.purchase.SwPurOrderVo;
 import com.fangxin.siwei.fangzhi.vo.result.SwPurOrderBaseResultVo;
 import com.fangxin.siwei.fangzhi.vo.result.SwPurOrderResultVo;
@@ -75,12 +75,12 @@ public class PurchaseController {
     @RequestMapping(value = "/audit",method = RequestMethod.POST)
     @ApiOperation(value="审核订单", notes="初审、终审接口")
     //@ApiImplicitParam(name = "swPurOrderVo", value = "采购单信息实体 swPurOrderVo",dataTypeClass = SysDictVo.class)
-    public Result<String> audit(@ApiParam(name = "swOrderAuditVo", value = "订单审核 swOrderAuditVo", required = true) @RequestBody SwOrderAuditVo swOrderAuditVo){
-        ValidatorUtil.validateEntity(swOrderAuditVo, AddGroup.class);//校验
+    public Result<String> audit(@ApiParam(name = "swOrderAuditVo", value = "订单审核 swOrderAuditVo", required = true) @RequestBody SwPurAuditVo swPurAuditVo){
+        ValidatorUtil.validateEntity(swPurAuditVo, AddGroup.class);//校验
         try{
-            swOrderAuditVo.setAuditUserNo(ShiroUtils.getCurrentUserNo());
-            swOrderAuditVo.setAuditUserName(ShiroUtils.getCurrentUserName());
-            Result<Integer> _result= purchaseService.audit(swOrderAuditVo);
+            swPurAuditVo.setAuditUserNo(ShiroUtils.getCurrentUserNo());
+            swPurAuditVo.setAuditUserName(ShiroUtils.getCurrentUserName());
+            Result<Integer> _result= purchaseService.audit(swPurAuditVo);
             if(!_result.isSuccess()){
                 return Result.newError(_result.getCode(),_result.getMessage());
             }

@@ -1,5 +1,6 @@
 package com.fangxin.siwei.fangzhi.service.impl.order;
 
+import com.fangxin.siwei.fangzhi.common.constant.ConstantKey;
 import com.fangxin.siwei.fangzhi.common.enums.AuditTypeEnum;
 import com.fangxin.siwei.fangzhi.common.enums.OrderStatus;
 import com.fangxin.siwei.fangzhi.common.enums.ResultCode;
@@ -68,7 +69,7 @@ public class SwOrderServiceImpl extends AbstractService<SwOrderBase> implements 
         SwOrderBaseVo swOrderBaseVo= swOrderVo.getSwOrderBaseVo();
         SwOrderBase swOrderBase=new SwOrderBase();
         convertVoToEntity(swOrderBase,swOrderBaseVo);
-        String orderNo= UUIDUtils.genUUID("D");
+        String orderNo= UUIDUtils.genUUID(ConstantKey.ORDER_KEY_PRE);
         swOrderBase.setOrderNo(orderNo);
         swOrderBase.setOrderDate(new Date());
         swOrderBase.setOrderStatus(OrderStatus.WAIT_AUDIT.getCode());

@@ -4,6 +4,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.validator.constraints.Length;
 
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Pattern;
 import java.math.BigDecimal;
 
@@ -14,47 +15,46 @@ import java.math.BigDecimal;
  **/
 @ApiModel(value = "采购单Vo SwPurOrderBaseVo")
 public class SwPurOrderBaseVo {
-    @Length(max = 32,message = "采购单号长度不能超过32")
-    @ApiModelProperty(value = "采购单号",required =false )
-    private String purNo;
     @Pattern(regexp="[0-9]{4}-[0-9]{2}-[0-9]{2}", message="采购日期格式不正确，正确的格式类似于1998-04-13")
     @ApiModelProperty(value = "采购日期",required =false )
     private String purDate;
     @Pattern(regexp="[0-9]{4}-[0-9]{2}-[0-9]{2}", message="预计到货日期格式不正确，正确的格式类似于1998-04-13")
     @ApiModelProperty(value = "预计到货日期",required =false )
     private String expectDate;
-
+    @Length(max = 32,message = "业务负责人长度不能超过32")
+    @ApiModelProperty(value = "业务负责人",required =false )
     private String respName;
-
+    @Length(max = 32,message = "供货方编号长度不能超过32")
+    @ApiModelProperty(value = "供货方编号",required =false )
     private String supplyCompNo;
-
+    @Length(max = 128,message = "供货方名称长度不能超过128")
+    @ApiModelProperty(value = "供货方名称",required =false )
     private String supplyCompName;
-
+    @Length(max = 64,message = "供货方联系人长度不能超过64")
+    @ApiModelProperty(value = "供货方联系人",required =false )
     private String supplyContactName;
-
+    @Length(max = 16,message = "供货方手机长度不能超过16")
+    @ApiModelProperty(value = "供货方手机",required =false )
     private String supplyMobile;
-
+    @Length(max = 16,message = "供货方电话长度不能超过16")
+    @ApiModelProperty(value = "供货方电话",required =false )
     private String supplyPhone;
-
+    @Length(max = 16,message = "供货方传真长度不能超过16")
+    @ApiModelProperty(value = "供货方传真",required =false )
     private String supplyTax;
-
+    @Length(max = 32,message = "供货方地址长度不能超过32")
+    @ApiModelProperty(value = "供货方地址",required =false )
     private String supplyAddr;
-
+    @DecimalMin(value="0.01",message = "采购金额最小为0.01")
+    @ApiModelProperty(value = "采购金额",required =false )
     private BigDecimal purAmt;
-
+    @DecimalMin(value="0.01",message = "采购数量最小为0.01")
+    @ApiModelProperty(value = "采购数量",required =false )
     private BigDecimal purNum;
 
-    private String purStatus;
-
+    @Length(max = 256,message = "备注长度最大为256")
+    @ApiModelProperty(value = "备注",required =false )
     private String memo;
-
-    public String getPurNo() {
-        return purNo;
-    }
-
-    public void setPurNo(String purNo) {
-        this.purNo = purNo;
-    }
 
     public String getPurDate() {
         return purDate;
@@ -152,13 +152,6 @@ public class SwPurOrderBaseVo {
         this.purNum = purNum;
     }
 
-    public String getPurStatus() {
-        return purStatus;
-    }
-
-    public void setPurStatus(String purStatus) {
-        this.purStatus = purStatus;
-    }
 
     public String getMemo() {
         return memo;
