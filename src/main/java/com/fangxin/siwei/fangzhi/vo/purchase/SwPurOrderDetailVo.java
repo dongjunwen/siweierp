@@ -1,5 +1,9 @@
 package com.fangxin.siwei.fangzhi.vo.purchase;
 
+import io.swagger.annotations.ApiModelProperty;
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.DecimalMin;
 import java.math.BigDecimal;
 
 /**
@@ -8,42 +12,45 @@ import java.math.BigDecimal;
  * @Description：
  **/
 public class SwPurOrderDetailVo {
-
-    private String purNo;
-
+    @Length(max = 32,message = "序号长度不能超过32")
+    @ApiModelProperty(value = "序号",required =false )
     private String purSeqNo;
-
+    @Length(max = 32,message = "订单号长度不能超过32")
+    @ApiModelProperty(value = "订单号",required =false )
     private String orderNo;
-
+    @Length(max = 32,message = "订单序号长度不能超过32")
+    @ApiModelProperty(value = "订单序号",required =false )
     private String orderSeqNo;
-
+    @Length(max = 32,message = "物料编号长度不能超过32")
+    @ApiModelProperty(value = "物料编号",required =false )
     private String materialNo;
-
+    @Length(max = 32,message = "物料名称长度不能超过32")
+    @ApiModelProperty(value = "物料名称",required =false )
     private String materialName;
-
+    @Length(max = 32,message = "物料分类长度不能超过32")
+    @ApiModelProperty(value = "物料分类",required =false )
     private String materialType;
-
+    @Length(max = 100,message = "规格长度不能超过100")
+    @ApiModelProperty(value = "规格",required =false )
     private String spec;
-
+    @Length(max = 100,message = "型号长度不能超过100")
+    @ApiModelProperty(value = "型号",required =false )
     private String pattern;
-
+    @Length(max = 12,message = "单位长度不能超过12")
+    @ApiModelProperty(value = "单位",required =false )
     private String unit;
-
+    @DecimalMin(value="0.01",message = "采购数量最小为0.01")
+    @ApiModelProperty(value = "采购数量",required =false )
     private BigDecimal num;
-
+    @DecimalMin(value="0.01",message = "采购单价最小为0.01")
+    @ApiModelProperty(value = "采购单价",required =false )
     private BigDecimal price;
-
+    @DecimalMin(value="0.01",message = "采购金额最小为0.01")
+    @ApiModelProperty(value = "采购金额",required =false )
     private BigDecimal amt;
-
+    @Length(max = 256,message = "备注长度最大为256")
+    @ApiModelProperty(value = "备注",required =false )
     private String memo;
-
-    public String getPurNo() {
-        return purNo;
-    }
-
-    public void setPurNo(String purNo) {
-        this.purNo = purNo;
-    }
 
     public String getPurSeqNo() {
         return purSeqNo;
