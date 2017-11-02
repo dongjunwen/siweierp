@@ -9,10 +9,11 @@ import java.util.Objects;
  **/
 public enum PurStatus {
 
+    WAIT_APPLY("WAIT_APPLY","待申请"),
     WAIT_AUDIT("WAIT_AUDIT","待初审"),
     AUDIT01_SUCCESS("AUDIT01_SUCCESS","初审成功"),
-    AUDIT_SUCCESS("AUDIT_SUCCESS","终审成功"),
-    ORDER_FINISH("ORDER_FINISH","采购结束");
+    AUDIT_SUCCESS("AUDIT_SUCCESS","已发货"),
+    HAS_CANCEL("HAS_CANCEL","已作废");
 
     String code;
     String message;

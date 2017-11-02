@@ -38,6 +38,7 @@ import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Condition;
 
 import java.lang.reflect.InvocationTargetException;
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -68,26 +69,34 @@ public class PurchaseServiceImpl extends AbstractService<SwPurchaseBase> impleme
         SwPurOrderBaseVo swPurOrderBaseVo= swPurOrderVo.getSwPurOrderBaseVo();
         SwPurchaseBase swPurchaseBase=new SwPurchaseBase();
         convertVoToEntity(swPurchaseBase,swPurOrderBaseVo);
-        String orderNo= UUIDUtils.genUUID(ConstantKey.PURCHASE_KEY_PRE);
-        swPurchaseBase.setPurNo(orderNo);
+        String purNo= UUIDUtils.genUUID(ConstantKey.PURCHASE_KEY_PRE);
+        swPurchaseBase.setPurNo(purNo);
         swPurchaseBase.setPurDate(new Date());
-        swPurchaseBase.setPurStatus(PurStatus.WAIT_AUDIT.getCode());
+        swPurchaseBase.setPurStatus(PurStatus.WAIT_APPLY.getCode());
         swPurchaseBase.setCreateNo(ShiroUtils.getCurrentUserNo());
         swPurchaseBase.setCreateTime(new Date());
         swPurchaseBase.setModiNo(ShiroUtils.getCurrentUserNo());
         swPurchaseBase.setModiTime(new Date());
+        swPurchaseBase.setVersion(0);
         List<SwPurOrderDetailVo> swPurOrderDetailVos=swPurOrderVo.getSwPurOrderDetailVo();
         List swOrderDetails=new ArrayList();
+        BigDecimal totalNum=BigDecimal.ZERO;
+        BigDecimal totalAmt=BigDecimal.ZERO;
         for(SwPurOrderDetailVo swPurOrderDetailVo:swPurOrderDetailVos){
             SwPurchaseDetail swPurchaseDetail=new SwPurchaseDetail();
             convertVoToEntityDetail(swPurchaseDetail,swPurOrderDetailVo);
-            swPurchaseDetail.setOrderNo(orderNo);
+            swPurchaseDetail.setPurNo(purNo);
             swPurchaseDetail.setCreateNo(ShiroUtils.getCurrentUserNo());
             swPurchaseDetail.setCreateTime(new Date());
             swPurchaseDetail.setModiNo(ShiroUtils.getCurrentUserNo());
             swPurchaseDetail.setModiTime(new Date());
+            swPurchaseDetail.setVersion(0);
             swOrderDetails.add(swPurchaseDetail);
+            totalNum=totalNum.add(swPurchaseDetail.getNum());
+            totalAmt=totalAmt.add(swPurchaseDetail.getAmt());
         }
+        swPurchaseBase.setPurNum(totalNum);
+        swPurchaseBase.setPurAmt(totalAmt);
         int flag=swPurchaseBaseMapper.insert(swPurchaseBase);
         swPurchaseDetailMapper.insertBatch(swOrderDetails);
         return Result.newSuccess(flag);

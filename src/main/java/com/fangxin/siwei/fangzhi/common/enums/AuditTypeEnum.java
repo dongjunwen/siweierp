@@ -11,7 +11,7 @@ public enum AuditTypeEnum {
 
     ORDER("ORDER","业务订单"),
     DELIVER("DELIVER","发货单"),
-    PURCHASE("PUR","采购单");
+    PURCHASE("PURCHASE","采购单");
 
     String code;
     String desc;

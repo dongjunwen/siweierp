@@ -73,9 +73,9 @@ public class PurchaseController {
 
 
     @RequestMapping(value = "/audit",method = RequestMethod.POST)
-    @ApiOperation(value="审核订单", notes="初审、终审接口")
+    @ApiOperation(value="审核采购单", notes="初审、终审接口")
     //@ApiImplicitParam(name = "swPurOrderVo", value = "采购单信息实体 swPurOrderVo",dataTypeClass = SysDictVo.class)
-    public Result<String> audit(@ApiParam(name = "swOrderAuditVo", value = "订单审核 swOrderAuditVo", required = true) @RequestBody SwPurAuditVo swPurAuditVo){
+    public Result<String> audit(@ApiParam(name = "swPurAuditVo", value = "审核采购单 swPurAuditVo", required = true) @RequestBody SwPurAuditVo swPurAuditVo){
         ValidatorUtil.validateEntity(swPurAuditVo, AddGroup.class);//校验
         try{
             swPurAuditVo.setAuditUserNo(ShiroUtils.getCurrentUserNo());
@@ -92,11 +92,11 @@ public class PurchaseController {
     }
 
 
-    @RequestMapping(value = "/{orderNo}",method = RequestMethod.GET)
-    @ApiOperation(value="获取订单详细信息", notes="根据url的用户编号来获取业务订单详细信息")
-    @ApiImplicitParam(name = "orderNo", value = "订单编号", required = true, dataType = "string",paramType = "path")
-    public Result<SwPurOrderResultVo> getUserById(@PathVariable("orderNo")String orderNo){
-        SwPurOrderResultVo swPurOrderResultVo = purchaseService.getEntityByNo(orderNo);
+    @RequestMapping(value = "/{purNo}",method = RequestMethod.GET)
+    @ApiOperation(value="获取采购单详细信息", notes="根据url的用户编号来获取采购单详细信息")
+    @ApiImplicitParam(name = "purNo", value = "采购单编号", required = true, dataType = "string",paramType = "path")
+    public Result<SwPurOrderResultVo> getUserById(@PathVariable("purNo")String purNo){
+        SwPurOrderResultVo swPurOrderResultVo = purchaseService.getEntityByNo(purNo);
         return Result.newSuccess(swPurOrderResultVo);
     }
 }

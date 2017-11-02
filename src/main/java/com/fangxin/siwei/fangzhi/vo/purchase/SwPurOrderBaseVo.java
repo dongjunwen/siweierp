@@ -15,9 +15,6 @@ import java.math.BigDecimal;
  **/
 @ApiModel(value = "采购单Vo SwPurOrderBaseVo")
 public class SwPurOrderBaseVo {
-    @Pattern(regexp="[0-9]{4}-[0-9]{2}-[0-9]{2}", message="采购日期格式不正确，正确的格式类似于1998-04-13")
-    @ApiModelProperty(value = "采购日期",required =false )
-    private String purDate;
     @Pattern(regexp="[0-9]{4}-[0-9]{2}-[0-9]{2}", message="预计到货日期格式不正确，正确的格式类似于1998-04-13")
     @ApiModelProperty(value = "预计到货日期",required =false )
     private String expectDate;
@@ -45,24 +42,9 @@ public class SwPurOrderBaseVo {
     @Length(max = 32,message = "供货方地址长度不能超过32")
     @ApiModelProperty(value = "供货方地址",required =false )
     private String supplyAddr;
-    @DecimalMin(value="0.01",message = "采购金额最小为0.01")
-    @ApiModelProperty(value = "采购金额",required =false )
-    private BigDecimal purAmt;
-    @DecimalMin(value="0.01",message = "采购数量最小为0.01")
-    @ApiModelProperty(value = "采购数量",required =false )
-    private BigDecimal purNum;
-
     @Length(max = 256,message = "备注长度最大为256")
     @ApiModelProperty(value = "备注",required =false )
     private String memo;
-
-    public String getPurDate() {
-        return purDate;
-    }
-
-    public void setPurDate(String purDate) {
-        this.purDate = purDate;
-    }
 
     public String getExpectDate() {
         return expectDate;
@@ -136,21 +118,6 @@ public class SwPurOrderBaseVo {
         this.supplyAddr = supplyAddr;
     }
 
-    public BigDecimal getPurAmt() {
-        return purAmt;
-    }
-
-    public void setPurAmt(BigDecimal purAmt) {
-        this.purAmt = purAmt;
-    }
-
-    public BigDecimal getPurNum() {
-        return purNum;
-    }
-
-    public void setPurNum(BigDecimal purNum) {
-        this.purNum = purNum;
-    }
 
 
     public String getMemo() {
