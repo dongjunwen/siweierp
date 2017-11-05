@@ -1,5 +1,6 @@
 package com.fangxin.siwei.fangzhi.service.impl.base;
 
+import com.fangxin.siwei.fangzhi.common.enums.MaterialTypeEnum;
 import com.fangxin.siwei.fangzhi.common.enums.ResultCode;
 import com.fangxin.siwei.fangzhi.common.exception.RRException;
 import com.fangxin.siwei.fangzhi.common.result.Result;
@@ -10,6 +11,7 @@ import com.fangxin.siwei.fangzhi.modal.SwMaterialInfo;
 import com.fangxin.siwei.fangzhi.service.AbstractService;
 import com.fangxin.siwei.fangzhi.service.base.SwMaterialInfoService;
 import com.fangxin.siwei.fangzhi.vo.base.SwMaterialInfoVo;
+import com.fangxin.siwei.fangzhi.vo.result.SwMaterialInfoResultVo;
 import com.github.pagehelper.Page;
 import org.apache.commons.beanutils.BeanUtils;
 import org.slf4j.Logger;
@@ -19,6 +21,7 @@ import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Condition;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -78,10 +81,33 @@ public class SwMaterialInfoServiceImpl extends AbstractService<SwMaterialInfo> i
     }
 
     @Override
-    public Page<SwMaterialInfo> findList(Map<String, String> params) {
+    public Page<SwMaterialInfoResultVo> findList(Map<String, String> params) {
         Condition serviceCondition = Common.getServiceCondition(params, SwMaterialInfo.class);
-        List<SwMaterialInfo> swDepartInfos = findByCondition(serviceCondition);
-        return (Page<SwMaterialInfo>) swDepartInfos;
+        List<SwMaterialInfo> swMaterialInfos = findByCondition(serviceCondition);
+        List<SwMaterialInfoResultVo> swMaterialInfoResultVos=new Page<>();
+        for(SwMaterialInfo swMaterialInfo:swMaterialInfos){
+            SwMaterialInfoResultVo swMaterialInfoResultVo=new SwMaterialInfoResultVo();
+            swMaterialInfoResultVo.setMaterialNo(swMaterialInfo.getMaterialNo());
+            swMaterialInfoResultVo.setMaterialName(swMaterialInfo.getMaterialName());
+            swMaterialInfoResultVo.setMaterialType(swMaterialInfo.getMaterialType());
+            swMaterialInfoResultVo.setPattern(swMaterialInfo.getPattern());
+            swMaterialInfoResultVo.setSpec(swMaterialInfo.getSpec());
+            swMaterialInfoResultVo.setUnit(swMaterialInfo.getUnit());
+            MaterialTypeEnum materialTypeEnum=MaterialTypeEnum.parse(swMaterialInfo.getMaterialType());
+            if(materialTypeEnum!=null){
+                swMaterialInfoResultVo.setMaterialTypeName(materialTypeEnum.getDesc());
+            }else{
+                swMaterialInfoResultVo.setMaterialTypeName(swMaterialInfo.getMaterialType());
+            }
+
+            swMaterialInfoResultVos.add(swMaterialInfoResultVo);
+        }
+        return (Page<SwMaterialInfoResultVo>) swMaterialInfoResultVos;
+    }
+
+    @Override
+    public List<SwMaterialInfo> findMaterialLike(String condStr) {
+        return swMaterialInfoMapper.findMaterialLike(condStr);
     }
 
     private void convertVoToEntity(SwMaterialInfo swDepartInfo, SwMaterialInfoVo swMaterialInfoVo) {

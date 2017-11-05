@@ -6,9 +6,11 @@ import com.fangxin.siwei.fangzhi.common.result.Result;
 import com.fangxin.siwei.fangzhi.common.utils.PageUitls;
 import com.fangxin.siwei.fangzhi.common.validator.ValidatorUtil;
 import com.fangxin.siwei.fangzhi.common.validator.group.AddGroup;
+import com.fangxin.siwei.fangzhi.modal.SwFormularInfo;
 import com.fangxin.siwei.fangzhi.modal.SwMaterialInfo;
 import com.fangxin.siwei.fangzhi.service.base.SwMaterialInfoService;
 import com.fangxin.siwei.fangzhi.vo.base.SwMaterialInfoVo;
+import com.fangxin.siwei.fangzhi.vo.result.SwMaterialInfoResultVo;
 import com.github.pagehelper.Page;
 import io.swagger.annotations.*;
 import org.slf4j.Logger;
@@ -16,6 +18,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -81,6 +84,14 @@ public class SwMaterialInfoController {
         }
     }
 
+    @RequestMapping(value = "/findMaterialLike/{condStr}",method = RequestMethod.GET)
+    @ApiOperation(value="根据条件模糊匹配物料列表", notes="根据查询条件模糊匹配物料列表")
+    @ApiImplicitParam(name = "condStr", value = "公式编号", required = true, dataType = "string",paramType = "path")
+    public Result<List<SwMaterialInfo>> findMaterialLike(@PathVariable("condStr") String condStr){
+        List<SwMaterialInfo> swMaterialInfos = swMaterialInfoService.findMaterialLike(condStr);
+        return Result.newSuccess(swMaterialInfos);
+    }
+
     @RequestMapping(value = "/{materialNo}",method = RequestMethod.GET)
     @ApiOperation(value="获取物料详细信息", notes="根据url的materialNo来获取物料详细信息")
     @ApiImplicitParam(name = "materialNo", value = "物料编号", required = true, dataType = "string",paramType = "path")
@@ -101,8 +112,8 @@ public class SwMaterialInfoController {
             @ApiImplicitParam(name = "filter",value = "通用表过滤器。发送JSON键/值对，如<code>{“key”:“value”}</code>。", paramType = "query",dataTypeClass = JSON.class)
 
     })
-    public Result<PageUitls<SwMaterialInfo>> findList(@RequestParam @ApiParam(hidden = true) Map<String,String> params){
-        Page<SwMaterialInfo> page =  swMaterialInfoService.findList(params);
-        return Result.newSuccess(new PageUitls<SwMaterialInfo>(page));
+    public Result<PageUitls<SwMaterialInfoResultVo>> findList(@RequestParam @ApiParam(hidden = true) Map<String,String> params){
+        Page<SwMaterialInfoResultVo> page =  swMaterialInfoService.findList(params);
+        return Result.newSuccess(new PageUitls<SwMaterialInfoResultVo>(page));
     }
 }

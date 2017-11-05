@@ -1,18 +1,18 @@
-package com.fangxin.siwei.fangzhi.modal;
+package com.fangxin.siwei.fangzhi.vo.result;
 
-import javax.persistence.Id;
-import java.util.Date;
-
-public class SwMaterialInfo {
-    @Id
-    private Integer id;
-
+/**
+ * @Date:2017/11/5 0005 16:05
+ * @Author lu.dong
+ * @Description：
+ **/
+public class SwMaterialInfoResultVo {
     private String materialNo;
 
     private String materialName;
 
     private String materialType;
 
+    private String materialTypeName;
 
     private String spec;
 
@@ -24,28 +24,18 @@ public class SwMaterialInfo {
 
     private String createNo;
 
-    private Date createTime;
+    private String createTime;
 
     private String modiNo;
 
-    private Date modiTime;
-
-    private Integer version;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    private String modiTime;
 
     public String getMaterialNo() {
         return materialNo;
     }
 
     public void setMaterialNo(String materialNo) {
-        this.materialNo = materialNo == null ? null : materialNo.trim();
+        this.materialNo = materialNo;
     }
 
     public String getMaterialName() {
@@ -53,7 +43,7 @@ public class SwMaterialInfo {
     }
 
     public void setMaterialName(String materialName) {
-        this.materialName = materialName == null ? null : materialName.trim();
+        this.materialName = materialName;
     }
 
     public String getMaterialType() {
@@ -61,7 +51,15 @@ public class SwMaterialInfo {
     }
 
     public void setMaterialType(String materialType) {
-        this.materialType = materialType == null ? null : materialType.trim();
+        this.materialType = materialType;
+    }
+
+    public String getMaterialTypeName() {
+        return materialTypeName;
+    }
+
+    public void setMaterialTypeName(String materialTypeName) {
+        this.materialTypeName = materialTypeName;
     }
 
     public String getSpec() {
@@ -69,7 +67,7 @@ public class SwMaterialInfo {
     }
 
     public void setSpec(String spec) {
-        this.spec = spec == null ? null : spec.trim();
+        this.spec = spec;
     }
 
     public String getPattern() {
@@ -77,7 +75,7 @@ public class SwMaterialInfo {
     }
 
     public void setPattern(String pattern) {
-        this.pattern = pattern == null ? null : pattern.trim();
+        this.pattern = pattern;
     }
 
     public String getUnit() {
@@ -85,7 +83,7 @@ public class SwMaterialInfo {
     }
 
     public void setUnit(String unit) {
-        this.unit = unit == null ? null : unit.trim();
+        this.unit = unit;
     }
 
     public String getMemo() {
@@ -93,7 +91,7 @@ public class SwMaterialInfo {
     }
 
     public void setMemo(String memo) {
-        this.memo = memo == null ? null : memo.trim();
+        this.memo = memo;
     }
 
     public String getCreateNo() {
@@ -101,14 +99,14 @@ public class SwMaterialInfo {
     }
 
     public void setCreateNo(String createNo) {
-        this.createNo = createNo == null ? null : createNo.trim();
+        this.createNo = createNo;
     }
 
-    public Date getCreateTime() {
+    public String getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(String createTime) {
         this.createTime = createTime;
     }
 
@@ -117,23 +115,14 @@ public class SwMaterialInfo {
     }
 
     public void setModiNo(String modiNo) {
-        this.modiNo = modiNo == null ? null : modiNo.trim();
+        this.modiNo = modiNo;
     }
 
-    public Date getModiTime() {
+    public String getModiTime() {
         return modiTime;
     }
 
-    public void setModiTime(Date modiTime) {
+    public void setModiTime(String modiTime) {
         this.modiTime = modiTime;
     }
-
-    public Integer getVersion() {
-        return version;
-    }
-
-    public void setVersion(Integer version) {
-        this.version = version;
-    }
-
 }
