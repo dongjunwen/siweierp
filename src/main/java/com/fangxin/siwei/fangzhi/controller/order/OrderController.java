@@ -9,7 +9,9 @@ import com.fangxin.siwei.fangzhi.common.validator.ValidatorUtil;
 import com.fangxin.siwei.fangzhi.common.validator.group.AddGroup;
 import com.fangxin.siwei.fangzhi.modal.SysUser;
 import com.fangxin.siwei.fangzhi.service.order.SwOrderService;
+import com.fangxin.siwei.fangzhi.vo.base.SwMaterialInfoVo;
 import com.fangxin.siwei.fangzhi.vo.order.SwOrderAuditVo;
+import com.fangxin.siwei.fangzhi.vo.order.SwOrderModiVo;
 import com.fangxin.siwei.fangzhi.vo.order.SwOrderVo;
 import com.fangxin.siwei.fangzhi.vo.result.SwOrderBaseResultVo;
 import com.fangxin.siwei.fangzhi.vo.result.SwOrderResultVo;
@@ -51,6 +53,21 @@ public class OrderController {
             return  Result.newSuccess("添加订单合同成功");
         }catch (Exception e){
             logger.error("添加订单合同异常!{}",e);
+            return Result.newError(ResultCode.FAIL);
+        }
+    }
+
+    @ApiOperation(value="更新订单详细信息", notes="根据url的订单编号来指定更新对象，并根据传过来的订单信息来更新订单详细信息")
+    @RequestMapping(method = RequestMethod.PUT)
+    public Result<String> update(@RequestBody SwOrderModiVo swOrderModiVo){
+        try {
+            Result<Integer> _result =  swOrderService.update(swOrderModiVo);
+            if (!_result.isSuccess()) {
+                return Result.newError(_result.getCode(), _result.getMessage());
+            }
+            return Result.newSuccess("修改订单成功");
+        } catch (Exception e) {
+            logger.error("修改订单异常!{}", e);
             return Result.newError(ResultCode.FAIL);
         }
     }

@@ -19,10 +19,7 @@ import com.fangxin.siwei.fangzhi.service.AbstractService;
 import com.fangxin.siwei.fangzhi.service.audit.AuditingParam;
 import com.fangxin.siwei.fangzhi.service.audit.IAuditingService;
 import com.fangxin.siwei.fangzhi.service.order.SwOrderService;
-import com.fangxin.siwei.fangzhi.vo.order.SwOrderAuditVo;
-import com.fangxin.siwei.fangzhi.vo.order.SwOrderBaseVo;
-import com.fangxin.siwei.fangzhi.vo.order.SwOrderDetailVo;
-import com.fangxin.siwei.fangzhi.vo.order.SwOrderVo;
+import com.fangxin.siwei.fangzhi.vo.order.*;
 import com.fangxin.siwei.fangzhi.vo.result.SwOrderDetailResultVo;
 import com.fangxin.siwei.fangzhi.vo.result.SwOrderBaseResultVo;
 import com.fangxin.siwei.fangzhi.vo.result.SwOrderResultVo;
@@ -91,6 +88,31 @@ public class SwOrderServiceImpl extends AbstractService<SwOrderBase> implements 
         }
         int flag=swOrderBaseMapper.insert(swOrderBase);
         swOrderDetailMapper.insertBatch(swOrderDetails);
+        return Result.newSuccess(flag);
+    }
+
+    @Override
+    public Result<Integer> update(SwOrderModiVo swOrderModiVo) {
+        SwOrderBaseModiVo swOrderBaseModiVo= swOrderModiVo.getSwOrderBaseModiVo();
+        SwOrderBase swOrderBase=new SwOrderBase();
+        convertVoToEntity(swOrderBase,swOrderBaseModiVo);
+        String orderNo=swOrderBaseModiVo.getOrderNo();
+        swOrderBase.setOrderNo(swOrderBaseModiVo.getOrderNo());
+        swOrderBase.setOrderStatus(OrderStatus.WAIT_AUDIT.getCode());
+        swOrderBase.setModiNo(ShiroUtils.getCurrentUserNo());
+        swOrderBase.setModiTime(new Date());
+        List<SwOrderDetailVo> swOrderDetailVoList=swOrderModiVo.getSwOrderDetailVos();
+        List swOrderDetails=new ArrayList();
+        for(SwOrderDetailVo swOrderDetailVo:swOrderDetailVoList){
+            SwOrderDetail swOrderDetail=new SwOrderDetail();
+            convertVoToEntityDetail(swOrderDetail,swOrderDetailVo);
+            swOrderDetail.setOrderNo(orderNo);
+            swOrderDetail.setModiNo(ShiroUtils.getCurrentUserNo());
+            swOrderDetail.setModiTime(new Date());
+            swOrderDetails.add(swOrderDetail);
+        }
+        int flag=swOrderBaseMapper.updateByOrderNo(swOrderBase);
+        swOrderDetailMapper.updateBatch(swOrderDetails);
         return Result.newSuccess(flag);
     }
 
@@ -188,6 +210,8 @@ public class SwOrderServiceImpl extends AbstractService<SwOrderBase> implements 
         swOrderResultVo.setSwORderDetailResultVos(swORderDetailResultVos);
         return swOrderResultVo;
     }
+
+
 
     private void convertDetailEntityTVo(SwOrderDetailResultVo swORderDetailResultVo, SwOrderDetail swOrderDetail) {
         try {

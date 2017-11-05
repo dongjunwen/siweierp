@@ -20,4 +20,6 @@ public interface SwOrderDetailMapper {
     int insertBatch(List swOrderDetails);
 
     List<SwOrderDetail> selectByOrderNo(String orderNo);
+
+    void updateBatch(List swOrderDetails);
 }

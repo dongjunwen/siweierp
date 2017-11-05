@@ -93,6 +93,7 @@ public class SwMaterialInfoServiceImpl extends AbstractService<SwMaterialInfo> i
             swMaterialInfoResultVo.setPattern(swMaterialInfo.getPattern());
             swMaterialInfoResultVo.setSpec(swMaterialInfo.getSpec());
             swMaterialInfoResultVo.setUnit(swMaterialInfo.getUnit());
+            swMaterialInfoResultVo.setMemo(swMaterialInfo.getMemo());
             MaterialTypeEnum materialTypeEnum=MaterialTypeEnum.parse(swMaterialInfo.getMaterialType());
             if(materialTypeEnum!=null){
                 swMaterialInfoResultVo.setMaterialTypeName(materialTypeEnum.getDesc());
