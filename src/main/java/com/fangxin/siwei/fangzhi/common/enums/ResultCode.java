@@ -19,12 +19,17 @@ public enum ResultCode {
     COMMON_ORDER_SOURCE_ERROR("1005", "数据来源方不存在"),
     COMMON_QUERY_ERROR("1006", "数据执行SQL查询错误"),
 
+    //基础资料 1100-1199
+    USER_PASS_NOT_EQUAL("1100","两次密码不一致"),
+    USER_OLD_PASS_ERROR("1101","原始密码错误"),
     // 审核流程错误码 1300 -- 1399
     AUDIT_ERROR_NO_CONFIG("1300", "审核流程不允许"),
     AUDIT_CURRENT_STAGE_ERROR("1301", "当前状态不可操作"),
     AUDIT_CHECKING_ERROR("1302", "审核检查不通过"),
     AUDIT_DOES_NOT_EXIST("1310", "审核状态不存在"),
     AUDIT_ERROR_FOR_OTHER_DEPART("1311", "不能审核其他部门的数据"),
+
+
 
     SUCCESS("200","操作成功"),
     FAIL("500","系统异常"),

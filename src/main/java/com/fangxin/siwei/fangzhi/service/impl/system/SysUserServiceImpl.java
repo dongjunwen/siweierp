@@ -14,6 +14,7 @@ import com.fangxin.siwei.fangzhi.service.system.SysUserService;
 import com.fangxin.siwei.fangzhi.vo.base.SwCompInfoVo;
 import com.fangxin.siwei.fangzhi.vo.result.SwCompInfoResultVo;
 import com.fangxin.siwei.fangzhi.vo.result.SysUserResultVo;
+import com.fangxin.siwei.fangzhi.vo.system.SysUserModiVo;
 import com.fangxin.siwei.fangzhi.vo.system.SysUserVo;
 import org.apache.commons.beanutils.BeanUtils;
 import org.slf4j.Logger;
@@ -127,6 +128,26 @@ public class SysUserServiceImpl  implements SysUserService {
         }
         sysUserResultVo.setSwCompInfoResultVo(swCompInfoResultVo);
         return sysUserResultVo;
+    }
+
+    @Override
+    public Result<Integer> modiPass(SysUserModiVo sysUserModiVo) {
+        SysUser oldSysUser=getUserById(sysUserModiVo.getUserNo());
+        if(oldSysUser==null){
+            return  Result.newError(ResultCode.COMMON_DATA_NOT_EXISTS.getCode(),"账户不存在!");
+        }
+        String signPass=MD5Util.getMD5(sysUserModiVo.getOldPass());
+        if(!oldSysUser.getPassword().equals(signPass)){
+            return  Result.newError(ResultCode.USER_OLD_PASS_ERROR);
+        }
+        if(!sysUserModiVo.getPasswordNew1().equals(sysUserModiVo.getPasswordNew2())){
+            return   Result.newError(ResultCode.USER_PASS_NOT_EQUAL);
+        }
+        SysUser sysUser=new SysUser();
+        sysUser.setUserNo(oldSysUser.getUserNo());
+        String signPass1=MD5Util.getMD5(sysUserModiVo.getPasswordNew1());
+        sysUser.setPassword(signPass1);
+        return Result.newSuccess(sysUserMapper.updateByUserNo(sysUser));
     }
 
     private void convertVoToEntity(SysUser sysUser,SysUserVo sysUserVo) {

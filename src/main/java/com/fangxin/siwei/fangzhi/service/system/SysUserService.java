@@ -3,6 +3,7 @@ package com.fangxin.siwei.fangzhi.service.system;
 import com.fangxin.siwei.fangzhi.common.result.Result;
 import com.fangxin.siwei.fangzhi.modal.SysUser;
 import com.fangxin.siwei.fangzhi.vo.result.SysUserResultVo;
+import com.fangxin.siwei.fangzhi.vo.system.SysUserModiVo;
 import com.fangxin.siwei.fangzhi.vo.system.SysUserVo;
 
 /**
@@ -51,4 +52,6 @@ public interface SysUserService {
      * @return
      */
     SysUserResultVo getUserInfoByNo(String loginNo);
+
+    Result<Integer> modiPass(SysUserModiVo sysUserModiVo);
 }
