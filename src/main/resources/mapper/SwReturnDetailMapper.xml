@@ -31,18 +31,15 @@
     material_name, material_type, spec, pattern, unit, num, price, amt, return_reason, 
     memo, create_no, create_time, modi_no, modi_time, version
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByReturnNo" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from sw_return_detail
-    where id = #{id,jdbcType=INTEGER}
+    where return_no = #{returnNo,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from sw_return_detail
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.fangxin.siwei.fangzhi.modal.SwReturnDetail">
-    insert into sw_return_detail (id, return_no, return_seq_no, 
+
+  <insert id="insertBatch" parameterType="java.util.List">
+    insert into sw_return_detail ( return_no, return_seq_no,
       pur_no, pur_seq_no, order_no, 
       order_seq_no, material_no, material_name, 
       material_type, spec, pattern, 
@@ -50,256 +47,90 @@
       return_reason, memo, create_no, 
       create_time, modi_no, modi_time, 
       version)
-    values (#{id,jdbcType=INTEGER}, #{returnNo,jdbcType=VARCHAR}, #{returnSeqNo,jdbcType=VARCHAR}, 
-      #{purNo,jdbcType=VARCHAR}, #{purSeqNo,jdbcType=VARCHAR}, #{orderNo,jdbcType=VARCHAR}, 
-      #{orderSeqNo,jdbcType=VARCHAR}, #{materialNo,jdbcType=VARCHAR}, #{materialName,jdbcType=VARCHAR}, 
-      #{materialType,jdbcType=VARCHAR}, #{spec,jdbcType=VARCHAR}, #{pattern,jdbcType=VARCHAR}, 
-      #{unit,jdbcType=VARCHAR}, #{num,jdbcType=DECIMAL}, #{price,jdbcType=DECIMAL}, #{amt,jdbcType=DECIMAL}, 
-      #{returnReason,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR}, #{createNo,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{modiNo,jdbcType=VARCHAR}, #{modiTime,jdbcType=TIMESTAMP}, 
-      #{version,jdbcType=INTEGER})
+    values
+     <foreach collection="list" item="item" separator="," index="index">
+     ( #{item.returnNo,jdbcType=VARCHAR}, #{item.returnSeqNo,jdbcType=VARCHAR},
+      #{item.purNo,jdbcType=VARCHAR}, #{item.purSeqNo,jdbcType=VARCHAR}, #{item.orderNo,jdbcType=VARCHAR},
+      #{item.orderSeqNo,jdbcType=VARCHAR}, #{item.materialNo,jdbcType=VARCHAR}, #{item.materialName,jdbcType=VARCHAR},
+      #{item.materialType,jdbcType=VARCHAR}, #{item.spec,jdbcType=VARCHAR}, #{item.pattern,jdbcType=VARCHAR},
+      #{item.unit,jdbcType=VARCHAR}, #{item.num,jdbcType=DECIMAL}, #{item.price,jdbcType=DECIMAL}, #{item.amt,jdbcType=DECIMAL},
+      #{item.returnReason,jdbcType=VARCHAR}, #{item.memo,jdbcType=VARCHAR}, #{item.createNo,jdbcType=VARCHAR},
+      #{item.createTime,jdbcType=TIMESTAMP}, #{item.modiNo,jdbcType=VARCHAR}, #{item.modiTime,jdbcType=TIMESTAMP},
+      #{item.version,jdbcType=INTEGER})
+     </foreach>
   </insert>
-  <insert id="insertSelective" parameterType="com.fangxin.siwei.fangzhi.modal.SwReturnDetail">
-    insert into sw_return_detail
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="returnNo != null">
-        return_no,
-      </if>
-      <if test="returnSeqNo != null">
-        return_seq_no,
-      </if>
-      <if test="purNo != null">
-        pur_no,
-      </if>
-      <if test="purSeqNo != null">
-        pur_seq_no,
-      </if>
-      <if test="orderNo != null">
-        order_no,
-      </if>
-      <if test="orderSeqNo != null">
-        order_seq_no,
-      </if>
-      <if test="materialNo != null">
-        material_no,
-      </if>
-      <if test="materialName != null">
-        material_name,
-      </if>
-      <if test="materialType != null">
-        material_type,
-      </if>
-      <if test="spec != null">
-        spec,
-      </if>
-      <if test="pattern != null">
-        pattern,
-      </if>
-      <if test="unit != null">
-        unit,
-      </if>
-      <if test="num != null">
-        num,
-      </if>
-      <if test="price != null">
-        price,
-      </if>
-      <if test="amt != null">
-        amt,
-      </if>
-      <if test="returnReason != null">
-        return_reason,
-      </if>
-      <if test="memo != null">
-        memo,
-      </if>
-      <if test="createNo != null">
-        create_no,
-      </if>
-      <if test="createTime != null">
-        create_time,
-      </if>
-      <if test="modiNo != null">
-        modi_no,
-      </if>
-      <if test="modiTime != null">
-        modi_time,
-      </if>
-      <if test="version != null">
-        version,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="returnNo != null">
-        #{returnNo,jdbcType=VARCHAR},
-      </if>
-      <if test="returnSeqNo != null">
-        #{returnSeqNo,jdbcType=VARCHAR},
-      </if>
-      <if test="purNo != null">
-        #{purNo,jdbcType=VARCHAR},
-      </if>
-      <if test="purSeqNo != null">
-        #{purSeqNo,jdbcType=VARCHAR},
-      </if>
-      <if test="orderNo != null">
-        #{orderNo,jdbcType=VARCHAR},
-      </if>
-      <if test="orderSeqNo != null">
-        #{orderSeqNo,jdbcType=VARCHAR},
-      </if>
-      <if test="materialNo != null">
-        #{materialNo,jdbcType=VARCHAR},
-      </if>
-      <if test="materialName != null">
-        #{materialName,jdbcType=VARCHAR},
-      </if>
-      <if test="materialType != null">
-        #{materialType,jdbcType=VARCHAR},
-      </if>
-      <if test="spec != null">
-        #{spec,jdbcType=VARCHAR},
-      </if>
-      <if test="pattern != null">
-        #{pattern,jdbcType=VARCHAR},
-      </if>
-      <if test="unit != null">
-        #{unit,jdbcType=VARCHAR},
-      </if>
-      <if test="num != null">
-        #{num,jdbcType=DECIMAL},
-      </if>
-      <if test="price != null">
-        #{price,jdbcType=DECIMAL},
-      </if>
-      <if test="amt != null">
-        #{amt,jdbcType=DECIMAL},
-      </if>
-      <if test="returnReason != null">
-        #{returnReason,jdbcType=VARCHAR},
-      </if>
-      <if test="memo != null">
-        #{memo,jdbcType=VARCHAR},
-      </if>
-      <if test="createNo != null">
-        #{createNo,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="modiNo != null">
-        #{modiNo,jdbcType=VARCHAR},
-      </if>
-      <if test="modiTime != null">
-        #{modiTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="version != null">
-        #{version,jdbcType=INTEGER},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.fangxin.siwei.fangzhi.modal.SwReturnDetail">
+
+  <update id="updateBatch" parameterType="java.util.List">
+    <foreach collection="list" index="index" item="item" separator=";">
     update sw_return_detail
     <set>
-      <if test="returnNo != null">
-        return_no = #{returnNo,jdbcType=VARCHAR},
+
+      <if test="item.purNo != null">
+        pur_no = #{item.purNo,jdbcType=VARCHAR},
       </if>
-      <if test="returnSeqNo != null">
-        return_seq_no = #{returnSeqNo,jdbcType=VARCHAR},
+      <if test="item.purSeqNo != null">
+        pur_seq_no = #{item.purSeqNo,jdbcType=VARCHAR},
       </if>
-      <if test="purNo != null">
-        pur_no = #{purNo,jdbcType=VARCHAR},
+      <if test="item.orderNo != null">
+        order_no = #{item.orderNo,jdbcType=VARCHAR},
       </if>
-      <if test="purSeqNo != null">
-        pur_seq_no = #{purSeqNo,jdbcType=VARCHAR},
+      <if test="item.orderSeqNo != null">
+        order_seq_no = #{item.orderSeqNo,jdbcType=VARCHAR},
       </if>
-      <if test="orderNo != null">
-        order_no = #{orderNo,jdbcType=VARCHAR},
+      <if test="item.materialNo != null">
+        material_no = #{item.materialNo,jdbcType=VARCHAR},
       </if>
-      <if test="orderSeqNo != null">
-        order_seq_no = #{orderSeqNo,jdbcType=VARCHAR},
+      <if test="item.materialName != null">
+        material_name = #{item.materialName,jdbcType=VARCHAR},
       </if>
-      <if test="materialNo != null">
-        material_no = #{materialNo,jdbcType=VARCHAR},
+      <if test="item.materialType != null">
+        material_type = #{item.materialType,jdbcType=VARCHAR},
       </if>
-      <if test="materialName != null">
-        material_name = #{materialName,jdbcType=VARCHAR},
+      <if test="item.spec != null">
+        spec = #{item.spec,jdbcType=VARCHAR},
       </if>
-      <if test="materialType != null">
-        material_type = #{materialType,jdbcType=VARCHAR},
+      <if test="item.pattern != null">
+        pattern = #{item.pattern,jdbcType=VARCHAR},
       </if>
-      <if test="spec != null">
-        spec = #{spec,jdbcType=VARCHAR},
+      <if test="item.unit != null">
+        unit = #{item.unit,jdbcType=VARCHAR},
       </if>
-      <if test="pattern != null">
-        pattern = #{pattern,jdbcType=VARCHAR},
+      <if test="item.num != null">
+        num = #{item.num,jdbcType=DECIMAL},
       </if>
-      <if test="unit != null">
-        unit = #{unit,jdbcType=VARCHAR},
+      <if test="item.price != null">
+        price = #{item.price,jdbcType=DECIMAL},
       </if>
-      <if test="num != null">
-        num = #{num,jdbcType=DECIMAL},
+      <if test="item.amt != null">
+        amt = #{item.amt,jdbcType=DECIMAL},
       </if>
-      <if test="price != null">
-        price = #{price,jdbcType=DECIMAL},
+      <if test="item.returnReason != null">
+        return_reason = #{item.returnReason,jdbcType=VARCHAR},
       </if>
-      <if test="amt != null">
-        amt = #{amt,jdbcType=DECIMAL},
+      <if test="item.memo != null">
+        memo = #{item.memo,jdbcType=VARCHAR},
       </if>
-      <if test="returnReason != null">
-        return_reason = #{returnReason,jdbcType=VARCHAR},
+      <if test="item.createNo != null">
+        create_no = #{item.createNo,jdbcType=VARCHAR},
       </if>
-      <if test="memo != null">
-        memo = #{memo,jdbcType=VARCHAR},
+      <if test="item.createTime != null">
+        create_time = #{item.createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="createNo != null">
-        create_no = #{createNo,jdbcType=VARCHAR},
+      <if test="item.modiNo != null">
+        modi_no = #{item.modiNo,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=TIMESTAMP},
+      <if test="item.modiTime != null">
+        modi_time = #{item.modiTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="modiNo != null">
-        modi_no = #{modiNo,jdbcType=VARCHAR},
-      </if>
-      <if test="modiTime != null">
-        modi_time = #{modiTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="version != null">
-        version = #{version,jdbcType=INTEGER},
+      <if test="item.version != null">
+        version = #{item.version,jdbcType=INTEGER},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where
+        return_no = #{returnNo,jdbcType=VARCHAR}
+      and return_seq_no = #{returnSeqNo,jdbcType=VARCHAR}
+    </foreach>
+
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.fangxin.siwei.fangzhi.modal.SwReturnDetail">
-    update sw_return_detail
-    set return_no = #{returnNo,jdbcType=VARCHAR},
-      return_seq_no = #{returnSeqNo,jdbcType=VARCHAR},
-      pur_no = #{purNo,jdbcType=VARCHAR},
-      pur_seq_no = #{purSeqNo,jdbcType=VARCHAR},
-      order_no = #{orderNo,jdbcType=VARCHAR},
-      order_seq_no = #{orderSeqNo,jdbcType=VARCHAR},
-      material_no = #{materialNo,jdbcType=VARCHAR},
-      material_name = #{materialName,jdbcType=VARCHAR},
-      material_type = #{materialType,jdbcType=VARCHAR},
-      spec = #{spec,jdbcType=VARCHAR},
-      pattern = #{pattern,jdbcType=VARCHAR},
-      unit = #{unit,jdbcType=VARCHAR},
-      num = #{num,jdbcType=DECIMAL},
-      price = #{price,jdbcType=DECIMAL},
-      amt = #{amt,jdbcType=DECIMAL},
-      return_reason = #{returnReason,jdbcType=VARCHAR},
-      memo = #{memo,jdbcType=VARCHAR},
-      create_no = #{createNo,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      modi_no = #{modiNo,jdbcType=VARCHAR},
-      modi_time = #{modiTime,jdbcType=TIMESTAMP},
-      version = #{version,jdbcType=INTEGER}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+
 </mapper>

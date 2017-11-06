@@ -1,17 +1,16 @@
 package com.fangxin.siwei.fangzhi.mapper;
 
+import com.fangxin.siwei.fangzhi.common.utils.MyMapper;
 import com.fangxin.siwei.fangzhi.modal.SwReturnDetail;
 
-public interface SwReturnDetailMapper {
-    int deleteByPrimaryKey(Integer id);
+import java.util.List;
 
-    int insert(SwReturnDetail record);
+public interface SwReturnDetailMapper extends MyMapper<SwReturnDetail> {
 
-    int insertSelective(SwReturnDetail record);
 
-    SwReturnDetail selectByPrimaryKey(Integer id);
+    void insertBatch(List swOrderDetails);
 
-    int updateByPrimaryKeySelective(SwReturnDetail record);
+    List<SwReturnDetail> selectByReturnNo(String orderNo);
 
-    int updateByPrimaryKey(SwReturnDetail record);
+    void updateBatch(List swOrderDetails);
 }

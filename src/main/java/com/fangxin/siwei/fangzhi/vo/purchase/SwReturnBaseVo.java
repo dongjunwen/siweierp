@@ -1,0 +1,131 @@
+package com.fangxin.siwei.fangzhi.vo.purchase;
+
+import java.math.BigDecimal;
+
+/**
+ * @Date:2017/11/6 0006 17:15
+ * @Author lu.dong
+ * @Description：
+ **/
+public class SwReturnBaseVo {
+
+    private String respName;
+
+    private String supplyCompNo;
+
+    private String supplyCompName;
+
+    private String supplyContactName;
+
+    private String supplyMobile;
+
+    private String supplyPhone;
+
+    private String supplyTax;
+
+    private String supplyAddr;
+
+    private BigDecimal returnAmt;
+
+    private BigDecimal returnNum;
+
+    private String returnReason;
+
+    private String memo;
+
+    public String getRespName() {
+        return respName;
+    }
+
+    public void setRespName(String respName) {
+        this.respName = respName;
+    }
+
+    public String getSupplyCompNo() {
+        return supplyCompNo;
+    }
+
+    public void setSupplyCompNo(String supplyCompNo) {
+        this.supplyCompNo = supplyCompNo;
+    }
+
+    public String getSupplyCompName() {
+        return supplyCompName;
+    }
+
+    public void setSupplyCompName(String supplyCompName) {
+        this.supplyCompName = supplyCompName;
+    }
+
+    public String getSupplyContactName() {
+        return supplyContactName;
+    }
+
+    public void setSupplyContactName(String supplyContactName) {
+        this.supplyContactName = supplyContactName;
+    }
+
+    public String getSupplyMobile() {
+        return supplyMobile;
+    }
+
+    public void setSupplyMobile(String supplyMobile) {
+        this.supplyMobile = supplyMobile;
+    }
+
+    public String getSupplyPhone() {
+        return supplyPhone;
+    }
+
+    public void setSupplyPhone(String supplyPhone) {
+        this.supplyPhone = supplyPhone;
+    }
+
+    public String getSupplyTax() {
+        return supplyTax;
+    }
+
+    public void setSupplyTax(String supplyTax) {
+        this.supplyTax = supplyTax;
+    }
+
+    public String getSupplyAddr() {
+        return supplyAddr;
+    }
+
+    public void setSupplyAddr(String supplyAddr) {
+        this.supplyAddr = supplyAddr;
+    }
+
+    public BigDecimal getReturnAmt() {
+        return returnAmt;
+    }
+
+    public void setReturnAmt(BigDecimal returnAmt) {
+        this.returnAmt = returnAmt;
+    }
+
+    public BigDecimal getReturnNum() {
+        return returnNum;
+    }
+
+    public void setReturnNum(BigDecimal returnNum) {
+        this.returnNum = returnNum;
+    }
+
+    public String getReturnReason() {
+        return returnReason;
+    }
+
+    public void setReturnReason(String returnReason) {
+        this.returnReason = returnReason;
+    }
+
+    public String getMemo() {
+        return memo;
+    }
+
+    public void setMemo(String memo) {
+        this.memo = memo;
+    }
+}

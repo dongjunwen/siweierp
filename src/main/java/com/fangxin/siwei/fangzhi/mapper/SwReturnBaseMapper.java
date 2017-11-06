@@ -1,17 +1,12 @@
 package com.fangxin.siwei.fangzhi.mapper;
 
+import com.fangxin.siwei.fangzhi.common.utils.MyMapper;
 import com.fangxin.siwei.fangzhi.modal.SwReturnBase;
 
-public interface SwReturnBaseMapper {
-    int deleteByPrimaryKey(Integer id);
+public interface SwReturnBaseMapper  extends MyMapper<SwReturnBase> {
 
-    int insert(SwReturnBase record);
 
-    int insertSelective(SwReturnBase record);
+    SwReturnBase selectByReturnNo(String orderNo);
 
-    SwReturnBase selectByPrimaryKey(Integer id);
-
-    int updateByPrimaryKeySelective(SwReturnBase record);
-
-    int updateByPrimaryKey(SwReturnBase record);
+    int updateByReturnNo(SwReturnBase swReturnBase);
 }
