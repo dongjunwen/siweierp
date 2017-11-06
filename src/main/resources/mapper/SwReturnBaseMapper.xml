@@ -35,10 +35,7 @@
     from sw_return_base
     where return_no = #{returnNo,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from sw_return_base
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
+
 
 
   <update id="updateByReturnNo" parameterType="com.fangxin.siwei.fangzhi.modal.SwReturnBase">
