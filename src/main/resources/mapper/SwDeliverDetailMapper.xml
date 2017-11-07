@@ -207,6 +207,65 @@
       </if>
     </trim>
   </insert>
+  <update id="updateBatch" parameterType="java.util.List">
+    <foreach collection="list" index="index" item="item" separator=";">
+      update sw_deliver_detail
+      <set>
+
+        <if test="item.orderNo != null">
+          order_no = #{item.orderNo,jdbcType=VARCHAR},
+        </if>
+        <if test="item.orderSeqNo != null">
+          order_seq_no = #{item.orderSeqNo,jdbcType=VARCHAR},
+        </if>
+        <if test="item.boxNo != null">
+          box_no = #{item.boxNo,jdbcType=VARCHAR},
+        </if>
+        <if test="item.prodNo != null">
+          prod_no = #{item.prodNo,jdbcType=VARCHAR},
+        </if>
+        <if test="item.prodName != null">
+          prod_name = #{item.prodName,jdbcType=VARCHAR},
+        </if>
+        <if test="item.prodType != null">
+          prod_type = #{item.prodType,jdbcType=VARCHAR},
+        </if>
+        <if test="item.prodForm != null">
+          prod_form = #{item.prodForm,jdbcType=VARCHAR},
+        </if>
+        <if test="item.prodLong != null">
+          prod_long = #{item.prodLong,jdbcType=DECIMAL},
+        </if>
+        <if test="item.prodWidth != null">
+          prod_width = #{item.prodWidth,jdbcType=DECIMAL},
+        </if>
+        <if test="item.prodNum != null">
+          prod_num = #{item.prodNum,jdbcType=DECIMAL},
+        </if>
+        <if test="item.prodPrice != null">
+          prod_price = #{item.prodPrice,jdbcType=DECIMAL},
+        </if>
+        <if test="item.memo != null">
+          memo = #{item.memo,jdbcType=VARCHAR},
+        </if>
+        <if test="item.createNo != null">
+          create_no = #{item.createNo,jdbcType=VARCHAR},
+        </if>
+        <if test="item.createTime != null">
+          create_time = #{item.createTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="item.modiNo != null">
+          modi_no = #{item.modiNo,jdbcType=VARCHAR},
+        </if>
+        <if test="item.modiTime != null">
+          modi_time = #{item.modiTime,jdbcType=TIMESTAMP},
+        </if>
+      </set>
+      where
+        deilver_no = #{item.deilverNo,jdbcType=VARCHAR}
+        and deilver_seq_no = #{item.deilverSeqNo,jdbcType=VARCHAR}
+    </foreach>
+  </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.fangxin.siwei.fangzhi.modal.SwDeliverDetail">
     update sw_deliver_detail
     <set>

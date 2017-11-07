@@ -2,6 +2,7 @@ package com.fangxin.siwei.fangzhi.service.order;
 
 import com.fangxin.siwei.fangzhi.common.result.Result;
 import com.fangxin.siwei.fangzhi.vo.order.SwDeliverAuditVo;
+import com.fangxin.siwei.fangzhi.vo.order.SwDeliverModiVo;
 import com.fangxin.siwei.fangzhi.vo.order.SwDeliverVo;
 import com.fangxin.siwei.fangzhi.vo.order.SwOrderAuditVo;
 import com.fangxin.siwei.fangzhi.vo.result.SwDeliverBaseResutVo;
@@ -21,4 +22,6 @@ public interface SwDeliverService {
     Result<Integer> audit(SwDeliverAuditVo swDeliverAuditVo);
 
     SwDeliverResultVo getEntityByNo(String deilverNo);
+
+    Result<Integer> update(SwDeliverModiVo swDeliverModiVo);
 }

@@ -9,6 +9,8 @@ import com.fangxin.siwei.fangzhi.common.validator.ValidatorUtil;
 import com.fangxin.siwei.fangzhi.common.validator.group.AddGroup;
 import com.fangxin.siwei.fangzhi.service.order.SwDeliverService;
 import com.fangxin.siwei.fangzhi.vo.order.SwDeliverAuditVo;
+import com.fangxin.siwei.fangzhi.vo.order.SwDeliverModiVo;
+import com.fangxin.siwei.fangzhi.vo.purchase.SwPurOrderModiVo;
 import com.fangxin.siwei.fangzhi.vo.result.SwDeliverBaseResutVo;
 import com.fangxin.siwei.fangzhi.vo.order.SwOrderAuditVo;
 import com.fangxin.siwei.fangzhi.vo.order.SwDeliverVo;
@@ -51,6 +53,21 @@ public class DeliverController {
             return  Result.newSuccess("添加发货单成功");
         }catch (Exception e){
             logger.error("添加发货单异常!{}",e);
+            return Result.newError(ResultCode.FAIL);
+        }
+    }
+
+    @ApiOperation(value="更新发货单详细信息", notes="根据url的发货单编号来指定更新对象，并根据传过来的发货单信息来更新发货单详细信息")
+    @RequestMapping(method = RequestMethod.PUT)
+    public Result<String> update(@RequestBody SwDeliverModiVo swDeliverModiVo){
+        try {
+            Result<Integer> _result =  swDeliverService.update(swDeliverModiVo);
+            if (!_result.isSuccess()) {
+                return Result.newError(_result.getCode(), _result.getMessage());
+            }
+            return Result.newSuccess("修改发货单成功");
+        } catch (Exception e) {
+            logger.error("修改发货单异常!{}", e);
             return Result.newError(ResultCode.FAIL);
         }
     }

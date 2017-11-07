@@ -9,7 +9,9 @@ import com.fangxin.siwei.fangzhi.common.validator.ValidatorUtil;
 import com.fangxin.siwei.fangzhi.common.validator.group.AddGroup;
 import com.fangxin.siwei.fangzhi.service.purchase.PurchaseService;
 import com.fangxin.siwei.fangzhi.vo.purchase.SwPurAuditVo;
+import com.fangxin.siwei.fangzhi.vo.purchase.SwPurOrderModiVo;
 import com.fangxin.siwei.fangzhi.vo.purchase.SwPurOrderVo;
+import com.fangxin.siwei.fangzhi.vo.purchase.SwReturnModiVo;
 import com.fangxin.siwei.fangzhi.vo.result.SwPurOrderBaseResultVo;
 import com.fangxin.siwei.fangzhi.vo.result.SwPurOrderResultVo;
 import com.github.pagehelper.Page;
@@ -49,6 +51,22 @@ public class PurchaseController {
             return  Result.newSuccess("添加采购单成功");
         }catch (Exception e){
             logger.error("添加采购单异常!{}",e);
+            return Result.newError(ResultCode.FAIL);
+        }
+    }
+
+
+    @ApiOperation(value="更新采购单详细信息", notes="根据url的采购单编号来指定更新对象，并根据传过来的采购单信息来更新采购单详细信息")
+    @RequestMapping(method = RequestMethod.PUT)
+    public Result<String> update(@RequestBody SwPurOrderModiVo swPurOrderModiVo){
+        try {
+            Result<Integer> _result =  purchaseService.update(swPurOrderModiVo);
+            if (!_result.isSuccess()) {
+                return Result.newError(_result.getCode(), _result.getMessage());
+            }
+            return Result.newSuccess("修改采购单成功");
+        } catch (Exception e) {
+            logger.error("修改采购单异常!{}", e);
             return Result.newError(ResultCode.FAIL);
         }
     }

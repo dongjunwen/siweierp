@@ -20,10 +20,7 @@ import com.fangxin.siwei.fangzhi.service.AbstractService;
 import com.fangxin.siwei.fangzhi.service.audit.AuditingParam;
 import com.fangxin.siwei.fangzhi.service.audit.IAuditingService;
 import com.fangxin.siwei.fangzhi.service.purchase.PurchaseService;
-import com.fangxin.siwei.fangzhi.vo.purchase.SwPurAuditVo;
-import com.fangxin.siwei.fangzhi.vo.purchase.SwPurOrderBaseVo;
-import com.fangxin.siwei.fangzhi.vo.purchase.SwPurOrderDetailVo;
-import com.fangxin.siwei.fangzhi.vo.purchase.SwPurOrderVo;
+import com.fangxin.siwei.fangzhi.vo.purchase.*;
 import com.fangxin.siwei.fangzhi.vo.result.SwPurOrderBaseResultVo;
 import com.fangxin.siwei.fangzhi.vo.result.SwPurOrderDetailResultVo;
 import com.fangxin.siwei.fangzhi.vo.result.SwPurOrderResultVo;
@@ -194,12 +191,12 @@ public class PurchaseServiceImpl extends AbstractService<SwPurchaseBase> impleme
         Result<SysAuditConfig> _result=beginAudit(orderNo,swPurAuditVo);
         if(_result.isSuccess()){
             SysAuditConfig sysAuditConfig=_result.getData();
-            SwOrderBase swOrderBase=new SwOrderBase();
-            swOrderBase.setOrderNo(orderNo);
-            swOrderBase.setOrderStatus(sysAuditConfig.getNextStage());
-            swOrderBase.setModiNo(swPurAuditVo.getAuditUserNo());
-            swOrderBase.setModiTime(new Date());
-            swPurchaseBaseMapper.updateByPurNo(swOrderBase);
+            SwPurchaseBase swPurchaseBase=new SwPurchaseBase();
+            swPurchaseBase.setPurNo(orderNo);
+            swPurchaseBase.setPurStatus(sysAuditConfig.getNextStage());
+            swPurchaseBase.setModiNo(swPurAuditVo.getAuditUserNo());
+            swPurchaseBase.setModiTime(new Date());
+            swPurchaseBaseMapper.updateByPurNo(swPurchaseBase);
         }
         return _result;
     }
@@ -235,6 +232,37 @@ public class PurchaseServiceImpl extends AbstractService<SwPurchaseBase> impleme
         }
         swPurOrderResultVo.setSwPurOrderDetailResultVoList(swORderDetailResultVos);
         return swPurOrderResultVo;
+    }
+
+    @Override
+    public Result<Integer> update(SwPurOrderModiVo swPurOrderModiVo) {
+        SwPurOrderBaseModiVo swPurOrderBaseModiVo= swPurOrderModiVo.getSwPurOrderBaseModiVo();
+        SwPurchaseBase swPurchaseBase=new SwPurchaseBase();
+        convertVoToEntity(swPurchaseBase,swPurOrderBaseModiVo);
+        String purNo= swPurOrderBaseModiVo.getPurNo();
+        swPurchaseBase.setPurNo(purNo);
+        swPurchaseBase.setPurStatus(PurStatus.WAIT_APPLY.getCode());
+        swPurchaseBase.setModiNo(ShiroUtils.getCurrentUserNo());
+        swPurchaseBase.setModiTime(new Date());
+        List<SwPurOrderDetailVo> swPurOrderDetailVos=swPurOrderModiVo.getSwPurOrderDetailVo();
+        List swOrderDetails=new ArrayList();
+        BigDecimal totalNum=BigDecimal.ZERO;
+        BigDecimal totalAmt=BigDecimal.ZERO;
+        for(SwPurOrderDetailVo swPurOrderDetailVo:swPurOrderDetailVos){
+            SwPurchaseDetail swPurchaseDetail=new SwPurchaseDetail();
+            convertVoToEntityDetail(swPurchaseDetail,swPurOrderDetailVo);
+            swPurchaseDetail.setPurNo(purNo);
+            swPurchaseDetail.setModiNo(ShiroUtils.getCurrentUserNo());
+            swPurchaseDetail.setModiTime(new Date());
+            swOrderDetails.add(swPurchaseDetail);
+            totalNum=totalNum.add(swPurchaseDetail.getNum());
+            totalAmt=totalAmt.add(swPurchaseDetail.getAmt());
+        }
+        swPurchaseBase.setPurNum(totalNum);
+        swPurchaseBase.setPurAmt(totalAmt);
+        int flag=swPurchaseBaseMapper.updateByPurNo(swPurchaseBase);
+        swPurchaseDetailMapper.updateBatch(swOrderDetails);
+        return Result.newSuccess(flag);
     }
 
     private void convertDetailEntityTVo(SwPurOrderDetailResultVo swPurOrderDetailResultVo, SwPurchaseDetail swPurchaseDetail) {

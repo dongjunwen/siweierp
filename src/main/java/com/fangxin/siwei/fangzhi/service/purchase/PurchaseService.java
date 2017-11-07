@@ -4,6 +4,7 @@ package com.fangxin.siwei.fangzhi.service.purchase;
 import com.fangxin.siwei.fangzhi.common.result.Result;
 import com.fangxin.siwei.fangzhi.vo.order.SwOrderAuditVo;
 import com.fangxin.siwei.fangzhi.vo.purchase.SwPurAuditVo;
+import com.fangxin.siwei.fangzhi.vo.purchase.SwPurOrderModiVo;
 import com.fangxin.siwei.fangzhi.vo.purchase.SwPurOrderVo;
 import com.fangxin.siwei.fangzhi.vo.result.SwOrderResultVo;
 import com.fangxin.siwei.fangzhi.vo.result.SwPurOrderBaseResultVo;
@@ -23,4 +24,6 @@ public interface PurchaseService {
     Result<Integer> audit(SwPurAuditVo swPurAuditVo);
 
     SwPurOrderResultVo getEntityByNo(String orderNo);
+
+    Result<Integer> update(SwPurOrderModiVo swPurOrderModiVo);
 }

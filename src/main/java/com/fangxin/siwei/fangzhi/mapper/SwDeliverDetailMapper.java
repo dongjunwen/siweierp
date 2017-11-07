@@ -20,4 +20,6 @@ public interface SwDeliverDetailMapper {
     void insertBatch(List swDeliverDetails);
 
     List<SwDeliverDetail> selectByDeliverNo(String orderNo);
+
+    void updateBatch(List swDeliverDetails);
 }

@@ -6,7 +6,7 @@ import com.fangxin.siwei.fangzhi.modal.SwPurchaseBase;
 
 public interface SwPurchaseBaseMapper  extends MyMapper<SwPurchaseBase>{
 
-    void updateByPurNo(SwOrderBase swOrderBase);
+    int updateByPurNo(SwPurchaseBase swPurchaseBase);
 
     SwPurchaseBase selectByPurNo(String orderNo);
 }

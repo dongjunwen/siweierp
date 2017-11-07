@@ -87,6 +87,31 @@ public class SwDeliverServiceImpl extends AbstractService<SwDeliverBase> impleme
         return Result.newSuccess(flag);
     }
 
+    @Override
+    public Result<Integer> update(SwDeliverModiVo swDeliverModiVo) {
+        SwDeliverBaseModiVo swDeliverBaseModiVo= swDeliverModiVo.getSwDeliverBaseModiVo();
+        SwDeliverBase swDeliverBase=new SwDeliverBase();
+        convertVoToEntity(swDeliverBase,swDeliverBaseModiVo);
+        String deliverNo= swDeliverBaseModiVo.getDeilverNo();
+        swDeliverBase.setDeilverNo(deliverNo);
+        swDeliverBase.setDeilverStatus(DeliverStatus.WAIT_APPLY.getCode());
+        swDeliverBase.setModiNo(ShiroUtils.getCurrentUserNo());
+        swDeliverBase.setModiTime(new Date());
+        List<SwDeliverDetailVo> swDeliverDetailVoList=swDeliverModiVo.getSwDeliverDetailVoList();
+        List swDeliverDetails=new ArrayList();
+        for(SwDeliverDetailVo swDeliverDetailVo:swDeliverDetailVoList){
+            SwDeliverDetail swDeliverDetail=new SwDeliverDetail();
+            convertVoToEntityDetail(swDeliverDetail,swDeliverDetailVo);
+            swDeliverDetail.setDeilverNo(deliverNo);
+            swDeliverDetail.setModiNo(ShiroUtils.getCurrentUserNo());
+            swDeliverDetail.setModiTime(new Date());
+            swDeliverDetails.add(swDeliverDetail);
+        }
+        int flag=swDeliverBaseMapper.updateByDeliverNo(swDeliverBase);
+        swDeliverDetailMapper.updateBatch(swDeliverDetails);
+        return Result.newSuccess(flag);
+    }
+
 
 
     private void convertVoToEntityDetail(SwDeliverDetail swDeliverDetail, SwDeliverDetailVo swDeliverDetailVo) {
@@ -181,6 +206,7 @@ public class SwDeliverServiceImpl extends AbstractService<SwDeliverBase> impleme
         swDeliverResultVo.setSwDeliverDetailResutVos(swDeliverDetailResutVos);
         return swDeliverResultVo;
     }
+
 
     private void convertDetailEntityTVo(SwDeliverDetailResutVo swDeliverDetailResutVo, SwDeliverDetail swDeliverDetail) {
         try {
