@@ -10,6 +10,7 @@
     <result column="pattern" jdbcType="VARCHAR" property="pattern" />
     <result column="unit" jdbcType="VARCHAR" property="unit" />
     <result column="memo" jdbcType="VARCHAR" property="memo" />
+    <result column="material_stock" jdbcType="VARCHAR" property="materialStock" />
     <result column="create_no" jdbcType="VARCHAR" property="createNo" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="modi_no" jdbcType="VARCHAR" property="modiNo" />
@@ -17,7 +18,7 @@
     <result column="version" jdbcType="INTEGER" property="version" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, material_no, material_name, material_type, spec, pattern, unit, memo, create_no, 
+    id, material_no, material_name, material_type, spec, pattern, unit, memo,material_stock, create_no,
     create_time, modi_no, modi_time, version
   </sql>
   <select id="selectByMaterialNo" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -55,6 +56,9 @@
       </if>
       <if test="memo != null">
         memo = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="materialStock != null">
+        material_stock = #{materialStock,jdbcType=VARCHAR},
       </if>
       <if test="createNo != null">
         create_no = #{createNo,jdbcType=VARCHAR},

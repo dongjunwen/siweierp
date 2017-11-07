@@ -22,6 +22,7 @@ public enum ResultCode {
     //基础资料 1100-1199
     USER_PASS_NOT_EQUAL("1100","两次密码不一致"),
     USER_OLD_PASS_ERROR("1101","原始密码错误"),
+
     // 审核流程错误码 1300 -- 1399
     AUDIT_ERROR_NO_CONFIG("1300", "审核流程不允许"),
     AUDIT_CURRENT_STAGE_ERROR("1301", "当前状态不可操作"),
@@ -29,7 +30,8 @@ public enum ResultCode {
     AUDIT_DOES_NOT_EXIST("1310", "审核状态不存在"),
     AUDIT_ERROR_FOR_OTHER_DEPART("1311", "不能审核其他部门的数据"),
 
-
+    //入库单 1400-1499
+    SOURCE_NO_NOT_EXITS("1400","未找到采购单号或物料编码"),
 
     SUCCESS("200","操作成功"),
     FAIL("500","系统异常"),

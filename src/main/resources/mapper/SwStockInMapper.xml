@@ -4,9 +4,11 @@
   <resultMap id="BaseResultMap" type="com.fangxin.siwei.fangzhi.modal.SwStockIn">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="stk_in_no" jdbcType="VARCHAR" property="stkInNo" />
-    <result column="order_type" jdbcType="VARCHAR" property="orderType" />
     <result column="order_no" jdbcType="VARCHAR" property="orderNo" />
     <result column="order_seq_no" jdbcType="VARCHAR" property="orderSeqNo" />
+    <result column="source_type" jdbcType="VARCHAR" property="sourceType" />
+    <result column="source_no" jdbcType="VARCHAR" property="sourceNo" />
+    <result column="source_seq_no" jdbcType="VARCHAR" property="sourceSeqNo" />
     <result column="material_no" jdbcType="VARCHAR" property="materialNo" />
     <result column="material_name" jdbcType="VARCHAR" property="materialName" />
     <result column="material_type" jdbcType="VARCHAR" property="materialType" />
@@ -23,7 +25,7 @@
     <result column="version" jdbcType="INTEGER" property="version" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, stk_in_no, order_type, order_no, order_seq_no, material_no, material_name, material_type, 
+    id, stk_in_no,  order_no, order_seq_no,source_type,source_no,source_seq_no, material_no, material_name, material_type,
     spec, pattern, unit, material_stock, num, status, create_no, create_time, modi_no, 
     modi_time, version
   </sql>
@@ -38,20 +40,44 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.fangxin.siwei.fangzhi.modal.SwStockIn">
-    insert into sw_stock_in (id, stk_in_no, order_type, 
-      order_no, order_seq_no, material_no, 
+    insert into sw_stock_in (id, stk_in_no,
+      order_no, order_seq_no,source_type, source_no, source_seq_no,  material_no,
       material_name, material_type, spec, 
       pattern, unit, material_stock, 
       num, status, create_no, 
       create_time, modi_no, modi_time, 
       version)
-    values (#{id,jdbcType=INTEGER}, #{stkInNo,jdbcType=VARCHAR}, #{orderType,jdbcType=VARCHAR}, 
-      #{orderNo,jdbcType=VARCHAR}, #{orderSeqNo,jdbcType=VARCHAR}, #{materialNo,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{stkInNo,jdbcType=VARCHAR},
+      #{orderNo,jdbcType=VARCHAR}, #{orderSeqNo,jdbcType=VARCHAR},
+        #{sourceType,jdbcType=VARCHAR}, #{sourceNo,jdbcType=VARCHAR}, #{sourceSeqNo,jdbcType=VARCHAR},#{materialNo,jdbcType=VARCHAR},
       #{materialName,jdbcType=VARCHAR}, #{materialType,jdbcType=VARCHAR}, #{spec,jdbcType=VARCHAR}, 
       #{pattern,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, #{materialStock,jdbcType=VARCHAR}, 
       #{num,jdbcType=DECIMAL}, #{status,jdbcType=VARCHAR}, #{createNo,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=TIMESTAMP}, #{modiNo,jdbcType=VARCHAR}, #{modiTime,jdbcType=TIMESTAMP}, 
       #{version,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertBatch" parameterType="java.util.List">
+    insert into sw_stock_in ( stk_in_no,
+    order_no, order_seq_no,
+    source_type, source_no, source_seq_no,
+    material_no,material_name, material_type, spec,
+      pattern, unit, material_stock,
+      num, status, create_no,
+      create_time, modi_no, modi_time,
+      version)
+    values
+      <foreach collection="list" index="index" item="item" separator=",">
+        ( #{item.stkInNo,jdbcType=VARCHAR},
+        #{item.orderNo,jdbcType=VARCHAR}, #{item.orderSeqNo,jdbcType=VARCHAR},
+        #{item.sourceType,jdbcType=VARCHAR}, #{item.sourceNo,jdbcType=VARCHAR}, #{item.sourceSeqNo,jdbcType=VARCHAR},
+        #{item.materialNo,jdbcType=VARCHAR},
+        #{item.materialName,jdbcType=VARCHAR}, #{item.materialType,jdbcType=VARCHAR}, #{item.spec,jdbcType=VARCHAR},
+        #{item.pattern,jdbcType=VARCHAR}, #{item.unit,jdbcType=VARCHAR}, #{item.materialStock,jdbcType=VARCHAR},
+        #{item.num,jdbcType=DECIMAL}, #{item.status,jdbcType=VARCHAR}, #{item.createNo,jdbcType=VARCHAR},
+        #{item.createTime,jdbcType=TIMESTAMP}, #{item.modiNo,jdbcType=VARCHAR}, #{item.modiTime,jdbcType=TIMESTAMP},
+        #{item.version,jdbcType=INTEGER})
+      </foreach>
+
   </insert>
   <insert id="insertSelective" parameterType="com.fangxin.siwei.fangzhi.modal.SwStockIn">
     insert into sw_stock_in
@@ -62,14 +88,20 @@
       <if test="stkInNo != null">
         stk_in_no,
       </if>
-      <if test="orderType != null">
-        order_type,
-      </if>
       <if test="orderNo != null">
         order_no,
       </if>
       <if test="orderSeqNo != null">
         order_seq_no,
+      </if>
+      <if test="sourceType != null">
+        source_type,
+      </if>
+      <if test="sourceNo != null">
+        source_no,
+      </if>
+      <if test="sourceSeqNo != null">
+        source_seq_no,
       </if>
       <if test="materialNo != null">
         material_no,
@@ -121,14 +153,21 @@
       <if test="stkInNo != null">
         #{stkInNo,jdbcType=VARCHAR},
       </if>
-      <if test="orderType != null">
-        #{orderType,jdbcType=VARCHAR},
-      </if>
+
       <if test="orderNo != null">
         #{orderNo,jdbcType=VARCHAR},
       </if>
       <if test="orderSeqNo != null">
         #{orderSeqNo,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceType != null">
+        #{sourceType,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceNo != null">
+        #{sourceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceSeqNo != null">
+        #{sourceSeqNo,jdbcType=VARCHAR},
       </if>
       <if test="materialNo != null">
         #{materialNo,jdbcType=VARCHAR},
@@ -180,14 +219,20 @@
       <if test="stkInNo != null">
         stk_in_no = #{stkInNo,jdbcType=VARCHAR},
       </if>
-      <if test="orderType != null">
-        order_type = #{orderType,jdbcType=VARCHAR},
-      </if>
       <if test="orderNo != null">
         order_no = #{orderNo,jdbcType=VARCHAR},
       </if>
       <if test="orderSeqNo != null">
         order_seq_no = #{orderSeqNo,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceType != null">
+        source_type=#{sourceType,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceNo != null">
+        source_no=#{sourceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceSeqNo != null">
+       source_seq_no=  #{sourceSeqNo,jdbcType=VARCHAR},
       </if>
       <if test="materialNo != null">
         material_no = #{materialNo,jdbcType=VARCHAR},
@@ -237,7 +282,9 @@
   <update id="updateByPrimaryKey" parameterType="com.fangxin.siwei.fangzhi.modal.SwStockIn">
     update sw_stock_in
     set stk_in_no = #{stkInNo,jdbcType=VARCHAR},
-      order_type = #{orderType,jdbcType=VARCHAR},
+      source_type = #{sourceType,jdbcType=VARCHAR},
+      source_no = #{sourceNo,jdbcType=VARCHAR},
+      source_seq_no = #{sourceSeqNo,jdbcType=VARCHAR},
       order_no = #{orderNo,jdbcType=VARCHAR},
       order_seq_no = #{orderSeqNo,jdbcType=VARCHAR},
       material_no = #{materialNo,jdbcType=VARCHAR},

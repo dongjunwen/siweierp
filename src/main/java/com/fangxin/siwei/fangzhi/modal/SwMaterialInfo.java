@@ -13,6 +13,7 @@ public class SwMaterialInfo {
 
     private String materialType;
 
+    private String materialStock;
 
     private String spec;
 
@@ -62,6 +63,14 @@ public class SwMaterialInfo {
 
     public void setMaterialType(String materialType) {
         this.materialType = materialType == null ? null : materialType.trim();
+    }
+
+    public String getMaterialStock() {
+        return materialStock;
+    }
+
+    public void setMaterialStock(String materialStock) {
+        this.materialStock = materialStock;
     }
 
     public String getSpec() {

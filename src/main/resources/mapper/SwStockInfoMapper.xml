@@ -17,6 +17,12 @@
     from sw_stock_info
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectByMaterialNo" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sw_stock_info
+    where material_no = #{materialNo,jdbcType=VARCHAR}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from sw_stock_info
     where id = #{id,jdbcType=INTEGER}
@@ -64,6 +70,14 @@
       </if>
     </trim>
   </insert>
+  <update id="addNum" parameterType="com.fangxin.siwei.fangzhi.modal.SwStockInfo">
+    update sw_stock_info
+    set
+        num =num+ #{num,jdbcType=DECIMAL},
+        modi_time = #{modiTime,jdbcType=TIMESTAMP},
+        version = version+1
+    where  material_no = #{materialNo,jdbcType=VARCHAR} and version = #{version,jdbcType=INTEGER}
+  </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.fangxin.siwei.fangzhi.modal.SwStockInfo">
     update sw_stock_info
     <set>

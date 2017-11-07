@@ -8,11 +8,15 @@ public class SwStockIn {
 
     private String stkInNo;
 
-    private String orderType;
-
     private String orderNo;
 
     private String orderSeqNo;
+
+    private String sourceType;
+
+    private String sourceNo;
+
+    private String sourceSeqNo;
 
     private String materialNo;
 
@@ -58,12 +62,28 @@ public class SwStockIn {
         this.stkInNo = stkInNo == null ? null : stkInNo.trim();
     }
 
-    public String getOrderType() {
-        return orderType;
+    public String getSourceType() {
+        return sourceType;
     }
 
-    public void setOrderType(String orderType) {
-        this.orderType = orderType == null ? null : orderType.trim();
+    public void setSourceType(String sourceType) {
+        this.sourceType = sourceType;
+    }
+
+    public String getSourceNo() {
+        return sourceNo;
+    }
+
+    public void setSourceNo(String sourceNo) {
+        this.sourceNo = sourceNo;
+    }
+
+    public String getSourceSeqNo() {
+        return sourceSeqNo;
+    }
+
+    public void setSourceSeqNo(String sourceSeqNo) {
+        this.sourceSeqNo = sourceSeqNo;
     }
 
     public String getOrderNo() {

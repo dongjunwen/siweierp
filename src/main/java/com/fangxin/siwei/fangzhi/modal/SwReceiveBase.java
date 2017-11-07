@@ -1,9 +1,11 @@
 package com.fangxin.siwei.fangzhi.modal;
 
+import javax.persistence.Id;
 import java.math.BigDecimal;
 import java.util.Date;
 
 public class SwReceiveBase {
+    @Id
     private Integer id;
 
     private String recvNo;

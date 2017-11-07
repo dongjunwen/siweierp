@@ -14,4 +14,8 @@ public interface SwStockInfoMapper {
     int updateByPrimaryKeySelective(SwStockInfo record);
 
     int updateByPrimaryKey(SwStockInfo record);
+
+    int addNum(SwStockInfo swStockInfo);
+
+    SwStockInfo selectByMaterialNo(String materialNo);
 }

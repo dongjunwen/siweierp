@@ -2,6 +2,8 @@ package com.fangxin.siwei.fangzhi.mapper;
 
 import com.fangxin.siwei.fangzhi.modal.SwStockIn;
 
+import java.util.List;
+
 public interface SwStockInMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +16,6 @@ public interface SwStockInMapper {
     int updateByPrimaryKeySelective(SwStockIn record);
 
     int updateByPrimaryKey(SwStockIn record);
+
+    int insertBatch(List<SwStockIn> swStockIns);
 }
