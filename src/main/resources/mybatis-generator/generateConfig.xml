@@ -39,7 +39,7 @@
         <!-- 表转代码：tableName：修改表名 -->
 
 
-        <table tableName="sw_receive_detail" enableCountByExample="false"
+        <table tableName="sw_receive_base" enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false"
                enableSelectByExample="false" selectByExampleQueryId="true"
                enableInsert="true" enableUpdateByPrimaryKey="true"

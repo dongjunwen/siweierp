@@ -62,7 +62,7 @@ public class ReturnServiceImpl extends AbstractService<SwReturnBase> implements 
         SwReturnBaseVo swReturnBaseVo= swReturnVo.getSwReturnBaseVo();
         SwReturnBase swReturnBase=new SwReturnBase();
         convertVoToEntity(swReturnBase,swReturnBaseVo);
-        String returnNo= UUIDUtils.genUUID(ConstantKey.PURCHASE_KEY_PRE);
+        String returnNo= UUIDUtils.genUUID(ConstantKey.RETURN_KEY_PRE);
         swReturnBase.setReturnNo(returnNo);
         swReturnBase.setReturnDate(new Date());
         swReturnBase.setReturnStatus(ReturnStatus.WAIT_APPLY.getCode());

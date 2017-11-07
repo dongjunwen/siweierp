@@ -10,4 +10,5 @@ public class ConstantKey {
     public static final String DELIVER_KEY_PRE="F";
     public static final String PURCHASE_KEY_PRE="C";
     public static final String RETURN_KEY_PRE="T";
+    public static final String RECEIVE_KEY_PRE="R";
 }
