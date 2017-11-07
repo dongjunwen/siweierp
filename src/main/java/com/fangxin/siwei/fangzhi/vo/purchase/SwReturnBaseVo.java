@@ -25,9 +25,7 @@ public class SwReturnBaseVo {
 
     private String supplyAddr;
 
-    private BigDecimal returnAmt;
 
-    private BigDecimal returnNum;
 
     private String returnReason;
 
@@ -95,22 +93,6 @@ public class SwReturnBaseVo {
 
     public void setSupplyAddr(String supplyAddr) {
         this.supplyAddr = supplyAddr;
-    }
-
-    public BigDecimal getReturnAmt() {
-        return returnAmt;
-    }
-
-    public void setReturnAmt(BigDecimal returnAmt) {
-        this.returnAmt = returnAmt;
-    }
-
-    public BigDecimal getReturnNum() {
-        return returnNum;
-    }
-
-    public void setReturnNum(BigDecimal returnNum) {
-        this.returnNum = returnNum;
     }
 
     public String getReturnReason() {
