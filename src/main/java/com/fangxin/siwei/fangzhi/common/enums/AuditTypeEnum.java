@@ -12,7 +12,8 @@ public enum AuditTypeEnum {
     ORDER("ORDER","业务订单"),
     DELIVER("DELIVER","发货单"),
     PURCHASE("PURCHASE","采购单"),
-    RETURN("RETURN","退货单");
+    RETURN("RETURN","退货单"),
+    RECEIVE("RECEIVE","领料单");
 
     String code;
     String desc;
