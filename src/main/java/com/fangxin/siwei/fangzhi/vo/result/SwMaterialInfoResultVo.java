@@ -1,5 +1,7 @@
 package com.fangxin.siwei.fangzhi.vo.result;
 
+import java.math.BigDecimal;
+
 /**
  * @Date:2017/11/5 0005 16:05
  * @Author lu.dong
@@ -20,7 +22,15 @@ public class SwMaterialInfoResultVo {
 
     private String unit;
 
+    private BigDecimal price;
+
     private String memo;
+
+    private String materialStock;
+
+    private BigDecimal materialLong;
+
+    private BigDecimal materialWidth;
 
     private String createNo;
 
@@ -124,5 +134,37 @@ public class SwMaterialInfoResultVo {
 
     public void setModiTime(String modiTime) {
         this.modiTime = modiTime;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public String getMaterialStock() {
+        return materialStock;
+    }
+
+    public void setMaterialStock(String materialStock) {
+        this.materialStock = materialStock;
+    }
+
+    public BigDecimal getMaterialLong() {
+        return materialLong;
+    }
+
+    public void setMaterialLong(BigDecimal materialLong) {
+        this.materialLong = materialLong;
+    }
+
+    public BigDecimal getMaterialWidth() {
+        return materialWidth;
+    }
+
+    public void setMaterialWidth(BigDecimal materialWidth) {
+        this.materialWidth = materialWidth;
     }
 }

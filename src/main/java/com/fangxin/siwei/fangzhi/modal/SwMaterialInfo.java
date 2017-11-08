@@ -1,6 +1,7 @@
 package com.fangxin.siwei.fangzhi.modal;
 
 import javax.persistence.Id;
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class SwMaterialInfo {
@@ -13,15 +14,21 @@ public class SwMaterialInfo {
 
     private String materialType;
 
-    private String materialStock;
-
     private String spec;
 
     private String pattern;
 
     private String unit;
 
+    private BigDecimal price;
+
     private String memo;
+
+    private String materialStock;
+
+    private BigDecimal materialLong;
+
+    private BigDecimal materialWidth;
 
     private String createNo;
 
@@ -145,4 +152,27 @@ public class SwMaterialInfo {
         this.version = version;
     }
 
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public BigDecimal getMaterialLong() {
+        return materialLong;
+    }
+
+    public void setMaterialLong(BigDecimal materialLong) {
+        this.materialLong = materialLong;
+    }
+
+    public BigDecimal getMaterialWidth() {
+        return materialWidth;
+    }
+
+    public void setMaterialWidth(BigDecimal materialWidth) {
+        this.materialWidth = materialWidth;
+    }
 }

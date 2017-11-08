@@ -5,6 +5,7 @@ import com.fangxin.siwei.fangzhi.common.enums.ResultCode;
 import com.fangxin.siwei.fangzhi.common.exception.RRException;
 import com.fangxin.siwei.fangzhi.common.result.Result;
 import com.fangxin.siwei.fangzhi.common.utils.Common;
+import com.fangxin.siwei.fangzhi.common.utils.DateUtil;
 import com.fangxin.siwei.fangzhi.common.utils.ShiroUtils;
 import com.fangxin.siwei.fangzhi.mapper.SwMaterialInfoMapper;
 import com.fangxin.siwei.fangzhi.modal.SwMaterialInfo;
@@ -59,11 +60,12 @@ public class SwMaterialInfoServiceImpl extends AbstractService<SwMaterialInfo> i
         if(_swDepartInfo==null){
             return  Result.newError(ResultCode.COMMON_DATA_NOT_EXISTS.getCode(),"物料信息不存在!");
         }
-        SwMaterialInfo swDepartInfo=new SwMaterialInfo();
-        convertVoToEntity(swDepartInfo,swMaterialInfoVo);
-        swDepartInfo.setModiNo(ShiroUtils.getCurrentUserNo());
-        swDepartInfo.setModiTime(new Date());
-        return Result.newSuccess(swMaterialInfoMapper.updateByMateialNo(swDepartInfo));
+        SwMaterialInfo swMaterialInfo=new SwMaterialInfo();
+        convertVoToEntity(swMaterialInfo,swMaterialInfoVo);
+        swMaterialInfo.setModiNo(ShiroUtils.getCurrentUserNo());
+        swMaterialInfo.setModiTime(new Date());
+        swMaterialInfo.setVersion(_swDepartInfo.getVersion());
+        return Result.newSuccess(swMaterialInfoMapper.updateByMateialNo(swMaterialInfo));
     }
 
     @Override
@@ -87,23 +89,30 @@ public class SwMaterialInfoServiceImpl extends AbstractService<SwMaterialInfo> i
         List<SwMaterialInfoResultVo> swMaterialInfoResultVos=new Page<>();
         for(SwMaterialInfo swMaterialInfo:swMaterialInfos){
             SwMaterialInfoResultVo swMaterialInfoResultVo=new SwMaterialInfoResultVo();
-            swMaterialInfoResultVo.setMaterialNo(swMaterialInfo.getMaterialNo());
-            swMaterialInfoResultVo.setMaterialName(swMaterialInfo.getMaterialName());
-            swMaterialInfoResultVo.setMaterialType(swMaterialInfo.getMaterialType());
-            swMaterialInfoResultVo.setPattern(swMaterialInfo.getPattern());
-            swMaterialInfoResultVo.setSpec(swMaterialInfo.getSpec());
-            swMaterialInfoResultVo.setUnit(swMaterialInfo.getUnit());
-            swMaterialInfoResultVo.setMemo(swMaterialInfo.getMemo());
+            convertVoToResultVo(swMaterialInfoResultVo,swMaterialInfo);
             MaterialTypeEnum materialTypeEnum=MaterialTypeEnum.parse(swMaterialInfo.getMaterialType());
             if(materialTypeEnum!=null){
                 swMaterialInfoResultVo.setMaterialTypeName(materialTypeEnum.getDesc());
             }else{
                 swMaterialInfoResultVo.setMaterialTypeName(swMaterialInfo.getMaterialType());
             }
-
+            swMaterialInfoResultVo.setCreateTime(DateUtil.formatDateTime(swMaterialInfo.getCreateTime()));
+            swMaterialInfoResultVo.setModiTime(DateUtil.formatDateTime(swMaterialInfo.getModiTime()));
             swMaterialInfoResultVos.add(swMaterialInfoResultVo);
         }
         return (Page<SwMaterialInfoResultVo>) swMaterialInfoResultVos;
+    }
+
+    private void convertVoToResultVo(SwMaterialInfoResultVo swMaterialInfoResultVo, SwMaterialInfo swMaterialInfo) {
+        try {
+            BeanUtils.copyProperties(swMaterialInfoResultVo,swMaterialInfo);
+        } catch (IllegalAccessException e) {
+            logger.error("物料转换结果语法错误:{}",e);
+            throw new RRException(ResultCode.COMMON_PARAM_INVALID.getMessage());
+        } catch (InvocationTargetException e) {
+            logger.error("物料转换结果目标错误:{}",e);
+            throw new RRException(ResultCode.COMMON_PARAM_INVALID.getMessage());
+        }
     }
 
     @Override
@@ -111,11 +120,11 @@ public class SwMaterialInfoServiceImpl extends AbstractService<SwMaterialInfo> i
         return swMaterialInfoMapper.findMaterialLike(condStr);
     }
 
-    private void convertVoToEntity(SwMaterialInfo swDepartInfo, SwMaterialInfoVo swMaterialInfoVo) {
+    private void convertVoToEntity(SwMaterialInfo swMaterialInfo, SwMaterialInfoVo swMaterialInfoVo) {
         try {
-            BeanUtils.copyProperties(swDepartInfo,swMaterialInfoVo);
+            BeanUtils.copyProperties(swMaterialInfo,swMaterialInfoVo);
         } catch (IllegalAccessException e) {
-            logger.error("物料转换法错误:{}",e);
+            logger.error("物料转换语法错误:{}",e);
             throw new RRException(ResultCode.COMMON_PARAM_INVALID.getMessage());
         } catch (InvocationTargetException e) {
             logger.error("物料转换目标错误:{}",e);

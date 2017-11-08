@@ -6,6 +6,9 @@ import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
+import javax.validation.constraints.DecimalMin;
+import java.math.BigDecimal;
+
 /**
  * @Date:2017/10/20 0020 17:51
  * @Author lu.dong
@@ -36,6 +39,18 @@ public class SwMaterialInfoVo {
     @Length(max = 128,message = "物料备注长度不能超过128")
     @ApiModelProperty(value = "备注",required =false )
     private String memo;
+    @DecimalMin(value = "0.01",message = "单价最小金额为0.01")
+    @ApiModelProperty(value = "备注",required =false )
+    private BigDecimal price;
+    @Length(max = 32,message = "所属仓库长度不能超过32")
+    @ApiModelProperty(value = "所属仓库",required =false )
+    private String materialStock;
+    @DecimalMin(value = "0.01",message = "长度最小金额为0.01")
+    @ApiModelProperty(value = "长度",required =false )
+    private BigDecimal materialLong;
+    @DecimalMin(value = "0.01",message = "宽度最小金额为0.01")
+    @ApiModelProperty(value = "宽度",required =false )
+    private BigDecimal materialWidth;
 
     public String getMaterialNo() {
         return materialNo;
@@ -91,5 +106,37 @@ public class SwMaterialInfoVo {
 
     public void setMemo(String memo) {
         this.memo = memo;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public String getMaterialStock() {
+        return materialStock;
+    }
+
+    public void setMaterialStock(String materialStock) {
+        this.materialStock = materialStock;
+    }
+
+    public BigDecimal getMaterialLong() {
+        return materialLong;
+    }
+
+    public void setMaterialLong(BigDecimal materialLong) {
+        this.materialLong = materialLong;
+    }
+
+    public BigDecimal getMaterialWidth() {
+        return materialWidth;
+    }
+
+    public void setMaterialWidth(BigDecimal materialWidth) {
+        this.materialWidth = materialWidth;
     }
 }
