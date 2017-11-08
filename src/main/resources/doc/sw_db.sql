@@ -43,7 +43,7 @@ CREATE TABLE `sw_company_info` (
 
 /*Data for the table `sw_company_info` */
 
-insert  into `sw_company_info`(`id`,`comp_no`,`comp_name`,`contact_name`,`mobile`,`telphone`,`tax`,`email`,`addr`,`is_self`,`is_valid`,`memo`,`create_no`,`create_time`,`modi_no`,`modi_time`,`version`) values (1,'swSpinComp','山东思维纺织','山东思维纺织','0631-5769674','0631-5769674','0631-5769674','1221','山东省威海市环翠区羊亭裕林工业园5号','Y','Y',NULL,'system','2017-10-20 15:41:10','system','2017-10-30 11:22:41',0),(2,'aaaaaa','艾弗森的','齐威王','1233444','12122112','1221','1221','12122222222222','N','Y',NULL,'system','2017-10-20 15:44:33','system','2017-10-30 11:21:43',0),(3,'asd','艾弗森的','齐威王','1233444','12122112','1221','1221','12122222222222','N','Y',NULL,'system','2017-10-20 15:44:39','system','2017-10-30 11:21:31',0),(4,'asd12','艾弗森的','齐威王','1233444','12122112','1221','1221','12122222222222','N','Y',NULL,'system','2017-10-20 15:44:44','system','2017-10-30 11:21:31',0),(5,'XXXx1122222','XX实业科技有限公司','张三','12333','1','111','XX@qq.com','广兰路','N','Y',NULL,'system','2017-10-20 16:36:20','system','2017-10-30 11:21:32',0),(6,'XXXx1121222','XX实业科技有限公司','张三','12333','1','111','XX@qq.com','广兰路','N','Y',NULL,'system','2017-10-20 16:36:30','system','2017-10-30 11:21:33',0),(7,'XXXx11212333','XX实业科技有限公司','张三','12333','1','111','XX@qq.com','广兰路','N','Y',NULL,'system','2017-10-20 16:36:35','system','2017-10-30 11:21:34',0);
+insert  into `sw_company_info`(`id`,`comp_no`,`comp_name`,`contact_name`,`mobile`,`telphone`,`tax`,`email`,`addr`,`is_self`,`is_valid`,`memo`,`create_no`,`create_time`,`modi_no`,`modi_time`,`version`) values (1,'swSpinComp','山东思维纺织','山东思维纺织','0631-5769674','0631-5769674','0631-5769674','1221888','山东省威海市环翠区羊亭裕林工业园5号','Y','Y',NULL,'system','2017-10-20 15:41:10','wangfangfang','2017-11-05 14:26:21',0),(3,'asd','艾弗森的','齐威王','1233444','12122112','1221','1221','12122222222222','N','Y',NULL,'system','2017-10-20 15:44:39','system','2017-10-30 11:21:31',0),(4,'asd12','艾弗森的','齐威王','1233444','12122112','1221','1221','12122222222222','N','Y',NULL,'system','2017-10-20 15:44:44','system','2017-10-30 11:21:31',0),(5,'XXXx1122222','XX实业科技有限公司','张三','12333','1','111','XX@qq.com','广兰路','N','Y',NULL,'system','2017-10-20 16:36:20','system','2017-10-30 11:21:32',0),(6,'XXXx1121222','XX实业科技有限公司','张三','12333','1','111','XX@qq.com','广兰路','N','Y',NULL,'system','2017-10-20 16:36:30','system','2017-10-30 11:21:33',0),(7,'XXXx11212333','XX实业科技有限公司','张三','12333','1','111','XX@qq.com','广兰路','N','Y',NULL,'system','2017-10-20 16:36:35','system','2017-10-30 11:21:34',0);
 
 /*Table structure for table `sw_deliver_base` */
 
@@ -169,9 +169,11 @@ CREATE TABLE `sw_formular_info` (
   `modi_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   `version` int(11) DEFAULT '0' COMMENT '版本号',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='公式信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='公式信息表';
 
 /*Data for the table `sw_formular_info` */
+
+insert  into `sw_formular_info`(`id`,`formular_no`,`formular_name`,`formular_value`,`formular_type`,`memo`,`create_no`,`create_time`,`modi_no`,`modi_time`,`version`) values (1,'aab','aa','dd','CRAFTS','dddddddd',NULL,NULL,'wangfangfang','2017-11-05 15:39:25',0),(2,'aac','a','d','PROD','dddddddd',NULL,NULL,NULL,'2017-11-05 15:37:50',0),(3,'aad','ddd','d','d','d',NULL,NULL,NULL,'2017-10-30 18:07:52',0);
 
 /*Table structure for table `sw_material_info` */
 
@@ -184,7 +186,11 @@ CREATE TABLE `sw_material_info` (
   `material_type` varchar(32) DEFAULT NULL COMMENT '物料分类 SYS_DICT中的MATERIAL_TYPE',
   `spec` varchar(100) DEFAULT NULL COMMENT '规格',
   `pattern` varchar(100) DEFAULT NULL COMMENT '型号',
+  `price` decimal(20,2) DEFAULT NULL COMMENT '单价',
   `unit` varchar(12) DEFAULT NULL COMMENT '单位',
+  `material_long` decimal(20,2) DEFAULT NULL COMMENT '长',
+  `material_width` decimal(20,2) DEFAULT NULL COMMENT '宽',
+  `material_stock` varchar(32) DEFAULT NULL COMMENT '所属仓库',
   `memo` varchar(128) DEFAULT NULL COMMENT '备注',
   `create_no` varchar(32) DEFAULT NULL COMMENT '创建人',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
@@ -192,11 +198,11 @@ CREATE TABLE `sw_material_info` (
   `modi_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   `version` int(11) DEFAULT '0' COMMENT '版本号',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='物料信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COMMENT='物料信息表';
 
 /*Data for the table `sw_material_info` */
 
-insert  into `sw_material_info`(`id`,`material_no`,`material_name`,`material_type`,`spec`,`pattern`,`unit`,`memo`,`create_no`,`create_time`,`modi_no`,`modi_time`,`version`) values (1,'TBYD','圆底台布','PROD','超棉文艺复兴','圆','米','string','admin','2017-10-24 14:41:09','admin','2017-10-24 14:43:06',0),(2,'KBLT-DZ-54','口布雨','PROD','超棉文艺复兴','方','米','string','admin','2017-10-24 14:41:57','admin','2017-10-24 14:43:08',0);
+insert  into `sw_material_info`(`id`,`material_no`,`material_name`,`material_type`,`spec`,`pattern`,`price`,`unit`,`material_long`,`material_width`,`material_stock`,`memo`,`create_no`,`create_time`,`modi_no`,`modi_time`,`version`) values (1,'TBYD','圆底台布','成品布','超棉文艺复兴','圆','100.00','米','10.00','20.00','PROD_STOCK','测试','admin','2017-10-24 14:41:09','admin','2017-11-08 10:34:55',1),(2,'KBLT-DZ-54','口布雨','PROD','超棉文艺复兴','方','12.00','米','3.00','3.00','tt','string','admin','2017-10-24 14:41:57','admin','2017-11-08 10:20:57',0),(3,'CDSSSS','台布','PROD','超棉文艺复兴','圆','3.00','米','3.00','3.00','tt','sd','wangfangfang','2017-11-01 11:31:20','wangfangfang','2017-11-08 10:21:41',0),(4,'ss','ss','PROD','超棉文艺复兴','圆','3.00','米','3.00','3.00','t',NULL,'wangfangfang','2017-11-01 11:31:57','wangfangfang','2017-11-08 10:21:41',0),(5,'ddff','ddd','PROD','超棉文艺复兴','圆','3.00','米','3.00','3.00','t','fff','wangfangfang','2017-11-05 14:16:52','wangfangfang','2017-11-08 10:21:42',0),(7,'test_code2','测试物料','PROD','超棉文艺复兴','圆','3.00','米','4.00','5.00','tt','随便','wangfangfang','2017-11-05 15:14:54','wangfangfang','2017-11-08 10:21:42',0),(8,'test_code3','测试物料2','PROD','超棉文艺复兴','圆','3.00','米','5.00','6.00','t',NULL,'wangfangfang','2017-11-05 15:17:18','wangfangfang','2017-11-08 10:21:43',0),(9,'test_code4','随意了','CRAFTS','超棉文艺复兴','圆','3.00','米','1.00','2.00','t',NULL,'wangfangfang','2017-11-05 15:22:49','wangfangfang','2017-11-08 10:21:43',0),(10,'test_code2334','测试物料','COTTON','超棉文艺复兴','圆','3.00','米','1.00','3.00','t',NULL,'wangfangfang','2017-11-05 15:25:10','wangfangfang','2017-11-08 10:32:37',0);
 
 /*Table structure for table `sw_order_base` */
 
@@ -217,7 +223,7 @@ CREATE TABLE `sw_order_base` (
   `cust_comp_name` varchar(128) DEFAULT NULL COMMENT '客户名称',
   `cust_contact_name` varchar(64) DEFAULT NULL COMMENT '客户联系人',
   `cust_mobile` varchar(16) DEFAULT NULL COMMENT '客户手机',
-  `custt_phone` varchar(16) DEFAULT NULL COMMENT '客户电话',
+  `cust_phone` varchar(16) DEFAULT NULL COMMENT '客户电话',
   `cust_tax` varchar(16) DEFAULT NULL COMMENT '客户传真',
   `cust_addr` varchar(256) DEFAULT NULL COMMENT '客户地址',
   `supply_comp_no` varchar(32) DEFAULT NULL COMMENT '供货方编号',
@@ -237,7 +243,7 @@ CREATE TABLE `sw_order_base` (
 
 /*Data for the table `sw_order_base` */
 
-insert  into `sw_order_base`(`id`,`order_no`,`order_date`,`pay_way`,`good_date`,`finish_date`,`order_type`,`sale_type`,`order_status`,`memo`,`cust_comp_no`,`cust_comp_name`,`cust_contact_name`,`cust_mobile`,`custt_phone`,`cust_tax`,`cust_addr`,`supply_comp_no`,`supply_comp_name`,`supply_contact_name`,`supply_mobile`,`supply_phone`,`supply_tax`,`supply_addr`,`create_no`,`create_time`,`modi_no`,`modi_time`,`version`) values (80,'D-20171025142941-01700','2017-10-25','TEL_PAY','2017-02-01','2017-05-01','SIMPLE_ORDER','INNER_SALE','AUDIT_SUCCESS','喂喂喂','001','XX科技有限公司','XX张三','1246666',NULL,'13333','上海宝山','DDDOOO','XXX贸易有限公司','李四XXX','15555555','1233333','322222','北京五里屯','admin','2017-10-25 14:29:42','string','2017-10-25 17:51:34',NULL),(81,'D-20171025142942-34918','2017-10-25','TEL_PAY','2017-02-01','2017-05-01','SIMPLE_ORDER','INNER_SALE','WAIT_AUDIT','喂喂喂','001','XX科技有限公司','XX张三','1246666',NULL,'13333','上海宝山','DDDOOO','XXX贸易有限公司','李四XXX','15555555','1233333','322222','北京五里屯','admin','2017-10-25 14:29:42','admin','2017-10-25 14:29:42',NULL),(82,'D-20171025142942-17265','2017-10-25','TEL_PAY','2017-02-01','2017-05-01','SIMPLE_ORDER','INNER_SALE','WAIT_AUDIT','喂喂喂','001','XX科技有限公司','XX张三','1246666',NULL,'13333','上海宝山','DDDOOO','XXX贸易有限公司','李四XXX','15555555','1233333','322222','北京五里屯','admin','2017-10-25 14:29:42','admin','2017-10-25 14:29:42',NULL),(83,'D-20171025142942-03027','2017-10-25','TEL_PAY','2017-02-01','2017-05-01','SIMPLE_ORDER','INNER_SALE','WAIT_AUDIT','喂喂喂','001','XX科技有限公司','XX张三','1246666',NULL,'13333','上海宝山','DDDOOO','XXX贸易有限公司','李四XXX','15555555','1233333','322222','北京五里屯','admin','2017-10-25 14:29:43','admin','2017-10-25 14:29:43',NULL),(84,'D-20171025142942-13612','2017-10-25','TEL_PAY','2017-02-01','2017-05-01','SIMPLE_ORDER','INNER_SALE','WAIT_AUDIT','喂喂喂','001','XX科技有限公司','XX张三','1246666',NULL,'13333','上海宝山','DDDOOO','XXX贸易有限公司','李四XXX','15555555','1233333','322222','北京五里屯','admin','2017-10-25 14:29:43','admin','2017-10-25 14:29:43',NULL),(85,'D-20171025142942-84467','2017-10-25','TEL_PAY','2017-02-01','2017-05-01','SIMPLE_ORDER','INNER_SALE','WAIT_AUDIT','喂喂喂','001','XX科技有限公司','XX张三','1246666',NULL,'13333','上海宝山','DDDOOO','XXX贸易有限公司','李四XXX','15555555','1233333','322222','北京五里屯','admin','2017-10-25 14:29:43','admin','2017-10-25 14:29:43',NULL),(86,'D-20171025142943-90935','2017-10-25','TEL_PAY','2017-02-01','2017-05-01','SIMPLE_ORDER','INNER_SALE','WAIT_AUDIT','喂喂喂','001','XX科技有限公司','XX张三','1246666',NULL,'13333','上海宝山','DDDOOO','XXX贸易有限公司','李四XXX','15555555','1233333','322222','北京五里屯','admin','2017-10-25 14:29:43','admin','2017-10-25 14:29:43',NULL),(87,'D-20171025142943-77480','2017-10-25','TEL_PAY','2017-02-01','2017-05-01','SIMPLE_ORDER','INNER_SALE','WAIT_AUDIT','喂喂喂','001','XX科技有限公司','XX张三','1246666',NULL,'13333','上海宝山','DDDOOO','XXX贸易有限公司','李四XXX','15555555','1233333','322222','北京五里屯','admin','2017-10-25 14:29:43','admin','2017-10-25 14:29:43',NULL),(88,'D-20171025142943-01443','2017-10-25','TEL_PAY','2017-02-01','2017-05-01','SIMPLE_ORDER','INNER_SALE','WAIT_AUDIT','喂喂喂','001','XX科技有限公司','XX张三','1246666',NULL,'13333','上海宝山','DDDOOO','XXX贸易有限公司','李四XXX','15555555','1233333','322222','北京五里屯','admin','2017-10-25 14:29:43','admin','2017-10-25 14:29:43',NULL),(89,'D-20171025142943-31701','2017-10-25','TEL_PAY','2017-02-01','2017-05-01','SIMPLE_ORDER','INNER_SALE','WAIT_AUDIT','喂喂喂','001','XX科技有限公司','XX张三','1246666',NULL,'13333','上海宝山','DDDOOO','XXX贸易有限公司','李四XXX','15555555','1233333','322222','北京五里屯','admin','2017-10-25 14:29:44','admin','2017-10-25 14:29:44',NULL),(90,'D-20171025142943-20706','2017-10-25','TEL_PAY','2017-02-01','2017-05-01','SIMPLE_ORDER','INNER_SALE','WAIT_AUDIT','喂喂喂','001','XX科技有限公司','XX张三','1246666',NULL,'13333','上海宝山','DDDOOO','XXX贸易有限公司','李四XXX','15555555','1233333','322222','北京五里屯','admin','2017-10-25 14:29:44','admin','2017-10-25 14:29:44',NULL),(91,'D-20171025142943-75119','2017-10-25','TEL_PAY','2017-02-01','2017-05-01','SIMPLE_ORDER','INNER_SALE','WAIT_AUDIT','喂喂喂','001','XX科技有限公司','XX张三','1246666',NULL,'13333','上海宝山','DDDOOO','XXX贸易有限公司','李四XXX','15555555','1233333','322222','北京五里屯','admin','2017-10-25 14:29:44','admin','2017-10-25 14:29:44',NULL),(92,'D-20171025142944-52321','2017-10-25','TEL_PAY','2017-02-01','2017-05-01','SIMPLE_ORDER','INNER_SALE','WAIT_AUDIT','喂喂喂','001','XX科技有限公司','XX张三','1246666',NULL,'13333','上海宝山','DDDOOO','XXX贸易有限公司','李四XXX','15555555','1233333','322222','北京五里屯','admin','2017-10-25 14:29:44','admin','2017-10-25 14:29:44',NULL),(93,'D-20171025142944-77057','2017-10-25','TEL_PAY','2017-02-01','2017-05-01','SIMPLE_ORDER','INNER_SALE','WAIT_AUDIT','喂喂喂','001','XX科技有限公司','XX张三','1246666',NULL,'13333','上海宝山','DDDOOO','XXX贸易有限公司','李四XXX','15555555','1233333','322222','北京五里屯','admin','2017-10-25 14:29:44','admin','2017-10-25 14:29:44',NULL),(94,'D-20171025142944-64124','2017-10-25','TEL_PAY','2017-02-01','2017-05-01','SIMPLE_ORDER','INNER_SALE','WAIT_AUDIT','喂喂喂','001','XX科技有限公司','XX张三','1246666',NULL,'13333','上海宝山','DDDOOO','XXX贸易有限公司','李四XXX','15555555','1233333','322222','北京五里屯','admin','2017-10-25 14:29:44','admin','2017-10-25 14:29:44',NULL);
+insert  into `sw_order_base`(`id`,`order_no`,`order_date`,`pay_way`,`good_date`,`finish_date`,`order_type`,`sale_type`,`order_status`,`memo`,`cust_comp_no`,`cust_comp_name`,`cust_contact_name`,`cust_mobile`,`cust_phone`,`cust_tax`,`cust_addr`,`supply_comp_no`,`supply_comp_name`,`supply_contact_name`,`supply_mobile`,`supply_phone`,`supply_tax`,`supply_addr`,`create_no`,`create_time`,`modi_no`,`modi_time`,`version`) values (80,'D-20171025142941-01700','2017-10-25','TEL_PAY','2017-02-01','2017-05-01','SIMPLE_ORDER','INNER_SALE','AUDIT_SUCCESS','喂喂喂','001','XX科技有限公司','XX张三','1246666',NULL,'13333','上海宝山','DDDOOO','XXX贸易有限公司','李四XXX','15555555','1233333','322222','北京五里屯','admin','2017-10-25 14:29:42','string','2017-10-25 17:51:34',NULL),(81,'D-20171025142942-34918','2017-10-25','TEL_PAY','2017-02-01','2017-05-01','SIMPLE_ORDER','INNER_SALE','WAIT_AUDIT','喂喂喂','001','XX科技有限公司','XX张三','1246666',NULL,'13333','上海宝山','DDDOOO','XXX贸易有限公司','李四XXX','15555555','1233333','322222','北京五里屯','admin','2017-10-25 14:29:42','admin','2017-10-25 14:29:42',NULL),(82,'D-20171025142942-17265','2017-10-25','TEL_PAY','2017-02-01','2017-05-01','SIMPLE_ORDER','INNER_SALE','WAIT_AUDIT','喂喂喂','001','XX科技有限公司','XX张三','1246666',NULL,'13333','上海宝山','DDDOOO','XXX贸易有限公司','李四XXX','15555555','1233333','322222','北京五里屯','admin','2017-10-25 14:29:42','admin','2017-10-25 14:29:42',NULL),(83,'D-20171025142942-03027','2017-10-25','TEL_PAY','2017-02-01','2017-05-01','SIMPLE_ORDER','INNER_SALE','WAIT_AUDIT','喂喂喂','001','XX科技有限公司','XX张三','1246666',NULL,'13333','上海宝山','DDDOOO','XXX贸易有限公司','李四XXX','15555555','1233333','322222','北京五里屯','admin','2017-10-25 14:29:43','admin','2017-10-25 14:29:43',NULL),(84,'D-20171025142942-13612','2017-10-25','TEL_PAY','2017-02-01','2017-05-01','SIMPLE_ORDER','INNER_SALE','WAIT_AUDIT','喂喂喂','001','XX科技有限公司','XX张三','1246666',NULL,'13333','上海宝山','DDDOOO','XXX贸易有限公司','李四XXX','15555555','1233333','322222','北京五里屯','admin','2017-10-25 14:29:43','admin','2017-10-25 14:29:43',NULL),(85,'D-20171025142942-84467','2017-10-25','TEL_PAY','2017-02-01','2017-05-01','SIMPLE_ORDER','INNER_SALE','WAIT_AUDIT','喂喂喂','001','XX科技有限公司','XX张三','1246666',NULL,'13333','上海宝山','DDDOOO','XXX贸易有限公司','李四XXX','15555555','1233333','322222','北京五里屯','admin','2017-10-25 14:29:43','admin','2017-10-25 14:29:43',NULL),(86,'D-20171025142943-90935','2017-10-25','TEL_PAY','2017-02-01','2017-05-01','SIMPLE_ORDER','INNER_SALE','WAIT_AUDIT','喂喂喂','001','XX科技有限公司','XX张三','1246666',NULL,'13333','上海宝山','DDDOOO','XXX贸易有限公司','李四XXX','15555555','1233333','322222','北京五里屯','admin','2017-10-25 14:29:43','admin','2017-10-25 14:29:43',NULL),(87,'D-20171025142943-77480','2017-10-25','TEL_PAY','2017-02-01','2017-05-01','SIMPLE_ORDER','INNER_SALE','WAIT_AUDIT','喂喂喂','001','XX科技有限公司','XX张三','1246666',NULL,'13333','上海宝山','DDDOOO','XXX贸易有限公司','李四XXX','15555555','1233333','322222','北京五里屯','admin','2017-10-25 14:29:43','admin','2017-10-25 14:29:43',NULL),(88,'D-20171025142943-01443','2017-10-25','TEL_PAY','2017-02-01','2017-05-01','SIMPLE_ORDER','INNER_SALE','WAIT_AUDIT','喂喂喂','001','XX科技有限公司','XX张三','1246666',NULL,'13333','上海宝山','DDDOOO','XXX贸易有限公司','李四XXX','15555555','1233333','322222','北京五里屯','admin','2017-10-25 14:29:43','admin','2017-10-25 14:29:43',NULL),(89,'D-20171025142943-31701','2017-10-25','TEL_PAY','2017-02-01','2017-05-01','SIMPLE_ORDER','INNER_SALE','WAIT_AUDIT','喂喂喂','001','XX科技有限公司','XX张三','1246666',NULL,'13333','上海宝山','DDDOOO','XXX贸易有限公司','李四XXX','15555555','1233333','322222','北京五里屯','admin','2017-10-25 14:29:44','admin','2017-10-25 14:29:44',NULL),(90,'D-20171025142943-20706','2017-10-25','TEL_PAY','2017-02-01','2017-05-01','SIMPLE_ORDER','INNER_SALE','WAIT_AUDIT','喂喂喂','001','XX科技有限公司','XX张三','1246666',NULL,'13333','上海宝山','DDDOOO','XXX贸易有限公司','李四XXX','15555555','1233333','322222','北京五里屯','admin','2017-10-25 14:29:44','admin','2017-10-25 14:29:44',NULL),(91,'D-20171025142943-75119','2017-10-25','TEL_PAY','2017-02-01','2017-05-01','SIMPLE_ORDER','INNER_SALE','WAIT_AUDIT','喂喂喂','001','XX科技有限公司','XX张三','1246666',NULL,'13333','上海宝山','DDDOOO','XXX贸易有限公司','李四XXX','15555555','1233333','322222','北京五里屯','admin','2017-10-25 14:29:44','admin','2017-10-25 14:29:44',NULL),(92,'D-20171025142944-52321','2017-10-25','TEL_PAY','2017-02-01','2017-05-01','SIMPLE_ORDER','INNER_SALE','WAIT_AUDIT','喂喂喂','001','XX科技有限公司','XX张三','1246666',NULL,'13333','上海宝山','DDDOOO','XXX贸易有限公司','李四XXX','15555555','1233333','322222','北京五里屯','admin','2017-10-25 14:29:44','admin','2017-10-25 14:29:44',NULL),(93,'D-20171025142944-77057','2017-10-25','TEL_PAY','2017-02-01','2017-05-01','SIMPLE_ORDER','INNER_SALE','WAIT_AUDIT','喂喂喂','001','XX科技有限公司','XX张三','1246666',NULL,'13333','上海宝山','DDDOOO','XXX贸易有限公司','李四XXX','15555555','1233333','322222','北京五里屯','admin','2017-10-25 14:29:44','admin','2017-10-25 14:29:44',NULL),(94,'D-20171025142944-64124','2017-10-25','TEL_PAY','2017-02-01','2017-05-01','SIMPLE_ORDER','INNER_SALE','WAIT_AUDIT','喂喂喂','001','XX科技有限公司','XX张三','1246666',NULL,'13333','上海宝山','DDDOOO','XXX贸易有限公司','李四XXX','15555555','1233333','322222','北京五里屯','admin','2017-10-25 14:29:44','admin','2017-10-25 14:29:44',NULL);
 
 /*Table structure for table `sw_order_detail` */
 
@@ -287,6 +293,268 @@ CREATE TABLE `sw_order_detail` (
 
 insert  into `sw_order_detail`(`id`,`order_no`,`order_seq_no`,`prod_no`,`prod_name`,`prod_type`,`prod_form`,`prod_long`,`prod_width`,`prod_num`,`prod_unit`,`prod_price_no`,`prod_price_express`,`prod_price`,`prod_amt`,`area`,`material_no`,`material_name`,`material_width`,`material_price_no`,`material_price_express`,`material_num`,`material_price`,`tech_no`,`tech_name`,`tech_price`,`tech_price_express`,`memo`,`prod_price1`,`if_prod`,`cate_type`,`create_no`,`create_time`,`modi_no`,`modi_time`,`version`) values (148,'D-20171025142941-01700','1','sdddxxx','台布','df','ddd','10.00','0.00','0.00','米','df','df','0.00','2220.00','门窗','XXX0000','布料','0.00','dfdfdf','33434','100.00','0.00','fdfd','df','0.00','string','ddfdf','0.00','N','ddd','admin','2017-10-25 14:29:42','admin','2017-10-25 14:29:42',NULL),(149,'D-20171025142941-01700','2','dfdfdf','dfdfd','df','ddd','10.00','0.00','0.00','米','df','df','0.00','2220.00','门窗','XXX0000','布料','0.00','dfdfdf','33434','100.00','0.00','fdfd','df','0.00','string','ddfdf','0.00','N','ddd','admin','2017-10-25 14:29:42','admin','2017-10-25 14:29:42',NULL),(150,'D-20171025142942-34918','1','sdddxxx','台布','df','ddd','10.00','0.00','0.00','米','df','df','0.00','2220.00','门窗','XXX0000','布料','0.00','dfdfdf','33434','100.00','0.00','fdfd','df','0.00','string','ddfdf','0.00','N','ddd','admin','2017-10-25 14:29:42','admin','2017-10-25 14:29:42',NULL),(151,'D-20171025142942-34918','2','dfdfdf','dfdfd','df','ddd','10.00','0.00','0.00','米','df','df','0.00','2220.00','门窗','XXX0000','布料','0.00','dfdfdf','33434','100.00','0.00','fdfd','df','0.00','string','ddfdf','0.00','N','ddd','admin','2017-10-25 14:29:42','admin','2017-10-25 14:29:42',NULL),(152,'D-20171025142942-17265','1','sdddxxx','台布','df','ddd','10.00','0.00','0.00','米','df','df','0.00','2220.00','门窗','XXX0000','布料','0.00','dfdfdf','33434','100.00','0.00','fdfd','df','0.00','string','ddfdf','0.00','N','ddd','admin','2017-10-25 14:29:42','admin','2017-10-25 14:29:42',NULL),(153,'D-20171025142942-17265','2','dfdfdf','dfdfd','df','ddd','10.00','0.00','0.00','米','df','df','0.00','2220.00','门窗','XXX0000','布料','0.00','dfdfdf','33434','100.00','0.00','fdfd','df','0.00','string','ddfdf','0.00','N','ddd','admin','2017-10-25 14:29:42','admin','2017-10-25 14:29:42',NULL),(154,'D-20171025142942-03027','1','sdddxxx','台布','df','ddd','10.00','0.00','0.00','米','df','df','0.00','2220.00','门窗','XXX0000','布料','0.00','dfdfdf','33434','100.00','0.00','fdfd','df','0.00','string','ddfdf','0.00','N','ddd','admin','2017-10-25 14:29:43','admin','2017-10-25 14:29:43',NULL),(155,'D-20171025142942-03027','2','dfdfdf','dfdfd','df','ddd','10.00','0.00','0.00','米','df','df','0.00','2220.00','门窗','XXX0000','布料','0.00','dfdfdf','33434','100.00','0.00','fdfd','df','0.00','string','ddfdf','0.00','N','ddd','admin','2017-10-25 14:29:43','admin','2017-10-25 14:29:43',NULL),(156,'D-20171025142942-13612','1','sdddxxx','台布','df','ddd','10.00','0.00','0.00','米','df','df','0.00','2220.00','门窗','XXX0000','布料','0.00','dfdfdf','33434','100.00','0.00','fdfd','df','0.00','string','ddfdf','0.00','N','ddd','admin','2017-10-25 14:29:43','admin','2017-10-25 14:29:43',NULL),(157,'D-20171025142942-13612','2','dfdfdf','dfdfd','df','ddd','10.00','0.00','0.00','米','df','df','0.00','2220.00','门窗','XXX0000','布料','0.00','dfdfdf','33434','100.00','0.00','fdfd','df','0.00','string','ddfdf','0.00','N','ddd','admin','2017-10-25 14:29:43','admin','2017-10-25 14:29:43',NULL),(158,'D-20171025142942-84467','1','sdddxxx','台布','df','ddd','10.00','0.00','0.00','米','df','df','0.00','2220.00','门窗','XXX0000','布料','0.00','dfdfdf','33434','100.00','0.00','fdfd','df','0.00','string','ddfdf','0.00','N','ddd','admin','2017-10-25 14:29:43','admin','2017-10-25 14:29:43',NULL),(159,'D-20171025142942-84467','2','dfdfdf','dfdfd','df','ddd','10.00','0.00','0.00','米','df','df','0.00','2220.00','门窗','XXX0000','布料','0.00','dfdfdf','33434','100.00','0.00','fdfd','df','0.00','string','ddfdf','0.00','N','ddd','admin','2017-10-25 14:29:43','admin','2017-10-25 14:29:43',NULL),(160,'D-20171025142943-90935','1','sdddxxx','台布','df','ddd','10.00','0.00','0.00','米','df','df','0.00','2220.00','门窗','XXX0000','布料','0.00','dfdfdf','33434','100.00','0.00','fdfd','df','0.00','string','ddfdf','0.00','N','ddd','admin','2017-10-25 14:29:43','admin','2017-10-25 14:29:43',NULL),(161,'D-20171025142943-90935','2','dfdfdf','dfdfd','df','ddd','10.00','0.00','0.00','米','df','df','0.00','2220.00','门窗','XXX0000','布料','0.00','dfdfdf','33434','100.00','0.00','fdfd','df','0.00','string','ddfdf','0.00','N','ddd','admin','2017-10-25 14:29:43','admin','2017-10-25 14:29:43',NULL),(162,'D-20171025142943-77480','1','sdddxxx','台布','df','ddd','10.00','0.00','0.00','米','df','df','0.00','2220.00','门窗','XXX0000','布料','0.00','dfdfdf','33434','100.00','0.00','fdfd','df','0.00','string','ddfdf','0.00','N','ddd','admin','2017-10-25 14:29:43','admin','2017-10-25 14:29:43',NULL),(163,'D-20171025142943-77480','2','dfdfdf','dfdfd','df','ddd','10.00','0.00','0.00','米','df','df','0.00','2220.00','门窗','XXX0000','布料','0.00','dfdfdf','33434','100.00','0.00','fdfd','df','0.00','string','ddfdf','0.00','N','ddd','admin','2017-10-25 14:29:43','admin','2017-10-25 14:29:43',NULL),(164,'D-20171025142943-01443','1','sdddxxx','台布','df','ddd','10.00','0.00','0.00','米','df','df','0.00','2220.00','门窗','XXX0000','布料','0.00','dfdfdf','33434','100.00','0.00','fdfd','df','0.00','string','ddfdf','0.00','N','ddd','admin','2017-10-25 14:29:43','admin','2017-10-25 14:29:43',NULL),(165,'D-20171025142943-01443','2','dfdfdf','dfdfd','df','ddd','10.00','0.00','0.00','米','df','df','0.00','2220.00','门窗','XXX0000','布料','0.00','dfdfdf','33434','100.00','0.00','fdfd','df','0.00','string','ddfdf','0.00','N','ddd','admin','2017-10-25 14:29:43','admin','2017-10-25 14:29:43',NULL),(166,'D-20171025142943-31701','1','sdddxxx','台布','df','ddd','10.00','0.00','0.00','米','df','df','0.00','2220.00','门窗','XXX0000','布料','0.00','dfdfdf','33434','100.00','0.00','fdfd','df','0.00','string','ddfdf','0.00','N','ddd','admin','2017-10-25 14:29:44','admin','2017-10-25 14:29:44',NULL),(167,'D-20171025142943-31701','2','dfdfdf','dfdfd','df','ddd','10.00','0.00','0.00','米','df','df','0.00','2220.00','门窗','XXX0000','布料','0.00','dfdfdf','33434','100.00','0.00','fdfd','df','0.00','string','ddfdf','0.00','N','ddd','admin','2017-10-25 14:29:44','admin','2017-10-25 14:29:44',NULL),(168,'D-20171025142943-20706','1','sdddxxx','台布','df','ddd','10.00','0.00','0.00','米','df','df','0.00','2220.00','门窗','XXX0000','布料','0.00','dfdfdf','33434','100.00','0.00','fdfd','df','0.00','string','ddfdf','0.00','N','ddd','admin','2017-10-25 14:29:44','admin','2017-10-25 14:29:44',NULL),(169,'D-20171025142943-20706','2','dfdfdf','dfdfd','df','ddd','10.00','0.00','0.00','米','df','df','0.00','2220.00','门窗','XXX0000','布料','0.00','dfdfdf','33434','100.00','0.00','fdfd','df','0.00','string','ddfdf','0.00','N','ddd','admin','2017-10-25 14:29:44','admin','2017-10-25 14:29:44',NULL),(170,'D-20171025142943-75119','1','sdddxxx','台布','df','ddd','10.00','0.00','0.00','米','df','df','0.00','2220.00','门窗','XXX0000','布料','0.00','dfdfdf','33434','100.00','0.00','fdfd','df','0.00','string','ddfdf','0.00','N','ddd','admin','2017-10-25 14:29:44','admin','2017-10-25 14:29:44',NULL),(171,'D-20171025142943-75119','2','dfdfdf','dfdfd','df','ddd','10.00','0.00','0.00','米','df','df','0.00','2220.00','门窗','XXX0000','布料','0.00','dfdfdf','33434','100.00','0.00','fdfd','df','0.00','string','ddfdf','0.00','N','ddd','admin','2017-10-25 14:29:44','admin','2017-10-25 14:29:44',NULL),(172,'D-20171025142944-52321','1','sdddxxx','台布','df','ddd','10.00','0.00','0.00','米','df','df','0.00','2220.00','门窗','XXX0000','布料','0.00','dfdfdf','33434','100.00','0.00','fdfd','df','0.00','string','ddfdf','0.00','N','ddd','admin','2017-10-25 14:29:44','admin','2017-10-25 14:29:44',NULL),(173,'D-20171025142944-52321','2','dfdfdf','dfdfd','df','ddd','10.00','0.00','0.00','米','df','df','0.00','2220.00','门窗','XXX0000','布料','0.00','dfdfdf','33434','100.00','0.00','fdfd','df','0.00','string','ddfdf','0.00','N','ddd','admin','2017-10-25 14:29:44','admin','2017-10-25 14:29:44',NULL),(174,'D-20171025142944-77057','1','sdddxxx','台布','df','ddd','10.00','0.00','0.00','米','df','df','0.00','2220.00','门窗','XXX0000','布料','0.00','dfdfdf','33434','100.00','0.00','fdfd','df','0.00','string','ddfdf','0.00','N','ddd','admin','2017-10-25 14:29:44','admin','2017-10-25 14:29:44',NULL),(175,'D-20171025142944-77057','2','dfdfdf','dfdfd','df','ddd','10.00','0.00','0.00','米','df','df','0.00','2220.00','门窗','XXX0000','布料','0.00','dfdfdf','33434','100.00','0.00','fdfd','df','0.00','string','ddfdf','0.00','N','ddd','admin','2017-10-25 14:29:44','admin','2017-10-25 14:29:44',NULL),(176,'D-20171025142944-64124','1','sdddxxx','台布','df','ddd','10.00','0.00','0.00','米','df','df','0.00','2220.00','门窗','XXX0000','布料','0.00','dfdfdf','33434','100.00','0.00','fdfd','df','0.00','string','ddfdf','0.00','N','ddd','admin','2017-10-25 14:29:44','admin','2017-10-25 14:29:44',NULL),(177,'D-20171025142944-64124','2','dfdfdf','dfdfd','df','ddd','10.00','0.00','0.00','米','df','df','0.00','2220.00','门窗','XXX0000','布料','0.00','dfdfdf','33434','100.00','0.00','fdfd','df','0.00','string','ddfdf','0.00','N','ddd','admin','2017-10-25 14:29:44','admin','2017-10-25 14:29:44',NULL);
 
+/*Table structure for table `sw_purchase_base` */
+
+DROP TABLE IF EXISTS `sw_purchase_base`;
+
+CREATE TABLE `sw_purchase_base` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增主键ID',
+  `pur_no` varchar(32) DEFAULT NULL COMMENT '采购单号',
+  `pur_date` date DEFAULT NULL COMMENT '申购日期',
+  `expect_date` date DEFAULT NULL COMMENT '预计到货日期',
+  `resp_name` varchar(32) DEFAULT NULL COMMENT '业务负责人',
+  `supply_comp_no` varchar(32) DEFAULT NULL COMMENT '供货方编号',
+  `supply_comp_name` varchar(128) DEFAULT NULL COMMENT '供货方名称',
+  `supply_contact_name` varchar(64) DEFAULT NULL COMMENT '供货方联系人',
+  `supply_mobile` varchar(16) DEFAULT NULL COMMENT '供货方手机',
+  `supply_phone` varchar(16) DEFAULT NULL COMMENT '供货方电话',
+  `supply_tax` varchar(16) DEFAULT NULL COMMENT '供货方传真',
+  `supply_addr` varchar(256) DEFAULT NULL COMMENT '供货方地址',
+  `pur_amt` decimal(20,2) DEFAULT NULL COMMENT '采购金额',
+  `pur_num` decimal(20,2) DEFAULT NULL COMMENT '采购数量',
+  `pur_status` varchar(32) DEFAULT NULL COMMENT '采购状态',
+  `memo` varchar(256) DEFAULT NULL COMMENT '备注',
+  `create_no` varchar(32) DEFAULT NULL COMMENT '创建人',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `modi_no` varchar(32) DEFAULT NULL COMMENT '修改人',
+  `modi_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+  `version` int(11) DEFAULT '0' COMMENT '版本号',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8 COMMENT='采购单总表';
+
+/*Data for the table `sw_purchase_base` */
+
+insert  into `sw_purchase_base`(`id`,`pur_no`,`pur_date`,`expect_date`,`resp_name`,`supply_comp_no`,`supply_comp_name`,`supply_contact_name`,`supply_mobile`,`supply_phone`,`supply_tax`,`supply_addr`,`pur_amt`,`pur_num`,`pur_status`,`memo`,`create_no`,`create_time`,`modi_no`,`modi_time`,`version`) values (58,'C-20171107172541-23612','2017-11-07','2017-10-01','张三','123111','XX科技有限公司','李四','12536666','13644444','021-099333','山东即墨','600.00','60.00','WAIT_APPLY','测试demo','admin','2017-11-07 17:25:42','admin','2017-11-07 17:25:42',0);
+
+/*Table structure for table `sw_purchase_detail` */
+
+DROP TABLE IF EXISTS `sw_purchase_detail`;
+
+CREATE TABLE `sw_purchase_detail` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增主键ID',
+  `pur_no` varchar(32) DEFAULT NULL COMMENT '采购单号',
+  `pur_seq_no` varchar(32) DEFAULT NULL COMMENT '采购单序号',
+  `order_no` varchar(32) DEFAULT NULL COMMENT '订单号',
+  `order_seq_no` varchar(32) DEFAULT NULL COMMENT '订单序号',
+  `material_no` varchar(32) DEFAULT NULL COMMENT '物料编号',
+  `material_name` varchar(32) DEFAULT NULL COMMENT '物料名称',
+  `material_type` varchar(32) DEFAULT NULL COMMENT '物料分类',
+  `spec` varchar(100) DEFAULT NULL COMMENT '规格',
+  `pattern` varchar(100) DEFAULT NULL COMMENT '型号',
+  `unit` varchar(12) DEFAULT NULL COMMENT '单位',
+  `num` decimal(20,2) DEFAULT NULL COMMENT '数量',
+  `price` decimal(20,2) DEFAULT NULL COMMENT '单价',
+  `amt` decimal(20,2) DEFAULT NULL COMMENT '金额',
+  `memo` varchar(256) DEFAULT NULL COMMENT '备注',
+  `create_no` varchar(32) DEFAULT NULL COMMENT '创建人',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `modi_no` varchar(32) DEFAULT NULL COMMENT '修改人',
+  `modi_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+  `version` int(11) DEFAULT '0' COMMENT '版本号',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=99 DEFAULT CHARSET=utf8 COMMENT='采购单明细表';
+
+/*Data for the table `sw_purchase_detail` */
+
+insert  into `sw_purchase_detail`(`id`,`pur_no`,`pur_seq_no`,`order_no`,`order_seq_no`,`material_no`,`material_name`,`material_type`,`spec`,`pattern`,`unit`,`num`,`price`,`amt`,`memo`,`create_no`,`create_time`,`modi_no`,`modi_time`,`version`) values (97,'C-20171107172541-23612','1','D-20171025142941-01700','1','KBLT-DZ-54','口布雨','PROD','超棉文艺复兴','方','米','50.00','10.00','500.00','测试','admin','2017-11-07 17:25:42','admin','2017-11-07 17:25:42',0),(98,'C-20171107172541-23612','2','D-20171025142941-01700','1','TBYD','圆底台布11','COTTON','超棉文艺复兴','方','米','10.00','10.00','100.00','测试','admin','2017-11-07 17:25:42','admin','2017-11-07 17:25:42',0);
+
+/*Table structure for table `sw_receive_base` */
+
+DROP TABLE IF EXISTS `sw_receive_base`;
+
+CREATE TABLE `sw_receive_base` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增主键ID',
+  `recv_no` varchar(32) DEFAULT NULL COMMENT '领料单号',
+  `recv_date` date DEFAULT NULL COMMENT '领料单日期',
+  `recver` varchar(32) DEFAULT NULL COMMENT '领料人',
+  `recv_status` varchar(16) DEFAULT NULL COMMENT '状态',
+  `use_way` varchar(512) DEFAULT NULL COMMENT '用途',
+  `num` decimal(20,2) DEFAULT NULL COMMENT '数量',
+  `memo` varchar(1024) DEFAULT NULL COMMENT '备注',
+  `create_no` varchar(32) DEFAULT NULL COMMENT '创建人',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `modi_no` varchar(32) DEFAULT NULL COMMENT '修改人',
+  `modi_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+  `version` int(11) DEFAULT '0' COMMENT '版本号',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='领料单总表';
+
+/*Data for the table `sw_receive_base` */
+
+/*Table structure for table `sw_receive_detail` */
+
+DROP TABLE IF EXISTS `sw_receive_detail`;
+
+CREATE TABLE `sw_receive_detail` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增主键ID',
+  `recv_no` varchar(32) DEFAULT NULL COMMENT '领料单号',
+  `recv_seq_no` varchar(32) DEFAULT NULL COMMENT '领料单序号',
+  `material_no` varchar(32) DEFAULT NULL COMMENT '物料编号',
+  `material_name` varchar(32) DEFAULT NULL COMMENT '物料名称',
+  `material_type` varchar(32) DEFAULT NULL COMMENT '物料分类',
+  `spec` varchar(100) DEFAULT NULL COMMENT '规格',
+  `pattern` varchar(100) DEFAULT NULL COMMENT '型号',
+  `unit` varchar(12) DEFAULT NULL COMMENT '单位',
+  `num` decimal(20,2) DEFAULT NULL COMMENT '数量',
+  `create_no` varchar(32) DEFAULT NULL COMMENT '创建人',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `modi_no` varchar(32) DEFAULT NULL COMMENT '修改人',
+  `modi_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+  `version` int(11) DEFAULT '0' COMMENT '版本号',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='领料单明细表';
+
+/*Data for the table `sw_receive_detail` */
+
+/*Table structure for table `sw_return_base` */
+
+DROP TABLE IF EXISTS `sw_return_base`;
+
+CREATE TABLE `sw_return_base` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增主键ID',
+  `return_no` varchar(32) DEFAULT NULL COMMENT '退货单号',
+  `return_date` date DEFAULT NULL COMMENT '退货日期',
+  `resp_name` varchar(32) DEFAULT NULL COMMENT '业务负责人',
+  `supply_comp_no` varchar(32) DEFAULT NULL COMMENT '供货方编号',
+  `supply_comp_name` varchar(128) DEFAULT NULL COMMENT '供货方名称',
+  `supply_contact_name` varchar(64) DEFAULT NULL COMMENT '供货方联系人',
+  `supply_mobile` varchar(16) DEFAULT NULL COMMENT '供货方手机',
+  `supply_phone` varchar(16) DEFAULT NULL COMMENT '供货方电话',
+  `supply_tax` varchar(16) DEFAULT NULL COMMENT '供货方传真',
+  `supply_addr` varchar(256) DEFAULT NULL COMMENT '供货方地址',
+  `return_amt` decimal(20,2) DEFAULT NULL COMMENT '退货金额',
+  `return_num` decimal(20,2) DEFAULT NULL COMMENT '退货数量',
+  `return_reason` varchar(256) DEFAULT NULL COMMENT '退货原因',
+  `return_status` varchar(32) DEFAULT NULL COMMENT '退货状态',
+  `memo` varchar(256) DEFAULT NULL COMMENT '备注',
+  `create_no` varchar(32) DEFAULT NULL COMMENT '创建人',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `modi_no` varchar(32) DEFAULT NULL COMMENT '修改人',
+  `modi_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+  `version` int(11) DEFAULT '0' COMMENT '版本号',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COMMENT='退货单总表';
+
+/*Data for the table `sw_return_base` */
+
+insert  into `sw_return_base`(`id`,`return_no`,`return_date`,`resp_name`,`supply_comp_no`,`supply_comp_name`,`supply_contact_name`,`supply_mobile`,`supply_phone`,`supply_tax`,`supply_addr`,`return_amt`,`return_num`,`return_reason`,`return_status`,`memo`,`create_no`,`create_time`,`modi_no`,`modi_time`,`version`) values (1,'C-20171106193614-95281','2017-11-06','string','rrrrrrrrrrr','rrr','rrrrrrr','3333333333','333','333','rr','20.00','20.00','rrr','WAIT_APPLY','44444444','admin','2017-11-06 19:36:14','admin','2017-11-06 19:36:14',0),(2,'C-20171106193617-28710','2017-11-06','string','rrrrrrrrrrr','rrr','rrrrrrr','3333333333','333','333','rr','20.00','20.00','rrr','WAIT_APPLY','44444444','admin','2017-11-06 19:36:18','admin','2017-11-06 19:36:18',0),(3,'C-20171106193618-21522','2017-11-06','string','rrrrrrrrrrr','rrr','rrrrrrr','3333333333','333','333','rr','20.00','20.00','rrr','WAIT_AUDIT','44444444','admin','2017-11-06 19:36:18','admin','2017-11-06 20:12:23',0),(4,'C-20171106193618-93951','2017-11-06','string','rrrrrrrrrrr','rrr','rrrrrrr','3333333333','333','333','rr','20.00','20.00','rrr','WAIT_APPLY','44444444','admin','2017-11-06 19:36:18','admin','2017-11-06 19:36:18',0),(5,'C-20171106193618-75379','2017-11-06','string','rrrrrrrrrrr','rrr','rrrrrrr','3333333333','333','333','rr','20.00','20.00','rrr','WAIT_APPLY','44444444','admin','2017-11-06 19:36:18','admin','2017-11-06 19:36:18',0),(6,'C-20171106193618-02797','2017-11-06','string','rrrrrrrrrrr','rrr','rrrrrrr','3333333333','333','333','rr','20.00','20.00','rrr','WAIT_APPLY','44444444','admin','2017-11-06 19:36:19','admin','2017-11-06 19:36:19',0),(7,'C-20171106193618-43614','2017-11-06','string','rrrrrrrrrrr','rrr','rrrrrrr','3333333333','333','333','rr','20.00','20.00','rrr','WAIT_APPLY','44444444','admin','2017-11-06 19:36:19','admin','2017-11-06 19:36:19',0),(8,'C-20171106193619-55986','2017-11-06','string','rrrrrrrrrrr','rrr','rrrrrrr','3333333333','333','333','rr','20.00','20.00','rrr','WAIT_APPLY','44444444','admin','2017-11-06 19:36:19','admin','2017-11-06 19:36:19',0),(9,'C-20171106193619-33678','2017-11-06','string','rrrrrrrrrrr','rrr','rrrrrrr','3333333333','333','333','rr','20.00','20.00','rrr','WAIT_APPLY','44444444','admin','2017-11-06 19:36:19','admin','2017-11-06 19:36:19',0),(10,'C-20171106193619-71314','2017-11-06','string','rrrrrrrrrrr','rrr','rrrrrrr','3333333333','333','333','rr','20.00','20.00','rrr','WAIT_APPLY','44444444','admin','2017-11-06 19:36:19','admin','2017-11-06 19:36:19',0),(11,'C-20171106193619-58635','2017-11-06','string','rrrrrrrrrrr','rrr','rrrrrrr','3333333333','333','333','rr','20.00','20.00','rrr','WAIT_APPLY','44444444','admin','2017-11-06 19:36:20','admin','2017-11-06 19:36:20',0),(12,'C-20171106193619-13516','2017-11-06','string','rrrrrrrrrrr','rrr','rrrrrrr','3333333333','333','333','rr','20.00','20.00','rrr','WAIT_APPLY','44444444','admin','2017-11-06 19:36:20','admin','2017-11-06 19:36:20',0),(13,'C-20171106193619-49402','2017-11-06','string','rrrrrrrrrrr','rrr','rrrrrrr','3333333333','333','333','rr','20.00','20.00','rrr','WAIT_APPLY','44444444','admin','2017-11-06 19:36:20','admin','2017-11-06 19:36:20',0),(14,'C-20171106193620-92645','2017-11-06','string','rrrrrrrrrrr','rrr','rrrrrrr','3333333333','333','333','rr','20.00','20.00','rrr','WAIT_APPLY','44444444','admin','2017-11-06 19:36:20','admin','2017-11-06 19:36:20',0);
+
+/*Table structure for table `sw_return_detail` */
+
+DROP TABLE IF EXISTS `sw_return_detail`;
+
+CREATE TABLE `sw_return_detail` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增主键ID',
+  `return_no` varchar(32) DEFAULT NULL COMMENT '退货单号',
+  `return_seq_no` varchar(32) DEFAULT NULL COMMENT '退货单序号',
+  `pur_no` varchar(32) DEFAULT NULL COMMENT '采购单号',
+  `pur_seq_no` varchar(32) DEFAULT NULL COMMENT '采购单序号',
+  `order_no` varchar(32) DEFAULT NULL COMMENT '订单号',
+  `order_seq_no` varchar(32) DEFAULT NULL COMMENT '订单序号',
+  `material_no` varchar(32) DEFAULT NULL COMMENT '物料编号',
+  `material_name` varchar(32) DEFAULT NULL COMMENT '物料名称',
+  `material_type` varchar(32) DEFAULT NULL COMMENT '物料分类',
+  `spec` varchar(100) DEFAULT NULL COMMENT '规格',
+  `pattern` varchar(100) DEFAULT NULL COMMENT '型号',
+  `unit` varchar(12) DEFAULT NULL COMMENT '单位',
+  `num` decimal(20,2) DEFAULT NULL COMMENT '数量',
+  `price` decimal(20,2) DEFAULT NULL COMMENT '单价',
+  `amt` decimal(20,2) DEFAULT NULL COMMENT '金额',
+  `return_reason` varchar(256) DEFAULT NULL COMMENT '退货原因',
+  `memo` varchar(256) DEFAULT NULL COMMENT '备注',
+  `create_no` varchar(32) DEFAULT NULL COMMENT '创建人',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `modi_no` varchar(32) DEFAULT NULL COMMENT '修改人',
+  `modi_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+  `version` int(11) DEFAULT '0' COMMENT '版本号',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8 COMMENT='退货明细表';
+
+/*Data for the table `sw_return_detail` */
+
+insert  into `sw_return_detail`(`id`,`return_no`,`return_seq_no`,`pur_no`,`pur_seq_no`,`order_no`,`order_seq_no`,`material_no`,`material_name`,`material_type`,`spec`,`pattern`,`unit`,`num`,`price`,`amt`,`return_reason`,`memo`,`create_no`,`create_time`,`modi_no`,`modi_time`,`version`) values (1,'C-20171106193614-95281','1','string','string','string','string','string','string','string','string','string','string','10.00','0.00','10.00','string','string','admin','2017-11-06 19:36:14','admin','2017-11-06 19:36:14',0),(2,'C-20171106193614-95281','2','string','string','string','string','string','string','string','string','string','string','10.00','0.00','10.00','string','string','admin','2017-11-06 19:36:14','admin','2017-11-06 19:36:14',0),(3,'C-20171106193617-28710','1','string','string','string','string','string','string','string','string','string','string','10.00','0.00','10.00','string','string','admin','2017-11-06 19:36:18','admin','2017-11-06 19:36:18',0),(4,'C-20171106193617-28710','2','string','string','string','string','string','string','string','string','string','string','10.00','0.00','10.00','string','string','admin','2017-11-06 19:36:18','admin','2017-11-06 19:36:18',0),(5,'C-20171106193618-21522','1','string','string','string','string','string','string','string','string','string','string','10.00','0.00','10.00','string','string','admin','2017-11-06 19:36:18','admin','2017-11-06 19:36:18',0),(6,'C-20171106193618-21522','2','string','string','string','string','string','string','string','string','string','string','10.00','0.00','10.00','string','string','admin','2017-11-06 19:36:18','admin','2017-11-06 19:36:18',0),(7,'C-20171106193618-93951','1','string','string','string','string','string','string','string','string','string','string','10.00','0.00','10.00','string','string','admin','2017-11-06 19:36:18','admin','2017-11-06 19:36:18',0),(8,'C-20171106193618-93951','2','string','string','string','string','string','string','string','string','string','string','10.00','0.00','10.00','string','string','admin','2017-11-06 19:36:18','admin','2017-11-06 19:36:18',0),(9,'C-20171106193618-75379','1','string','string','string','string','string','string','string','string','string','string','10.00','0.00','10.00','string','string','admin','2017-11-06 19:36:18','admin','2017-11-06 19:36:18',0),(10,'C-20171106193618-75379','2','string','string','string','string','string','string','string','string','string','string','10.00','0.00','10.00','string','string','admin','2017-11-06 19:36:18','admin','2017-11-06 19:36:18',0),(11,'C-20171106193618-02797','1','string','string','string','string','string','string','string','string','string','string','10.00','0.00','10.00','string','string','admin','2017-11-06 19:36:19','admin','2017-11-06 19:36:19',0),(12,'C-20171106193618-02797','2','string','string','string','string','string','string','string','string','string','string','10.00','0.00','10.00','string','string','admin','2017-11-06 19:36:19','admin','2017-11-06 19:36:19',0),(13,'C-20171106193618-43614','1','string','string','string','string','string','string','string','string','string','string','10.00','0.00','10.00','string','string','admin','2017-11-06 19:36:19','admin','2017-11-06 19:36:19',0),(14,'C-20171106193618-43614','2','string','string','string','string','string','string','string','string','string','string','10.00','0.00','10.00','string','string','admin','2017-11-06 19:36:19','admin','2017-11-06 19:36:19',0),(15,'C-20171106193619-55986','1','string','string','string','string','string','string','string','string','string','string','10.00','0.00','10.00','string','string','admin','2017-11-06 19:36:19','admin','2017-11-06 19:36:19',0),(16,'C-20171106193619-55986','2','string','string','string','string','string','string','string','string','string','string','10.00','0.00','10.00','string','string','admin','2017-11-06 19:36:19','admin','2017-11-06 19:36:19',0),(17,'C-20171106193619-33678','1','string','string','string','string','string','string','string','string','string','string','10.00','0.00','10.00','string','string','admin','2017-11-06 19:36:19','admin','2017-11-06 19:36:19',0),(18,'C-20171106193619-33678','2','string','string','string','string','string','string','string','string','string','string','10.00','0.00','10.00','string','string','admin','2017-11-06 19:36:19','admin','2017-11-06 19:36:19',0),(19,'C-20171106193619-71314','1','string','string','string','string','string','string','string','string','string','string','10.00','0.00','10.00','string','string','admin','2017-11-06 19:36:19','admin','2017-11-06 19:36:19',0),(20,'C-20171106193619-71314','2','string','string','string','string','string','string','string','string','string','string','10.00','0.00','10.00','string','string','admin','2017-11-06 19:36:19','admin','2017-11-06 19:36:19',0),(21,'C-20171106193619-58635','1','string','string','string','string','string','string','string','string','string','string','10.00','0.00','10.00','string','string','admin','2017-11-06 19:36:20','admin','2017-11-06 19:36:20',0),(22,'C-20171106193619-58635','2','string','string','string','string','string','string','string','string','string','string','10.00','0.00','10.00','string','string','admin','2017-11-06 19:36:20','admin','2017-11-06 19:36:20',0),(23,'C-20171106193619-13516','1','string','string','string','string','string','string','string','string','string','string','10.00','0.00','10.00','string','string','admin','2017-11-06 19:36:20','admin','2017-11-06 19:36:20',0),(24,'C-20171106193619-13516','2','string','string','string','string','string','string','string','string','string','string','10.00','0.00','10.00','string','string','admin','2017-11-06 19:36:20','admin','2017-11-06 19:36:20',0),(25,'C-20171106193619-49402','1','string','string','string','string','string','string','string','string','string','string','10.00','0.00','10.00','string','string','admin','2017-11-06 19:36:20','admin','2017-11-06 19:36:20',0),(26,'C-20171106193619-49402','2','string','string','string','string','string','string','string','string','string','string','10.00','0.00','10.00','string','string','admin','2017-11-06 19:36:20','admin','2017-11-06 19:36:20',0),(27,'C-20171106193620-92645','1','string','string','string','string','string','string','string','string','string','string','10.00','0.00','10.00','string','string','admin','2017-11-06 19:36:20','admin','2017-11-06 19:36:20',0),(28,'C-20171106193620-92645','2','string','string','string','string','string','string','string','string','string','string','10.00','0.00','10.00','string','string','admin','2017-11-06 19:36:20','admin','2017-11-06 19:36:20',0);
+
+/*Table structure for table `sw_stock_in` */
+
+DROP TABLE IF EXISTS `sw_stock_in`;
+
+CREATE TABLE `sw_stock_in` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增主键ID',
+  `stk_in_no` varchar(32) DEFAULT NULL COMMENT '入库单编号',
+  `order_no` varchar(32) DEFAULT NULL COMMENT '单据编号',
+  `order_seq_no` varchar(32) DEFAULT NULL COMMENT '单据序号',
+  `source_type` varchar(32) DEFAULT NULL COMMENT '来源类型',
+  `source_no` varchar(32) DEFAULT NULL COMMENT '来源单号',
+  `source_seq_no` varchar(32) DEFAULT NULL COMMENT '来源序号',
+  `material_no` varchar(32) DEFAULT NULL COMMENT '物料编号',
+  `material_name` varchar(32) DEFAULT NULL COMMENT '物料名称',
+  `material_type` varchar(32) DEFAULT NULL COMMENT '物料分类',
+  `spec` varchar(100) DEFAULT NULL COMMENT '规格',
+  `pattern` varchar(100) DEFAULT NULL COMMENT '型号',
+  `unit` varchar(12) DEFAULT NULL COMMENT '单位',
+  `material_stock` varchar(32) DEFAULT NULL COMMENT '所属仓库',
+  `num` decimal(20,2) DEFAULT NULL COMMENT '入库数量',
+  `status` varchar(32) DEFAULT NULL COMMENT '入库状态',
+  `create_no` varchar(32) DEFAULT NULL COMMENT '创建人',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `modi_no` varchar(32) DEFAULT NULL COMMENT '修改人',
+  `modi_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+  `version` int(11) DEFAULT '0' COMMENT '版本号',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COMMENT='入库单表';
+
+/*Data for the table `sw_stock_in` */
+
+insert  into `sw_stock_in`(`id`,`stk_in_no`,`order_no`,`order_seq_no`,`source_type`,`source_no`,`source_seq_no`,`material_no`,`material_name`,`material_type`,`spec`,`pattern`,`unit`,`material_stock`,`num`,`status`,`create_no`,`create_time`,`modi_no`,`modi_time`,`version`) values (4,'S-20171107170704-48852',NULL,NULL,NULL,NULL,NULL,'TBYD','圆底台布11','COTTON','超棉文艺复兴','圆','米','tt','0.00',NULL,'admin','2017-11-07 17:07:05','admin','2017-11-07 17:07:44',NULL),(5,'S-20171107170746-34371',NULL,NULL,NULL,NULL,NULL,'TBYD','圆底台布11','COTTON','超棉文艺复兴','圆','米','tt','0.00',NULL,'admin','2017-11-07 17:07:47','admin','2017-11-07 17:07:47',NULL),(6,'S-20171107170747-90717',NULL,NULL,NULL,NULL,NULL,'TBYD','圆底台布11','COTTON','超棉文艺复兴','圆','米','tt','0.00',NULL,'admin','2017-11-07 17:07:47','admin','2017-11-07 17:07:47',NULL),(7,'S-20171107170747-95701',NULL,NULL,NULL,NULL,NULL,'TBYD','圆底台布11','COTTON','超棉文艺复兴','圆','米','tt','0.00',NULL,'admin','2017-11-07 17:07:47','admin','2017-11-07 17:07:47',NULL),(8,'S-20171107170747-02661',NULL,NULL,NULL,NULL,NULL,'TBYD','圆底台布11','COTTON','超棉文艺复兴','圆','米','tt','0.00',NULL,'admin','2017-11-07 17:07:47','admin','2017-11-07 17:07:47',NULL),(9,'S-20171107170747-21260',NULL,NULL,NULL,NULL,NULL,'TBYD','圆底台布11','COTTON','超棉文艺复兴','圆','米','tt','0.00',NULL,'admin','2017-11-07 17:07:48','admin','2017-11-07 17:07:48',NULL),(10,'S-20171107170747-69531',NULL,NULL,NULL,NULL,NULL,'TBYD','圆底台布11','COTTON','超棉文艺复兴','圆','米','tt','0.00',NULL,'admin','2017-11-07 17:07:48','admin','2017-11-07 17:07:48',NULL),(11,'S-20171107170747-25211',NULL,NULL,NULL,NULL,NULL,'TBYD','圆底台布11','COTTON','超棉文艺复兴','圆','米','tt','0.00',NULL,'admin','2017-11-07 17:07:48','admin','2017-11-07 17:07:48',NULL),(12,'S-20171107170748-80198',NULL,NULL,NULL,NULL,NULL,'TBYD','圆底台布11','COTTON','超棉文艺复兴','圆','米','tt','0.00',NULL,'admin','2017-11-07 17:07:48','admin','2017-11-07 17:07:48',NULL),(13,'S-20171107171939-90900',NULL,NULL,NULL,NULL,NULL,'TBYD','圆底台布11','COTTON','超棉文艺复兴','圆','米','tt','0.00','WAIT_VERIFY','admin','2017-11-07 17:19:40','admin','2017-11-07 17:19:40',NULL),(14,'S-20171107172848-88065',NULL,NULL,NULL,NULL,NULL,'KBLT-DZ-54','口布雨','PROD','超棉文艺复兴','方','米','tt','50.00','WAIT_VERIFY','admin','2017-11-07 17:28:49','admin','2017-11-07 17:28:49',NULL),(15,'S-20171107172848-20646',NULL,NULL,NULL,NULL,NULL,'TBYD','圆底台布11','COTTON','超棉文艺复兴','方','米','tt','10.00','WAIT_VERIFY','admin','2017-11-07 17:28:49','admin','2017-11-07 17:28:49',NULL),(16,'S-20171107175823-25042','D-20171025142941-01700','1','C','C-20171107172541-23612','1','KBLT-DZ-54','口布雨','PROD','超棉文艺复兴','方','米','tt','50.00','WAIT_VERIFY','admin','2017-11-07 17:58:24','admin','2017-11-07 17:58:24',NULL),(17,'S-20171107175823-75194','D-20171025142941-01700','1','C','C-20171107172541-23612','2','TBYD','圆底台布11','COTTON','超棉文艺复兴','方','米','tt','10.00','WAIT_VERIFY','admin','2017-11-07 17:58:24','admin','2017-11-07 17:58:24',NULL);
+
+/*Table structure for table `sw_stock_info` */
+
+DROP TABLE IF EXISTS `sw_stock_info`;
+
+CREATE TABLE `sw_stock_info` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增主键ID',
+  `material_no` varchar(32) DEFAULT NULL COMMENT '物料编号',
+  `num` decimal(20,2) DEFAULT NULL COMMENT '有效数量',
+  `modi_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+  `version` int(11) DEFAULT '0' COMMENT '版本号',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='库存表';
+
+/*Data for the table `sw_stock_info` */
+
+insert  into `sw_stock_info`(`id`,`material_no`,`num`,`modi_time`,`version`) values (2,'TBYD','20.00','2017-11-07 17:58:24',11),(3,'KBLT-DZ-54','100.00','2017-11-07 17:58:24',1);
+
+/*Table structure for table `sw_stock_verify` */
+
+DROP TABLE IF EXISTS `sw_stock_verify`;
+
+CREATE TABLE `sw_stock_verify` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增主键ID',
+  `stk_in_no` varchar(32) DEFAULT NULL COMMENT '入库单编号',
+  `order_type` varchar(32) DEFAULT NULL COMMENT '单据类型',
+  `order_no` varchar(32) DEFAULT NULL COMMENT '单据编号',
+  `order_seq_no` varchar(32) DEFAULT NULL COMMENT '单据序号',
+  `material_no` varchar(32) DEFAULT NULL COMMENT '物料编号',
+  `material_name` varchar(32) DEFAULT NULL COMMENT '物料名称',
+  `material_type` varchar(32) DEFAULT NULL COMMENT '物料分类',
+  `spec` varchar(100) DEFAULT NULL COMMENT '规格',
+  `pattern` varchar(100) DEFAULT NULL COMMENT '型号',
+  `unit` varchar(12) DEFAULT NULL COMMENT '单位',
+  `material_stock` varchar(32) DEFAULT NULL COMMENT '所属仓库',
+  `num` decimal(20,2) DEFAULT NULL COMMENT '入库数量',
+  `stand_num` decimal(20,2) DEFAULT NULL COMMENT '合格数量',
+  `mois_rate` varchar(64) DEFAULT NULL COMMENT '含潮率',
+  `weight` varchar(64) DEFAULT NULL COMMENT '重量',
+  `quality` varchar(64) DEFAULT NULL COMMENT '品质',
+  `status` varchar(32) DEFAULT NULL COMMENT '检测状态',
+  `reason` varchar(100) DEFAULT NULL COMMENT '不合格原因',
+  `modi_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+  `version` int(11) DEFAULT '0' COMMENT '版本号',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='入库单校验信息表';
+
+/*Data for the table `sw_stock_verify` */
+
 /*Table structure for table `sys_audit_config` */
 
 DROP TABLE IF EXISTS `sys_audit_config`;
@@ -303,11 +571,11 @@ CREATE TABLE `sys_audit_config` (
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `modi_time` datetime DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COMMENT='审核配置表';
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COMMENT='审核配置表';
 
 /*Data for the table `sys_audit_config` */
 
-insert  into `sys_audit_config`(`id`,`audit_no`,`audit_type`,`audit_type_name`,`audit_action`,`audit_action_name`,`current_stage`,`next_stage`,`create_time`,`modi_time`) values (1,'ORDER&AUDIT_PASS&WAIT_AUDIT','ORDER','订单审核','AUDIT_PASS','初审成功','WAIT_AUDIT','AUDIT01_SUCCESS','2017-10-25 16:08:34','2017-10-25 16:08:36'),(2,'ORDER&AUDIT_PASS&AUDIT01_SUCCESS','ORDER','订单审核','AUDIT_PASS','终审成功','AUDIT01_SUCCESS','AUDIT_SUCCESS','2017-10-25 16:11:12','2017-10-25 16:11:14'),(3,'ORDER&AUDIT_REFUSE&AUDIT01_SUCCESS','ORDER','订单审核','AUDIT_REFUSE','拒绝','AUDIT01_SUCCESS','WAIT_AUDIT','2017-10-25 16:11:16','2017-10-25 16:13:28'),(4,'DELIVER&APPLY&WAIT_APPLY','DELIVER','发货单审核','APPLY','发起申请','WAIT_APPLY','WAIT_AUDIT','2017-10-26 15:51:51','2017-10-26 15:51:53'),(5,'DELIVER&AUDIT_PASS&WAIT_AUDIT','DELIVER','发货单审核','AUDIT_PASS','初审成功','WAIT_AUDIT','AUDIT01_SUCCESS','2017-10-26 15:51:56','2017-10-26 15:51:58'),(6,'DELIVER&AUDIT_REFUSE&WAIT_AUDIT','DELIVER','发货单审核','AUDIT_REFUSE','初审拒绝','WAIT_AUDIT','WAIT_APPLY','2017-10-26 15:53:12','2017-10-26 15:53:13'),(7,'DELIVER&AUDIT_PASS&AUDIT01_SUCCESS','DELIVER','发货单审核','AUDIT_PASS','终审通过','AUDIT01_SUCCESS','AUDIT_SUCCESS','2017-10-26 15:53:40','2017-10-26 15:53:42'),(8,'DELIVER&AUDIT_REFUSE&WAIT_AUDIT','DELIVER','发货单审核','AUDIT_REFUSE','终审拒绝','AUDIT01_SUCCESS','WAIT_APPLY','2017-10-26 15:54:46','2017-10-26 15:54:48'),(9,'DELIVER&CANCEL&WAIT_APPLY','DELIVER','发货单审核','CANCEL','作废','WAIT_APPLY','HAS_CANCEL','2017-10-26 15:55:55','2017-10-26 15:55:57');
+insert  into `sys_audit_config`(`id`,`audit_no`,`audit_type`,`audit_type_name`,`audit_action`,`audit_action_name`,`current_stage`,`next_stage`,`create_time`,`modi_time`) values (1,'ORDER&AUDIT_PASS&WAIT_AUDIT','ORDER','订单审核','AUDIT_PASS','初审成功','WAIT_AUDIT','AUDIT01_SUCCESS','2017-10-25 16:08:34','2017-10-25 16:08:36'),(2,'ORDER&AUDIT_PASS&AUDIT01_SUCCESS','ORDER','订单审核','AUDIT_PASS','终审成功','AUDIT01_SUCCESS','AUDIT_SUCCESS','2017-10-25 16:11:12','2017-10-25 16:11:14'),(3,'ORDER&AUDIT_REFUSE&AUDIT01_SUCCESS','ORDER','订单审核','AUDIT_REFUSE','拒绝','AUDIT01_SUCCESS','WAIT_AUDIT','2017-10-25 16:11:16','2017-10-25 16:13:28'),(4,'DELIVER&APPLY&WAIT_APPLY','DELIVER','发货单审核','APPLY','发起申请','WAIT_APPLY','WAIT_AUDIT','2017-10-26 15:51:51','2017-10-26 15:51:53'),(5,'DELIVER&AUDIT_PASS&WAIT_AUDIT','DELIVER','发货单审核','AUDIT_PASS','初审成功','WAIT_AUDIT','AUDIT01_SUCCESS','2017-10-26 15:51:56','2017-10-26 15:51:58'),(6,'DELIVER&AUDIT_REFUSE&WAIT_AUDIT','DELIVER','发货单审核','AUDIT_REFUSE','初审拒绝','WAIT_AUDIT','WAIT_APPLY','2017-10-26 15:53:12','2017-10-26 15:53:13'),(7,'DELIVER&AUDIT_PASS&AUDIT01_SUCCESS','DELIVER','发货单审核','AUDIT_PASS','终审通过','AUDIT01_SUCCESS','AUDIT_SUCCESS','2017-10-26 15:53:40','2017-10-26 15:53:42'),(8,'DELIVER&AUDIT_REFUSE&WAIT_AUDIT','DELIVER','发货单审核','AUDIT_REFUSE','终审拒绝','AUDIT01_SUCCESS','WAIT_APPLY','2017-10-26 15:54:46','2017-10-26 15:54:48'),(9,'DELIVER&CANCEL&WAIT_APPLY','DELIVER','发货单审核','CANCEL','作废','WAIT_APPLY','HAS_CANCEL','2017-10-26 15:55:55','2017-10-26 15:55:57'),(10,'PURCHASE&APPLY&WAIT_APPLY','PURCHASE','采购单审核','APPLY','发起申请','WAIT_APPLY','WAIT_AUDIT','2017-11-02 17:30:38','2017-11-02 17:30:38'),(11,'PURCHASE&AUDIT_PASS&WAIT_AUDIT','PURCHASE','采购单审核','AUDIT_PASS','初审成功','WAIT_AUDIT','AUDIT01_SUCCESS','2017-11-02 17:30:38','2017-11-02 17:30:38'),(12,'PURCHASE&AUDIT_REFUSE&WAIT_AUDIT','PURCHASE','采购单审核','AUDIT_REFUSE','初审拒绝','WAIT_AUDIT','WAIT_APPLY','2017-11-02 17:30:38','2017-11-02 17:30:38'),(13,'PURCHASE&AUDIT_PASS&AUDIT01_SUCCESS','PURCHASE','采购单审核','AUDIT_PASS','终审通过','AUDIT01_SUCCESS','AUDIT_SUCCESS','2017-11-02 17:30:38','2017-11-02 17:30:38'),(14,'PURCHASE&AUDIT_REFUSE&WAIT_AUDIT','PURCHASE','采购单审核','AUDIT_REFUSE','终审拒绝','AUDIT01_SUCCESS','WAIT_APPLY','2017-11-02 17:30:38','2017-11-02 17:30:38'),(15,'PURCHASE&CANCEL&WAIT_APPLY','PURCHASE','采购单审核','CANCEL','作废','WAIT_APPLY','HAS_CANCEL','2017-11-02 17:30:38','2017-11-02 17:30:38'),(16,'RETURN&APPLY&WAIT_APPLY','RETURN','退货单审核','APPLY','发起申请','WAIT_APPLY','WAIT_AUDIT','2017-11-06 19:38:01','2017-11-06 19:38:02'),(17,'RETURN&AUDIT_PASS&WAIT_AUDIT','RETURN','退货单审核','AUDIT_PASS','作废','WAIT_AUDIT','HAS_CANCEL','2017-11-06 19:39:32','2017-11-06 19:39:36'),(18,'RETURN&AUDIT_REFUSE&WAIT_AUDIT','RETURN','退货单审核','AUDIT_REFUSE','初审拒绝','WAIT_AUDIT','WAIT_APPLY','2017-11-06 19:42:34','2017-11-06 19:42:32'),(19,'RETURN&AUDIT_PASS&AUDIT01_SUCCESS','RETURN','退货单审核','AUDIT_PASS','终审通过','AUDIT01_SUCCESS','AUDIT_SUCCESS','2017-11-06 19:42:36','2017-11-06 19:42:31'),(20,'RETURN&AUDIT_REFUSE&WAIT_AUDIT','RETURN','退货单审核','AUDIT_REFUSE','终审拒绝','AUDIT01_SUCCESS','WAIT_APPLY','2017-11-06 19:42:38','2017-11-06 19:42:29'),(21,'RETURN&CANCEL&WAIT_APPLY','RETURN','退货单审核','CANCEL','作废','WAIT_APPLY','HAS_CANCEL','2017-11-06 19:42:26','2017-11-06 19:42:28');
 
 /*Table structure for table `sys_audit_log` */
 
@@ -328,11 +596,11 @@ CREATE TABLE `sys_audit_log` (
   `audit_time` datetime DEFAULT NULL COMMENT '审核时间',
   `audit_desc` varchar(128) DEFAULT NULL COMMENT '审核描述',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='审核日志表';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='审核日志表';
 
 /*Data for the table `sys_audit_log` */
 
-insert  into `sys_audit_log`(`id`,`source_no`,`audit_no`,`audit_type`,`audit_type_name`,`audit_action`,`audit_action_name`,`current_stage`,`next_stage`,`audit_user_no`,`audit_user_name`,`audit_time`,`audit_desc`) values (1,'D-20171025142941-01700','ORDER&AUDIT_PASS&WAIT_AUDIT','ORDER','订单审核','AUDIT_PASS','初审成功','WAIT_AUDIT','AUDIT01_SUCCESS','string','string','2017-10-25 17:50:53','测试'),(2,'D-20171025142941-01700','ORDER&AUDIT_PASS&AUDIT01_SUCCESS','ORDER','订单审核','AUDIT_PASS','终审成功','AUDIT01_SUCCESS','AUDIT_SUCCESS','string','string','2017-10-25 17:51:34','测试'),(3,'F-20171026154553-22138','DELIVER&APPLY&WAIT_APPLY','DELIVER','发货单审核','APPLY','发起申请','WAIT_APPLY','WAIT_AUDIT','admin',NULL,'2017-10-26 16:05:05','测试'),(4,'F-20171026154553-22138','DELIVER&AUDIT_PASS&WAIT_AUDIT','DELIVER','发货单审核','AUDIT_PASS','初审成功','WAIT_AUDIT','AUDIT01_SUCCESS','admin',NULL,'2017-10-26 16:08:28','测试'),(5,'F-20171026154553-22138','DELIVER&AUDIT_PASS&AUDIT01_SUCCESS','DELIVER','发货单审核','AUDIT_PASS','终审通过','AUDIT01_SUCCESS','AUDIT_SUCCESS','admin',NULL,'2017-10-26 16:09:36','测试');
+insert  into `sys_audit_log`(`id`,`source_no`,`audit_no`,`audit_type`,`audit_type_name`,`audit_action`,`audit_action_name`,`current_stage`,`next_stage`,`audit_user_no`,`audit_user_name`,`audit_time`,`audit_desc`) values (1,'D-20171025142941-01700','ORDER&AUDIT_PASS&WAIT_AUDIT','ORDER','订单审核','AUDIT_PASS','初审成功','WAIT_AUDIT','AUDIT01_SUCCESS','string','string','2017-10-25 17:50:53','测试'),(2,'D-20171025142941-01700','ORDER&AUDIT_PASS&AUDIT01_SUCCESS','ORDER','订单审核','AUDIT_PASS','终审成功','AUDIT01_SUCCESS','AUDIT_SUCCESS','string','string','2017-10-25 17:51:34','测试'),(3,'F-20171026154553-22138','DELIVER&APPLY&WAIT_APPLY','DELIVER','发货单审核','APPLY','发起申请','WAIT_APPLY','WAIT_AUDIT','admin',NULL,'2017-10-26 16:05:05','测试'),(4,'F-20171026154553-22138','DELIVER&AUDIT_PASS&WAIT_AUDIT','DELIVER','发货单审核','AUDIT_PASS','初审成功','WAIT_AUDIT','AUDIT01_SUCCESS','admin',NULL,'2017-10-26 16:08:28','测试'),(5,'F-20171026154553-22138','DELIVER&AUDIT_PASS&AUDIT01_SUCCESS','DELIVER','发货单审核','AUDIT_PASS','终审通过','AUDIT01_SUCCESS','AUDIT_SUCCESS','admin',NULL,'2017-10-26 16:09:36','测试'),(6,'C-20171106193618-21522','RETURN&APPLY&WAIT_APPLY','RETURN','退货单审核','APPLY','发起申请','WAIT_APPLY','WAIT_AUDIT','admin',NULL,'2017-11-06 20:12:23','string');
 
 /*Table structure for table `sys_dict` */
 
@@ -348,11 +616,11 @@ CREATE TABLE `sys_dict` (
   `fh_dict_code` varchar(32) DEFAULT NULL COMMENT '上级编码',
   `memo` varchar(128) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COMMENT='数据字典';
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COMMENT='数据字典';
 
 /*Data for the table `sys_dict` */
 
-insert  into `sys_dict`(`id`,`dict_type`,`dict_code`,`dict_name`,`dict_value`,`dict_desc`,`fh_dict_code`,`memo`) values (1,'ORDER_TYPE','SIMPLE_ORDER','样品单','SIMPLE_ORDER','样品单','','订单类型'),(2,'ORDER_TYPE','NORMAL_ORDER','正常单','NORMAL_ORDER','正常单','','订单类型'),(3,'ORDER_TYPE','ADD_ORDER','补单','ADD_ORDER','补单','','订单类型'),(4,'ORDER_TYPE','GIFT_ORDER','赠品','GIFT_ORDER','赠品','','订单类型'),(5,'ORDER_TYPE','ENGIN_ORDER','工程单','ENGIN_ORDER','工程单','','订单类型'),(6,'SALE_TYPE','INNER_SALE','内销','INNER_SALE','内销','','销售类型'),(7,'SALE_TYPE','OUT_SALE','外销','OUT_SALE','外销','','销售类型'),(8,'MATERIAL_TYPE','PROD','成品布','PROD','成品布','','物料类型'),(9,'MATERIAL_TYPE','COTTON ','面料','COTTON ','面料','','物料类型'),(10,'MATERIAL_TYPE','CRAFTS','工艺','CRAFTS','工艺','','物料类型'),(11,'PAY_WAY','TEL_PAY','电汇','TEL_PAY','电汇','','付款方式'),(12,'PAY_WAY','CASH','现金','CASH','现金','','付款方式'),(13,'PAY_WAY','CHEQUE','支票','CHEQUE','支票','','付款方式'),(14,'PAY_WAY','POS','POS','POS','POS','','付款方式'),(15,'ORDER_STATUS','WAIT_AUDIT','待初审','WAIT_AUDIT','待初审','','订单状态'),(16,'ORDER_STATUS','AUDIT01_SUCCESS','初审成功','AUDIT01_SUCCESS','初审成功','','订单状态'),(17,'ORDER_STATUS','AUDIT_SUCCESS','终审成功','AUDIT_SUCCESS','终审成功','','订单状态'),(18,'ORDER_STATUS','ORDER_FINISH','订单结束','ORDER_FINISH','订单结束','','订单状态');
+insert  into `sys_dict`(`id`,`dict_type`,`dict_code`,`dict_name`,`dict_value`,`dict_desc`,`fh_dict_code`,`memo`) values (1,'ORDER_TYPE','SIMPLE_ORDER','样品单','SIMPLE_ORDER','样品单','','订单类型'),(2,'ORDER_TYPE','NORMAL_ORDER','正常单','NORMAL_ORDER','正常单','','订单类型'),(3,'ORDER_TYPE','ADD_ORDER','补单','ADD_ORDER','补单','','订单类型'),(4,'ORDER_TYPE','GIFT_ORDER','赠品','GIFT_ORDER','赠品','','订单类型'),(5,'ORDER_TYPE','ENGIN_ORDER','工程单','ENGIN_ORDER','工程单','','订单类型'),(6,'SALE_TYPE','INNER_SALE','内销','INNER_SALE','内销','','销售类型'),(7,'SALE_TYPE','OUT_SALE','外销','OUT_SALE','外销','','销售类型'),(8,'MATERIAL_TYPE','PROD','成品布','PROD','成品布','','物料类型'),(9,'MATERIAL_TYPE','COTTON ','面料','COTTON ','面料','','物料类型'),(11,'PAY_WAY','TEL_PAY','电汇','TEL_PAY','电汇','','付款方式'),(12,'PAY_WAY','CASH','现金','CASH','现金','','付款方式'),(13,'PAY_WAY','CHEQUE','支票','CHEQUE','支票','','付款方式'),(14,'PAY_WAY','POS','POS','POS','POS','','付款方式'),(15,'ORDER_STATUS','WAIT_AUDIT','待初审','WAIT_AUDIT','待初审','','订单状态'),(16,'ORDER_STATUS','AUDIT01_SUCCESS','初审成功','AUDIT01_SUCCESS','初审成功','','订单状态'),(17,'ORDER_STATUS','AUDIT_SUCCESS','终审成功','AUDIT_SUCCESS','终审成功','','订单状态'),(18,'ORDER_STATUS','ORDER_FINISH','订单结束','ORDER_FINISH','订单结束','','订单状态'),(19,'FORMULAR_TYPE','PROD','成品布公式','PROD','成品布公式',NULL,'公式类型'),(20,'FORMULAR_TYPE','COTTON ','面料公式','COTTON ','面料公式',NULL,'公式类型'),(21,'FORMULAR_TYPE','CRAFTS','工艺公式','CRAFTS','工艺公式',NULL,'公式类型'),(22,'MATERIAL_STOCK','PROD_STOCK','成品库','PROD_STOCK','成品库',NULL,'所属仓库'),(23,'MATERIAL_STOCK','COTTON_STOCK','面料库','COTTON_STOCK','面料库',NULL,'所属仓库');
 
 /*Table structure for table `sys_resource` */
 
@@ -380,7 +648,7 @@ CREATE TABLE `sys_resource` (
 
 /*Data for the table `sys_resource` */
 
-insert  into `sys_resource`(`id`,`source_no`,`source_name`,`fh_source_no`,`source_type`,`req_url`,`rsource_icon`,`sort_order`,`level`,`if_visible`,`memo`,`create_no`,`create_time`,`modi_no`,`modi_time`,`version`) values (1,'order','业务订单',NULL,'MENU',NULL,NULL,1,1,'Y',NULL,NULL,NULL,NULL,'2017-10-23 17:28:40',0),(2,'stock','仓采管理',NULL,'MENU',NULL,NULL,2,1,'Y',NULL,NULL,NULL,NULL,'2017-10-23 17:28:40',0),(3,'produce','生产制造',NULL,'MENU',NULL,NULL,4,1,'Y',NULL,NULL,NULL,NULL,'2017-10-23 17:28:41',0),(4,'coloring','染色管理',NULL,'MENU',NULL,NULL,5,1,'Y',NULL,NULL,NULL,NULL,'2017-10-23 17:28:42',0),(5,'base','基础资料',NULL,'MENU',NULL,NULL,6,1,'Y',NULL,NULL,NULL,NULL,'2017-10-23 17:28:42',0),(6,'system','系统管理',NULL,'MENU',NULL,NULL,7,1,'Y',NULL,NULL,NULL,NULL,'2017-10-23 17:28:43',0),(7,'orderCreate','创建订单合同','order','MENU','XXXX',NULL,1,2,'Y',NULL,NULL,NULL,NULL,'2017-10-23 17:28:44',0),(8,'orderAudit01','订单初审','order','MENU','XXXX',NULL,2,2,'Y',NULL,NULL,NULL,NULL,'2017-10-23 17:28:45',0),(9,'orderAudit02','订单终审','order','MENU','XXXX',NULL,3,2,'Y',NULL,NULL,NULL,NULL,'2017-10-23 17:28:45',0),(10,'orderQuery','订单查询','order','MENU','XXXX',NULL,4,2,'Y',NULL,NULL,NULL,NULL,'2017-10-23 17:28:46',0),(11,'deliverCreate','创建发货单','order','MENU','XXXX',NULL,5,2,'Y',NULL,NULL,NULL,NULL,'2017-10-23 17:28:46',0),(12,'deliverAudit01','发货单初审','order','MENU','XXXX',NULL,6,2,'Y',NULL,NULL,NULL,NULL,'2017-10-23 17:28:47',0),(13,'deliverAudit02','发货单终审','order','MENU','XXXX',NULL,7,2,'Y',NULL,NULL,NULL,NULL,'2017-10-23 17:28:47',0),(14,'deliverQuery','发货单查询','order','MENU','XXXX',NULL,8,2,'Y',NULL,NULL,NULL,NULL,'2017-10-23 17:28:48',0),(15,'materialInfo','物料信息','base','MENU','XXXX',NULL,1,2,'Y',NULL,NULL,NULL,NULL,'2017-10-23 17:28:48',0),(16,'formularInfo','公式信息','base','MENU','XXXX',NULL,2,2,'Y',NULL,NULL,NULL,NULL,'2017-10-23 17:28:49',0),(17,'compInfo','公司资料','base','MENU','XXXX',NULL,3,2,'Y',NULL,NULL,NULL,NULL,'2017-10-23 17:28:49',0),(18,'departInfo','部门信息','base','MENU','XXXX',NULL,4,2,'Y',NULL,NULL,NULL,NULL,'2017-10-23 17:28:50',0);
+insert  into `sys_resource`(`id`,`source_no`,`source_name`,`fh_source_no`,`source_type`,`req_url`,`rsource_icon`,`sort_order`,`level`,`if_visible`,`memo`,`create_no`,`create_time`,`modi_no`,`modi_time`,`version`) values (1,'order','业务订单',NULL,'MENU',NULL,NULL,1,1,'Y',NULL,NULL,NULL,NULL,'2017-10-23 17:28:40',0),(2,'purchase','采购管理',NULL,'MENU',NULL,NULL,2,1,'Y',NULL,NULL,NULL,NULL,'2017-10-31 14:22:09',0),(3,'produce','生产制造',NULL,'MENU',NULL,NULL,3,1,'Y',NULL,NULL,NULL,NULL,'2017-10-31 14:22:31',0),(4,'stock','仓库管理',NULL,'MENU',NULL,NULL,4,1,'Y',NULL,NULL,NULL,NULL,'2017-10-31 14:22:35',0),(5,'base','基础资料',NULL,'MENU',NULL,NULL,5,1,'Y',NULL,NULL,NULL,NULL,'2017-10-31 14:22:41',0),(6,'system','系统管理',NULL,'MENU',NULL,NULL,6,1,'Y',NULL,NULL,NULL,NULL,'2017-10-31 14:22:43',0),(7,'orderCreate','创建订单合同','order','MENU','XXXX',NULL,1,2,'Y',NULL,NULL,NULL,NULL,'2017-10-23 17:28:44',0),(8,'orderAudit01','订单初审','order','MENU','XXXX',NULL,2,2,'Y',NULL,NULL,NULL,NULL,'2017-10-23 17:28:45',0),(9,'orderAudit02','订单终审','order','MENU','XXXX',NULL,3,2,'Y',NULL,NULL,NULL,NULL,'2017-10-23 17:28:45',0),(10,'orderQuery','订单查询','order','MENU','XXXX',NULL,4,2,'Y',NULL,NULL,NULL,NULL,'2017-10-23 17:28:46',0),(11,'deliverCreate','创建发货单','order','MENU','XXXX',NULL,5,2,'Y',NULL,NULL,NULL,NULL,'2017-10-23 17:28:46',0),(12,'deliverAudit01','发货单初审','order','MENU','XXXX',NULL,6,2,'Y',NULL,NULL,NULL,NULL,'2017-10-23 17:28:47',0),(13,'deliverAudit02','发货单终审','order','MENU','XXXX',NULL,7,2,'Y',NULL,NULL,NULL,NULL,'2017-10-23 17:28:47',0),(14,'deliverQuery','发货单查询','order','MENU','XXXX',NULL,8,2,'Y',NULL,NULL,NULL,NULL,'2017-10-23 17:28:48',0),(15,'materialInfo','物料信息','base','MENU','XXXX',NULL,1,2,'Y',NULL,NULL,NULL,NULL,'2017-10-23 17:28:48',0),(16,'formularInfo','公式信息','base','MENU','XXXX',NULL,2,2,'Y',NULL,NULL,NULL,NULL,'2017-10-23 17:28:49',0),(17,'compInfo','公司资料','base','MENU','XXXX',NULL,3,2,'Y',NULL,NULL,NULL,NULL,'2017-10-23 17:28:49',0),(18,'departInfo','部门信息','base','MENU','XXXX',NULL,4,2,'Y',NULL,NULL,NULL,NULL,'2017-10-23 17:28:50',0);
 
 /*Table structure for table `sys_role` */
 
@@ -451,7 +719,7 @@ CREATE TABLE `sys_user` (
 
 /*Data for the table `sys_user` */
 
-insert  into `sys_user`(`id`,`user_no`,`user_name`,`nick_name`,`phone_num`,`email_addr`,`password`,`status`,`memo`,`last_login_time`,`create_no`,`create_time`,`modi_no`,`modi_time`,`version`) values (11,'wangfangfang','王芳芳','王芳芳','15166119377','XXX@qq.com','e10adc3949ba59abbe56e057f20f883e','Y','test',NULL,'system','2017-10-20 11:14:18','system','2017-10-30 11:24:50',0),(12,'zhangsan',NULL,'张三','15222222','XXX@qq.com','e10adc3949ba59abbe56e057f20f883e','Y','test',NULL,'system','2017-10-20 11:14:26','system','2017-10-30 11:24:51',0),(13,'admin',NULL,'管理员','15222222','XXX@qq.com','e10adc3949ba59abbe56e057f20f883e','Y','test',NULL,'system','2017-10-20 11:14:34','system','2017-10-30 11:24:52',0),(14,'admin1',NULL,'管理员1','15222222','XXX@qq.com','e10adc3949ba59abbe56e057f20f883e','Y','test',NULL,'system','2017-10-20 11:14:40','system','2017-10-30 11:24:52',0),(15,'admin2',NULL,'管理员2','15222222','XXX@qq.com','e10adc3949ba59abbe56e057f20f883e','Y','test',NULL,'system','2017-10-20 11:14:45','system','2017-10-30 11:24:53',0),(16,'admin3',NULL,'管理员3','15222222','XXX@qq.com','e10adc3949ba59abbe56e057f20f883e','Y','test',NULL,'system','2017-10-20 11:14:51','system','2017-10-30 11:24:54',0),(17,'admin4',NULL,'管理员4','15222222','XXX@qq.com','e10adc3949ba59abbe56e057f20f883e','Y','test',NULL,'system','2017-10-20 11:16:59','system','2017-10-30 11:24:55',0);
+insert  into `sys_user`(`id`,`user_no`,`user_name`,`nick_name`,`phone_num`,`email_addr`,`password`,`status`,`memo`,`last_login_time`,`create_no`,`create_time`,`modi_no`,`modi_time`,`version`) values (11,'wangfangfang','王芳芳','王芳芳','15166119377','XXX@qq.com','e10adc3949ba59abbe56e057f20f883e','Y','test',NULL,'system','2017-10-20 11:14:18','system','2017-10-30 11:24:50',0),(12,'zhangsan',NULL,'张三','15222222','XXX@qq.com','e10adc3949ba59abbe56e057f20f883e','Y','test',NULL,'system','2017-10-20 11:14:26','system','2017-10-30 11:24:51',0),(13,'admin',NULL,'管理员','15222222','XXX@qq.com','e10adc3949ba59abbe56e057f20f883e','Y','test',NULL,'system','2017-10-20 11:14:34','system','2017-11-06 17:05:02',0),(14,'admin1',NULL,'管理员1','15222222','XXX@qq.com','e10adc3949ba59abbe56e057f20f883e','Y','test',NULL,'system','2017-10-20 11:14:40','system','2017-10-30 11:24:52',0),(15,'admin2',NULL,'管理员2','15222222','XXX@qq.com','e10adc3949ba59abbe56e057f20f883e','Y','test',NULL,'system','2017-10-20 11:14:45','system','2017-10-30 11:24:53',0),(16,'admin3',NULL,'管理员3','15222222','XXX@qq.com','e10adc3949ba59abbe56e057f20f883e','Y','test',NULL,'system','2017-10-20 11:14:51','system','2017-10-30 11:24:54',0),(17,'admin4',NULL,'管理员4','15222222','XXX@qq.com','e10adc3949ba59abbe56e057f20f883e','Y','test',NULL,'system','2017-10-20 11:16:59','system','2017-10-30 11:24:55',0);
 
 /*Table structure for table `sys_user_role` */
 

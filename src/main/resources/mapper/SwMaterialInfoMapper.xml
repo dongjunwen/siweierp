@@ -42,34 +42,34 @@
     update sw_material_info
     <set>
 
-      <if test="materialName != null">
+      <if test="materialName != null and materialName != ''">
         material_name = #{materialName,jdbcType=VARCHAR},
       </if>
-      <if test="materialType != null">
+      <if test="materialType != null and materialType != ''">
         material_type = #{materialType,jdbcType=VARCHAR},
       </if>
-      <if test="spec != null">
+      <if test="spec != null and spec != ''">
         spec = #{spec,jdbcType=VARCHAR},
       </if>
-      <if test="pattern != null">
+      <if test="pattern != null and pattern != ''">
         pattern = #{pattern,jdbcType=VARCHAR},
       </if>
-      <if test="unit != null">
+      <if test="unit != null and unit != ''">
         unit = #{unit,jdbcType=VARCHAR},
       </if>
-      <if test="memo != null">
+      <if test="memo != null and memo != ''">
         memo = #{memo,jdbcType=VARCHAR},
       </if>
-      <if test="price != null">
+      <if test="price != null and price != ''">
         price = #{price,jdbcType=DECIMAL},
       </if>
-      <if test="materialLong != null">
+      <if test="materialLong != null and materialLong != ''">
         material_long = #{materialLong,jdbcType=DECIMAL},
       </if>
-      <if test="materialWidth != null">
+      <if test="materialWidth != null and materialWidth != ''">
         material_width = #{materialWidth,jdbcType=DECIMAL},
       </if>
-      <if test="materialStock != null">
+      <if test="materialStock != null  and materialStock != ''">
         material_stock = #{materialStock,jdbcType=VARCHAR},
       </if>
       <if test="createNo != null">
