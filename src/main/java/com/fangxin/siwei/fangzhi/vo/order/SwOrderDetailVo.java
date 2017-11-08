@@ -41,12 +41,12 @@ public class SwOrderDetailVo {
     @Length(max = 32,message = "单位不能超过32")
     @ApiModelProperty(value = "单位",required =false )
     private String prodUnit;
-    @Length(max = 32,message = "单价公式编码不能超过32")
+   /* @Length(max = 32,message = "单价公式编码不能超过32")
     @ApiModelProperty(value = "单价公式编码",required =false )
     private String prodPriceNo;
     @Length(max = 32,message = "单价公式不能超过32")
     @ApiModelProperty(value = "单价公式",required =false )
-    private String prodPriceExpress;
+    private String prodPriceExpress;*/
     @ApiModelProperty(value = "单价",required =false )
     private BigDecimal prodPrice;
     @ApiModelProperty(value = "金额",required =false )
@@ -165,22 +165,6 @@ public class SwOrderDetailVo {
 
     public void setProdUnit(String prodUnit) {
         this.prodUnit = prodUnit;
-    }
-
-    public String getProdPriceNo() {
-        return prodPriceNo;
-    }
-
-    public void setProdPriceNo(String prodPriceNo) {
-        this.prodPriceNo = prodPriceNo;
-    }
-
-    public String getProdPriceExpress() {
-        return prodPriceExpress;
-    }
-
-    public void setProdPriceExpress(String prodPriceExpress) {
-        this.prodPriceExpress = prodPriceExpress;
     }
 
     public BigDecimal getProdPrice() {

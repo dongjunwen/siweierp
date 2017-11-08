@@ -31,9 +31,9 @@ public class SwOrderDetailResultVo {
 
     private String prodUnit;
 
-    private String prodPriceNo;
+  /*  private String prodPriceNo;
 
-    private String prodPriceExpress;
+    private String prodPriceExpress;*/
 
     private BigDecimal prodPrice;
 
@@ -165,22 +165,6 @@ public class SwOrderDetailResultVo {
 
     public void setProdUnit(String prodUnit) {
         this.prodUnit = prodUnit;
-    }
-
-    public String getProdPriceNo() {
-        return prodPriceNo;
-    }
-
-    public void setProdPriceNo(String prodPriceNo) {
-        this.prodPriceNo = prodPriceNo;
-    }
-
-    public String getProdPriceExpress() {
-        return prodPriceExpress;
-    }
-
-    public void setProdPriceExpress(String prodPriceExpress) {
-        this.prodPriceExpress = prodPriceExpress;
     }
 
     public BigDecimal getProdPrice() {
