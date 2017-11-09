@@ -45,4 +45,15 @@ public class StockInfoServiceImpl implements StockInfoService {
         }
         return saveNum;
     }
+
+    @Override
+    public void updateByNo(SwStockIn swStockIn) {
+        SwStockInfo swStockInfo=new SwStockInfo();
+        swStockInfo.setMaterialNo(swStockIn.getMaterialNo());
+        swStockInfo.setNum(swStockIn.getNum());
+        swStockInfo.setModiTime(new Date());
+        SwStockInfo oldSwStockInfo=swStockInfoMapper.selectByMaterialNo(swStockInfo.getMaterialNo());
+        swStockInfo.setVersion(oldSwStockInfo.getVersion());
+        swStockInfoMapper.addNum(swStockInfo);
+    }
 }

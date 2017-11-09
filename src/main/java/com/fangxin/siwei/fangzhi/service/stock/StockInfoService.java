@@ -9,4 +9,6 @@ import java.util.List; /**
  **/
 public interface StockInfoService {
     int saveStock(List<SwStockIn> swStockIns);
+
+    void updateByNo(SwStockIn swStockIn);
 }

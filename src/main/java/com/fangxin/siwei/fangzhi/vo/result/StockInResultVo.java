@@ -1,13 +1,13 @@
-package com.fangxin.siwei.fangzhi.modal;
+package com.fangxin.siwei.fangzhi.vo.result;
 
-import javax.persistence.Id;
 import java.math.BigDecimal;
-import java.util.Date;
 
-public class SwStockIn {
-    @Id
-    private Integer id;
-
+/**
+ * @Date:2017/11/8 0008 10:48
+ * @Author lu.dong
+ * @Description：
+ **/
+public class StockInResultVo {
     private String stkInNo;
 
     private String orderNo;
@@ -38,30 +38,38 @@ public class SwStockIn {
 
     private String status;
 
+    private String statusName;
+
     private String createNo;
 
-    private Date createTime;
+    private String createTime;
 
     private String modiNo;
 
-    private Date modiTime;
-
-    private Integer version;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    private String modiTime;
 
     public String getStkInNo() {
         return stkInNo;
     }
 
     public void setStkInNo(String stkInNo) {
-        this.stkInNo = stkInNo == null ? null : stkInNo.trim();
+        this.stkInNo = stkInNo;
+    }
+
+    public String getOrderNo() {
+        return orderNo;
+    }
+
+    public void setOrderNo(String orderNo) {
+        this.orderNo = orderNo;
+    }
+
+    public String getOrderSeqNo() {
+        return orderSeqNo;
+    }
+
+    public void setOrderSeqNo(String orderSeqNo) {
+        this.orderSeqNo = orderSeqNo;
     }
 
     public String getSourceType() {
@@ -88,28 +96,12 @@ public class SwStockIn {
         this.sourceSeqNo = sourceSeqNo;
     }
 
-    public String getOrderNo() {
-        return orderNo;
-    }
-
-    public void setOrderNo(String orderNo) {
-        this.orderNo = orderNo == null ? null : orderNo.trim();
-    }
-
-    public String getOrderSeqNo() {
-        return orderSeqNo;
-    }
-
-    public void setOrderSeqNo(String orderSeqNo) {
-        this.orderSeqNo = orderSeqNo == null ? null : orderSeqNo.trim();
-    }
-
     public String getMaterialNo() {
         return materialNo;
     }
 
     public void setMaterialNo(String materialNo) {
-        this.materialNo = materialNo == null ? null : materialNo.trim();
+        this.materialNo = materialNo;
     }
 
     public String getMaterialName() {
@@ -117,7 +109,7 @@ public class SwStockIn {
     }
 
     public void setMaterialName(String materialName) {
-        this.materialName = materialName == null ? null : materialName.trim();
+        this.materialName = materialName;
     }
 
     public String getMaterialType() {
@@ -125,7 +117,7 @@ public class SwStockIn {
     }
 
     public void setMaterialType(String materialType) {
-        this.materialType = materialType == null ? null : materialType.trim();
+        this.materialType = materialType;
     }
 
     public String getSpec() {
@@ -133,7 +125,7 @@ public class SwStockIn {
     }
 
     public void setSpec(String spec) {
-        this.spec = spec == null ? null : spec.trim();
+        this.spec = spec;
     }
 
     public String getPattern() {
@@ -141,7 +133,7 @@ public class SwStockIn {
     }
 
     public void setPattern(String pattern) {
-        this.pattern = pattern == null ? null : pattern.trim();
+        this.pattern = pattern;
     }
 
     public String getUnit() {
@@ -149,7 +141,7 @@ public class SwStockIn {
     }
 
     public void setUnit(String unit) {
-        this.unit = unit == null ? null : unit.trim();
+        this.unit = unit;
     }
 
     public String getMaterialStock() {
@@ -157,7 +149,7 @@ public class SwStockIn {
     }
 
     public void setMaterialStock(String materialStock) {
-        this.materialStock = materialStock == null ? null : materialStock.trim();
+        this.materialStock = materialStock;
     }
 
     public BigDecimal getNum() {
@@ -173,7 +165,15 @@ public class SwStockIn {
     }
 
     public void setStatus(String status) {
-        this.status = status == null ? null : status.trim();
+        this.status = status;
+    }
+
+    public String getStatusName() {
+        return statusName;
+    }
+
+    public void setStatusName(String statusName) {
+        this.statusName = statusName;
     }
 
     public String getCreateNo() {
@@ -181,14 +181,14 @@ public class SwStockIn {
     }
 
     public void setCreateNo(String createNo) {
-        this.createNo = createNo == null ? null : createNo.trim();
+        this.createNo = createNo;
     }
 
-    public Date getCreateTime() {
+    public String getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(String createTime) {
         this.createTime = createTime;
     }
 
@@ -197,22 +197,14 @@ public class SwStockIn {
     }
 
     public void setModiNo(String modiNo) {
-        this.modiNo = modiNo == null ? null : modiNo.trim();
+        this.modiNo = modiNo;
     }
 
-    public Date getModiTime() {
+    public String getModiTime() {
         return modiTime;
     }
 
-    public void setModiTime(Date modiTime) {
+    public void setModiTime(String modiTime) {
         this.modiTime = modiTime;
-    }
-
-    public Integer getVersion() {
-        return version;
-    }
-
-    public void setVersion(Integer version) {
-        this.version = version;
     }
 }
