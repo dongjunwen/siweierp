@@ -96,7 +96,10 @@ public class StockInVerifyServiceImpl extends AbstractService<SwStockVerify> imp
         if(oldSwStockVerify==null){
             return  Result.newError(ResultCode.COMMON_DATA_NOT_EXISTS.getCode(),"入库单"+stockInNo+"不存在!");
         }
-        BigDecimal subNum=oldSwStockVerify.getStandNum().subtract(stockVerifyVo.getStandNum());
+        BigDecimal oldNum=oldSwStockVerify.getStandNum();
+        oldNum=stockVerifyVo.getNum()==null?oldNum:stockVerifyVo.getNum();
+        BigDecimal newNum=stockVerifyVo.getStandNum()==null?BigDecimal.ZERO:stockVerifyVo.getStandNum();
+        BigDecimal subNum=oldNum.subtract(newNum);
         if(subNum.compareTo(BigDecimal.ZERO)==-1){
             return  Result.newError(ResultCode.INNUM_BIGGER_THAN_OLDNUM);
         }
