@@ -13,7 +13,8 @@ public enum AuditTypeEnum {
     DELIVER("DELIVER","发货单"),
     PURCHASE("PURCHASE","采购单"),
     RETURN("RETURN","退货单"),
-    RECEIVE("RECEIVE","领料单");
+    RECEIVE("RECEIVE","领料单"),
+    STOCKVERIFY("STOCKVERIFY","来料校验");
 
     String code;
     String desc;

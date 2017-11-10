@@ -1,17 +1,16 @@
 package com.fangxin.siwei.fangzhi.mapper;
 
+import com.fangxin.siwei.fangzhi.common.utils.MyMapper;
 import com.fangxin.siwei.fangzhi.modal.SwStockVerify;
 
-public interface SwStockVerifyMapper {
-    int deleteByPrimaryKey(Integer id);
+import java.util.List;
 
-    int insert(SwStockVerify record);
+public interface SwStockVerifyMapper extends MyMapper<SwStockVerify>{
 
-    int insertSelective(SwStockVerify record);
 
-    SwStockVerify selectByPrimaryKey(Integer id);
+    void insertBatch(List<SwStockVerify> swStockVerifies);
 
-    int updateByPrimaryKeySelective(SwStockVerify record);
+    SwStockVerify selectByStockInNo(String stockInNo);
 
-    int updateByPrimaryKey(SwStockVerify record);
+    int updateByNo(SwStockVerify swStockVerify);
 }

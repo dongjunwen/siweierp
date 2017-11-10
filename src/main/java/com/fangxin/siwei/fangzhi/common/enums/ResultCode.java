@@ -32,6 +32,7 @@ public enum ResultCode {
 
     //入库单 1400-1499
     SOURCE_NO_NOT_EXITS("1400","未找到采购单号或物料编码"),
+    INNUM_BIGGER_THAN_OLDNUM("1401","合格数量不能大于来料数量"),
 
     SUCCESS("200","操作成功"),
     FAIL("500","系统异常"),

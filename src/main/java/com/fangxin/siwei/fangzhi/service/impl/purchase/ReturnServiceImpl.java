@@ -85,8 +85,8 @@ public class ReturnServiceImpl extends AbstractService<SwReturnBase> implements 
             swReturnDetail.setModiTime(new Date());
             swReturnDetail.setVersion(0);
             swOrderDetails.add(swReturnDetail);
-            totalNum=totalNum.add(swReturnDetail.getNum());
-            totalAmt=totalAmt.add(swReturnDetail.getAmt());
+            totalNum=totalNum.add(swReturnDetail.getNum()==null?BigDecimal.ZERO:swReturnDetail.getNum());
+            totalAmt=totalAmt.add(swReturnDetail.getAmt()==null?BigDecimal.ZERO:swReturnDetail.getAmt());
         }
         swReturnBase.setReturnNum(totalNum);
         swReturnBase.setReturnAmt(totalAmt);

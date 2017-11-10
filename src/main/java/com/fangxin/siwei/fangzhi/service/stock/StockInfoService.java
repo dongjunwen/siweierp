@@ -1,6 +1,7 @@
 package com.fangxin.siwei.fangzhi.service.stock;
 
-import com.fangxin.siwei.fangzhi.modal.SwStockIn;
+import com.fangxin.siwei.fangzhi.modal.SwStockInfo;
+import com.fangxin.siwei.fangzhi.modal.SwStockVerify;
 
 import java.util.List; /**
  * @Date:2017/11/7 0007 16:35
@@ -8,7 +9,6 @@ import java.util.List; /**
  * @Description：
  **/
 public interface StockInfoService {
-    int saveStock(List<SwStockIn> swStockIns);
 
-    void updateByNo(SwStockIn swStockIn);
+    int saveSingleStock(SwStockInfo swStockInfo);
 }

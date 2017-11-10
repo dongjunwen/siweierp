@@ -1,6 +1,5 @@
 package com.fangxin.siwei.fangzhi.vo.purchase;
 
-import java.math.BigDecimal;
 
 /**
  * @Date:2017/11/6 0006 17:15

@@ -4,7 +4,9 @@
   <resultMap id="BaseResultMap" type="com.fangxin.siwei.fangzhi.modal.SwStockVerify">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="stk_in_no" jdbcType="VARCHAR" property="stkInNo" />
-    <result column="order_type" jdbcType="VARCHAR" property="orderType" />
+    <result column="source_type" jdbcType="VARCHAR" property="sourceType" />
+    <result column="source_no" jdbcType="VARCHAR" property="sourceNo" />
+    <result column="source_seq_no" jdbcType="VARCHAR" property="sourceSeqNo" />
     <result column="order_no" jdbcType="VARCHAR" property="orderNo" />
     <result column="order_seq_no" jdbcType="VARCHAR" property="orderSeqNo" />
     <result column="material_no" jdbcType="VARCHAR" property="materialNo" />
@@ -21,183 +23,67 @@
     <result column="quality" jdbcType="VARCHAR" property="quality" />
     <result column="status" jdbcType="VARCHAR" property="status" />
     <result column="reason" jdbcType="VARCHAR" property="reason" />
+    <result column="supply_comp_no" jdbcType="VARCHAR" property="supplyCompNo" />
+    <result column="supply_comp_name" jdbcType="VARCHAR" property="supplyCompName" />
+    <result column="refuse_type" jdbcType="VARCHAR" property="refuseType" />
+    <result column="create_no" jdbcType="VARCHAR" property="createNo" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="modi_no" jdbcType="VARCHAR" property="modiNo" />
     <result column="modi_time" jdbcType="TIMESTAMP" property="modiTime" />
     <result column="version" jdbcType="INTEGER" property="version" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, stk_in_no, order_type, order_no, order_seq_no, material_no, material_name, material_type, 
+    id, stk_in_no,  source_type, source_no, source_seq_no, order_no, order_seq_no, material_no, material_name, material_type,
     spec, pattern, unit, material_stock, num, stand_num, mois_rate, weight, quality, 
-    status, reason, modi_time, version
+    status, reason,supply_comp_no, supply_comp_name,refuse_type,create_no, create_time, modi_no, modi_time, version
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByStockInNo" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from sw_stock_verify
-    where id = #{id,jdbcType=INTEGER}
+    where stk_in_no = #{stkInNo,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from sw_stock_verify
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.fangxin.siwei.fangzhi.modal.SwStockVerify">
-    insert into sw_stock_verify (id, stk_in_no, order_type, 
-      order_no, order_seq_no, material_no, 
-      material_name, material_type, spec, 
-      pattern, unit, material_stock, 
-      num, stand_num, mois_rate, 
-      weight, quality, status, 
-      reason, modi_time, version
+
+  <insert id="insertBatch" parameterType="java.util.List" >
+     insert into sw_stock_verify (
+      stk_in_no,
+      source_type,source_no,source_seq_no,
+      order_no, order_seq_no, material_no,
+      material_name, material_type, spec,
+      pattern, unit, material_stock,
+      num, stand_num, mois_rate,
+      weight, quality, status,
+      supply_comp_no, supply_comp_name,
+      reason, refuse_type,create_no, create_time,
+       modi_no,modi_time, version
       )
-    values (#{id,jdbcType=INTEGER}, #{stkInNo,jdbcType=VARCHAR}, #{orderType,jdbcType=VARCHAR}, 
-      #{orderNo,jdbcType=VARCHAR}, #{orderSeqNo,jdbcType=VARCHAR}, #{materialNo,jdbcType=VARCHAR}, 
-      #{materialName,jdbcType=VARCHAR}, #{materialType,jdbcType=VARCHAR}, #{spec,jdbcType=VARCHAR}, 
-      #{pattern,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, #{materialStock,jdbcType=VARCHAR}, 
-      #{num,jdbcType=DECIMAL}, #{standNum,jdbcType=DECIMAL}, #{moisRate,jdbcType=VARCHAR}, 
-      #{weight,jdbcType=VARCHAR}, #{quality,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
-      #{reason,jdbcType=VARCHAR}, #{modiTime,jdbcType=TIMESTAMP}, #{version,jdbcType=INTEGER}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="com.fangxin.siwei.fangzhi.modal.SwStockVerify">
-    insert into sw_stock_verify
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="stkInNo != null">
-        stk_in_no,
-      </if>
-      <if test="orderType != null">
-        order_type,
-      </if>
-      <if test="orderNo != null">
-        order_no,
-      </if>
-      <if test="orderSeqNo != null">
-        order_seq_no,
-      </if>
-      <if test="materialNo != null">
-        material_no,
-      </if>
-      <if test="materialName != null">
-        material_name,
-      </if>
-      <if test="materialType != null">
-        material_type,
-      </if>
-      <if test="spec != null">
-        spec,
-      </if>
-      <if test="pattern != null">
-        pattern,
-      </if>
-      <if test="unit != null">
-        unit,
-      </if>
-      <if test="materialStock != null">
-        material_stock,
-      </if>
-      <if test="num != null">
-        num,
-      </if>
-      <if test="standNum != null">
-        stand_num,
-      </if>
-      <if test="moisRate != null">
-        mois_rate,
-      </if>
-      <if test="weight != null">
-        weight,
-      </if>
-      <if test="quality != null">
-        quality,
-      </if>
-      <if test="status != null">
-        status,
-      </if>
-      <if test="reason != null">
-        reason,
-      </if>
-      <if test="modiTime != null">
-        modi_time,
-      </if>
-      <if test="version != null">
-        version,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="stkInNo != null">
-        #{stkInNo,jdbcType=VARCHAR},
-      </if>
-      <if test="orderType != null">
-        #{orderType,jdbcType=VARCHAR},
-      </if>
-      <if test="orderNo != null">
-        #{orderNo,jdbcType=VARCHAR},
-      </if>
-      <if test="orderSeqNo != null">
-        #{orderSeqNo,jdbcType=VARCHAR},
-      </if>
-      <if test="materialNo != null">
-        #{materialNo,jdbcType=VARCHAR},
-      </if>
-      <if test="materialName != null">
-        #{materialName,jdbcType=VARCHAR},
-      </if>
-      <if test="materialType != null">
-        #{materialType,jdbcType=VARCHAR},
-      </if>
-      <if test="spec != null">
-        #{spec,jdbcType=VARCHAR},
-      </if>
-      <if test="pattern != null">
-        #{pattern,jdbcType=VARCHAR},
-      </if>
-      <if test="unit != null">
-        #{unit,jdbcType=VARCHAR},
-      </if>
-      <if test="materialStock != null">
-        #{materialStock,jdbcType=VARCHAR},
-      </if>
-      <if test="num != null">
-        #{num,jdbcType=DECIMAL},
-      </if>
-      <if test="standNum != null">
-        #{standNum,jdbcType=DECIMAL},
-      </if>
-      <if test="moisRate != null">
-        #{moisRate,jdbcType=VARCHAR},
-      </if>
-      <if test="weight != null">
-        #{weight,jdbcType=VARCHAR},
-      </if>
-      <if test="quality != null">
-        #{quality,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null">
-        #{status,jdbcType=VARCHAR},
-      </if>
-      <if test="reason != null">
-        #{reason,jdbcType=VARCHAR},
-      </if>
-      <if test="modiTime != null">
-        #{modiTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="version != null">
-        #{version,jdbcType=INTEGER},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.fangxin.siwei.fangzhi.modal.SwStockVerify">
+    values
+    <foreach collection="list" index="index" item="item" separator=",">
+      ( #{item.stkInNo,jdbcType=VARCHAR},
+      #{item.sourceType,jdbcType=VARCHAR},#{item.sourceNo,jdbcType=VARCHAR},#{item.sourceSeqNo,jdbcType=VARCHAR},
+      #{item.orderNo,jdbcType=VARCHAR}, #{item.orderSeqNo,jdbcType=VARCHAR}, #{item.materialNo,jdbcType=VARCHAR},
+      #{item.materialName,jdbcType=VARCHAR}, #{item.materialType,jdbcType=VARCHAR}, #{item.spec,jdbcType=VARCHAR},
+      #{item.pattern,jdbcType=VARCHAR}, #{item.unit,jdbcType=VARCHAR}, #{item.materialStock,jdbcType=VARCHAR},
+      #{item.num,jdbcType=DECIMAL},#{item.standNum,jdbcType=DECIMAL}, #{item.moisRate,jdbcType=VARCHAR},
+      #{item.weight,jdbcType=VARCHAR}, #{item.quality,jdbcType=VARCHAR}, #{item.status,jdbcType=VARCHAR},
+      #{item.supplyCompNo,jdbcType=VARCHAR},   #{item.supplyCompName,jdbcType=VARCHAR},#{item.refuseType,jdbcType=VARCHAR},
+      #{item.reason,jdbcType=VARCHAR},   #{item.createNo,jdbcType=VARCHAR}, #{item.createTime,jdbcType=TIMESTAMP},
+      #{item.modiNo,jdbcType=VARCHAR},    #{item.modiTime,jdbcType=TIMESTAMP}, #{item.version,jdbcType=INTEGER})
+    </foreach>
+    </insert>
+
+  <update id="updateByNo" parameterType="com.fangxin.siwei.fangzhi.modal.SwStockVerify">
     update sw_stock_verify
     <set>
-      <if test="stkInNo != null">
-        stk_in_no = #{stkInNo,jdbcType=VARCHAR},
+
+      <if test="sourceType != null">
+        source_type = #{sourceType,jdbcType=VARCHAR},
       </if>
-      <if test="orderType != null">
-        order_type = #{orderType,jdbcType=VARCHAR},
+      <if test="sourceNo != null">
+        source_no = #{sourceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceSeqNo != null">
+        source_seq_no = #{sourceSeqNo,jdbcType=VARCHAR},
       </if>
       <if test="orderNo != null">
         order_no = #{orderNo,jdbcType=VARCHAR},
@@ -244,8 +130,17 @@
       <if test="status != null">
         status = #{status,jdbcType=VARCHAR},
       </if>
+      <if test="supplyCompNo != null">
+        supply_comp_no = #{supplyCompNo,jdbcType=VARCHAR},
+      </if>
+      <if test="supplyCompName != null">
+        supply_comp_name = #{supplyCompName,jdbcType=VARCHAR},
+      </if>
       <if test="reason != null">
         reason = #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="refuseType != null">
+        refuse_type = #{refuseType,jdbcType=VARCHAR},
       </if>
       <if test="modiTime != null">
         modi_time = #{modiTime,jdbcType=TIMESTAMP},
@@ -254,30 +149,8 @@
         version = #{version,jdbcType=INTEGER},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where
+      stk_in_no = #{stkInNo,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.fangxin.siwei.fangzhi.modal.SwStockVerify">
-    update sw_stock_verify
-    set stk_in_no = #{stkInNo,jdbcType=VARCHAR},
-      order_type = #{orderType,jdbcType=VARCHAR},
-      order_no = #{orderNo,jdbcType=VARCHAR},
-      order_seq_no = #{orderSeqNo,jdbcType=VARCHAR},
-      material_no = #{materialNo,jdbcType=VARCHAR},
-      material_name = #{materialName,jdbcType=VARCHAR},
-      material_type = #{materialType,jdbcType=VARCHAR},
-      spec = #{spec,jdbcType=VARCHAR},
-      pattern = #{pattern,jdbcType=VARCHAR},
-      unit = #{unit,jdbcType=VARCHAR},
-      material_stock = #{materialStock,jdbcType=VARCHAR},
-      num = #{num,jdbcType=DECIMAL},
-      stand_num = #{standNum,jdbcType=DECIMAL},
-      mois_rate = #{moisRate,jdbcType=VARCHAR},
-      weight = #{weight,jdbcType=VARCHAR},
-      quality = #{quality,jdbcType=VARCHAR},
-      status = #{status,jdbcType=VARCHAR},
-      reason = #{reason,jdbcType=VARCHAR},
-      modi_time = #{modiTime,jdbcType=TIMESTAMP},
-      version = #{version,jdbcType=INTEGER}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+
 </mapper>

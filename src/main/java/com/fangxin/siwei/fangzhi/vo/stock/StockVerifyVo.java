@@ -7,18 +7,18 @@ import java.math.BigDecimal;
  * @Author lu.dong
  * @Description：
  **/
-public class StockInVo {
+public class StockVerifyVo {
     private String stkInNo;
-
-    private String orderNo;
-
-    private String orderSeqNo;
 
     private String sourceType;
 
     private String sourceNo;
 
     private String sourceSeqNo;
+
+    private String orderNo;
+
+    private String orderSeqNo;
 
     private String materialNo;
 
@@ -36,28 +36,27 @@ public class StockInVo {
 
     private BigDecimal num;
 
+    private BigDecimal standNum;
+
+    private String moisRate;
+
+    private String weight;
+
+    private String quality;
+
+    private String reason;
+
+    private String supplyCompNo;
+
+    private String supplyCompName;
+
+    private String refuseType;
     public String getStkInNo() {
         return stkInNo;
     }
 
     public void setStkInNo(String stkInNo) {
         this.stkInNo = stkInNo;
-    }
-
-    public String getOrderNo() {
-        return orderNo;
-    }
-
-    public void setOrderNo(String orderNo) {
-        this.orderNo = orderNo;
-    }
-
-    public String getOrderSeqNo() {
-        return orderSeqNo;
-    }
-
-    public void setOrderSeqNo(String orderSeqNo) {
-        this.orderSeqNo = orderSeqNo;
     }
 
     public String getSourceType() {
@@ -82,6 +81,22 @@ public class StockInVo {
 
     public void setSourceSeqNo(String sourceSeqNo) {
         this.sourceSeqNo = sourceSeqNo;
+    }
+
+    public String getOrderNo() {
+        return orderNo;
+    }
+
+    public void setOrderNo(String orderNo) {
+        this.orderNo = orderNo;
+    }
+
+    public String getOrderSeqNo() {
+        return orderSeqNo;
+    }
+
+    public void setOrderSeqNo(String orderSeqNo) {
+        this.orderSeqNo = orderSeqNo;
     }
 
     public String getMaterialNo() {
@@ -146,5 +161,69 @@ public class StockInVo {
 
     public void setNum(BigDecimal num) {
         this.num = num;
+    }
+
+    public BigDecimal getStandNum() {
+        return standNum;
+    }
+
+    public void setStandNum(BigDecimal standNum) {
+        this.standNum = standNum;
+    }
+
+    public String getMoisRate() {
+        return moisRate;
+    }
+
+    public void setMoisRate(String moisRate) {
+        this.moisRate = moisRate;
+    }
+
+    public String getWeight() {
+        return weight;
+    }
+
+    public void setWeight(String weight) {
+        this.weight = weight;
+    }
+
+    public String getQuality() {
+        return quality;
+    }
+
+    public void setQuality(String quality) {
+        this.quality = quality;
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
+    }
+
+    public String getSupplyCompNo() {
+        return supplyCompNo;
+    }
+
+    public void setSupplyCompNo(String supplyCompNo) {
+        this.supplyCompNo = supplyCompNo;
+    }
+
+    public String getSupplyCompName() {
+        return supplyCompName;
+    }
+
+    public void setSupplyCompName(String supplyCompName) {
+        this.supplyCompName = supplyCompName;
+    }
+
+    public String getRefuseType() {
+        return refuseType;
+    }
+
+    public void setRefuseType(String refuseType) {
+        this.refuseType = refuseType;
     }
 }

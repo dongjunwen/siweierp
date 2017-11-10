@@ -1,14 +1,20 @@
 package com.fangxin.siwei.fangzhi.modal;
 
+import javax.persistence.Id;
 import java.math.BigDecimal;
 import java.util.Date;
 
 public class SwStockVerify {
+    @Id
     private Integer id;
 
     private String stkInNo;
 
-    private String orderType;
+    private String sourceType;
+
+    private String sourceNo;
+
+    private String sourceSeqNo;
 
     private String orderNo;
 
@@ -42,9 +48,22 @@ public class SwStockVerify {
 
     private String reason;
 
+
+    private String createNo;
+
+    private Date createTime;
+
+    private String modiNo;
+
     private Date modiTime;
 
     private Integer version;
+
+    private String supplyCompNo;
+
+    private String supplyCompName;
+
+    private String refuseType;
 
     public Integer getId() {
         return id;
@@ -62,13 +81,6 @@ public class SwStockVerify {
         this.stkInNo = stkInNo == null ? null : stkInNo.trim();
     }
 
-    public String getOrderType() {
-        return orderType;
-    }
-
-    public void setOrderType(String orderType) {
-        this.orderType = orderType == null ? null : orderType.trim();
-    }
 
     public String getOrderNo() {
         return orderNo;
@@ -212,5 +224,77 @@ public class SwStockVerify {
 
     public void setVersion(Integer version) {
         this.version = version;
+    }
+
+    public String getSourceType() {
+        return sourceType;
+    }
+
+    public void setSourceType(String sourceType) {
+        this.sourceType = sourceType;
+    }
+
+    public String getSourceNo() {
+        return sourceNo;
+    }
+
+    public void setSourceNo(String sourceNo) {
+        this.sourceNo = sourceNo;
+    }
+
+    public String getSourceSeqNo() {
+        return sourceSeqNo;
+    }
+
+    public void setSourceSeqNo(String sourceSeqNo) {
+        this.sourceSeqNo = sourceSeqNo;
+    }
+
+    public String getCreateNo() {
+        return createNo;
+    }
+
+    public void setCreateNo(String createNo) {
+        this.createNo = createNo;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public String getModiNo() {
+        return modiNo;
+    }
+
+    public void setModiNo(String modiNo) {
+        this.modiNo = modiNo;
+    }
+
+    public String getSupplyCompNo() {
+        return supplyCompNo;
+    }
+
+    public void setSupplyCompNo(String supplyCompNo) {
+        this.supplyCompNo = supplyCompNo;
+    }
+
+    public String getSupplyCompName() {
+        return supplyCompName;
+    }
+
+    public void setSupplyCompName(String supplyCompName) {
+        this.supplyCompName = supplyCompName;
+    }
+
+    public String getRefuseType() {
+        return refuseType;
+    }
+
+    public void setRefuseType(String refuseType) {
+        this.refuseType = refuseType;
     }
 }
