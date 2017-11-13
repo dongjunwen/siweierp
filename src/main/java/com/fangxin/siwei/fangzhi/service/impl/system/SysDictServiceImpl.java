@@ -77,6 +77,10 @@ public class SysDictServiceImpl extends AbstractService<SysDict> implements SysD
         return (Page<SysDict>) sysDicts;
     }
 
+    public List<SysDict> findAll(){
+        return sysDictMapper.findAll();
+    }
+
     @Override
     public List<SysDict> getEntityByDictType(String dictType) {
         return sysDictMapper.selectByDictType(dictType);

@@ -14,7 +14,7 @@ import java.util.Map;
  * @Author lu.dong
  * @Description：
  **/
-public interface StockInVerifyService {
+public interface SwStockInVerifyService {
     Result<List<StockVerifyResultVo>> create(String reqNo);
 
     Result<Integer> update(StockVerifyVo stockInVo);

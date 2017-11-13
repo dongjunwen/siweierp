@@ -1,18 +1,16 @@
 package com.fangxin.siwei.fangzhi.controller.stock;
 
 import com.alibaba.fastjson.JSON;
-import com.fangxin.siwei.fangzhi.common.enums.AuditActionEnum;
 import com.fangxin.siwei.fangzhi.common.enums.ResultCode;
 import com.fangxin.siwei.fangzhi.common.result.Result;
 import com.fangxin.siwei.fangzhi.common.utils.PageUitls;
 import com.fangxin.siwei.fangzhi.common.utils.ShiroUtils;
-import com.fangxin.siwei.fangzhi.service.stock.StockInVerifyService;
+import com.fangxin.siwei.fangzhi.service.stock.SwStockInVerifyService;
 import com.fangxin.siwei.fangzhi.vo.result.StockVerifyResultVo;
 import com.fangxin.siwei.fangzhi.vo.stock.StockVerifyVo;
 import com.fangxin.siwei.fangzhi.vo.stock.StockVerifyActionVo;
 import com.github.pagehelper.Page;
 import io.swagger.annotations.*;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +31,7 @@ public class StockVerifyController {
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
-    StockInVerifyService stockInVerifyService;
+    SwStockInVerifyService stockInVerifyService;
 
     @RequestMapping(value = "/{reqNo}",method = RequestMethod.POST)
     @ApiOperation(value="创建入库校验单", notes="根据来源单号创建入库校验单")

@@ -11,65 +11,14 @@
   <sql id="Base_Column_List">
     id, material_no, num, modi_time, version
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from sw_stock_info
-    where id = #{id,jdbcType=INTEGER}
-  </select>
+
   <select id="selectByMaterialNo" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from sw_stock_info
     where material_no = #{materialNo,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from sw_stock_info
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.fangxin.siwei.fangzhi.modal.SwStockInfo">
-    insert into sw_stock_info (id, material_no, num, 
-      modi_time, version)
-    values (#{id,jdbcType=INTEGER}, #{materialNo,jdbcType=VARCHAR}, #{num,jdbcType=DECIMAL}, 
-      #{modiTime,jdbcType=TIMESTAMP}, #{version,jdbcType=INTEGER})
-  </insert>
-  <insert id="insertSelective" parameterType="com.fangxin.siwei.fangzhi.modal.SwStockInfo">
-    insert into sw_stock_info
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="materialNo != null">
-        material_no,
-      </if>
-      <if test="num != null">
-        num,
-      </if>
-      <if test="modiTime != null">
-        modi_time,
-      </if>
-      <if test="version != null">
-        version,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="materialNo != null">
-        #{materialNo,jdbcType=VARCHAR},
-      </if>
-      <if test="num != null">
-        #{num,jdbcType=DECIMAL},
-      </if>
-      <if test="modiTime != null">
-        #{modiTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="version != null">
-        #{version,jdbcType=INTEGER},
-      </if>
-    </trim>
-  </insert>
+
   <update id="addNum" parameterType="com.fangxin.siwei.fangzhi.modal.SwStockInfo">
     update sw_stock_info
     set
@@ -78,30 +27,5 @@
         version = version+1
     where  material_no = #{materialNo,jdbcType=VARCHAR} and version = #{version,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.fangxin.siwei.fangzhi.modal.SwStockInfo">
-    update sw_stock_info
-    <set>
-      <if test="materialNo != null">
-        material_no = #{materialNo,jdbcType=VARCHAR},
-      </if>
-      <if test="num != null">
-        num = #{num,jdbcType=DECIMAL},
-      </if>
-      <if test="modiTime != null">
-        modi_time = #{modiTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="version != null">
-        version = #{version,jdbcType=INTEGER},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.fangxin.siwei.fangzhi.modal.SwStockInfo">
-    update sw_stock_info
-    set material_no = #{materialNo,jdbcType=VARCHAR},
-      num = #{num,jdbcType=DECIMAL},
-      modi_time = #{modiTime,jdbcType=TIMESTAMP},
-      version = #{version,jdbcType=INTEGER}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+
 </mapper>

@@ -23,4 +23,6 @@ public interface SysDictService {
     Page<SysDict> findList(Map<String, String> params);
 
     List<SysDict> getEntityByDictType(String dictType);
+
+    List<SysDict> findAll();
 }

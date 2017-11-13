@@ -18,8 +18,8 @@ import com.fangxin.siwei.fangzhi.service.audit.IAuditingService;
 import com.fangxin.siwei.fangzhi.service.base.SwCompanyInfoService;
 import com.fangxin.siwei.fangzhi.service.base.SwMaterialInfoService;
 import com.fangxin.siwei.fangzhi.service.purchase.SwReturnService;
-import com.fangxin.siwei.fangzhi.service.stock.StockInVerifyService;
-import com.fangxin.siwei.fangzhi.service.stock.StockInfoService;
+import com.fangxin.siwei.fangzhi.service.stock.SwStockInVerifyService;
+import com.fangxin.siwei.fangzhi.service.stock.SwStockInfoService;
 import com.fangxin.siwei.fangzhi.vo.purchase.SwReturnBaseVo;
 import com.fangxin.siwei.fangzhi.vo.purchase.SwReturnDetailVo;
 import com.fangxin.siwei.fangzhi.vo.purchase.SwReturnVo;
@@ -46,12 +46,12 @@ import java.util.*;
  * @Description：
  **/
 @Service
-public class StockInVerifyServiceImpl extends AbstractService<SwStockVerify> implements StockInVerifyService {
+public class StockInVerifyServiceImpl extends AbstractService<SwStockVerify> implements SwStockInVerifyService {
     private static  final Logger logger= LoggerFactory.getLogger(StockInVerifyServiceImpl.class);
     @Resource
     SwStockVerifyMapper swStockVerifyMapper;
     @Resource
-    StockInfoService stockInfoService;
+    SwStockInfoService stockInfoService;
     @Resource
     SwMaterialInfoService swMaterialInfoService;
     @Resource

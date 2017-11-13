@@ -9,9 +9,9 @@ import java.util.List;
 public interface SwMaterialInfoMapper extends MyMapper<SwMaterialInfo>{
     
 
-    SwMaterialInfo selectByMaterialNo(String departNo);
+    SwMaterialInfo selectByMaterialNo(String materialNo);
 
-    int updateByMateialNo(SwMaterialInfo swDepartInfo);
+    int updateByMateialNo(SwMaterialInfo swMaterialInfo);
 
     List<SwMaterialInfo> findMaterialLike(@Param("condStr")String condStr);
 }

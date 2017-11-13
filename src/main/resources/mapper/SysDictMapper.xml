@@ -29,6 +29,12 @@
     where dict_type = #{dictType,jdbcType=VARCHAR}
  </select>
 
+  <select id="findAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sys_dict
+  </select>
+
 
 
 </mapper>

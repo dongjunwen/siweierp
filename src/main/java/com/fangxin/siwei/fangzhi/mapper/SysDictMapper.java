@@ -11,4 +11,6 @@ public interface SysDictMapper extends MyMapper<SysDict> {
     SysDict selectByUniqNo(@Param("dictType") String dictType, @Param("dictCode")String dictCode);
 
     List<SysDict> selectByDictType(String dictType);
+
+    List<SysDict> findAll();
 }

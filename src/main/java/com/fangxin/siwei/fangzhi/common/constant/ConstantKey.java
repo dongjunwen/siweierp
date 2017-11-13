@@ -12,4 +12,7 @@ public class ConstantKey {
     public static final String RETURN_KEY_PRE="T";
     public static final String RECEIVE_KEY_PRE="R";
     public static final String STOCK_IN_KEY="S";
+
+    public static final String MATERIAL_TYPE="MATERIAL_TYPE";
+    public static final String MATERIAL_STOCK="MATERIAL_STOCK";
 }
