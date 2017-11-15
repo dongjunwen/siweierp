@@ -27,7 +27,7 @@ import java.util.Date;
 @RequestMapping("/api/user")
 @Api(tags = "用户",description = "用户相关api")
 public class SysUserController {
-    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+    private static final Logger logger = LoggerFactory.getLogger(SysUserController.class);
 
     @Autowired
     SysUserService sysUserService;

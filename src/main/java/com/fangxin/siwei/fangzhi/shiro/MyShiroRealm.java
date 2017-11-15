@@ -2,9 +2,7 @@ package com.fangxin.siwei.fangzhi.shiro;
 
 
 import com.fangxin.siwei.fangzhi.modal.*;
-import com.fangxin.siwei.fangzhi.service.UserService;
 import com.fangxin.siwei.fangzhi.service.system.SysRoleResourceService;
-import com.fangxin.siwei.fangzhi.service.system.SysRoleService;
 import com.fangxin.siwei.fangzhi.service.system.SysUserRoleService;
 import com.fangxin.siwei.fangzhi.service.system.SysUserService;
 import org.apache.shiro.SecurityUtils;

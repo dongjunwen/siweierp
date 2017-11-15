@@ -3,7 +3,7 @@ logging:
     level:
         root: TRACE, DEBUG, INFO, WARN, ERROR, FATAL, OFF
         java: ERROR
-    file: /home/logs/log.log
+    file: /home/logs/sw-erp-service.log
 ## Server
 server:
   port: 8082

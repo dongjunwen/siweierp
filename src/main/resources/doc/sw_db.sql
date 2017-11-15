@@ -202,7 +202,7 @@ CREATE TABLE `sw_material_info` (
 
 /*Data for the table `sw_material_info` */
 
-insert  into `sw_material_info`(`id`,`material_no`,`material_name`,`material_type`,`spec`,`pattern`,`price`,`unit`,`material_long`,`material_width`,`material_stock`,`memo`,`create_no`,`create_time`,`modi_no`,`modi_time`,`version`) values (1,'TBYD','圆底台布','PROD','超棉文艺复兴','圆','100.00','米','10.00','20.00','PROD_STOCK','测试','admin','2017-10-24 14:41:09','admin','2017-11-08 10:36:57',4),(2,'KBLT-DZ-54','口布雨','PROD','超棉文艺复兴','方','12.00','米','3.00','3.00','tt','string','admin','2017-10-24 14:41:57','admin','2017-11-08 10:20:57',0),(3,'CDSSSS','台布','PROD','超棉文艺复兴','圆','3.00','米','3.00','3.00','tt','sd','wangfangfang','2017-11-01 11:31:20','wangfangfang','2017-11-08 10:21:41',0),(4,'ss','ss','PROD','超棉文艺复兴','圆','3.00','米','3.00','3.00','t',NULL,'wangfangfang','2017-11-01 11:31:57','wangfangfang','2017-11-08 10:21:41',0),(5,'ddff','ddd','PROD','超棉文艺复兴','圆','3.00','米','3.00','3.00','t','fff','wangfangfang','2017-11-05 14:16:52','wangfangfang','2017-11-08 10:21:42',0),(7,'test_code2','测试物料','PROD','超棉文艺复兴','圆','3.00','米','4.00','5.00','tt','随便','wangfangfang','2017-11-05 15:14:54','wangfangfang','2017-11-08 10:21:42',0),(8,'test_code3','测试物料2','PROD','超棉文艺复兴','圆','3.00','米','5.00','6.00','t',NULL,'wangfangfang','2017-11-05 15:17:18','wangfangfang','2017-11-08 10:21:43',0),(9,'test_code4','随意了','CRAFTS','超棉文艺复兴','圆','3.00','米','1.00','2.00','t',NULL,'wangfangfang','2017-11-05 15:22:49','wangfangfang','2017-11-08 10:21:43',0),(10,'test_code2334','测试物料','COTTON','超棉文艺复兴','圆','3.00','米','1.00','3.00','t',NULL,'wangfangfang','2017-11-05 15:25:10','wangfangfang','2017-11-08 10:32:37',0);
+insert  into `sw_material_info`(`id`,`material_no`,`material_name`,`material_type`,`spec`,`pattern`,`price`,`unit`,`material_long`,`material_width`,`material_stock`,`memo`,`create_no`,`create_time`,`modi_no`,`modi_time`,`version`) values (1,'TBYD','圆底台布','PROD','超棉文艺复兴','圆','100.00','米','10.00','20.00','PROD_STOCK','测试','admin','2017-10-24 14:41:09','admin','2017-11-08 10:36:57',4),(2,'KBLT-DZ-54','口布雨','PROD','超棉文艺复兴','方','12.00','米','3.00','3.00','PROD_STOCK','string','admin','2017-10-24 14:41:57','admin','2017-11-13 14:31:07',0),(3,'TBYD1','台布','PROD','超棉文艺复兴','圆','3.00','米','3.00','3.00','PROD_STOCK','sd','wangfangfang','2017-11-01 11:31:20','wangfangfang','2017-11-13 14:32:26',0),(4,'TBYD2','圆底台布','PROD','超棉文艺复兴','圆','3.00','米','3.00','3.00','COTTON_STOCK',NULL,'wangfangfang','2017-11-01 11:31:57','wangfangfang','2017-11-13 14:32:28',0),(5,'TBYD3','圆底台布','PROD','超棉文艺复兴','圆','3.00','米','3.00','3.00','COTTON_STOCK','fff','wangfangfang','2017-11-05 14:16:52','wangfangfang','2017-11-13 14:32:30',0),(7,'TBYD4','圆底台布','PROD','超棉文艺复兴','圆','3.00','米','4.00','5.00','COTTON_STOCK','随便','wangfangfang','2017-11-05 15:14:54','wangfangfang','2017-11-13 14:32:32',0),(8,'TBYD5','圆底台布','PROD','超棉文艺复兴','圆','3.00','米','5.00','6.00','COTTON_STOCK',NULL,'wangfangfang','2017-11-05 15:17:18','wangfangfang','2017-11-13 14:32:33',0),(9,'TBYD6','圆底台布','CRAFTS','超棉文艺复兴','圆','3.00','米','1.00','2.00','PROD_STOCK',NULL,'wangfangfang','2017-11-05 15:22:49','wangfangfang','2017-11-13 14:32:35',0),(10,'TBYD7','圆底台布','COTTON','超棉文艺复兴','圆','3.00','米','1.00','3.00','COTTON_STOCK',NULL,'wangfangfang','2017-11-05 15:25:10','wangfangfang','2017-11-13 14:32:37',0);
 
 /*Table structure for table `sw_order_base` */
 
@@ -548,7 +548,7 @@ CREATE TABLE `sys_audit_config` (
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `modi_time` datetime DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COMMENT='审核配置表';
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COMMENT='审核配置表';
 
 /*Data for the table `sys_audit_config` */
 
@@ -717,17 +717,6 @@ CREATE TABLE `sys_user_role` (
 /*Data for the table `sys_user_role` */
 
 insert  into `sys_user_role`(`id`,`user_no`,`role_code`,`create_no`,`create_time`,`modi_no`,`modi_time`,`version`) values (1,'admin','admin',NULL,'2017-10-30 14:13:00',NULL,'2017-10-30 14:13:02',0),(2,'wangfangfang','busi',NULL,'2017-10-30 14:13:02',NULL,'2017-10-30 14:13:04',0);
-
-/*Table structure for table `users` */
-
-DROP TABLE IF EXISTS `users`;
-
-CREATE TABLE `users` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-/*Data for the table `users` */
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
