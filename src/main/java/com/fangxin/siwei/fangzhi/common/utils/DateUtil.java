@@ -150,6 +150,23 @@ public class DateUtil {
     }
 
     /**
+     * 把字符串转为日期
+     *
+     * @param strDate
+     * @return
+     * @throws Exception
+     */
+    public static Date ConverToDate1(String strDate) {
+        DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+        try {
+            return df.parse(strDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
      * 获取某段时间的所有的日期
      *
      * @param startTime

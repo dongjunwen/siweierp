@@ -161,6 +161,25 @@
 			<artifactId>hibernate-validator</artifactId>
 			<version>6.0.2.Final</version>
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>3.8</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>3.8</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml-schemas -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml-schemas</artifactId>
+			<version>3.8</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -210,7 +229,15 @@
 							src/main/resources/mybatis-generator/generateConfig.xml</configurationFile>
 					</configuration>
 				</plugin>
-			</plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <configuration>
+                        <source>1.8</source>
+                        <target>1.8</target>
+                    </configuration>
+                </plugin>
+            </plugins>
 		<!--</pluginManagement>-->
 
 	</build>

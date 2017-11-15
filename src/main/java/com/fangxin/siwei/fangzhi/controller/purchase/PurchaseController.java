@@ -7,11 +7,10 @@ import com.fangxin.siwei.fangzhi.common.utils.PageUitls;
 import com.fangxin.siwei.fangzhi.common.utils.ShiroUtils;
 import com.fangxin.siwei.fangzhi.common.validator.ValidatorUtil;
 import com.fangxin.siwei.fangzhi.common.validator.group.AddGroup;
-import com.fangxin.siwei.fangzhi.service.purchase.PurchaseService;
+import com.fangxin.siwei.fangzhi.service.purchase.SwPurchaseService;
 import com.fangxin.siwei.fangzhi.vo.purchase.SwPurAuditVo;
 import com.fangxin.siwei.fangzhi.vo.purchase.SwPurOrderModiVo;
 import com.fangxin.siwei.fangzhi.vo.purchase.SwPurOrderVo;
-import com.fangxin.siwei.fangzhi.vo.purchase.SwReturnModiVo;
 import com.fangxin.siwei.fangzhi.vo.result.SwPurOrderBaseResultVo;
 import com.fangxin.siwei.fangzhi.vo.result.SwPurOrderResultVo;
 import com.github.pagehelper.Page;
@@ -35,7 +34,7 @@ public class PurchaseController {
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
-    PurchaseService purchaseService;
+    SwPurchaseService purchaseService;
 
     @RequestMapping(method = RequestMethod.POST)
     @ApiOperation(value="创建采购单", notes="根据采购单对象创建采购单")

@@ -2,7 +2,6 @@ package com.fangxin.siwei.fangzhi.service.impl.produce;
 
 import com.fangxin.siwei.fangzhi.common.constant.ConstantKey;
 import com.fangxin.siwei.fangzhi.common.enums.AuditTypeEnum;
-import com.fangxin.siwei.fangzhi.common.enums.PurStatus;
 import com.fangxin.siwei.fangzhi.common.enums.ReceiveStatus;
 import com.fangxin.siwei.fangzhi.common.enums.ResultCode;
 import com.fangxin.siwei.fangzhi.common.exception.RRException;
@@ -17,11 +16,8 @@ import com.fangxin.siwei.fangzhi.modal.*;
 import com.fangxin.siwei.fangzhi.service.AbstractService;
 import com.fangxin.siwei.fangzhi.service.audit.AuditingParam;
 import com.fangxin.siwei.fangzhi.service.audit.IAuditingService;
-import com.fangxin.siwei.fangzhi.service.produce.ReceiveService;
+import com.fangxin.siwei.fangzhi.service.produce.SwReceiveService;
 import com.fangxin.siwei.fangzhi.vo.produce.*;
-import com.fangxin.siwei.fangzhi.vo.purchase.SwPurAuditVo;
-import com.fangxin.siwei.fangzhi.vo.purchase.SwPurOrderBaseModiVo;
-import com.fangxin.siwei.fangzhi.vo.purchase.SwPurOrderDetailVo;
 import com.fangxin.siwei.fangzhi.vo.result.*;
 import com.github.pagehelper.Page;
 import org.apache.commons.beanutils.BeanUtils;
@@ -48,7 +44,7 @@ import java.util.Map;
  * @Description：
  **/
 @Service
-public class ReceiveServiceImpl extends AbstractService<SwReceiveBase> implements ReceiveService {
+public class ReceiveServiceImpl extends AbstractService<SwReceiveBase> implements SwReceiveService {
     private static  final Logger logger= LoggerFactory.getLogger(ReceiveServiceImpl.class);
 
     @Autowired

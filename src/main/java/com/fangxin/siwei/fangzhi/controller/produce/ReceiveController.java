@@ -7,7 +7,7 @@ import com.fangxin.siwei.fangzhi.common.utils.PageUitls;
 import com.fangxin.siwei.fangzhi.common.utils.ShiroUtils;
 import com.fangxin.siwei.fangzhi.common.validator.ValidatorUtil;
 import com.fangxin.siwei.fangzhi.common.validator.group.AddGroup;
-import com.fangxin.siwei.fangzhi.service.produce.ReceiveService;
+import com.fangxin.siwei.fangzhi.service.produce.SwReceiveService;
 import com.fangxin.siwei.fangzhi.vo.produce.SwReceiveAuditVo;
 import com.fangxin.siwei.fangzhi.vo.produce.SwReceiveModiVo;
 import com.fangxin.siwei.fangzhi.vo.produce.SwReceiveVo;
@@ -34,7 +34,7 @@ public class ReceiveController {
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
-    ReceiveService receiveService;
+    SwReceiveService receiveService;
 
     @RequestMapping(method = RequestMethod.POST)
     @ApiOperation(value="创建领料单", notes="根据领料单对象创建领料单")

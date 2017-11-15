@@ -19,7 +19,7 @@ import com.fangxin.siwei.fangzhi.modal.SysAuditConfig;
 import com.fangxin.siwei.fangzhi.service.AbstractService;
 import com.fangxin.siwei.fangzhi.service.audit.AuditingParam;
 import com.fangxin.siwei.fangzhi.service.audit.IAuditingService;
-import com.fangxin.siwei.fangzhi.service.purchase.PurchaseService;
+import com.fangxin.siwei.fangzhi.service.purchase.SwPurchaseService;
 import com.fangxin.siwei.fangzhi.vo.purchase.*;
 import com.fangxin.siwei.fangzhi.vo.result.SwPurOrderBaseResultVo;
 import com.fangxin.siwei.fangzhi.vo.result.SwPurOrderDetailResultVo;
@@ -49,7 +49,7 @@ import java.util.Map;
  * @Description：采购单
  **/
 @Service
-public class PurchaseServiceImpl extends AbstractService<SwPurchaseBase> implements PurchaseService {
+public class PurchaseServiceImpl extends AbstractService<SwPurchaseBase> implements SwPurchaseService {
 
     private static  final Logger logger= LoggerFactory.getLogger(PurchaseServiceImpl.class);
 

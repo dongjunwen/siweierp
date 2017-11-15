@@ -13,7 +13,7 @@ import java.util.Map; /**
  * @Author lu.dong
  * @Description：
  **/
-public interface ReceiveService {
+public interface SwReceiveService {
     Result<Integer> audit(SwReceiveAuditVo swReceiveAuditVo);
 
     Result<Integer> create(SwReceiveVo swReceiveVo);

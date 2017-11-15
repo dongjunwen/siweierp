@@ -16,7 +16,7 @@ import java.util.Map; /**
  * @Author lu.dong
  * @Description：
  **/
-public interface PurchaseService {
+public interface SwPurchaseService {
     Result<Integer> create(SwPurOrderVo swPurOrderVo);
 
     Page<SwPurOrderBaseResultVo> findList(Map<String, String> params);
