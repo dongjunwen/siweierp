@@ -37,7 +37,9 @@ public class MyInterceptor implements HandlerInterceptor {
      */
     public void setResHeader(HttpServletRequest request,HttpServletResponse res){
         res.setContentType("application/octet-stream"); //设置返回格式二进制流
-        String reqPath=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort();
+       // String reqPath=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort();
+        String reqOriginRealPath = request.getHeader("Referer");
+        String reqPath=reqOriginRealPath.substring(0,reqOriginRealPath.indexOf("/",7));
         logger.debug("reqPath:{}",reqPath);
         res.setHeader("Access-Control-Allow-Origin", reqPath);
         res.setHeader("Access-Control-Allow-Credentials", "true");
@@ -46,6 +48,42 @@ public class MyInterceptor implements HandlerInterceptor {
         res.setHeader("Access-Control-Allow-Headers", "Origin, No-Cache, X-Requested-With, If-Modified-Since, Pragma, Last-Modified, Cache-Control, Expires, Content-Type, X-E4M-With,userId,token");
         res.setHeader("XDomainRequestAllowed","1");
     }
+
+
+    /**
+     * 获取用户真实IP地址，不使用request.getRemoteAddr();的原因是有可能用户使用了代理软件方式避免真实IP地址,
+     *
+     * 可是，如果通过了多级反向代理的话，X-Forwarded-For的值并不止一个，而是一串IP值，究竟哪个才是真正的用户端的真实IP呢？
+     * 答案是取X-Forwarded-For中第一个非unknown的有效IP字符串。
+     *
+     * 如：X-Forwarded-For：192.168.1.110, 192.168.1.120, 192.168.1.130,
+     * 192.168.1.100
+     *
+     * 用户真实IP为： 192.168.1.110
+     *
+     * @param request
+     * @return
+     */
+    public static String getIpAddress(HttpServletRequest request) {
+        String ip = request.getHeader("x-forwarded-for");
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getHeader("Proxy-Client-IP");
+        }
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getHeader("WL-Proxy-Client-IP");
+        }
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getHeader("HTTP_CLIENT_IP");
+        }
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getHeader("HTTP_X_FORWARDED_FOR");
+        }
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getRemoteAddr();
+        }
+        return ip;
+    }
+
     /**
      * 后处理回调方法，实现处理器的后处理（但在渲染视图之前），此时我们可以通过modelAndView（模型和视图对象）对模型数据进行处理或对视图进行处理，modelAndView也可能为null。
      * @param httpServletRequest
