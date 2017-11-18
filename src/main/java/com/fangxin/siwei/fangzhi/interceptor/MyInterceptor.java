@@ -40,8 +40,9 @@ public class MyInterceptor implements HandlerInterceptor {
        // String reqPath=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort();
         // 获取原始请求来源地址 不带请求路径 http://localhost:8080/fileDemo.html--》http://localhost:8080
         String reqOriginRealPath = request.getHeader("Referer");
-        String reqPath=reqOriginRealPath.substring(0,reqOriginRealPath.indexOf("/",7));
-        logger.debug("reqPath:{}",reqPath);
+        int len=reqOriginRealPath.indexOf("/",7);
+        String reqPath=reqOriginRealPath.substring(0,len);
+        logger.info("Referer:{},reqPath:{}",reqOriginRealPath,reqPath);
         res.setHeader("Access-Control-Allow-Origin", reqPath);
         res.setHeader("Access-Control-Allow-Credentials", "true");
         res.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
