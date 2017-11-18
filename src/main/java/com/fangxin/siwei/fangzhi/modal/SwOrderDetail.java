@@ -46,6 +46,8 @@ public class SwOrderDetail {
 
     private String materialPriceNo;
 
+    private String materialPriceName;
+
     private String materialPriceExpress;
 
     private BigDecimal materialNum;
@@ -236,6 +238,14 @@ public class SwOrderDetail {
 
     public void setMaterialPriceNo(String materialPriceNo) {
         this.materialPriceNo = materialPriceNo == null ? null : materialPriceNo.trim();
+    }
+
+    public String getMaterialPriceName() {
+        return materialPriceName;
+    }
+
+    public void setMaterialPriceName(String materialPriceName) {
+        this.materialPriceName = materialPriceName;
     }
 
     public String getMaterialPriceExpress() {

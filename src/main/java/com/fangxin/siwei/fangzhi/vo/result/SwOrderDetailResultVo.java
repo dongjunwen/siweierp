@@ -49,6 +49,8 @@ public class SwOrderDetailResultVo {
 
     private String materialPriceNo;
 
+    private String materialPriceName;
+
     private String materialPriceExpress;
 
     private BigDecimal materialNum;
@@ -341,5 +343,13 @@ public class SwOrderDetailResultVo {
 
     public void setModiTime(String modiTime) {
         this.modiTime = modiTime;
+    }
+
+    public String getMaterialPriceName() {
+        return materialPriceName;
+    }
+
+    public void setMaterialPriceName(String materialPriceName) {
+        this.materialPriceName = materialPriceName;
     }
 }
