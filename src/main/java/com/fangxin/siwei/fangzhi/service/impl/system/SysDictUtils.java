@@ -76,4 +76,9 @@ public class SysDictUtils {
         String key=dictType+"-"+dictValue;
         return  dictCodeMap.get(key);
     }
+
+    public static String getNameByUniq(String dictType, String dictValue) {
+        SysDict sysDict= getValueByUniq(dictType,dictValue);
+        return sysDict.getDictName();
+    }
 }

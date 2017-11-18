@@ -21,9 +21,15 @@ public class SwOrderBaseResultVo {
 
     private String orderType;
 
+    private String orderTypeName;
+
     private String saleType;
 
+    private String saleTypeName;
+
     private String orderStatus;
+
+    private String orderStatusName;
 
     private String memo;
 
@@ -285,5 +291,29 @@ public class SwOrderBaseResultVo {
 
     public void setModiTime(String modiTime) {
         this.modiTime = modiTime;
+    }
+
+    public String getOrderTypeName() {
+        return orderTypeName;
+    }
+
+    public void setOrderTypeName(String orderTypeName) {
+        this.orderTypeName = orderTypeName;
+    }
+
+    public String getSaleTypeName() {
+        return saleTypeName;
+    }
+
+    public void setSaleTypeName(String saleTypeName) {
+        this.saleTypeName = saleTypeName;
+    }
+
+    public String getOrderStatusName() {
+        return orderStatusName;
+    }
+
+    public void setOrderStatusName(String orderStatusName) {
+        this.orderStatusName = orderStatusName;
     }
 }

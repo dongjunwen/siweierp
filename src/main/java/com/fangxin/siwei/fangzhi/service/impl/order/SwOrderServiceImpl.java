@@ -18,6 +18,7 @@ import com.fangxin.siwei.fangzhi.modal.SysAuditConfig;
 import com.fangxin.siwei.fangzhi.service.AbstractService;
 import com.fangxin.siwei.fangzhi.service.audit.AuditingParam;
 import com.fangxin.siwei.fangzhi.service.audit.IAuditingService;
+import com.fangxin.siwei.fangzhi.service.impl.system.SysDictUtils;
 import com.fangxin.siwei.fangzhi.service.order.SwOrderService;
 import com.fangxin.siwei.fangzhi.vo.order.*;
 import com.fangxin.siwei.fangzhi.vo.result.SwOrderDetailResultVo;
@@ -165,6 +166,9 @@ public class SwOrderServiceImpl extends AbstractService<SwOrderBase> implements 
         for(SwOrderBase swOrderBase: swOrderBases){
             SwOrderBaseResultVo swOrderBaseResultVo=new SwOrderBaseResultVo();
             convertEntityTVo(swOrderBaseResultVo,swOrderBase);
+            swOrderBaseResultVo.setSaleTypeName(SysDictUtils.getNameByUniq("SALE_TYPE",swOrderBaseResultVo.getSaleType()));
+            swOrderBaseResultVo.setOrderTypeName(SysDictUtils.getNameByUniq("ORDER_TYPE",swOrderBaseResultVo.getOrderType()));
+            swOrderBaseResultVo.setOrderStatusName(SysDictUtils.getNameByUniq("ORDER_STATUS",swOrderBaseResultVo.getOrderStatus()));
             swOrderBaseResultVos.add(swOrderBaseResultVo);
         }
         return swOrderBaseResultVos;
