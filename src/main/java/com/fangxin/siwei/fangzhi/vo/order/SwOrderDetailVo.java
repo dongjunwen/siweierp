@@ -62,15 +62,18 @@ public class SwOrderDetailVo {
     private String materialName;
     @ApiModelProperty(value = "幅宽",required =false )
     private BigDecimal materialWidth;
-    @Length(max = 32,message = "面料品名不能超过32")
-    @ApiModelProperty(value = "面料品名",required =false )
+    @Length(max = 32,message = "面料公式代码不能超过32")
+    @ApiModelProperty(value = "面料公式代码",required =false )
     private String materialPriceNo;
-    @Length(max = 32,message = "面料品名不能超过32")
-    @ApiModelProperty(value = "面料品名",required =false )
+    @Length(max = 32,message = "面料公式名称不能超过32")
+    @ApiModelProperty(value = "面料公式名称",required =false )
+    private String materialPriceName;
+    @Length(max = 32,message = "面料公式不能超过32")
+    @ApiModelProperty(value = "面料公式",required =false )
     private String materialPriceExpress;
-    @ApiModelProperty(value = "面料品名",required =false )
+    @ApiModelProperty(value = "面料数量",required =false )
     private BigDecimal materialNum;
-    @ApiModelProperty(value = "面料单价",required =false )
+    @ApiModelProperty(value = "面料基础价",required =false )
     private BigDecimal materialPrice;
     @Length(max = 32,message = "工艺编码不能超过32")
     @ApiModelProperty(value = "工艺编码",required =false )
@@ -309,5 +312,13 @@ public class SwOrderDetailVo {
 
     public void setCateType(String cateType) {
         this.cateType = cateType;
+    }
+
+    public String getMaterialPriceName() {
+        return materialPriceName;
+    }
+
+    public void setMaterialPriceName(String materialPriceName) {
+        this.materialPriceName = materialPriceName;
     }
 }
