@@ -38,6 +38,7 @@ public class MyInterceptor implements HandlerInterceptor {
     public void setResHeader(HttpServletRequest request,HttpServletResponse res){
         res.setContentType("application/octet-stream"); //设置返回格式二进制流
        // String reqPath=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort();
+        // 获取原始请求来源地址 不带请求路径 http://localhost:8080/fileDemo.html--》http://localhost:8080
         String reqOriginRealPath = request.getHeader("Referer");
         String reqPath=reqOriginRealPath.substring(0,reqOriginRealPath.indexOf("/",7));
         logger.debug("reqPath:{}",reqPath);
