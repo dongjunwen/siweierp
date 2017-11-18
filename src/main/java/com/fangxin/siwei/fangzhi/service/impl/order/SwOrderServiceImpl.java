@@ -12,6 +12,7 @@ import com.fangxin.siwei.fangzhi.common.utils.ShiroUtils;
 import com.fangxin.siwei.fangzhi.common.utils.UUIDUtils;
 import com.fangxin.siwei.fangzhi.mapper.SwOrderBaseMapper;
 import com.fangxin.siwei.fangzhi.mapper.SwOrderDetailMapper;
+import com.fangxin.siwei.fangzhi.modal.SwFormularInfo;
 import com.fangxin.siwei.fangzhi.modal.SwOrderBase;
 import com.fangxin.siwei.fangzhi.modal.SwOrderDetail;
 import com.fangxin.siwei.fangzhi.modal.SysAuditConfig;
@@ -164,8 +165,12 @@ public class SwOrderServiceImpl extends AbstractService<SwOrderBase> implements 
         //日期查询条件
         params.put("timeCond1","good_date");
         Condition serviceCondition = Common.getServiceCondition(params, SwOrderBase.class);
-        List<SwOrderBase> swOrderBases = findByCondition(serviceCondition);
-        Page<SwOrderBaseResultVo> swOrderBaseResultVos= new Page<SwOrderBaseResultVo>();
+       Page<SwOrderBase>  swOrderBases=(Page<SwOrderBase>) findByCondition(serviceCondition);
+        Page<SwOrderBaseResultVo> swOrderBaseResultVos=new Page<SwOrderBaseResultVo>();
+        swOrderBaseResultVos.setPageSize(swOrderBases.getPageSize());
+        swOrderBaseResultVos.setPageNum(swOrderBases.getPageNum());
+        swOrderBaseResultVos.setPages(swOrderBases.getPages());
+        swOrderBaseResultVos.setTotal(swOrderBases.getTotal());
         for(SwOrderBase swOrderBase: swOrderBases){
             SwOrderBaseResultVo swOrderBaseResultVo=new SwOrderBaseResultVo();
             convertEntityTVo(swOrderBaseResultVo,swOrderBase);
