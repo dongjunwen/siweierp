@@ -15,6 +15,8 @@ public class SwOrderBaseResultVo {
 
     private String payWay;
 
+    private String payWayName;
+
     private String goodDate;
 
     private String finishDate;
@@ -315,5 +317,13 @@ public class SwOrderBaseResultVo {
 
     public void setOrderStatusName(String orderStatusName) {
         this.orderStatusName = orderStatusName;
+    }
+
+    public String getPayWayName() {
+        return payWayName;
+    }
+
+    public void setPayWayName(String payWayName) {
+        this.payWayName = payWayName;
     }
 }

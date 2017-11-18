@@ -166,6 +166,7 @@ public class SwOrderServiceImpl extends AbstractService<SwOrderBase> implements 
         for(SwOrderBase swOrderBase: swOrderBases){
             SwOrderBaseResultVo swOrderBaseResultVo=new SwOrderBaseResultVo();
             convertEntityTVo(swOrderBaseResultVo,swOrderBase);
+            swOrderBaseResultVo.setPayWayName(SysDictUtils.getNameByUniq("PAY_WAY",swOrderBaseResultVo.getPayWay()));
             swOrderBaseResultVo.setSaleTypeName(SysDictUtils.getNameByUniq("SALE_TYPE",swOrderBaseResultVo.getSaleType()));
             swOrderBaseResultVo.setOrderTypeName(SysDictUtils.getNameByUniq("ORDER_TYPE",swOrderBaseResultVo.getOrderType()));
             swOrderBaseResultVo.setOrderStatusName(SysDictUtils.getNameByUniq("ORDER_STATUS",swOrderBaseResultVo.getOrderStatus()));
@@ -203,13 +204,17 @@ public class SwOrderServiceImpl extends AbstractService<SwOrderBase> implements 
         SwOrderResultVo swOrderResultVo=new SwOrderResultVo();
         SwOrderBaseResultVo swOrderBaseResultVo=new SwOrderBaseResultVo();
         convertEntityTVo(swOrderBaseResultVo,swOrderBase);
+        swOrderBaseResultVo.setPayWayName(SysDictUtils.getNameByUniq("PAY_WAY",swOrderBaseResultVo.getPayWay()));
+        swOrderBaseResultVo.setSaleTypeName(SysDictUtils.getNameByUniq("SALE_TYPE",swOrderBaseResultVo.getSaleType()));
+        swOrderBaseResultVo.setOrderTypeName(SysDictUtils.getNameByUniq("ORDER_TYPE",swOrderBaseResultVo.getOrderType()));
+        swOrderBaseResultVo.setOrderStatusName(SysDictUtils.getNameByUniq("ORDER_STATUS",swOrderBaseResultVo.getOrderStatus()));
         swOrderResultVo.setSwOrderBaseResultVo(swOrderBaseResultVo);
         List<SwOrderDetail> swOrderDetails=swOrderDetailMapper.selectByOrderNo(orderNo);
         List<SwOrderDetailResultVo> swORderDetailResultVos=new ArrayList<>();
         for(SwOrderDetail swOrderDetail:swOrderDetails){
-            SwOrderDetailResultVo swORderDetailResultVo=new SwOrderDetailResultVo();
-            convertDetailEntityTVo(swORderDetailResultVo,swOrderDetail);
-            swORderDetailResultVos.add(swORderDetailResultVo);
+            SwOrderDetailResultVo swOrderDetailResultVo=new SwOrderDetailResultVo();
+            convertDetailEntityTVo(swOrderDetailResultVo,swOrderDetail);
+            swORderDetailResultVos.add(swOrderDetailResultVo);
         }
         swOrderResultVo.setSwORderDetailResultVos(swORderDetailResultVos);
         return swOrderResultVo;
