@@ -17,6 +17,8 @@ public class SwDeliverBaseResutVo {
 
     private String deilverWay;
 
+    private String deilverWayName;
+
     private String sendName;
 
     private String ifGurant;
@@ -197,5 +199,13 @@ public class SwDeliverBaseResutVo {
 
     public void setModiTime(String modiTime) {
         this.modiTime = modiTime;
+    }
+
+    public String getDeilverWayName() {
+        return deilverWayName;
+    }
+
+    public void setDeilverWayName(String deilverWayName) {
+        this.deilverWayName = deilverWayName;
     }
 }

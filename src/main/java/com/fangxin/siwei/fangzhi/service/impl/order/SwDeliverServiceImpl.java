@@ -16,6 +16,7 @@ import com.fangxin.siwei.fangzhi.modal.*;
 import com.fangxin.siwei.fangzhi.service.AbstractService;
 import com.fangxin.siwei.fangzhi.service.audit.AuditingParam;
 import com.fangxin.siwei.fangzhi.service.audit.IAuditingService;
+import com.fangxin.siwei.fangzhi.service.impl.system.SysDictUtils;
 import com.fangxin.siwei.fangzhi.service.order.SwDeliverService;
 import com.fangxin.siwei.fangzhi.vo.order.*;
 import com.fangxin.siwei.fangzhi.vo.result.*;
@@ -161,6 +162,7 @@ public class SwDeliverServiceImpl extends AbstractService<SwDeliverBase> impleme
         for(SwDeliverBase swDeliverBase: swDeliverBases){
             SwDeliverBaseResutVo swDeliverBaseResutVo=new SwDeliverBaseResutVo();
             convertEntityTVo(swDeliverBaseResutVo,swDeliverBase);
+            swDeliverBaseResutVo.setDeilverWayName(SysDictUtils.getNameByUniq("DELIVER_WAY",swDeliverBaseResutVo.getDeilverWay()));
             swOrderBaseResultVos.add(swDeliverBaseResutVo);
         }
         return swOrderBaseResultVos;
@@ -195,6 +197,7 @@ public class SwDeliverServiceImpl extends AbstractService<SwDeliverBase> impleme
         SwDeliverResultVo swDeliverResultVo=new SwDeliverResultVo();
         SwDeliverBaseResutVo swDeliverBaseResutVo=new SwDeliverBaseResutVo();
         convertEntityTVo(swDeliverBaseResutVo,swDeliverBase);
+        swDeliverBaseResutVo.setDeilverWayName(SysDictUtils.getNameByUniq("DELIVER_WAY",swDeliverBaseResutVo.getDeilverWay()));
         swDeliverResultVo.setSwDeliverBaseResutVo(swDeliverBaseResutVo);
         List<SwDeliverDetail> swDeliverDetails=swDeliverDetailMapper.selectByDeliverNo(orderNo);
         List<SwDeliverDetailResutVo> swDeliverDetailResutVos=new ArrayList<>();
