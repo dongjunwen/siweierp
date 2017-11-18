@@ -119,8 +119,12 @@ public class StockInVerifyServiceImpl extends AbstractService<SwStockVerify> imp
         //日期查询条件
         params.put("timeCond1","create_time");
         Condition serviceCondition = Common.getServiceCondition(params, SwOrderBase.class);
-        List<SwStockVerify> swStockIns = findByCondition(serviceCondition);
+        Page<SwStockVerify> swStockIns = (Page)findByCondition(serviceCondition);
         Page<StockVerifyResultVo> stockInResultVos= new Page<StockVerifyResultVo>();
+        stockInResultVos.setPageSize(swStockIns.getPageSize());
+        stockInResultVos.setPageNum(swStockIns.getPageNum());
+        stockInResultVos.setPages(swStockIns.getPages());
+        stockInResultVos.setTotal(swStockIns.getTotal());
         for(SwStockVerify swStockVerify: swStockIns){
             StockVerifyResultVo swStockInResultVo=new StockVerifyResultVo();
             convertToResult(swStockInResultVo,swStockVerify);

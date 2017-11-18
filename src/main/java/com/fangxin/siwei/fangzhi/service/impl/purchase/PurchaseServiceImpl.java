@@ -140,8 +140,12 @@ public class PurchaseServiceImpl extends AbstractService<SwPurchaseBase> impleme
         //日期查询条件
         params.put("timeCond1","pur_date");
         Condition serviceCondition = Common.getServiceCondition(params, SwOrderBase.class);
-        List<SwPurchaseBase> swPurchaseBases = findByCondition(serviceCondition);
+        Page<SwPurchaseBase> swPurchaseBases = (Page)findByCondition(serviceCondition);
         Page<SwPurOrderBaseResultVo> swOrderBaseResultVos= new Page<SwPurOrderBaseResultVo>();
+        swOrderBaseResultVos.setPageSize(swPurchaseBases.getPageSize());
+        swOrderBaseResultVos.setPageNum(swPurchaseBases.getPageNum());
+        swOrderBaseResultVos.setPages(swPurchaseBases.getPages());
+        swOrderBaseResultVos.setTotal(swPurchaseBases.getTotal());
         for(SwPurchaseBase swPurchaseBase: swPurchaseBases){
             SwPurOrderBaseResultVo swPurOrderBaseResultVo=new SwPurOrderBaseResultVo();
             convertEntityTVo(swPurOrderBaseResultVo,swPurchaseBase);

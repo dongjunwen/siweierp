@@ -55,8 +55,12 @@ public class StockInfoServiceImpl extends AbstractService<SwStockInfo> implement
     public Page<SwStockInfoResultVo> findList(Map<String, String> params) {
         //日期查询条件
         Condition serviceCondition = Common.getServiceCondition(params, SwStockInfo.class);
-        List<SwStockInfo> swStockIns = findByCondition(serviceCondition);
+        Page<SwStockInfo> swStockIns = (Page)findByCondition(serviceCondition);
         Page<SwStockInfoResultVo> swStockInfoResultVos= new Page<SwStockInfoResultVo>();
+        swStockInfoResultVos.setPageSize(swStockIns.getPageSize());
+        swStockInfoResultVos.setPageNum(swStockIns.getPageNum());
+        swStockInfoResultVos.setPages(swStockIns.getPages());
+        swStockInfoResultVos.setTotal(swStockIns.getTotal());
         for(SwStockInfo swStockInfo: swStockIns){
             SwStockInfoResultVo swStockInfoResultVo=new SwStockInfoResultVo();
             swStockInfoResultVo.setMaterialNo(swStockInfo.getMaterialNo());

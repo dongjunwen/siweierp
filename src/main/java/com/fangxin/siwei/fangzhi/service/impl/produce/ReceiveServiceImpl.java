@@ -131,8 +131,12 @@ public class ReceiveServiceImpl extends AbstractService<SwReceiveBase> implement
         //日期查询条件
         params.put("timeCond1","receive_date");
         Condition serviceCondition = Common.getServiceCondition(params, SwOrderBase.class);
-        List<SwReceiveBase> swReceiveBases = findByCondition(serviceCondition);
+        Page<SwReceiveBase> swReceiveBases = (Page)findByCondition(serviceCondition);
         Page<SwReceiveBaseResultVo> swOrderBaseResultVos= new Page<SwReceiveBaseResultVo>();
+        swOrderBaseResultVos.setPageSize(swReceiveBases.getPageSize());
+        swOrderBaseResultVos.setPageNum(swReceiveBases.getPageNum());
+        swOrderBaseResultVos.setPages(swReceiveBases.getPages());
+        swOrderBaseResultVos.setTotal(swReceiveBases.getTotal());
         for(SwReceiveBase swReceiveBase: swReceiveBases){
             SwReceiveBaseResultVo swReceiveBaseResultVo=new SwReceiveBaseResultVo();
             convertEntityTVo(swReceiveBaseResultVo,swReceiveBase);

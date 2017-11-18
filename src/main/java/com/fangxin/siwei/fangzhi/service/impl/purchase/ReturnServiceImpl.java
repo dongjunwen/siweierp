@@ -127,8 +127,12 @@ public class ReturnServiceImpl extends AbstractService<SwReturnBase> implements 
         //日期查询条件
         params.put("timeCond1","return_date");
         Condition serviceCondition = Common.getServiceCondition(params, SwReturnBase.class);
-        List<SwReturnBase> swReturnBases = findByCondition(serviceCondition);
+        Page<SwReturnBase> swReturnBases = (Page)findByCondition(serviceCondition);
         Page<SwReturnBaseResultVo> swReturnBaseResultVos= new Page<SwReturnBaseResultVo>();
+        swReturnBaseResultVos.setPageSize(swReturnBases.getPageSize());
+        swReturnBaseResultVos.setPageNum(swReturnBases.getPageNum());
+        swReturnBaseResultVos.setPages(swReturnBases.getPages());
+        swReturnBaseResultVos.setTotal(swReturnBases.getTotal());
         for(SwReturnBase swReturnBase: swReturnBases){
             SwReturnBaseResultVo swReturnBaseResultVo=new SwReturnBaseResultVo();
             convertEntityTVo(swReturnBaseResultVo,swReturnBase);

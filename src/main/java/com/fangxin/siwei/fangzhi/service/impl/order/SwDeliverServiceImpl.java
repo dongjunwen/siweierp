@@ -157,8 +157,12 @@ public class SwDeliverServiceImpl extends AbstractService<SwDeliverBase> impleme
         //日期查询条件
         params.put("timeCond1","deilver_date");
         Condition serviceCondition = Common.getServiceCondition(params, SwOrderBase.class);
-        List<SwDeliverBase> swDeliverBases = findByCondition(serviceCondition);
+        Page<SwDeliverBase> swDeliverBases = (Page)findByCondition(serviceCondition);
         Page<SwDeliverBaseResutVo> swOrderBaseResultVos= new Page<SwDeliverBaseResutVo>();
+        swOrderBaseResultVos.setPageSize(swDeliverBases.getPageSize());
+        swOrderBaseResultVos.setPageNum(swDeliverBases.getPageNum());
+        swOrderBaseResultVos.setPages(swDeliverBases.getPages());
+        swOrderBaseResultVos.setTotal(swDeliverBases.getTotal());
         for(SwDeliverBase swDeliverBase: swDeliverBases){
             SwDeliverBaseResutVo swDeliverBaseResutVo=new SwDeliverBaseResutVo();
             convertEntityTVo(swDeliverBaseResutVo,swDeliverBase);
