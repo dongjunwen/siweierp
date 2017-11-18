@@ -1,7 +1,9 @@
 ## log级别控制 logging.level：日志级别控制前缀，*为包名或Logger名 # LEVEL：选项TRACE, DEBUG, INFO, WARN, ERROR, FATAL, OFF
 logging:
     level:
-        root: TRACE, DEBUG, INFO, WARN, ERROR, FATAL, OFF
+        root: ALL
+       # org.springframework.web:  TRACE, DEBUG, INFO, WARN, ERROR
+        # com.fangxin.siwei.*: TRACE, DEBUG, INFO, WARN, ERROR, FATAL
         java: ERROR
     file: /home/logs/sw-erp-service.log
 ## Server

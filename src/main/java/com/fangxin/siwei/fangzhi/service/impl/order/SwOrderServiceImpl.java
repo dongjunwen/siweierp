@@ -20,6 +20,7 @@ import com.fangxin.siwei.fangzhi.service.audit.AuditingParam;
 import com.fangxin.siwei.fangzhi.service.audit.IAuditingService;
 import com.fangxin.siwei.fangzhi.service.impl.system.SysDictUtils;
 import com.fangxin.siwei.fangzhi.service.order.SwOrderService;
+import com.fangxin.siwei.fangzhi.service.system.SysUserService;
 import com.fangxin.siwei.fangzhi.vo.order.*;
 import com.fangxin.siwei.fangzhi.vo.result.SwOrderDetailResultVo;
 import com.fangxin.siwei.fangzhi.vo.result.SwOrderBaseResultVo;
@@ -59,6 +60,8 @@ public class SwOrderServiceImpl extends AbstractService<SwOrderBase> implements 
     SwOrderDetailMapper swOrderDetailMapper;
     @Autowired
     IAuditingService auditingService;
+    @Autowired
+    SysUserService sysUserService;
 
     @Transactional
     @Override
@@ -170,6 +173,8 @@ public class SwOrderServiceImpl extends AbstractService<SwOrderBase> implements 
             swOrderBaseResultVo.setSaleTypeName(SysDictUtils.getNameByUniq("SALE_TYPE",swOrderBaseResultVo.getSaleType()));
             swOrderBaseResultVo.setOrderTypeName(SysDictUtils.getNameByUniq("ORDER_TYPE",swOrderBaseResultVo.getOrderType()));
             swOrderBaseResultVo.setOrderStatusName(SysDictUtils.getNameByUniq("ORDER_STATUS",swOrderBaseResultVo.getOrderStatus()));
+            swOrderBaseResultVo.setCreateName(sysUserService.getUserNameById(swOrderBaseResultVo.getCreateNo()));
+            swOrderBaseResultVo.setModiName(sysUserService.getUserNameById(swOrderBaseResultVo.getModiNo()));
             swOrderBaseResultVos.add(swOrderBaseResultVo);
         }
         return swOrderBaseResultVos;

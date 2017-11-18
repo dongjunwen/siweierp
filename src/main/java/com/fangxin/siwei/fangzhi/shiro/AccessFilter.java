@@ -7,6 +7,8 @@ import com.fangxin.siwei.fangzhi.common.utils.ShiroUtils;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.authz.AuthorizationFilter;
 import org.apache.shiro.web.util.WebUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -23,6 +25,7 @@ import java.util.Map;
  * @Description：
  **/
 public class AccessFilter extends AuthorizationFilter {
+    private static final Logger logger= LoggerFactory.getLogger(AccessFilter.class);
     @Override
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) throws Exception {
         Subject subject = ShiroUtils.getSubject();
@@ -56,6 +59,18 @@ public class AccessFilter extends AuthorizationFilter {
             httpResponse.setStatus(200, "redirect");
             httpResponse.setCharacterEncoding("UTF-8");
             httpResponse.setContentType("application/json; charset=utf-8");
+            // String reqPath=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort();
+            // 获取原始请求来源地址 不带请求路径 http://localhost:8080/fileDemo.html--》http://localhost:8080
+            String reqOriginRealPath = httpRequest.getHeader("Referer");
+            int len=reqOriginRealPath.indexOf("/",7);
+            String reqPath=reqOriginRealPath.substring(0,len);
+            logger.info("Referer:{},reqPath:{}",reqOriginRealPath,reqPath);
+            httpResponse.setHeader("Access-Control-Allow-Origin", reqPath);
+            httpResponse.setHeader("Access-Control-Allow-Credentials", "true");
+            httpResponse.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
+            httpResponse.setHeader("Access-Control-Max-Age", "86400");
+            httpResponse.setHeader("Access-Control-Allow-Headers", "Origin, No-Cache, X-Requested-With, If-Modified-Since, Pragma, Last-Modified, Cache-Control, Expires, Content-Type, X-E4M-With,userId,token");
+            httpResponse.setHeader("XDomainRequestAllowed","1");
             PrintWriter out = null;
             try{
                 out = httpResponse.getWriter();

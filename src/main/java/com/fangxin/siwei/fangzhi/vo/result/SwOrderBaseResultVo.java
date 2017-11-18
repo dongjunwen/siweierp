@@ -65,9 +65,13 @@ public class SwOrderBaseResultVo {
 
     private String createNo;
 
+    private String createName;
+
     private String createTime;
 
     private String modiNo;
+
+    private String modiName;
 
     private String modiTime;
 
@@ -325,5 +329,21 @@ public class SwOrderBaseResultVo {
 
     public void setPayWayName(String payWayName) {
         this.payWayName = payWayName;
+    }
+
+    public String getCreateName() {
+        return createName;
+    }
+
+    public void setCreateName(String createName) {
+        this.createName = createName;
+    }
+
+    public String getModiName() {
+        return modiName;
+    }
+
+    public void setModiName(String modiName) {
+        this.modiName = modiName;
     }
 }

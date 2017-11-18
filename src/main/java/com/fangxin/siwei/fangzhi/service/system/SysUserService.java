@@ -46,6 +46,8 @@ public interface SysUserService {
      */
     SysUser getUserById(String userNo);
 
+    String getUserNameById(String userNo);
+
     /**
      * 按照用户号获取用户信息
      * @param loginNo
