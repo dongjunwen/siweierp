@@ -1,17 +1,11 @@
 package com.fangxin.siwei.fangzhi.mapper;
 
+import com.fangxin.siwei.fangzhi.common.utils.MyMapper;
 import com.fangxin.siwei.fangzhi.modal.SwWorkDetail;
+import com.fangxin.siwei.fangzhi.modal.TmpWorkDetail;
 
-public interface SwWorkDetailMapper {
-    int deleteByPrimaryKey(Integer id);
+import java.util.List;
 
-    int insert(SwWorkDetail record);
-
-    int insertSelective(SwWorkDetail record);
-
-    SwWorkDetail selectByPrimaryKey(Integer id);
-
-    int updateByPrimaryKeySelective(SwWorkDetail record);
-
-    int updateByPrimaryKey(SwWorkDetail record);
+public interface SwWorkDetailMapper extends MyMapper<SwWorkDetail> {
+    void insertBatch(List<SwWorkDetail> swWorkDetails);
 }

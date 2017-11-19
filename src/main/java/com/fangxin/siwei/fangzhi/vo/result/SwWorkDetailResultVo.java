@@ -1,54 +1,50 @@
-package com.fangxin.siwei.fangzhi.vo.produce;
-
-import com.fangxin.siwei.fangzhi.common.excel.ExcelField;
+package com.fangxin.siwei.fangzhi.vo.result;
 
 import java.util.Date;
 
 /**
- * @Date:2017/11/15 0015 16:57
+ * @Date:2017/11/19 0019 12:15
  * @Author lu.dong
  * @Description：
  **/
-public class SwWorkDetailVo {
+public class SwWorkDetailResultVo {
     private Integer id;
-    @ExcelField(title = "计件日期",sort = 1)
-    private Date workDate;
-    @ExcelField(title = "订单号",sort = 2)
+
+    private String workNo;
+
+    private String workDate;
+
     private String orderNo;
-    @ExcelField(title = "订单序号",sort = 3)
+
     private String orderSeqNo;
-    @ExcelField(title = "工号",sort = 4)
+
     private String userNo;
-    @ExcelField(title = "姓名",sort = 5)
+
     private String userName;
+
     private String stepNo;
-    @ExcelField(title = "流程步骤",sort = 6)
+
     private String stepName;
+
     private String processNo;
-    @ExcelField(title = "工艺",sort = 7)
+
     private String processName;
-    @ExcelField(title = "单位",sort = 8)
+
     private String unit;
-    @ExcelField(title = "数量",sort = 9)
+
     private String num;
 
-    public SwWorkDetailVo() {
-    }
+    private String createNo;
 
-    public SwWorkDetailVo(Integer id, Date workDate, String orderNo, String orderSeqNo, String userNo, String userName, String stepNo, String stepName, String processNo, String processName, String unit, String num) {
-        this.id = id;
-        this.workDate = workDate;
-        this.orderNo = orderNo;
-        this.orderSeqNo = orderSeqNo;
-        this.userNo = userNo;
-        this.userName = userName;
-        this.stepNo = stepNo;
-        this.stepName = stepName;
-        this.processNo = processNo;
-        this.processName = processName;
-        this.unit = unit;
-        this.num = num;
-    }
+    private String createName;
+
+    private String createTime;
+
+    private String modiNo;
+
+    private String modiName;
+
+    private String modiTime;
 
     public Integer getId() {
         return id;
@@ -58,11 +54,19 @@ public class SwWorkDetailVo {
         this.id = id;
     }
 
-    public Date getWorkDate() {
+    public String getWorkNo() {
+        return workNo;
+    }
+
+    public void setWorkNo(String workNo) {
+        this.workNo = workNo;
+    }
+
+    public String getWorkDate() {
         return workDate;
     }
 
-    public void setWorkDate(Date workDate) {
+    public void setWorkDate(String workDate) {
         this.workDate = workDate;
     }
 
@@ -144,5 +148,53 @@ public class SwWorkDetailVo {
 
     public void setNum(String num) {
         this.num = num;
+    }
+
+    public String getCreateNo() {
+        return createNo;
+    }
+
+    public void setCreateNo(String createNo) {
+        this.createNo = createNo;
+    }
+
+    public String getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
+    }
+
+    public String getModiNo() {
+        return modiNo;
+    }
+
+    public void setModiNo(String modiNo) {
+        this.modiNo = modiNo;
+    }
+
+    public String getModiTime() {
+        return modiTime;
+    }
+
+    public void setModiTime(String modiTime) {
+        this.modiTime = modiTime;
+    }
+
+    public String getCreateName() {
+        return createName;
+    }
+
+    public void setCreateName(String createName) {
+        this.createName = createName;
+    }
+
+    public String getModiName() {
+        return modiName;
+    }
+
+    public void setModiName(String modiName) {
+        this.modiName = modiName;
     }
 }

@@ -1,9 +1,13 @@
 package com.fangxin.siwei.fangzhi.modal;
 
+import javax.persistence.Id;
 import java.util.Date;
 
 public class SwWorkDetail {
+    @Id
     private Integer id;
+
+    private String workNo;
 
     private Date workDate;
 
@@ -43,6 +47,14 @@ public class SwWorkDetail {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getWorkNo() {
+        return workNo;
+    }
+
+    public void setWorkNo(String workNo) {
+        this.workNo = workNo;
     }
 
     public Date getWorkDate() {

@@ -3,6 +3,7 @@
 <mapper namespace="com.fangxin.siwei.fangzhi.mapper.SwWorkDetailMapper">
   <resultMap id="BaseResultMap" type="com.fangxin.siwei.fangzhi.modal.SwWorkDetail">
     <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="work_no" jdbcType="DATE" property="workNo" />
     <result column="work_date" jdbcType="DATE" property="workDate" />
     <result column="order_no" jdbcType="VARCHAR" property="orderNo" />
     <result column="order_seq_no" jdbcType="VARCHAR" property="orderSeqNo" />
@@ -21,214 +22,28 @@
     <result column="version" jdbcType="INTEGER" property="version" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, work_date, order_no, order_seq_no, user_no, user_name, step_no, step_name, process_no, 
+    id,work_no, work_date, order_no, order_seq_no, user_no, user_name, step_no, step_name, process_no,
     process_name, unit, num, create_no, create_time, modi_no, modi_time, version
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from sw_work_detail
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from sw_work_detail
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.fangxin.siwei.fangzhi.modal.SwWorkDetail">
-    insert into sw_work_detail (id, work_date, order_no, 
-      order_seq_no, user_no, user_name, 
-      step_no, step_name, process_no, 
-      process_name, unit, num, 
-      create_no, create_time, modi_no, 
-      modi_time, version)
-    values (#{id,jdbcType=INTEGER}, #{workDate,jdbcType=DATE}, #{orderNo,jdbcType=VARCHAR}, 
-      #{orderSeqNo,jdbcType=VARCHAR}, #{userNo,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
-      #{stepNo,jdbcType=VARCHAR}, #{stepName,jdbcType=VARCHAR}, #{processNo,jdbcType=VARCHAR}, 
-      #{processName,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, #{num,jdbcType=VARCHAR}, 
-      #{createNo,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{modiNo,jdbcType=VARCHAR}, 
-      #{modiTime,jdbcType=TIMESTAMP}, #{version,jdbcType=INTEGER})
+
+  <insert id="insertBatch" parameterType="java.util.List">
+    insert into sw_work_detail ( work_no, work_date,
+    order_no, order_seq_no, user_no,
+    user_name, step_no, step_name,
+    process_no, process_name, unit,
+    num, create_no, create_time,
+    modi_no, modi_time, version
+    )
+    values
+    <foreach collection="list" item="item" separator="," index="index" >
+      ( #{item.workNo,jdbcType=VARCHAR}, #{item.workDate,jdbcType=DATE},
+      #{item.orderNo,jdbcType=VARCHAR}, #{item.orderSeqNo,jdbcType=VARCHAR}, #{item.userNo,jdbcType=VARCHAR},
+      #{item.userName,jdbcType=VARCHAR}, #{item.stepNo,jdbcType=VARCHAR}, #{item.stepName,jdbcType=VARCHAR},
+      #{item.processNo,jdbcType=VARCHAR}, #{item.processName,jdbcType=VARCHAR}, #{item.unit,jdbcType=VARCHAR},
+      #{item.num,jdbcType=VARCHAR}, #{item.createNo,jdbcType=VARCHAR}, #{item.createTime,jdbcType=TIMESTAMP},
+      #{item.modiNo,jdbcType=VARCHAR}, #{item.modiTime,jdbcType=TIMESTAMP}, #{item.version,jdbcType=INTEGER}
+      )
+    </foreach>
   </insert>
-  <insert id="insertSelective" parameterType="com.fangxin.siwei.fangzhi.modal.SwWorkDetail">
-    insert into sw_work_detail
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="workDate != null">
-        work_date,
-      </if>
-      <if test="orderNo != null">
-        order_no,
-      </if>
-      <if test="orderSeqNo != null">
-        order_seq_no,
-      </if>
-      <if test="userNo != null">
-        user_no,
-      </if>
-      <if test="userName != null">
-        user_name,
-      </if>
-      <if test="stepNo != null">
-        step_no,
-      </if>
-      <if test="stepName != null">
-        step_name,
-      </if>
-      <if test="processNo != null">
-        process_no,
-      </if>
-      <if test="processName != null">
-        process_name,
-      </if>
-      <if test="unit != null">
-        unit,
-      </if>
-      <if test="num != null">
-        num,
-      </if>
-      <if test="createNo != null">
-        create_no,
-      </if>
-      <if test="createTime != null">
-        create_time,
-      </if>
-      <if test="modiNo != null">
-        modi_no,
-      </if>
-      <if test="modiTime != null">
-        modi_time,
-      </if>
-      <if test="version != null">
-        version,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="workDate != null">
-        #{workDate,jdbcType=DATE},
-      </if>
-      <if test="orderNo != null">
-        #{orderNo,jdbcType=VARCHAR},
-      </if>
-      <if test="orderSeqNo != null">
-        #{orderSeqNo,jdbcType=VARCHAR},
-      </if>
-      <if test="userNo != null">
-        #{userNo,jdbcType=VARCHAR},
-      </if>
-      <if test="userName != null">
-        #{userName,jdbcType=VARCHAR},
-      </if>
-      <if test="stepNo != null">
-        #{stepNo,jdbcType=VARCHAR},
-      </if>
-      <if test="stepName != null">
-        #{stepName,jdbcType=VARCHAR},
-      </if>
-      <if test="processNo != null">
-        #{processNo,jdbcType=VARCHAR},
-      </if>
-      <if test="processName != null">
-        #{processName,jdbcType=VARCHAR},
-      </if>
-      <if test="unit != null">
-        #{unit,jdbcType=VARCHAR},
-      </if>
-      <if test="num != null">
-        #{num,jdbcType=VARCHAR},
-      </if>
-      <if test="createNo != null">
-        #{createNo,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="modiNo != null">
-        #{modiNo,jdbcType=VARCHAR},
-      </if>
-      <if test="modiTime != null">
-        #{modiTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="version != null">
-        #{version,jdbcType=INTEGER},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.fangxin.siwei.fangzhi.modal.SwWorkDetail">
-    update sw_work_detail
-    <set>
-      <if test="workDate != null">
-        work_date = #{workDate,jdbcType=DATE},
-      </if>
-      <if test="orderNo != null">
-        order_no = #{orderNo,jdbcType=VARCHAR},
-      </if>
-      <if test="orderSeqNo != null">
-        order_seq_no = #{orderSeqNo,jdbcType=VARCHAR},
-      </if>
-      <if test="userNo != null">
-        user_no = #{userNo,jdbcType=VARCHAR},
-      </if>
-      <if test="userName != null">
-        user_name = #{userName,jdbcType=VARCHAR},
-      </if>
-      <if test="stepNo != null">
-        step_no = #{stepNo,jdbcType=VARCHAR},
-      </if>
-      <if test="stepName != null">
-        step_name = #{stepName,jdbcType=VARCHAR},
-      </if>
-      <if test="processNo != null">
-        process_no = #{processNo,jdbcType=VARCHAR},
-      </if>
-      <if test="processName != null">
-        process_name = #{processName,jdbcType=VARCHAR},
-      </if>
-      <if test="unit != null">
-        unit = #{unit,jdbcType=VARCHAR},
-      </if>
-      <if test="num != null">
-        num = #{num,jdbcType=VARCHAR},
-      </if>
-      <if test="createNo != null">
-        create_no = #{createNo,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="modiNo != null">
-        modi_no = #{modiNo,jdbcType=VARCHAR},
-      </if>
-      <if test="modiTime != null">
-        modi_time = #{modiTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="version != null">
-        version = #{version,jdbcType=INTEGER},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.fangxin.siwei.fangzhi.modal.SwWorkDetail">
-    update sw_work_detail
-    set work_date = #{workDate,jdbcType=DATE},
-      order_no = #{orderNo,jdbcType=VARCHAR},
-      order_seq_no = #{orderSeqNo,jdbcType=VARCHAR},
-      user_no = #{userNo,jdbcType=VARCHAR},
-      user_name = #{userName,jdbcType=VARCHAR},
-      step_no = #{stepNo,jdbcType=VARCHAR},
-      step_name = #{stepName,jdbcType=VARCHAR},
-      process_no = #{processNo,jdbcType=VARCHAR},
-      process_name = #{processName,jdbcType=VARCHAR},
-      unit = #{unit,jdbcType=VARCHAR},
-      num = #{num,jdbcType=VARCHAR},
-      create_no = #{createNo,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      modi_no = #{modiNo,jdbcType=VARCHAR},
-      modi_time = #{modiTime,jdbcType=TIMESTAMP},
-      version = #{version,jdbcType=INTEGER}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+
 </mapper>
