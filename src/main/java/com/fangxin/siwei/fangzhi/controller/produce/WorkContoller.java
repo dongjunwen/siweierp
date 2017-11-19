@@ -92,6 +92,7 @@ public class WorkContoller {
 
     @ApiOperation(value="删除工时", notes="删除工时")
     @RequestMapping(value = "{ids}",method = RequestMethod.DELETE)
+    @ApiImplicitParam(name = "ids",value = "工时Id编号 以逗号分隔 ")
     public Result<String> delete(@PathVariable("ids") String ids){
         try {
             Result<Integer> result= swWorkService.deleteByIdstr(ids);

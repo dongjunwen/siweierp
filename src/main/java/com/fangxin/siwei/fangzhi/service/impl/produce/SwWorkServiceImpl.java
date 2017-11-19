@@ -76,7 +76,7 @@ public class SwWorkServiceImpl extends AbstractService<SwWorkDetail> implements 
             }
             swWorkDetailMapper.insertBatch(swWorkDetails);
             logger.info("记录数据:{}成功!",saveFileName);
-            //FileUtil.delFile(saveFileName);
+            FileUtil.delFile(saveFileName);
             return Result.newSuccess(swWorkDetailVos);
         } catch (IOException e) {
             logger.error("IO异常:{}"+e.getMessage());
