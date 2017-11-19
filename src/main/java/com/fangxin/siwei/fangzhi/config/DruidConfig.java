@@ -18,10 +18,10 @@ public class DruidConfig {
 
         ServletRegistrationBean servletRegistrationBean = new ServletRegistrationBean(new StatViewServlet(), "/druid/*");
         //白名单：
-        servletRegistrationBean.addInitParameter("allow", "192.168.1.218,127.0.0.1");
+        //servletRegistrationBean.addInitParameter("allow", "192.168.1.218,127.0.0.1");
 
         //IP黑名单 (存在共同时，deny优先于allow) : 如果满足deny的即提示:Sorry, you are not permitted to view this page.
-        servletRegistrationBean.addInitParameter("deny", "192.168.1.100");
+      //  servletRegistrationBean.addInitParameter("deny", "192.168.1.100");
 
         //是否能够重置数据.
         servletRegistrationBean.addInitParameter("resetEnable", "false");

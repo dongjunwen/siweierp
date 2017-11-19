@@ -74,7 +74,7 @@ public class SwOrderServiceImpl extends AbstractService<SwOrderBase> implements 
         String orderNo= UUIDUtils.genUUID(ConstantKey.ORDER_KEY_PRE);
         swOrderBase.setOrderNo(orderNo);
         swOrderBase.setOrderDate(new Date());
-        swOrderBase.setOrderStatus(OrderStatus.WAIT_AUDIT.getCode());
+        swOrderBase.setOrderStatus(OrderStatus.WAIT_APPLY.getCode());
         swOrderBase.setCreateNo(ShiroUtils.getCurrentUserNo());
         swOrderBase.setCreateTime(new Date());
         swOrderBase.setModiNo(ShiroUtils.getCurrentUserNo());
@@ -103,7 +103,7 @@ public class SwOrderServiceImpl extends AbstractService<SwOrderBase> implements 
         convertVoToEntity(swOrderBase,swOrderBaseModiVo);
         String orderNo=swOrderBaseModiVo.getOrderNo();
         swOrderBase.setOrderNo(swOrderBaseModiVo.getOrderNo());
-        swOrderBase.setOrderStatus(OrderStatus.WAIT_AUDIT.getCode());
+        swOrderBase.setOrderStatus(OrderStatus.WAIT_APPLY.getCode());
         swOrderBase.setModiNo(ShiroUtils.getCurrentUserNo());
         swOrderBase.setModiTime(new Date());
         List<SwOrderDetailVo> swOrderDetailVoList=swOrderModiVo.getSwOrderDetailVos();

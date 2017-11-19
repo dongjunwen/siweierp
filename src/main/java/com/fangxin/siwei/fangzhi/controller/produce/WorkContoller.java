@@ -54,7 +54,7 @@ public class WorkContoller {
         }
     }
 
-    @RequestMapping("/downTemplate")
+    @RequestMapping(value = "/downTemplate",method = RequestMethod.GET)
     public ResponseEntity<byte[]> download() throws IOException {
         String fileName="workTemplate.xls";
         String dfileName=FileUtil.getRealPath()+"/static/template/"+fileName;

@@ -8,7 +8,8 @@ import java.util.Objects;
  * @Description：
  **/
 public enum OrderStatus {
-    WAIT_AUDIT("WAIT_AUDIT","待初审"),
+    WAIT_APPLY("WAIT_APPLY","待初审"),
+    HAS_CANCEL("HAS_CANCEL","已作废"),
     AUDIT01_SUCCESS("AUDIT01_SUCCESS","初审成功"),
     AUDIT_SUCCESS("AUDIT_SUCCESS","终审成功"),
     ORDER_FINISH("ORDER_FINISH","订单结束");
