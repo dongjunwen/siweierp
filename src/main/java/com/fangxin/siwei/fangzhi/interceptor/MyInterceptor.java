@@ -50,7 +50,7 @@ public class MyInterceptor implements HandlerInterceptor {
         }
         res.setHeader("Access-Control-Allow-Origin", reqPath);
         res.setHeader("Access-Control-Allow-Credentials", "true");
-        res.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
+        res.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE,PUT");
         res.setHeader("Access-Control-Max-Age", "86400");
         res.setHeader("Access-Control-Allow-Headers", "Origin, No-Cache, X-Requested-With, If-Modified-Since, Pragma, Last-Modified, Cache-Control, Expires, Content-Type, X-E4M-With,userId,token");
         res.setHeader("XDomainRequestAllowed","1");

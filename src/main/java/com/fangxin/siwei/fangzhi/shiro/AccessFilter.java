@@ -72,7 +72,7 @@ public class AccessFilter extends AuthorizationFilter {
             }
             httpResponse.setHeader("Access-Control-Allow-Origin", reqPath);
             httpResponse.setHeader("Access-Control-Allow-Credentials", "true");
-            httpResponse.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
+            httpResponse.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE,PUT");
             httpResponse.setHeader("Access-Control-Max-Age", "86400");
             httpResponse.setHeader("Access-Control-Allow-Headers", "Origin, No-Cache, X-Requested-With, If-Modified-Since, Pragma, Last-Modified, Cache-Control, Expires, Content-Type, X-E4M-With,userId,token");
             httpResponse.setHeader("XDomainRequestAllowed","1");
