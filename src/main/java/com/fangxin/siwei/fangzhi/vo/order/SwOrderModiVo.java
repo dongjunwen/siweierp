@@ -3,6 +3,7 @@ package com.fangxin.siwei.fangzhi.vo.order;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -12,6 +13,7 @@ import java.util.List;
  **/
 @ApiModel(value = "业务订单修改Vo SwOrderModiVo")
 public class SwOrderModiVo {
+    @NotNull(message = "基础数据不能为空!")
     @ApiModelProperty(value = "基础数据",required =false )
     private SwOrderBaseModiVo swOrderBaseModiVo;
     @ApiModelProperty(value = "明细数据",required =false )
