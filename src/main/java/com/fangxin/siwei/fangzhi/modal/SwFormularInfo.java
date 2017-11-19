@@ -1,6 +1,7 @@
 package com.fangxin.siwei.fangzhi.modal;
 
 import javax.persistence.Id;
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class SwFormularInfo {
@@ -12,6 +13,8 @@ public class SwFormularInfo {
     private String formularName;
 
     private String formularValue;
+
+    private BigDecimal formularPrice;
 
     private String formularType;
 
@@ -113,5 +116,13 @@ public class SwFormularInfo {
 
     public void setVersion(Integer version) {
         this.version = version;
+    }
+
+    public BigDecimal getFormularPrice() {
+        return formularPrice;
+    }
+
+    public void setFormularPrice(BigDecimal formularPrice) {
+        this.formularPrice = formularPrice;
     }
 }

@@ -103,6 +103,7 @@ public class OrderController {
             if(!_result.isSuccess()){
                 return Result.newError(_result.getCode(),_result.getMessage());
             }
+            logger.info("订单信息:{}审核成功",swOrderAuditVo);
             return  Result.newSuccess("审核订单合同成功");
         }catch (Exception e){
             logger.error("审核订单合同异常!{}",e);

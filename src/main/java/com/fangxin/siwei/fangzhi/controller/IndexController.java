@@ -78,6 +78,7 @@ public class IndexController {
         Subject currentUser  = SecurityUtils.getSubject();
         try {
             currentUser.login(token);
+            logger.info("账号:{}登录成功",name);
             return Result.newSuccess(name+"登录成功!");
         }catch(Exception e){
             //return new ResponseEntity<String>("用户名或密码错误", HttpStatus.UNPROCESSABLE_ENTITY);

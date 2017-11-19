@@ -6,6 +6,8 @@ import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
+import javax.validation.constraints.DecimalMin;
+
 /**
  * @Date:2017/10/20 0020 17:27
  * @Author lu.dong
@@ -24,6 +26,9 @@ public class SwFormularInfoVo {
     @Length(min = 1,max = 32,message = "公式值长度不能超过32")
     @ApiModelProperty(value = "公式值",required =true )
     private String formularValue;
+    @DecimalMin(value = "0.01")
+    @ApiModelProperty(value = "单价",required =true )
+    private String formularPrice;
     @Length(min = 1,max = 32,message = "公式类型不能超过32")
     @ApiModelProperty(value = "公式类型",required =true )
     private String formularType;
@@ -69,5 +74,13 @@ public class SwFormularInfoVo {
 
     public void setMemo(String memo) {
         this.memo = memo;
+    }
+
+    public String getFormularPrice() {
+        return formularPrice;
+    }
+
+    public void setFormularPrice(String formularPrice) {
+        this.formularPrice = formularPrice;
     }
 }

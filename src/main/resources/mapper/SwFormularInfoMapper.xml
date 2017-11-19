@@ -6,6 +6,7 @@
     <result column="formular_no" jdbcType="VARCHAR" property="formularNo" />
     <result column="formular_name" jdbcType="VARCHAR" property="formularName" />
     <result column="formular_value" jdbcType="VARCHAR" property="formularValue" />
+    <result column="formular_price" jdbcType="DECIMAL" property="formularPrice" />
     <result column="formular_type" jdbcType="VARCHAR" property="formularType" />
     <result column="memo" jdbcType="VARCHAR" property="memo" />
     <result column="create_no" jdbcType="VARCHAR" property="createNo" />
@@ -15,7 +16,7 @@
     <result column="version" jdbcType="INTEGER" property="version" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, formular_no, formular_name, formular_value, formular_type, memo, create_no, create_time, 
+    id, formular_no, formular_name, formular_value,formular_price, formular_type, memo, create_no, create_time,
     modi_no, modi_time, version
   </sql>
   <select id="selectByFormularNo" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -24,9 +25,6 @@
     from sw_formular_info
     where formular_no = #{formularNo,jdbcType=VARCHAR}
   </select>
-
-
-
   <select id="findFormularLike" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
@@ -42,6 +40,9 @@
       </if>
       <if test="formularValue != null">
         formular_value = #{formularValue,jdbcType=VARCHAR},
+      </if>
+      <if test="formularPrice != null">
+        formular_price = #{formularPrice,jdbcType=DECIMAL},
       </if>
       <if test="formularType != null">
         formular_type = #{formularType,jdbcType=VARCHAR},
