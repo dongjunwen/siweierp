@@ -127,41 +127,107 @@
   <update id="updateBatch" parameterType="java.util.List" >
     <foreach collection="list" index="index" item="item" separator=";">
      update sw_order_detail
-    set
-      prod_no = #{item.prodNo,jdbcType=VARCHAR},
-      prod_name = #{item.prodName,jdbcType=VARCHAR},
-      prod_type = #{item.prodType,jdbcType=VARCHAR},
-      prod_form = #{item.prodForm,jdbcType=VARCHAR},
-      prod_long = #{item.prodLong,jdbcType=DECIMAL},
-      prod_width = #{item.prodWidth,jdbcType=DECIMAL},
-      prod_num = #{item.prodNum,jdbcType=DECIMAL},
-      prod_unit = #{item.prodUnit,jdbcType=VARCHAR},
-      prod_price_no = #{item.prodPriceNo,jdbcType=VARCHAR},
-      prod_price_express = #{item.prodPriceExpress,jdbcType=VARCHAR},
-      prod_price = #{item.prodPrice,jdbcType=DECIMAL},
-      prod_amt = #{item.prodAmt,jdbcType=DECIMAL},
-      area = #{item.area,jdbcType=VARCHAR},
-      material_no = #{item.materialNo,jdbcType=VARCHAR},
-      material_name = #{item.materialName,jdbcType=VARCHAR},
-      material_width = #{item.materialWidth,jdbcType=DECIMAL},
-      material_price_no = #{item.materialPriceNo,jdbcType=VARCHAR},
-      material_price_name = #{item.materialPriceName,jdbcType=VARCHAR},
-      material_price_express = #{item.materialPriceExpress,jdbcType=VARCHAR},
-      material_num = #{item.materialNum,jdbcType=DECIMAL},
-      material_price = #{item.materialPrice,jdbcType=DECIMAL},
-      tech_no = #{item.techNo,jdbcType=VARCHAR},
-      tech_name = #{item.techName,jdbcType=VARCHAR},
-      tech_price = #{item.techPrice,jdbcType=DECIMAL},
-      tech_price_express = #{item.techPriceExpress,jdbcType=VARCHAR},
-      memo = #{item.memo,jdbcType=VARCHAR},
-      prod_price1 = #{item.prodPrice1,jdbcType=DECIMAL},
-      if_prod = #{item.ifProd,jdbcType=CHAR},
-      cate_type = #{item.cateType,jdbcType=VARCHAR},
-      create_no = #{item.createNo,jdbcType=VARCHAR},
-      create_time = #{item.createTime,jdbcType=TIMESTAMP},
-      modi_no = #{item.modiNo,jdbcType=VARCHAR},
-      modi_time = #{item.modiTime,jdbcType=TIMESTAMP},
-      version = #{item.version,jdbcType=INTEGER}
+      <set>
+        <if test="item.prodNo != null">
+          prod_no = #{item.prodNo,jdbcType=VARCHAR},
+        </if>
+        <if test="item.prodName != null">
+          prod_name = #{item.prodName,jdbcType=VARCHAR},
+        </if>
+        <if test="item.prodType != null">
+          prod_type = #{item.prodType,jdbcType=VARCHAR},
+        </if>
+        <if test="item.prodForm != null">
+          prod_form = #{item.prodForm,jdbcType=VARCHAR},
+        </if>
+        <if test="item.prodLong != null">
+          prod_long = #{item.prodLong,jdbcType=DECIMAL},
+        </if>
+        <if test="item.prodWidth != null">
+          prod_width = #{item.prodWidth,jdbcType=DECIMAL},
+        </if>
+        <if test="item.prodNum != null">
+          prod_num = #{item.prodNum,jdbcType=DECIMAL},
+        </if>
+        <if test="item.prodUnit != null">
+          prod_unit = #{item.prodUnit,jdbcType=VARCHAR},
+        </if>
+        <if test="item.prodPriceNo != null">
+          prod_price_no = #{item.prodPriceNo,jdbcType=VARCHAR},
+        </if>
+        <if test="item.prodPriceExpress != null">
+          prod_price_express = #{item.prodPriceExpress,jdbcType=VARCHAR},
+        </if>
+        <if test="item.prodPrice != null">
+          prod_price = #{item.prodPrice,jdbcType=DECIMAL},
+        </if>
+        <if test="item.prodAmt != null">
+          prod_amt = #{item.prodAmt,jdbcType=DECIMAL},
+        </if>
+        <if test="item.area != null">
+          area = #{item.area,jdbcType=VARCHAR},
+        </if>
+        <if test="item.materialNo != null">
+          material_no = #{item.materialNo,jdbcType=VARCHAR},
+        </if>
+        <if test="item.materialName != null">
+          material_name = #{item.materialName,jdbcType=VARCHAR},
+        </if>
+        <if test="item.materialWidth != null">
+          material_width = #{item.materialWidth,jdbcType=DECIMAL},
+        </if>
+        <if test="item.materialPriceNo != null">
+          material_price_no = #{item.materialPriceNo,jdbcType=VARCHAR},
+        </if>
+        <if test="item.materialPriceName != null">
+          material_price_name = #{item.materialPriceName,jdbcType=VARCHAR},
+        </if>
+        <if test="item.materialPriceExpress != null">
+          material_price_express = #{item.materialPriceExpress,jdbcType=VARCHAR},
+        </if>
+        <if test="item.materialNum != null">
+          material_num = #{item.materialNum,jdbcType=DECIMAL},
+        </if>
+        <if test="item.materialPrice != null">
+          material_price = #{item.materialPrice,jdbcType=DECIMAL},
+        </if>
+        <if test="item.techNo != null">
+          tech_no = #{item.techNo,jdbcType=VARCHAR},
+        </if>
+        <if test="item.techName != null">
+          tech_name = #{item.techName,jdbcType=VARCHAR},
+        </if>
+        <if test="item.techPrice != null">
+          tech_price = #{item.techPrice,jdbcType=DECIMAL},
+        </if>
+        <if test="item.techPriceExpress != null">
+          tech_price_express = #{item.techPriceExpress,jdbcType=VARCHAR},
+        </if>
+        <if test="item.memo != null">
+          memo = #{item.memo,jdbcType=VARCHAR},
+        </if>
+        <if test="item.prodPrice1 != null">
+          prod_price1 = #{item.prodPrice1,jdbcType=DECIMAL},
+        </if>
+        <if test="item.ifProd != null">
+          if_prod = #{item.ifProd,jdbcType=CHAR},
+        </if>
+        <if test="item.cateType != null">
+          cate_type = #{item.cateType,jdbcType=VARCHAR},
+        </if>
+        <if test="item.createNo != null">
+          create_no = #{item.createNo,jdbcType=VARCHAR},
+        </if>
+        <if test="item.createTime != null">
+          create_time = #{item.createTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="item.modiNo != null">
+          modi_no = #{item.modiNo,jdbcType=VARCHAR},
+        </if>
+        <if test="item.modiTime != null">
+          modi_time = #{item.modiTime,jdbcType=TIMESTAMP},
+        </if>
+      </set>
     where 1=1
       and order_no = #{item.orderNo,jdbcType=VARCHAR}
       and order_seq_no = #{item.orderSeqNo,jdbcType=VARCHAR}
