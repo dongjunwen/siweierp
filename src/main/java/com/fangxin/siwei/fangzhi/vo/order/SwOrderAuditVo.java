@@ -5,6 +5,7 @@ import com.fangxin.siwei.fangzhi.common.enums.OrderStatus;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -17,12 +18,13 @@ public class SwOrderAuditVo {
     /**
      * 审核单号
      */
-    @ApiModelProperty(value = "订单号列表",required =false )
+    @NotNull(message = "单号不能为空!")
+    @ApiModelProperty(value = "订单号列表",required =true )
     private List<String> orderNos;
     /**
      * 审核动作
      */
-    @ApiModelProperty(value = "审核动作",required =false )
+    @ApiModelProperty(value = "审核动作",required =true )
     private AuditActionEnum auditAction;
     /**
      * 当前状态

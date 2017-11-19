@@ -70,6 +70,7 @@ public class WorkContoller {
             if(!_result.isSuccess()){
                 return Result.newError(_result.getCode(),_result.getMessage());
             }
+            logger.info("工时导入成功!");
             return  _result;
         }catch (Exception e){
             logger.error("工时导入预览异常!{}",e);

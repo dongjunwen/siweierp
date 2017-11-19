@@ -56,27 +56,28 @@ public class SwWorkServiceImpl extends AbstractService<SwWorkDetail> implements 
         try {
             importFile = mFile.getInputStream();
             FileUtil.saveFile(saveFileName,importFile);
-        String keyValue = "计件日期:workDate,订单号:orderNo,订单序号:orderSeqNo,工号:userNo,姓名:userName,流程步骤:stepName,工艺:processName,单位:unit,数量:num";
-        Excel excel = new Excel(saveFileName);
-        ExcelSheet sheet = excel.getSheet();
-
-        List<SwWorkDetailVo> swWorkDetailVos = sheet.getList(0, 0, keyValue).toObject(SwWorkDetailVo.class);
-        List<SwWorkDetail> swWorkDetails=new ArrayList<>();
-        for(SwWorkDetailVo swWorkDetailVo:swWorkDetailVos){
-            String workNo= UUIDUtils.genUUID("I");
-            SwWorkDetail swWorkDetail=new SwWorkDetail();
-           convertVoToEntity(swWorkDetail,swWorkDetailVo);
-            swWorkDetail.setCreateNo(ShiroUtils.getCurrentUserNo());
-            swWorkDetail.setCreateTime(new Date());
-            swWorkDetail.setModiNo(ShiroUtils.getCurrentUserNo());
-            swWorkDetail.setModiTime(new Date());
-            swWorkDetail.setVersion(0);
-            swWorkDetail.setWorkNo(workNo);
-            swWorkDetails.add(swWorkDetail);
-        }
+            logger.info("保存文件:{}成功!",saveFileName);
+            String keyValue = "计件日期:workDate,订单号:orderNo,订单序号:orderSeqNo,工号:userNo,姓名:userName,流程步骤:stepName,工艺:processName,单位:unit,数量:num";
+            Excel excel = new Excel(saveFileName);
+            ExcelSheet sheet = excel.getSheet();
+            List<SwWorkDetailVo> swWorkDetailVos = sheet.getList(0, 0, keyValue).toObject(SwWorkDetailVo.class);
+            List<SwWorkDetail> swWorkDetails=new ArrayList<>();
+            for(SwWorkDetailVo swWorkDetailVo:swWorkDetailVos){
+                String workNo= UUIDUtils.genUUID("I");
+                SwWorkDetail swWorkDetail=new SwWorkDetail();
+                convertVoToEntity(swWorkDetail,swWorkDetailVo);
+                swWorkDetail.setCreateNo(ShiroUtils.getCurrentUserNo());
+                swWorkDetail.setCreateTime(new Date());
+                swWorkDetail.setModiNo(ShiroUtils.getCurrentUserNo());
+                swWorkDetail.setModiTime(new Date());
+                swWorkDetail.setVersion(0);
+                swWorkDetail.setWorkNo(workNo);
+                swWorkDetails.add(swWorkDetail);
+            }
             swWorkDetailMapper.insertBatch(swWorkDetails);
-            FileUtil.delFile(saveFileName);
-        return Result.newSuccess(swWorkDetailVos);
+            logger.info("记录数据:{}成功!",saveFileName);
+            //FileUtil.delFile(saveFileName);
+            return Result.newSuccess(swWorkDetailVos);
         } catch (IOException e) {
             logger.error("IO异常:{}"+e.getMessage());
             return Result.newError(ResultCode.FAIL);

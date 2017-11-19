@@ -85,8 +85,12 @@ public class SwMaterialInfoServiceImpl extends AbstractService<SwMaterialInfo> i
     @Override
     public Page<SwMaterialInfoResultVo> findList(Map<String, String> params) {
         Condition serviceCondition = Common.getServiceCondition(params, SwMaterialInfo.class);
-        List<SwMaterialInfo> swMaterialInfos = findByCondition(serviceCondition);
-        List<SwMaterialInfoResultVo> swMaterialInfoResultVos=new Page<>();
+        Page<SwMaterialInfo> swMaterialInfos = (Page<SwMaterialInfo>) findByCondition(serviceCondition);
+        Page<SwMaterialInfoResultVo> swMaterialInfoResultVos=new Page<>();
+        swMaterialInfoResultVos.setTotal(swMaterialInfos.getTotal());
+        swMaterialInfoResultVos.setPages(swMaterialInfos.getPages());
+        swMaterialInfoResultVos.setPageSize(swMaterialInfoResultVos.getPageSize());
+        swMaterialInfoResultVos.setPageNum(swMaterialInfoResultVos.getPageNum());
         for(SwMaterialInfo swMaterialInfo:swMaterialInfos){
             SwMaterialInfoResultVo swMaterialInfoResultVo=new SwMaterialInfoResultVo();
             convertVoToResultVo(swMaterialInfoResultVo,swMaterialInfo);
@@ -100,7 +104,7 @@ public class SwMaterialInfoServiceImpl extends AbstractService<SwMaterialInfo> i
             swMaterialInfoResultVo.setModiTime(DateUtil.formatDateTime(swMaterialInfo.getModiTime()));
             swMaterialInfoResultVos.add(swMaterialInfoResultVo);
         }
-        return (Page<SwMaterialInfoResultVo>) swMaterialInfoResultVos;
+        return  swMaterialInfoResultVos;
     }
 
     private void convertVoToResultVo(SwMaterialInfoResultVo swMaterialInfoResultVo, SwMaterialInfo swMaterialInfo) {
