@@ -1,5 +1,7 @@
 package com.fangxin.siwei.fangzhi.vo.result;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 /**
  * @Date:2017/10/26 0026 10:27
  * @Author lu.dong
@@ -19,6 +21,7 @@ public class SysResourceResultVo {
     /**
      * 面包屑导航的父id
      */
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String bpid;
     /**
      * 菜单的父id,缺省时为一级菜单,为-1时在菜单中不显示
