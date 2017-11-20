@@ -99,7 +99,7 @@ public class SysResourceServiceImpl extends AbstractService<SysResource> impleme
             sysResourceResultVo.setName(sysResource.getSourceName());
             sysResourceResultVo.setRoute(sysResource.getReqUrl());
             if(sysResource.getLevel()==1){
-                sysResourceResultVo.setBpid("1");
+                //sysResourceResultVo.setBpid("1");
             }else{
                 sysResourceResultVo.setBpid(sysResource.getFhSourceNo());
                 sysResourceResultVo.setMpid(sysResource.getFhSourceNo());
