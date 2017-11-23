@@ -26,6 +26,7 @@ public class SysResourceResultVo {
     /**
      * 菜单的父id,缺省时为一级菜单,为-1时在菜单中不显示
      */
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String mpid;
     /**
      * 显示名称
@@ -34,10 +35,12 @@ public class SysResourceResultVo {
     /**
      *  匹配路由,缺省时不做跳转
      */
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String route;
     /**
      * 在名称前显示的图标
      */
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String icon;
 
     public String getId() {

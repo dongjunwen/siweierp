@@ -44,7 +44,7 @@ public class MyInterceptor implements HandlerInterceptor {
         if(reqOriginRealPath!=null){
             int len=reqOriginRealPath.indexOf("/",7);
             reqPath= reqOriginRealPath.substring(0,len);
-            logger.info("Referer:{},reqPath:{}",reqOriginRealPath,reqPath);
+            logger.debug("Referer:{},reqPath:{}",reqOriginRealPath,reqPath);
         }else {
             reqPath=request.getHeader("Origin");
         }
