@@ -86,6 +86,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/api/logout", "anon"); //表示可以匿名访问
         filterChainDefinitionMap.put("/druid/**","anon");
         filterChainDefinitionMap.put("/swagger/**","anon");
+        filterChainDefinitionMap.put("/web/**","anon");
         filterChainDefinitionMap.put("/api/**", "authc");//表示需要认证才可以访问
         filterChainDefinitionMap.put("/api/**","accessFilter");
 
