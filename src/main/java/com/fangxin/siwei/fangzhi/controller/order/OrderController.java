@@ -12,6 +12,7 @@ import com.fangxin.siwei.fangzhi.service.order.SwOrderService;
 import com.fangxin.siwei.fangzhi.vo.base.SwMaterialInfoVo;
 import com.fangxin.siwei.fangzhi.vo.order.SwOrderAuditVo;
 import com.fangxin.siwei.fangzhi.vo.order.SwOrderModiVo;
+import com.fangxin.siwei.fangzhi.vo.order.SwOrderQueryVo;
 import com.fangxin.siwei.fangzhi.vo.order.SwOrderVo;
 import com.fangxin.siwei.fangzhi.vo.result.SwOrderBaseResultVo;
 import com.fangxin.siwei.fangzhi.vo.result.SwOrderResultVo;
@@ -119,4 +120,14 @@ public class OrderController {
         SwOrderResultVo swOrderResultVo = swOrderService.getEntityByNo(orderNo);
         return Result.newSuccess(swOrderResultVo);
     }
+
+    @RequestMapping(value = "/queryDetail",method = RequestMethod.POST)
+    @ApiOperation(value="获取订单详细信息", notes="根据客户编号、订单号等查询条件查询订单明细")
+    public Result<SwOrderResultVo> getUserById(@ApiParam(name = "swOrderQueryVo", value = "订单查询vo", required = true)
+                                                   @RequestBody SwOrderQueryVo swOrderQueryVo ){
+        SwOrderResultVo swOrderResultVo = swOrderService.getEntityByCond(swOrderQueryVo);
+        return Result.newSuccess(swOrderResultVo);
+    }
+
+
 }

@@ -45,6 +45,13 @@
     from sw_order_base
     where order_no = #{orderNo,jdbcType=VARCHAR}
   </select>
+  <select id="selectByCond"  parameterType="com.fangxin.siwei.fangzhi.modal.SwOrderBase" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sw_order_base
+    where order_no = #{orderNo,jdbcType=VARCHAR}
+    and   cust_comp_no = #{custCompNo,jdbcType=VARCHAR}
+  </select>
   <update id="updateByOrderNo" parameterType="com.fangxin.siwei.fangzhi.modal.SwOrderBase">
     update sw_order_base
     <set>

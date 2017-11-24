@@ -121,6 +121,35 @@ public class SwOrderServiceImpl extends AbstractService<SwOrderBase> implements 
         return Result.newSuccess(flag);
     }
 
+    @Override
+    public SwOrderResultVo getEntityByCond(SwOrderQueryVo swOrderQueryVo) {
+        String orderNo=swOrderQueryVo.getOrderNo();
+        String compNo=swOrderQueryVo.getCustCompNo();
+        SwOrderBase swOrderBaseCond=new SwOrderBase();
+        swOrderBaseCond.setOrderNo(orderNo);
+        swOrderBaseCond.setCustCompNo(compNo);
+        SwOrderBase swOrderBase=(SwOrderBase) swOrderBaseMapper.selectByCond(swOrderBaseCond);
+        if(swOrderBase==null){
+            throw  new RRException(ResultCode.COMMON_DATA_NOT_EXISTS.getCode(),ResultCode.COMMON_DATA_NOT_EXISTS.getMessage());
+        }
+        SwOrderResultVo swOrderResultVo=new SwOrderResultVo();
+        SwOrderBaseResultVo swOrderBaseResultVo=new SwOrderBaseResultVo();
+        convertEntityTVo(swOrderBaseResultVo,swOrderBase);
+        swOrderBaseResultVo.setPayWayName(SysDictUtils.getNameByUniq("PAY_WAY",swOrderBaseResultVo.getPayWay()));
+        swOrderBaseResultVo.setSaleTypeName(SysDictUtils.getNameByUniq("SALE_TYPE",swOrderBaseResultVo.getSaleType()));
+        swOrderBaseResultVo.setOrderTypeName(SysDictUtils.getNameByUniq("ORDER_TYPE",swOrderBaseResultVo.getOrderType()));
+        swOrderBaseResultVo.setOrderStatusName(SysDictUtils.getNameByUniq("ORDER_STATUS",swOrderBaseResultVo.getOrderStatus()));
+        swOrderResultVo.setSwOrderBaseResultVo(swOrderBaseResultVo);
+        List<SwOrderDetail> swOrderDetails=swOrderDetailMapper.selectByOrderNo(orderNo);
+        List<SwOrderDetailResultVo> swORderDetailResultVos=new ArrayList<>();
+        for(SwOrderDetail swOrderDetail:swOrderDetails){
+            SwOrderDetailResultVo swOrderDetailResultVo=new SwOrderDetailResultVo();
+            convertDetailEntityTVo(swOrderDetailResultVo,swOrderDetail);
+            swORderDetailResultVos.add(swOrderDetailResultVo);
+        }
+        swOrderResultVo.setSwORderDetailResultVos(swORderDetailResultVos);
+        return swOrderResultVo;
+    }
 
 
     private void convertVoToEntityDetail(SwOrderDetail swOrderDetail, SwOrderDetailVo swOrderDetailVo) {

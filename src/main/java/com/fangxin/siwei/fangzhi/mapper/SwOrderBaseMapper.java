@@ -8,4 +8,6 @@ public interface SwOrderBaseMapper extends MyMapper<SwOrderBase>{
     int updateByOrderNo(SwOrderBase swOrderBase);
 
     SwOrderBase selectByOrderNo(String sourceNo);
+
+    SwOrderBase selectByCond(SwOrderBase swOrderBaseCond);
 }

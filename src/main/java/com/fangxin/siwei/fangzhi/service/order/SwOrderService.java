@@ -3,6 +3,7 @@ package com.fangxin.siwei.fangzhi.service.order;
 import com.fangxin.siwei.fangzhi.common.result.Result;
 import com.fangxin.siwei.fangzhi.vo.order.SwOrderAuditVo;
 import com.fangxin.siwei.fangzhi.vo.order.SwOrderModiVo;
+import com.fangxin.siwei.fangzhi.vo.order.SwOrderQueryVo;
 import com.fangxin.siwei.fangzhi.vo.order.SwOrderVo;
 import com.fangxin.siwei.fangzhi.vo.result.SwOrderBaseResultVo;
 import com.fangxin.siwei.fangzhi.vo.result.SwOrderResultVo;
@@ -43,4 +44,6 @@ public interface SwOrderService {
     SwOrderResultVo getEntityByNo(String orderNo);
 
     Result<Integer> update(SwOrderModiVo swOrderModiVo);
+
+    SwOrderResultVo getEntityByCond(SwOrderQueryVo swOrderQueryVo);
 }
