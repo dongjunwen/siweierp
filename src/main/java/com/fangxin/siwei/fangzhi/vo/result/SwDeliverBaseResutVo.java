@@ -35,7 +35,7 @@ public class SwDeliverBaseResutVo {
 
     private String custMobile;
 
-    private String custtPhone;
+    private String custPhone;
 
     private String custTax;
 
@@ -145,12 +145,12 @@ public class SwDeliverBaseResutVo {
         this.custMobile = custMobile;
     }
 
-    public String getCusttPhone() {
-        return custtPhone;
+    public String getCustPhone() {
+        return custPhone;
     }
 
-    public void setCusttPhone(String custtPhone) {
-        this.custtPhone = custtPhone;
+    public void setCustPhone(String custPhone) {
+        this.custPhone = custPhone;
     }
 
     public String getCustTax() {
