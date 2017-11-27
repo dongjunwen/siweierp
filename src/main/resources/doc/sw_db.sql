@@ -161,6 +161,7 @@ CREATE TABLE `sw_formular_info` (
   `formular_no` varchar(32) DEFAULT NULL COMMENT '公式编码',
   `formular_name` varchar(32) DEFAULT NULL COMMENT '公式名称',
   `formular_value` varchar(32) DEFAULT NULL COMMENT '公式',
+  `formular_price` decimal(20,2) DEFAULT NULL COMMENT '价格',
   `formular_type` varchar(32) DEFAULT NULL COMMENT '公式类别 ',
   `memo` varchar(128) DEFAULT NULL COMMENT '备注',
   `create_no` varchar(32) DEFAULT NULL COMMENT '创建人',
@@ -173,7 +174,7 @@ CREATE TABLE `sw_formular_info` (
 
 /*Data for the table `sw_formular_info` */
 
-insert  into `sw_formular_info`(`id`,`formular_no`,`formular_name`,`formular_value`,`formular_type`,`memo`,`create_no`,`create_time`,`modi_no`,`modi_time`,`version`) values (1,'aab','aa','dd','CRAFTS','dddddddd',NULL,NULL,'wangfangfang','2017-11-05 15:39:25',0),(2,'aac','a','d','PROD','dddddddd',NULL,NULL,NULL,'2017-11-05 15:37:50',0),(3,'aad','ddd','d','d','d',NULL,NULL,NULL,'2017-10-30 18:07:52',0);
+insert  into `sw_formular_info`(`id`,`formular_no`,`formular_name`,`formular_value`,`formular_price`,`formular_type`,`memo`,`create_no`,`create_time`,`modi_no`,`modi_time`,`version`) values (1,'aab','aa','dd','222.00','CRAFTS','dddddddd',NULL,NULL,'wangfangfang','2017-11-27 15:30:35',0),(2,'aac','a','d',NULL,'PROD','dddddddd',NULL,NULL,NULL,'2017-11-05 15:37:50',0),(3,'aad','ddd','d',NULL,'d','d',NULL,NULL,NULL,'2017-10-30 18:07:52',0);
 
 /*Table structure for table `sw_material_info` */
 
