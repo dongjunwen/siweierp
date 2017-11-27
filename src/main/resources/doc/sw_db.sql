@@ -694,7 +694,7 @@ CREATE TABLE `sys_role_resource` (
   `modi_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   `version` int(11) DEFAULT '0' COMMENT '版本号',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=190 DEFAULT CHARSET=utf8 COMMENT='角色资源表';
+) ENGINE=InnoDB AUTO_INCREMENT=189 DEFAULT CHARSET=utf8 COMMENT='角色资源表';
 
 /*Data for the table `sys_role_resource` */
 
