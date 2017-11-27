@@ -11,13 +11,13 @@ public class SwDeliverBaseResutVo {
 
     private Integer id;
 
-    private String deilverNo;
+    private String deliverNo;
 
-    private String deilverDate;
+    private String deliverDate;
 
-    private String deilverWay;
+    private String deliverWay;
 
-    private String deilverWayName;
+    private String deliverWayName;
 
     private String sendName;
 
@@ -59,28 +59,36 @@ public class SwDeliverBaseResutVo {
         this.id = id;
     }
 
-    public String getDeilverNo() {
-        return deilverNo;
+    public String getDeliverNo() {
+        return deliverNo;
     }
 
-    public void setDeilverNo(String deilverNo) {
-        this.deilverNo = deilverNo;
+    public void setDeliverNo(String deliverNo) {
+        this.deliverNo = deliverNo;
     }
 
-    public String getDeilverDate() {
-        return deilverDate;
+    public String getDeliverDate() {
+        return deliverDate;
     }
 
-    public void setDeilverDate(String deilverDate) {
-        this.deilverDate = deilverDate;
+    public void setDeliverDate(String deliverDate) {
+        this.deliverDate = deliverDate;
     }
 
-    public String getDeilverWay() {
-        return deilverWay;
+    public String getDeliverWay() {
+        return deliverWay;
     }
 
-    public void setDeilverWay(String deilverWay) {
-        this.deilverWay = deilverWay;
+    public void setDeliverWay(String deliverWay) {
+        this.deliverWay = deliverWay;
+    }
+
+    public String getDeliverWayName() {
+        return deliverWayName;
+    }
+
+    public void setDeliverWayName(String deliverWayName) {
+        this.deliverWayName = deliverWayName;
     }
 
     public String getSendName() {
@@ -211,11 +219,4 @@ public class SwDeliverBaseResutVo {
         this.modiTime = modiTime;
     }
 
-    public String getDeilverWayName() {
-        return deilverWayName;
-    }
-
-    public void setDeilverWayName(String deilverWayName) {
-        this.deilverWayName = deilverWayName;
-    }
 }

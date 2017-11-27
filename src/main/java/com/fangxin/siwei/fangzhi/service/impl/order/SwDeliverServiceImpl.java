@@ -62,8 +62,8 @@ public class SwDeliverServiceImpl extends AbstractService<SwDeliverBase> impleme
         SwDeliverBase swDeliverBase=new SwDeliverBase();
         convertVoToEntity(swDeliverBase,swDeliverBaseVo);
         String deliverNo= UUIDUtils.genUUID(ConstantKey.DELIVER_KEY_PRE);
-        swDeliverBase.setDeilverNo(deliverNo);
-        swDeliverBase.setDeilverDate(new Date());
+        swDeliverBase.setDeliverNo(deliverNo);
+        swDeliverBase.setDeliverDate(new Date());
         swDeliverBase.setDeliverStatus(DeliverStatus.WAIT_APPLY.getCode());
         swDeliverBase.setCreateNo(ShiroUtils.getCurrentUserNo());
         swDeliverBase.setCreateTime(new Date());
@@ -94,7 +94,7 @@ public class SwDeliverServiceImpl extends AbstractService<SwDeliverBase> impleme
         SwDeliverBase swDeliverBase=new SwDeliverBase();
         convertVoToEntity(swDeliverBase,swDeliverBaseModiVo);
         String deliverNo= swDeliverBaseModiVo.getDeilverNo();
-        swDeliverBase.setDeilverNo(deliverNo);
+        swDeliverBase.setDeliverNo(deliverNo);
         swDeliverBase.setDeliverStatus(DeliverStatus.WAIT_APPLY.getCode());
         swDeliverBase.setModiNo(ShiroUtils.getCurrentUserNo());
         swDeliverBase.setModiTime(new Date());
@@ -166,7 +166,8 @@ public class SwDeliverServiceImpl extends AbstractService<SwDeliverBase> impleme
         for(SwDeliverBase swDeliverBase: swDeliverBases){
             SwDeliverBaseResutVo swDeliverBaseResutVo=new SwDeliverBaseResutVo();
             convertEntityTVo(swDeliverBaseResutVo,swDeliverBase);
-            swDeliverBaseResutVo.setDeilverWayName(SysDictUtils.getNameByUniq("DELIVER_WAY",swDeliverBaseResutVo.getDeilverWay()));
+            swDeliverBaseResutVo.setDeliverWayName(SysDictUtils.getNameByUniq("DELIVER_WAY",swDeliverBaseResutVo.getDeliverWay()));
+            swDeliverBaseResutVo.setDeliverStatusName(SysDictUtils.getNameByUniq("DELIVER_STATUS",swDeliverBaseResutVo.getDeliverStatus()));
             swOrderBaseResultVos.add(swDeliverBaseResutVo);
         }
         return swOrderBaseResultVos;
@@ -201,7 +202,7 @@ public class SwDeliverServiceImpl extends AbstractService<SwDeliverBase> impleme
         SwDeliverResultVo swDeliverResultVo=new SwDeliverResultVo();
         SwDeliverBaseResutVo swDeliverBaseResutVo=new SwDeliverBaseResutVo();
         convertEntityTVo(swDeliverBaseResutVo,swDeliverBase);
-        swDeliverBaseResutVo.setDeilverWayName(SysDictUtils.getNameByUniq("DELIVER_WAY",swDeliverBaseResutVo.getDeilverWay()));
+        swDeliverBaseResutVo.setDeliverWayName(SysDictUtils.getNameByUniq("DELIVER_WAY",swDeliverBaseResutVo.getDeliverWay()));
         swDeliverBaseResutVo.setDeliverStatusName(SysDictUtils.getNameByUniq("DELIVER_STATUS",swDeliverBaseResutVo.getDeliverStatus()));
         swDeliverResultVo.setSwDeliverBaseResutVo(swDeliverBaseResutVo);
         List<SwDeliverDetail> swDeliverDetails=swDeliverDetailMapper.selectByDeliverNo(orderNo);
@@ -236,7 +237,7 @@ public class SwDeliverServiceImpl extends AbstractService<SwDeliverBase> impleme
         if(_result.isSuccess()){
             SysAuditConfig sysAuditConfig=_result.getData();
             SwDeliverBase swDeliverBase=new SwDeliverBase();
-            swDeliverBase.setDeilverNo(deliverNo);
+            swDeliverBase.setDeliverNo(deliverNo);
             swDeliverBase.setDeliverStatus(sysAuditConfig.getNextStage());
             swDeliverBase.setModiNo(swDeliverAuditVo.getAuditUserNo());
             swDeliverBase.setModiTime(new Date());
@@ -265,7 +266,7 @@ public class SwDeliverServiceImpl extends AbstractService<SwDeliverBase> impleme
 
         try {
             BeanUtils.copyProperties(swDeliverBaseResutVo,swDeliverBase);
-            swDeliverBaseResutVo.setDeilverDate(DateUtil.formatDate(swDeliverBase.getDeilverDate()));
+            swDeliverBaseResutVo.setDeliverDate(DateUtil.formatDate(swDeliverBase.getDeliverDate()));
             swDeliverBaseResutVo.setCreateTime(DateUtil.formatDateTime(swDeliverBase.getCreateTime()));
             swDeliverBaseResutVo.setModiTime(DateUtil.formatDateTime(swDeliverBase.getModiTime()));
         } catch (IllegalAccessException e) {

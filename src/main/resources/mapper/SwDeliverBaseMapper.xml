@@ -33,7 +33,7 @@
     select
     <include refid="Base_Column_List" />
     from sw_deliver_base
-    where deilver_no = #{deilverNo,jdbcType=VARCHAR}
+    where deliver_no = #{deliverNo,jdbcType=VARCHAR}
   </select>
 
 

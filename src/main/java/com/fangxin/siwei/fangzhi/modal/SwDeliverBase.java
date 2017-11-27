@@ -7,11 +7,11 @@ public class SwDeliverBase {
     @Id
     private Integer id;
 
-    private String deilverNo;
+    private String deliverNo;
 
-    private Date deilverDate;
+    private Date deliverDate;
 
-    private String deilverWay;
+    private String deliverWay;
 
     private String sendName;
 
@@ -53,28 +53,28 @@ public class SwDeliverBase {
         this.id = id;
     }
 
-    public String getDeilverNo() {
-        return deilverNo;
+    public String getDeliverNo() {
+        return deliverNo;
     }
 
-    public void setDeilverNo(String deilverNo) {
-        this.deilverNo = deilverNo == null ? null : deilverNo.trim();
+    public void setDeliverNo(String deliverNo) {
+        this.deliverNo = deliverNo;
     }
 
-    public Date getDeilverDate() {
-        return deilverDate;
+    public Date getDeliverDate() {
+        return deliverDate;
     }
 
-    public void setDeilverDate(Date deilverDate) {
-        this.deilverDate = deilverDate;
+    public void setDeliverDate(Date deliverDate) {
+        this.deliverDate = deliverDate;
     }
 
-    public String getDeilverWay() {
-        return deilverWay;
+    public String getDeliverWay() {
+        return deliverWay;
     }
 
-    public void setDeilverWay(String deilverWay) {
-        this.deilverWay = deilverWay == null ? null : deilverWay.trim();
+    public void setDeliverWay(String deliverWay) {
+        this.deliverWay = deliverWay;
     }
 
     public String getSendName() {
