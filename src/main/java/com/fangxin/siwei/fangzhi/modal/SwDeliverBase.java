@@ -17,7 +17,7 @@ public class SwDeliverBase {
 
     private String ifGurant;
 
-    private String deilverStatus;
+    private String deliverStatus;
 
     private String memo;
 
@@ -93,12 +93,12 @@ public class SwDeliverBase {
         this.ifGurant = ifGurant == null ? null : ifGurant.trim();
     }
 
-    public String getDeilverStatus() {
-        return deilverStatus;
+    public String getDeliverStatus() {
+        return deliverStatus;
     }
 
-    public void setDeilverStatus(String deilverStatus) {
-        this.deilverStatus = deilverStatus == null ? null : deilverStatus.trim();
+    public void setDeliverStatus(String deliverStatus) {
+        this.deliverStatus = deliverStatus == null ? null : deliverStatus.trim();
     }
 
     public String getMemo() {

@@ -3,12 +3,12 @@
 <mapper namespace="com.fangxin.siwei.fangzhi.mapper.SwDeliverBaseMapper">
   <resultMap id="BaseResultMap" type="com.fangxin.siwei.fangzhi.modal.SwDeliverBase">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="deilver_no" jdbcType="VARCHAR" property="deilverNo" />
-    <result column="deilver_date" jdbcType="DATE" property="deilverDate" />
-    <result column="deilver_way" jdbcType="VARCHAR" property="deilverWay" />
+    <result column="deliver_no" jdbcType="VARCHAR" property="deliverNo" />
+    <result column="deliver_date" jdbcType="DATE" property="deliverDate" />
+    <result column="deliver_way" jdbcType="VARCHAR" property="deliverWay" />
     <result column="send_name" jdbcType="VARCHAR" property="sendName" />
     <result column="if_gurant" jdbcType="CHAR" property="ifGurant" />
-    <result column="deilver_status" jdbcType="VARCHAR" property="deilverStatus" />
+    <result column="deliver_status" jdbcType="VARCHAR" property="deliverStatus" />
     <result column="memo" jdbcType="VARCHAR" property="memo" />
     <result column="cust_comp_no" jdbcType="VARCHAR" property="custCompNo" />
     <result column="cust_comp_name" jdbcType="VARCHAR" property="custCompName" />
@@ -24,7 +24,7 @@
     <result column="version" jdbcType="INTEGER" property="version" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, deilver_no, deilver_date, deilver_way, send_name, if_gurant, deilver_status, 
+    id, deliver_no, deliver_date, deliver_way, send_name, if_gurant, deliver_status,
     memo, cust_comp_no, cust_comp_name, cust_contact_name, cust_mobile, cust_phone,
     cust_tax, cust_addr, create_no, create_time, modi_no, modi_time, version
   </sql>
@@ -40,11 +40,11 @@
   <update id="updateByDeliverNo" >
     update sw_deliver_base
     <set>
-      <if test="deilverDate != null">
-        deilver_date = #{deilverDate,jdbcType=DATE},
+      <if test="deliverDate != null">
+        deliver_date = #{deliverDate,jdbcType=DATE},
       </if>
-      <if test="deilverWay != null">
-        deilver_way = #{deilverWay,jdbcType=VARCHAR},
+      <if test="deliverWay != null">
+        deliver_way = #{deliverWay,jdbcType=VARCHAR},
       </if>
       <if test="sendName != null">
         send_name = #{sendName,jdbcType=VARCHAR},
@@ -52,8 +52,8 @@
       <if test="ifGurant != null">
         if_gurant = #{ifGurant,jdbcType=CHAR},
       </if>
-      <if test="deilverStatus != null">
-        deilver_status = #{deilverStatus,jdbcType=VARCHAR},
+      <if test="deliverStatus != null">
+        deliver_status = #{deliverStatus,jdbcType=VARCHAR},
       </if>
       <if test="memo != null">
         memo = #{memo,jdbcType=VARCHAR},
@@ -95,7 +95,7 @@
         version = version+1
       </if>
     </set>
-    where   deilver_no = #{deilverNo,jdbcType=VARCHAR}
+    where   deliver_no = #{deliverNo,jdbcType=VARCHAR}
     <if test="version != null">
     and  version = #{version,jdbcType=VARCHAR}
     </if>

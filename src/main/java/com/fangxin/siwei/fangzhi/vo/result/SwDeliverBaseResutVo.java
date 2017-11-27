@@ -23,7 +23,9 @@ public class SwDeliverBaseResutVo {
 
     private String ifGurant;
 
-    private String deilverStatus;
+    private String deliverStatus;
+
+    private String deliverStatusName;
 
     private String memo;
 
@@ -97,12 +99,20 @@ public class SwDeliverBaseResutVo {
         this.ifGurant = ifGurant;
     }
 
-    public String getDeilverStatus() {
-        return deilverStatus;
+    public String getDeliverStatus() {
+        return deliverStatus;
     }
 
-    public void setDeilverStatus(String deilverStatus) {
-        this.deilverStatus = deilverStatus;
+    public void setDeliverStatus(String deliverStatus) {
+        this.deliverStatus = deliverStatus;
+    }
+
+    public String getDeliverStatusName() {
+        return deliverStatusName;
+    }
+
+    public void setDeliverStatusName(String deliverStatusName) {
+        this.deliverStatusName = deliverStatusName;
     }
 
     public String getMemo() {

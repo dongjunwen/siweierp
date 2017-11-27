@@ -64,7 +64,7 @@ public class SwDeliverServiceImpl extends AbstractService<SwDeliverBase> impleme
         String deliverNo= UUIDUtils.genUUID(ConstantKey.DELIVER_KEY_PRE);
         swDeliverBase.setDeilverNo(deliverNo);
         swDeliverBase.setDeilverDate(new Date());
-        swDeliverBase.setDeilverStatus(DeliverStatus.WAIT_APPLY.getCode());
+        swDeliverBase.setDeliverStatus(DeliverStatus.WAIT_APPLY.getCode());
         swDeliverBase.setCreateNo(ShiroUtils.getCurrentUserNo());
         swDeliverBase.setCreateTime(new Date());
         swDeliverBase.setModiNo(ShiroUtils.getCurrentUserNo());
@@ -75,7 +75,7 @@ public class SwDeliverServiceImpl extends AbstractService<SwDeliverBase> impleme
         for(SwDeliverDetailVo swDeliverDetailVo:swDeliverDetailVoList){
             SwDeliverDetail swDeliverDetail=new SwDeliverDetail();
             convertVoToEntityDetail(swDeliverDetail,swDeliverDetailVo);
-            swDeliverDetail.setDeilverNo(deliverNo);
+            swDeliverDetail.setDeliverNo(deliverNo);
             swDeliverDetail.setCreateNo(ShiroUtils.getCurrentUserNo());
             swDeliverDetail.setCreateTime(new Date());
             swDeliverDetail.setModiNo(ShiroUtils.getCurrentUserNo());
@@ -95,7 +95,7 @@ public class SwDeliverServiceImpl extends AbstractService<SwDeliverBase> impleme
         convertVoToEntity(swDeliverBase,swDeliverBaseModiVo);
         String deliverNo= swDeliverBaseModiVo.getDeilverNo();
         swDeliverBase.setDeilverNo(deliverNo);
-        swDeliverBase.setDeilverStatus(DeliverStatus.WAIT_APPLY.getCode());
+        swDeliverBase.setDeliverStatus(DeliverStatus.WAIT_APPLY.getCode());
         swDeliverBase.setModiNo(ShiroUtils.getCurrentUserNo());
         swDeliverBase.setModiTime(new Date());
         List<SwDeliverDetailVo> swDeliverDetailVoList=swDeliverModiVo.getSwDeliverDetailVoList();
@@ -103,7 +103,7 @@ public class SwDeliverServiceImpl extends AbstractService<SwDeliverBase> impleme
         for(SwDeliverDetailVo swDeliverDetailVo:swDeliverDetailVoList){
             SwDeliverDetail swDeliverDetail=new SwDeliverDetail();
             convertVoToEntityDetail(swDeliverDetail,swDeliverDetailVo);
-            swDeliverDetail.setDeilverNo(deliverNo);
+            swDeliverDetail.setDeliverNo(deliverNo);
             swDeliverDetail.setModiNo(ShiroUtils.getCurrentUserNo());
             swDeliverDetail.setModiTime(new Date());
             swDeliverDetails.add(swDeliverDetail);
@@ -202,6 +202,7 @@ public class SwDeliverServiceImpl extends AbstractService<SwDeliverBase> impleme
         SwDeliverBaseResutVo swDeliverBaseResutVo=new SwDeliverBaseResutVo();
         convertEntityTVo(swDeliverBaseResutVo,swDeliverBase);
         swDeliverBaseResutVo.setDeilverWayName(SysDictUtils.getNameByUniq("DELIVER_WAY",swDeliverBaseResutVo.getDeilverWay()));
+        swDeliverBaseResutVo.setDeliverStatusName(SysDictUtils.getNameByUniq("DELIVER_STATUS",swDeliverBaseResutVo.getDeliverStatus()));
         swDeliverResultVo.setSwDeliverBaseResutVo(swDeliverBaseResutVo);
         List<SwDeliverDetail> swDeliverDetails=swDeliverDetailMapper.selectByDeliverNo(orderNo);
         List<SwDeliverDetailResutVo> swDeliverDetailResutVos=new ArrayList<>();
@@ -236,7 +237,7 @@ public class SwDeliverServiceImpl extends AbstractService<SwDeliverBase> impleme
             SysAuditConfig sysAuditConfig=_result.getData();
             SwDeliverBase swDeliverBase=new SwDeliverBase();
             swDeliverBase.setDeilverNo(deliverNo);
-            swDeliverBase.setDeilverStatus(sysAuditConfig.getNextStage());
+            swDeliverBase.setDeliverStatus(sysAuditConfig.getNextStage());
             swDeliverBase.setModiNo(swDeliverAuditVo.getAuditUserNo());
             swDeliverBase.setModiTime(new Date());
             SwDeliverBase _swDeliverBase= swDeliverBaseMapper.selectByDeliverNo(deliverNo);
