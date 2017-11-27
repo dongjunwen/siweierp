@@ -33,7 +33,7 @@ public class DeliverAuditCheckingServiceImpl implements IAuditCheckingService {
         SwDeliverBase swDeliverBase=swDeliverBaseMapper.selectByDeliverNo(param.getSourceNo());
         String status="";
         if(swDeliverBase!=null){
-            status=swDeliverBase.getDeilverStatus();
+            status=swDeliverBase.getDeliverStatus();
         }
         _result.setData(status);
         return _result;
