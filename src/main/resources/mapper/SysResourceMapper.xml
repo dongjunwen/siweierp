@@ -39,6 +39,7 @@
     JOIN sys_user_role AS c ON c.role_code=b.role_code
     WHERE 1=1
     and c.user_no = #{userNo,jdbcType=VARCHAR}
+    ORDER BY LEVEL,sort_order
   </select>
 
 
