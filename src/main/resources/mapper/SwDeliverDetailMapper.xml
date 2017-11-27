@@ -3,8 +3,8 @@
 <mapper namespace="com.fangxin.siwei.fangzhi.mapper.SwDeliverDetailMapper">
   <resultMap id="BaseResultMap" type="com.fangxin.siwei.fangzhi.modal.SwDeliverDetail">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="deilver_no" jdbcType="VARCHAR" property="deilverNo" />
-    <result column="deilver_seq_no" jdbcType="VARCHAR" property="deilverSeqNo" />
+    <result column="deliver_no" jdbcType="VARCHAR" property="deliverNo" />
+    <result column="deliver_seq_no" jdbcType="VARCHAR" property="deliverSeqNo" />
     <result column="order_no" jdbcType="VARCHAR" property="orderNo" />
     <result column="order_seq_no" jdbcType="VARCHAR" property="orderSeqNo" />
     <result column="box_no" jdbcType="VARCHAR" property="boxNo" />
@@ -24,7 +24,7 @@
     <result column="version" jdbcType="INTEGER" property="version" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, deilver_no, deilver_seq_no, order_no, order_seq_no, box_no, prod_no, prod_name, 
+    id, deliver_no, deliver_seq_no, order_no, order_seq_no, box_no, prod_no, prod_name,
     prod_type, prod_form, prod_long, prod_width, prod_num, prod_price, memo, create_no, 
     create_time, modi_no, modi_time, version
   </sql>
@@ -39,21 +39,21 @@
     select
     <include refid="Base_Column_List" />
     from sw_deliver_detail
-    where deilver_no = #{deilverNo,jdbcType=VARCHAR}
+    where deliver_no = #{deliverNo,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from sw_deliver_detail
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.fangxin.siwei.fangzhi.modal.SwDeliverDetail">
-    insert into sw_deliver_detail (id, deilver_no, deilver_seq_no, 
+    insert into sw_deliver_detail (id, deliver_no, deliver_seq_no,
       order_no, order_seq_no, box_no, 
       prod_no, prod_name, prod_type, 
       prod_form, prod_long, prod_width, 
       prod_num, prod_price, memo, 
       create_no, create_time, modi_no, 
       modi_time, version)
-    values (#{id,jdbcType=INTEGER}, #{deilverNo,jdbcType=VARCHAR}, #{deilverSeqNo,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{deliverNo,jdbcType=VARCHAR}, #{deliverSeqNo,jdbcType=VARCHAR},
       #{orderNo,jdbcType=VARCHAR}, #{orderSeqNo,jdbcType=VARCHAR}, #{boxNo,jdbcType=VARCHAR}, 
       #{prodNo,jdbcType=VARCHAR}, #{prodName,jdbcType=VARCHAR}, #{prodType,jdbcType=VARCHAR}, 
       #{prodForm,jdbcType=VARCHAR}, #{prodLong,jdbcType=DECIMAL}, #{prodWidth,jdbcType=DECIMAL}, 
@@ -62,7 +62,7 @@
       #{modiTime,jdbcType=TIMESTAMP}, #{version,jdbcType=INTEGER})
   </insert>
   <insert id="insertBatch" parameterType="java.util.List">
-      insert into sw_deliver_detail ( deilver_no, deilver_seq_no,
+      insert into sw_deliver_detail ( deliver_no, deliver_seq_no,
       order_no, order_seq_no, box_no,
       prod_no, prod_name, prod_type,
       prod_form, prod_long, prod_width,
@@ -71,7 +71,7 @@
       modi_time, version)
     values
     <foreach collection="list" index="index" separator="," item="item">
-      ( #{item.deilverNo,jdbcType=VARCHAR}, #{item.deilverSeqNo,jdbcType=VARCHAR},
+      ( #{item.deliverNo,jdbcType=VARCHAR}, #{item.deliverSeqNo,jdbcType=VARCHAR},
       #{item.orderNo,jdbcType=VARCHAR}, #{item.orderSeqNo,jdbcType=VARCHAR}, #{item.boxNo,jdbcType=VARCHAR},
       #{item.prodNo,jdbcType=VARCHAR}, #{item.prodName,jdbcType=VARCHAR}, #{item.prodType,jdbcType=VARCHAR},
       #{item.prodForm,jdbcType=VARCHAR}, #{item.prodLong,jdbcType=DECIMAL}, #{item.prodWidth,jdbcType=DECIMAL},
@@ -86,11 +86,11 @@
       <if test="id != null">
         id,
       </if>
-      <if test="deilverNo != null">
-        deilver_no,
+      <if test="deliverNo != null">
+        deliver_no,
       </if>
-      <if test="deilverSeqNo != null">
-        deilver_seq_no,
+      <if test="deliverSeqNo != null">
+        deliver_seq_no,
       </if>
       <if test="orderNo != null">
         order_no,
@@ -148,11 +148,11 @@
       <if test="id != null">
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="deilverNo != null">
-        #{deilverNo,jdbcType=VARCHAR},
+      <if test="deliverNo != null">
+        #{deliverNo,jdbcType=VARCHAR},
       </if>
-      <if test="deilverSeqNo != null">
-        #{deilverSeqNo,jdbcType=VARCHAR},
+      <if test="deliverSeqNo != null">
+        #{deliverSeqNo,jdbcType=VARCHAR},
       </if>
       <if test="orderNo != null">
         #{orderNo,jdbcType=VARCHAR},
@@ -262,18 +262,18 @@
         </if>
       </set>
       where
-        deilver_no = #{item.deilverNo,jdbcType=VARCHAR}
-        and deilver_seq_no = #{item.deilverSeqNo,jdbcType=VARCHAR}
+        deliver_no = #{item.deliverNo,jdbcType=VARCHAR}
+        and deliver_seq_no = #{item.deliverSeqNo,jdbcType=VARCHAR}
     </foreach>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.fangxin.siwei.fangzhi.modal.SwDeliverDetail">
     update sw_deliver_detail
     <set>
-      <if test="deilverNo != null">
-        deilver_no = #{deilverNo,jdbcType=VARCHAR},
+      <if test="deliverNo != null">
+        deliver_no = #{deliverNo,jdbcType=VARCHAR},
       </if>
-      <if test="deilverSeqNo != null">
-        deilver_seq_no = #{deilverSeqNo,jdbcType=VARCHAR},
+      <if test="deliverSeqNo != null">
+        deliver_seq_no = #{deliverSeqNo,jdbcType=VARCHAR},
       </if>
       <if test="orderNo != null">
         order_no = #{orderNo,jdbcType=VARCHAR},
@@ -331,8 +331,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.fangxin.siwei.fangzhi.modal.SwDeliverDetail">
     update sw_deliver_detail
-    set deilver_no = #{deilverNo,jdbcType=VARCHAR},
-      deilver_seq_no = #{deilverSeqNo,jdbcType=VARCHAR},
+    set deliver_no = #{deliverNo,jdbcType=VARCHAR},
+      deliver_seq_no = #{deliverSeqNo,jdbcType=VARCHAR},
       order_no = #{orderNo,jdbcType=VARCHAR},
       order_seq_no = #{orderSeqNo,jdbcType=VARCHAR},
       box_no = #{boxNo,jdbcType=VARCHAR},

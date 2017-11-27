@@ -111,11 +111,11 @@ public class DeliverController {
     }
 
 
-    @RequestMapping(value = "/{deilverNo}",method = RequestMethod.GET)
+    @RequestMapping(value = "/{deliverNo}",method = RequestMethod.GET)
     @ApiOperation(value="获取发货单详细信息", notes="根据url的编号来获取业务发货单详细信息")
-    @ApiImplicitParam(name = "deilverNo", value = "发货单编号", required = true, dataType = "string",paramType = "path")
-    public Result<SwDeliverResultVo> getUserById(@PathVariable("deilverNo")String deilverNo){
-        SwDeliverResultVo swDeliverResultVo = swDeliverService.getEntityByNo(deilverNo);
+    @ApiImplicitParam(name = "deliverNo", value = "发货单编号", required = true, dataType = "string",paramType = "path")
+    public Result<SwDeliverResultVo> getUserById(@PathVariable("deliverNo")String deliverNo){
+        SwDeliverResultVo swDeliverResultVo = swDeliverService.getEntityByNo(deliverNo);
         return Result.newSuccess(swDeliverResultVo);
     }
 }

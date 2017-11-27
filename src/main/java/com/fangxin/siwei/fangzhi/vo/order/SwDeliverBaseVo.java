@@ -16,10 +16,10 @@ import java.util.Date;
 public class SwDeliverBaseVo {
     @Pattern(regexp="[0-9]{4}-[0-9]{2}-[0-9]{2}", message="发货日期格式不正确，正确的格式类似于1998-04-13")
     @ApiModelProperty(value = "发货日期",required =false )
-    private String deilverDate;
+    private String deliverDate;
     @Length(max = 16,message = "发货方式长度不能超过16")
     @ApiModelProperty(value = "发货方式",required =false )
-    private String deilverWay;
+    private String deliverWay;
     @Length(max = 32,message = "发货人长度不能超过32")
     @ApiModelProperty(value = "发货人",required =false )
     private String sendName;
@@ -52,21 +52,20 @@ public class SwDeliverBaseVo {
     private String custAddr;
 
 
-
-    public String getDeilverDate() {
-        return deilverDate;
+    public String getDeliverDate() {
+        return deliverDate;
     }
 
-    public void setDeilverDate(String deilverDate) {
-        this.deilverDate = deilverDate;
+    public void setDeliverDate(String deliverDate) {
+        this.deliverDate = deliverDate;
     }
 
-    public String getDeilverWay() {
-        return deilverWay;
+    public String getDeliverWay() {
+        return deliverWay;
     }
 
-    public void setDeilverWay(String deilverWay) {
-        this.deilverWay = deilverWay;
+    public void setDeliverWay(String deliverWay) {
+        this.deliverWay = deliverWay;
     }
 
     public String getSendName() {

@@ -16,13 +16,13 @@ public class SwDeliverBaseModiVo extends SwDeliverBaseVo {
 
     @Length(max = 32,message = "发货编号长度不能超过32")
     @ApiModelProperty(value = "发货编号",required =false )
-    private String deilverNo;
+    private String deliverNo;
 
-    public String getDeilverNo() {
-        return deilverNo;
+    public String getDeliverNo() {
+        return deliverNo;
     }
 
-    public void setDeilverNo(String deilverNo) {
-        this.deilverNo = deilverNo;
+    public void setDeliverNo(String deliverNo) {
+        this.deliverNo = deliverNo;
     }
 }

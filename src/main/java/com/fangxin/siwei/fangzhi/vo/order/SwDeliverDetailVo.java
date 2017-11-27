@@ -9,9 +9,9 @@ import java.math.BigDecimal;
  **/
 public class SwDeliverDetailVo {
 
-    private String deilverNo;
+    private String deliverNo;
 
-    private String deilverSeqNo;
+    private String deliverSeqNo;
 
     private String orderNo;
 
@@ -37,20 +37,20 @@ public class SwDeliverDetailVo {
 
     private String memo;
 
-    public String getDeilverNo() {
-        return deilverNo;
+    public String getDeliverNo() {
+        return deliverNo;
     }
 
-    public void setDeilverNo(String deilverNo) {
-        this.deilverNo = deilverNo;
+    public void setDeliverNo(String deliverNo) {
+        this.deliverNo = deliverNo;
     }
 
-    public String getDeilverSeqNo() {
-        return deilverSeqNo;
+    public String getDeliverSeqNo() {
+        return deliverSeqNo;
     }
 
-    public void setDeilverSeqNo(String deilverSeqNo) {
-        this.deilverSeqNo = deilverSeqNo;
+    public void setDeliverSeqNo(String deliverSeqNo) {
+        this.deliverSeqNo = deliverSeqNo;
     }
 
     public String getOrderNo() {

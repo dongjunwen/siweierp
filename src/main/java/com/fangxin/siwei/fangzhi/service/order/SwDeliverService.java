@@ -21,7 +21,7 @@ public interface SwDeliverService {
 
     Result<Integer> audit(SwDeliverAuditVo swDeliverAuditVo);
 
-    SwDeliverResultVo getEntityByNo(String deilverNo);
+    SwDeliverResultVo getEntityByNo(String deliverNo);
 
     Result<Integer> update(SwDeliverModiVo swDeliverModiVo);
 }

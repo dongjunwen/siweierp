@@ -93,7 +93,7 @@ public class SwDeliverServiceImpl extends AbstractService<SwDeliverBase> impleme
         SwDeliverBaseModiVo swDeliverBaseModiVo= swDeliverModiVo.getSwDeliverBaseModiVo();
         SwDeliverBase swDeliverBase=new SwDeliverBase();
         convertVoToEntity(swDeliverBase,swDeliverBaseModiVo);
-        String deliverNo= swDeliverBaseModiVo.getDeilverNo();
+        String deliverNo= swDeliverBaseModiVo.getDeliverNo();
         swDeliverBase.setDeliverNo(deliverNo);
         swDeliverBase.setDeliverStatus(DeliverStatus.WAIT_APPLY.getCode());
         swDeliverBase.setModiNo(ShiroUtils.getCurrentUserNo());
@@ -155,8 +155,8 @@ public class SwDeliverServiceImpl extends AbstractService<SwDeliverBase> impleme
     @Override
     public Page<SwDeliverBaseResutVo> findList(Map<String, String> params) {
         //日期查询条件
-        params.put("timeCond1","deilver_date");
-        Condition serviceCondition = Common.getServiceCondition(params, SwOrderBase.class);
+        params.put("timeCond1","deliver_date");
+        Condition serviceCondition = Common.getServiceCondition(params, SwDeliverBase.class);
         Page<SwDeliverBase> swDeliverBases = (Page)findByCondition(serviceCondition);
         Page<SwDeliverBaseResutVo> swOrderBaseResultVos= new Page<SwDeliverBaseResutVo>();
         swOrderBaseResultVos.setPageSize(swDeliverBases.getPageSize());
