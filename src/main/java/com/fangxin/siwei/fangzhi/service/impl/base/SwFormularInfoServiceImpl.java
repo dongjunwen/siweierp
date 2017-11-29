@@ -3,6 +3,7 @@ package com.fangxin.siwei.fangzhi.service.impl.base;
 import com.fangxin.siwei.fangzhi.common.enums.ResultCode;
 import com.fangxin.siwei.fangzhi.common.exception.RRException;
 import com.fangxin.siwei.fangzhi.common.result.Result;
+import com.fangxin.siwei.fangzhi.common.utils.Calculator;
 import com.fangxin.siwei.fangzhi.common.utils.Common;
 import com.fangxin.siwei.fangzhi.common.utils.ShiroUtils;
 import com.fangxin.siwei.fangzhi.mapper.SwFormularInfoMapper;
@@ -10,6 +11,8 @@ import com.fangxin.siwei.fangzhi.modal.SwFormularInfo;
 import com.fangxin.siwei.fangzhi.service.AbstractService;
 import com.fangxin.siwei.fangzhi.service.base.SwFormularInfoService;
 import com.fangxin.siwei.fangzhi.vo.base.SwFormularInfoVo;
+import com.fangxin.siwei.fangzhi.vo.base.SwLikeVo;
+import com.fangxin.siwei.fangzhi.vo.result.SwFormularResultVo;
 import com.github.pagehelper.Page;
 import org.apache.commons.beanutils.BeanUtils;
 import org.slf4j.Logger;
@@ -19,6 +22,8 @@ import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Condition;
 
 import java.lang.reflect.InvocationTargetException;
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -87,9 +92,21 @@ public class SwFormularInfoServiceImpl extends AbstractService<SwFormularInfo> i
     }
 
     @Override
-    public List<SwFormularInfo> findFormularLike(String condStr) {
+    public List<SwFormularResultVo> findFormularLike( SwLikeVo swLikeVo) {
+        String condStr=swLikeVo.getCondStr();
         List<SwFormularInfo> swFormularInfos= swFormularInfoMapper.findFormularLike(condStr);
-        return swFormularInfos;
+        List<SwFormularResultVo> swFormularResults=new ArrayList<SwFormularResultVo>();
+        for(SwFormularInfo swFormularInfo:swFormularInfos){
+            SwFormularResultVo swFormularResultVo=new SwFormularResultVo();
+            swFormularResultVo.setFormularNo(swFormularInfo.getFormularNo());
+            swFormularResultVo.setFormularName(swFormularInfo.getFormularName());
+            swFormularResultVo.setFormularValue(swFormularInfo.getFormularValue());
+            swFormularResultVo.setFormularPrice(swFormularInfo.getFormularPrice());
+            BigDecimal calValue= Calculator.calNum(swFormularInfo.getFormularValue(),swLikeVo.getLongNum(),swLikeVo.getWidhtNum(),swLikeVo.getReqNum());
+            swFormularResultVo.setCalValue(calValue);
+            swFormularResults.add(swFormularResultVo);
+        }
+        return swFormularResults;
     }
 
     private void convertVoToEntity( SwFormularInfo swFormularInfo, SwFormularInfoVo swFormularInfoVo) {

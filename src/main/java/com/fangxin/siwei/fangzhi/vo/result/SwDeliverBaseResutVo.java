@@ -45,11 +45,19 @@ public class SwDeliverBaseResutVo {
 
     private String createNo;
 
+    private String createName;
+
     private String createTime;
 
     private String modiNo;
 
+    private String modiName;
+
     private String modiTime;
+    //审核理由
+    private String auditDes;
+    //审核人
+    private String auditName;
 
     public Integer getId() {
         return id;
@@ -219,4 +227,35 @@ public class SwDeliverBaseResutVo {
         this.modiTime = modiTime;
     }
 
+    public String getCreateName() {
+        return createName;
+    }
+
+    public void setCreateName(String createName) {
+        this.createName = createName;
+    }
+
+    public String getModiName() {
+        return modiName;
+    }
+
+    public void setModiName(String modiName) {
+        this.modiName = modiName;
+    }
+
+    public String getAuditDes() {
+        return auditDes;
+    }
+
+    public void setAuditDes(String auditDes) {
+        this.auditDes = auditDes;
+    }
+
+    public String getAuditName() {
+        return auditName;
+    }
+
+    public void setAuditName(String auditName) {
+        this.auditName = auditName;
+    }
 }

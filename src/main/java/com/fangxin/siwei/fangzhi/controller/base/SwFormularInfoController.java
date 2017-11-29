@@ -9,6 +9,8 @@ import com.fangxin.siwei.fangzhi.common.validator.group.AddGroup;
 import com.fangxin.siwei.fangzhi.modal.SwFormularInfo;
 import com.fangxin.siwei.fangzhi.service.base.SwFormularInfoService;
 import com.fangxin.siwei.fangzhi.vo.base.SwFormularInfoVo;
+import com.fangxin.siwei.fangzhi.vo.base.SwLikeVo;
+import com.fangxin.siwei.fangzhi.vo.result.SwFormularResultVo;
 import com.github.pagehelper.Page;
 import io.swagger.annotations.*;
 import org.slf4j.Logger;
@@ -91,11 +93,11 @@ public class SwFormularInfoController {
     }
 
 
-    @RequestMapping(value = "/findFormularLike/{condStr}",method = RequestMethod.GET)
+    @RequestMapping(value = "/findFormularLike",method = RequestMethod.POST)
     @ApiOperation(value="根据条件模糊匹配公式列表", notes="根据查询条件模糊匹配公式列表")
-    @ApiImplicitParam(name = "condStr", value = "公式编号", required = true, dataType = "string",paramType = "path")
-    public Result<List<SwFormularInfo>> findFormularLike(@PathVariable("condStr") String condStr){
-        List<SwFormularInfo> swFormularInfos = swFormularInfoService.findFormularLike(condStr);
+    @ApiParam(name = "swLikeVo", value = "模糊匹配查询条件(带自动计算功能)", required = true)
+    public Result<List<SwFormularResultVo>> findFormularLike(@RequestBody SwLikeVo swLikeVo){
+        List<SwFormularResultVo> swFormularInfos = swFormularInfoService.findFormularLike(swLikeVo);
         return Result.newSuccess(swFormularInfos);
     }
 

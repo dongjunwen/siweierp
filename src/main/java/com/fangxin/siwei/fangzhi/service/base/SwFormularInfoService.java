@@ -3,6 +3,8 @@ package com.fangxin.siwei.fangzhi.service.base;
 import com.fangxin.siwei.fangzhi.common.result.Result;
 import com.fangxin.siwei.fangzhi.modal.SwFormularInfo;
 import com.fangxin.siwei.fangzhi.vo.base.SwFormularInfoVo;
+import com.fangxin.siwei.fangzhi.vo.base.SwLikeVo;
+import com.fangxin.siwei.fangzhi.vo.result.SwFormularResultVo;
 import com.github.pagehelper.Page;
 
 import java.util.List;
@@ -22,5 +24,5 @@ public interface SwFormularInfoService {
 
     Page<SwFormularInfo> findList(Map<String, String> params);
 
-    List<SwFormularInfo> findFormularLike(String condStr);
+    List<SwFormularResultVo> findFormularLike( SwLikeVo swLikeVo);
 }

@@ -1,5 +1,8 @@
 package com.fangxin.siwei.fangzhi.common.utils;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,14 +15,32 @@ import java.util.Stack;
  * @Description：
  **/
 public class Calculator {
+    private static final Logger logger= LoggerFactory.getLogger(Calculator.class);
+
     /**
      * @param args
      */
     public static void main(String[] args) throws Exception {
-        //List<String> houzhuishi = houzhui("(0.006+(3-1))/(2+1)+3*2");
-        List<String>houzhuishi = houzhui("(600+(30000-1))/(2+1)+3*2");
+       List<String> houzhuishi = houzhui("2");
+        //List<String>houzhuishi = houzhui("(600+(30000-1))/(2+1)+3*2");
         //Double a = Calucate.recursiveCalStr("6+(3-1)/(2+1)+3*2");
         System.out.println(calcResult(houzhuishi));
+    }
+
+    public static BigDecimal calNum(String expressStr,BigDecimal longNum,BigDecimal widthNum,BigDecimal reqNum){
+      try{
+          BigDecimal s=longNum.add(widthNum);
+          s=s.multiply(new BigDecimal(2));
+          expressStr.replace("c",longNum.toString());
+          expressStr.replace("k",widthNum.toString());
+          expressStr.replace("s1",s.toString());
+          List<String> expresslists =houzhui(expressStr);
+          return calcResult(expresslists).multiply(reqNum);
+      }catch (Exception e){
+          logger.error("计算异常:{}",e);
+          return BigDecimal.ZERO;
+      }
+
     }
 
     public static BigDecimal calcResult(List<String> houzhishi) throws Exception{

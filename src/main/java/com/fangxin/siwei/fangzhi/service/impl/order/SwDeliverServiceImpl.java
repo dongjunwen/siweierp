@@ -18,6 +18,7 @@ import com.fangxin.siwei.fangzhi.service.audit.AuditingParam;
 import com.fangxin.siwei.fangzhi.service.audit.IAuditingService;
 import com.fangxin.siwei.fangzhi.service.impl.system.SysDictUtils;
 import com.fangxin.siwei.fangzhi.service.order.SwDeliverService;
+import com.fangxin.siwei.fangzhi.service.system.SysUserService;
 import com.fangxin.siwei.fangzhi.vo.order.*;
 import com.fangxin.siwei.fangzhi.vo.result.*;
 import com.github.pagehelper.Page;
@@ -54,6 +55,9 @@ public class SwDeliverServiceImpl extends AbstractService<SwDeliverBase> impleme
     private SwDeliverDetailMapper swDeliverDetailMapper;
     @Autowired
     IAuditingService auditingService;
+    @Autowired
+    SysUserService sysUserService;
+
 
     @Transactional
     @Override
@@ -168,6 +172,13 @@ public class SwDeliverServiceImpl extends AbstractService<SwDeliverBase> impleme
             convertEntityTVo(swDeliverBaseResutVo,swDeliverBase);
             swDeliverBaseResutVo.setDeliverWayName(SysDictUtils.getNameByUniq("DELIVER_WAY",swDeliverBaseResutVo.getDeliverWay()));
             swDeliverBaseResutVo.setDeliverStatusName(SysDictUtils.getNameByUniq("DELIVER_STATUS",swDeliverBaseResutVo.getDeliverStatus()));
+            SysAuditLog sysAuditLog=auditingService.queryLastOperateSysAuditLogBySourceNo(swDeliverBaseResutVo.getDeliverNo());
+            if(sysAuditLog!=null){
+                swDeliverBaseResutVo.setAuditName(sysAuditLog.getAuditUserName());
+                swDeliverBaseResutVo.setAuditDes(sysAuditLog.getAuditDesc());
+            }
+            swDeliverBaseResutVo.setCreateName(sysUserService.getUserNameById(swDeliverBaseResutVo.getCreateNo()));
+            swDeliverBaseResutVo.setModiName(sysUserService.getUserNameById(swDeliverBaseResutVo.getModiNo()));
             swOrderBaseResultVos.add(swDeliverBaseResutVo);
         }
         return swOrderBaseResultVos;

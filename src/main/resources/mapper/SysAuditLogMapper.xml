@@ -31,6 +31,7 @@
     <include refid="Base_Column_List" />
     from sys_audit_log
     where source_no = #{sourceNo,jdbcType=VARCHAR}
+    order by id desc
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from sys_audit_log
