@@ -26,13 +26,13 @@ public class SwFormularInfoVo {
     @Length(min = 1,max = 32,message = "公式值长度不能超过32")
     @ApiModelProperty(value = "公式值",required =true )
     private String formularValue;
-    @DecimalMin(value = "0.01")
+    @DecimalMin(value = "0.00")
     @ApiModelProperty(value = "单价",required =true )
     private String formularPrice;
     @Length(min = 1,max = 32,message = "公式类型不能超过32")
     @ApiModelProperty(value = "公式类型",required =true )
     private String formularType;
-    @Length(min = 1,max = 128,message = "公式备注不能超过128")
+    @Length(min = 0,max = 128,message = "公式备注不能超过128")
     @ApiModelProperty(value = "公式备注",required =true )
     private String memo;
 
