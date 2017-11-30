@@ -91,7 +91,7 @@ public class PurchaseController {
     }
 
 
-    @ApiOperation(value = "订单合同详细列表")
+    @ApiOperation(value = "采购详细列表")
     @RequestMapping(value = "findDetailList",method = RequestMethod.GET)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "currPage",value = "当前页",paramType = "query"),
@@ -102,7 +102,7 @@ public class PurchaseController {
             @ApiImplicitParam(name = "endTime",value = "结束时间 YYYY-MM-DD格式",required = false,dataType = "string",paramType = "query"),
             @ApiImplicitParam(name = "purNo",value = "订单号",required = false,dataType = "string",paramType = "query"),
             @ApiImplicitParam(name = "purStatus",value = "采购状态",required = false,dataType = "string",paramType = "query"),
-            @ApiImplicitParam(name = "supplyCompNo",value = "客户编号",required = true,dataType = "string",paramType = "query")
+            @ApiImplicitParam(name = "supplyCompNo",value = "客户编号",required = false,dataType = "string",paramType = "query")
     })
     public Result<PageUitls<SwPurOrderDetailResultVo>> findDetailList(@RequestParam @ApiParam(hidden = true) Map<String,String> params){
         Page<SwPurOrderDetailResultVo> page =  purchaseService.findDetailList(params);

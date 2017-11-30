@@ -47,7 +47,7 @@
     from
     sw_purchase_base as a
     join sw_purchase_detail as b
-    on a.order_no=b.order_no
+    on a.pur_no=b.pur_no
     where 1=1
     <if test="supplyCompNo!=null and supplyCompNo!=''">
       and a.supply_comp_no=#{supplyCompNo,jdbcType=VARCHAR}
@@ -72,7 +72,7 @@
     from
     sw_purchase_base as a
     join sw_purchase_detail as b
-    on a.order_no=b.order_no
+    on a.pur_no=b.pur_no
     where 1=1
     <if test="supplyCompNo!=null and supplyCompNo!=''">
       and a.supply_comp_no=#{supplyCompNo,jdbcType=VARCHAR}
