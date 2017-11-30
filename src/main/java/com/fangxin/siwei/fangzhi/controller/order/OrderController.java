@@ -101,7 +101,8 @@ public class OrderController {
             @ApiImplicitParam(name = "startTime",value = "开始时间 YYYY-MM-DD格式",required = false,dataType = "string",paramType = "query"),//如果时间类型则可以打开
             @ApiImplicitParam(name = "endTime",value = "结束时间 YYYY-MM-DD格式",required = false,dataType = "string",paramType = "query"),
             @ApiImplicitParam(name = "orderNo",value = "订单号",required = false,dataType = "string",paramType = "query"),
-            @ApiImplicitParam(name = "orderType",value = "订单类型",required = false,dataType = "string",paramType = "query")
+            @ApiImplicitParam(name = "orderType",value = "订单类型",required = false,dataType = "string",paramType = "query"),
+            @ApiImplicitParam(name = "custCompNo",value = "客户编号",required = false,dataType = "string",paramType = "query")
     })
     public Result<PageUitls<SwOrderDetailResultVo>> findDetailList(@RequestParam @ApiParam(hidden = true) Map<String,String> params){
         Page<SwOrderDetailResultVo> page =  swOrderService.findDetailList(params);

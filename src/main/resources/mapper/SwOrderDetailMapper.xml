@@ -67,6 +67,9 @@
     join sw_order_detail as b
     on a.order_no=b.order_no
     where 1=1
+    <if test="custCompNo!=null and custCompNo!=''">
+      and a.cust_comp_no=#{custCompNo,jdbcType=VARCHAR}
+    </if>
     <if test="orderNo!=null and orderNo!=''">
       and a.order_no=#{orderNo,jdbcType=VARCHAR}
     </if>
@@ -89,6 +92,9 @@
     join sw_order_detail as b
     on a.order_no=b.order_no
     where 1=1
+    <if test="custCompNo!=null and custCompNo!=''">
+      and a.cust_comp_no=#{custCompNo,jdbcType=VARCHAR}
+    </if>
     <if test="orderNo!=null and orderNo!=''">
       and a.order_no=#{orderNo,jdbcType=VARCHAR}
     </if>
