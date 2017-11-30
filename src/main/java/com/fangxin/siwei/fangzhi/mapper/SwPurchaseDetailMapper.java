@@ -3,6 +3,7 @@ package com.fangxin.siwei.fangzhi.mapper;
 import com.fangxin.siwei.fangzhi.modal.SwPurchaseDetail;
 
 import java.util.List;
+import java.util.Map;
 
 public interface SwPurchaseDetailMapper {
     int deleteByPrimaryKey(Integer id);
@@ -22,4 +23,8 @@ public interface SwPurchaseDetailMapper {
     List<SwPurchaseDetail> selectByPurNo(String purNo);
 
     void updateBatch(List swOrderDetails);
+
+    int countNum(Map<String, String> params);
+
+    List<SwPurchaseDetail> findList(Map<String, String> params);
 }

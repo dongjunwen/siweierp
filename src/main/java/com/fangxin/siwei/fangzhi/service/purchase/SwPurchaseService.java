@@ -8,6 +8,7 @@ import com.fangxin.siwei.fangzhi.vo.purchase.SwPurOrderModiVo;
 import com.fangxin.siwei.fangzhi.vo.purchase.SwPurOrderVo;
 import com.fangxin.siwei.fangzhi.vo.result.SwOrderResultVo;
 import com.fangxin.siwei.fangzhi.vo.result.SwPurOrderBaseResultVo;
+import com.fangxin.siwei.fangzhi.vo.result.SwPurOrderDetailResultVo;
 import com.fangxin.siwei.fangzhi.vo.result.SwPurOrderResultVo;
 import com.github.pagehelper.Page;
 
@@ -26,4 +27,6 @@ public interface SwPurchaseService {
     SwPurOrderResultVo getEntityByNo(String orderNo);
 
     Result<Integer> update(SwPurOrderModiVo swPurOrderModiVo);
+
+    Page<SwPurOrderDetailResultVo> findDetailList(Map<String, String> params);
 }

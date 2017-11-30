@@ -11,7 +11,9 @@ import com.fangxin.siwei.fangzhi.service.purchase.SwPurchaseService;
 import com.fangxin.siwei.fangzhi.vo.purchase.SwPurAuditVo;
 import com.fangxin.siwei.fangzhi.vo.purchase.SwPurOrderModiVo;
 import com.fangxin.siwei.fangzhi.vo.purchase.SwPurOrderVo;
+import com.fangxin.siwei.fangzhi.vo.result.SwOrderDetailResultVo;
 import com.fangxin.siwei.fangzhi.vo.result.SwPurOrderBaseResultVo;
+import com.fangxin.siwei.fangzhi.vo.result.SwPurOrderDetailResultVo;
 import com.fangxin.siwei.fangzhi.vo.result.SwPurOrderResultVo;
 import com.github.pagehelper.Page;
 import io.swagger.annotations.*;
@@ -88,6 +90,24 @@ public class PurchaseController {
         return Result.newSuccess(new PageUitls<SwPurOrderBaseResultVo>(page));
     }
 
+
+    @ApiOperation(value = "订单合同详细列表")
+    @RequestMapping(value = "findDetailList",method = RequestMethod.GET)
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "currPage",value = "当前页",paramType = "query"),
+            @ApiImplicitParam(name = "sort",value = "排序 ASC 或 DESC",required = false,example = "asc/desc",paramType = "query"),
+            @ApiImplicitParam(name = "orderBy",value = "排序字段",required = false,example = "createdTime",paramType = "query"),
+            @ApiImplicitParam(name = "pageSize",value = "每页显示条数",required = false,example = "createdTime",paramType = "query"),
+            @ApiImplicitParam(name = "startTime",value = "开始时间 YYYY-MM-DD格式",required = false,dataType = "string",paramType = "query"),//如果时间类型则可以打开
+            @ApiImplicitParam(name = "endTime",value = "结束时间 YYYY-MM-DD格式",required = false,dataType = "string",paramType = "query"),
+            @ApiImplicitParam(name = "purNo",value = "订单号",required = false,dataType = "string",paramType = "query"),
+            @ApiImplicitParam(name = "purStatus",value = "采购状态",required = false,dataType = "string",paramType = "query"),
+            @ApiImplicitParam(name = "supplyCompNo",value = "客户编号",required = true,dataType = "string",paramType = "query")
+    })
+    public Result<PageUitls<SwPurOrderDetailResultVo>> findDetailList(@RequestParam @ApiParam(hidden = true) Map<String,String> params){
+        Page<SwPurOrderDetailResultVo> page =  purchaseService.findDetailList(params);
+        return Result.newSuccess(new PageUitls<SwPurOrderDetailResultVo>(page));
+    }
 
     @RequestMapping(value = "/audit",method = RequestMethod.POST)
     @ApiOperation(value="审核采购单", notes="初审、终审接口")

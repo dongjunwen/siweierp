@@ -12,15 +12,13 @@ import com.fangxin.siwei.fangzhi.common.utils.ShiroUtils;
 import com.fangxin.siwei.fangzhi.common.utils.UUIDUtils;
 import com.fangxin.siwei.fangzhi.mapper.SwPurchaseBaseMapper;
 import com.fangxin.siwei.fangzhi.mapper.SwPurchaseDetailMapper;
-import com.fangxin.siwei.fangzhi.modal.SwOrderBase;
-import com.fangxin.siwei.fangzhi.modal.SwPurchaseBase;
-import com.fangxin.siwei.fangzhi.modal.SwPurchaseDetail;
-import com.fangxin.siwei.fangzhi.modal.SysAuditConfig;
+import com.fangxin.siwei.fangzhi.modal.*;
 import com.fangxin.siwei.fangzhi.service.AbstractService;
 import com.fangxin.siwei.fangzhi.service.audit.AuditingParam;
 import com.fangxin.siwei.fangzhi.service.audit.IAuditingService;
 import com.fangxin.siwei.fangzhi.service.purchase.SwPurchaseService;
 import com.fangxin.siwei.fangzhi.vo.purchase.*;
+import com.fangxin.siwei.fangzhi.vo.result.SwOrderDetailResultVo;
 import com.fangxin.siwei.fangzhi.vo.result.SwPurOrderBaseResultVo;
 import com.fangxin.siwei.fangzhi.vo.result.SwPurOrderDetailResultVo;
 import com.fangxin.siwei.fangzhi.vo.result.SwPurOrderResultVo;
@@ -28,6 +26,7 @@ import com.github.pagehelper.Page;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.Converter;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -154,6 +153,29 @@ public class PurchaseServiceImpl extends AbstractService<SwPurchaseBase> impleme
         return swOrderBaseResultVos;
     }
 
+    @Override
+    public Page<SwPurOrderDetailResultVo> findDetailList(Map<String, String> params) {
+        String pageIndexStr= StringUtils.isEmpty(params.get("currPage"))?"1":params.get("currPage");
+        Integer pageIndex=Integer.valueOf(pageIndexStr)-1;
+        params.put("pageIndex",pageIndex.toString());
+        Integer pageSize=Integer.valueOf( StringUtils.isEmpty(params.get("pageSize"))?"10":params.get("pageSize"));
+        params.put("pageSize",pageSize.toString());
+        int num=swPurchaseDetailMapper.countNum(params);
+        int pages=num%pageSize==0?num/pageSize:num/pageSize+1;
+        List<SwPurchaseDetail> swPurchaseDetails=swPurchaseDetailMapper.findList(params);
+        Page<SwPurOrderDetailResultVo> swPurOrderDetailResultVos=new Page<SwPurOrderDetailResultVo>();
+        swPurOrderDetailResultVos.setPageSize(pageSize);
+        swPurOrderDetailResultVos.setPageNum(pageIndex+1);
+        swPurOrderDetailResultVos.setPages(pages);
+        swPurOrderDetailResultVos.setTotal(num);
+        for(SwPurchaseDetail swPurchaseDetail:swPurchaseDetails){
+            SwPurOrderDetailResultVo swPurOrderDetailResultVo=new SwPurOrderDetailResultVo();
+            convertDetailEntityTVo(swPurOrderDetailResultVo,swPurchaseDetail);
+            swPurOrderDetailResultVos.add(swPurOrderDetailResultVo);
+        }
+        return swPurOrderDetailResultVos;
+    }
+
     private void convertEntityTVo(SwPurOrderBaseResultVo swPurOrderBaseResultVo, SwPurchaseBase swPurchaseBase) {
 
         try {
@@ -268,6 +290,8 @@ public class PurchaseServiceImpl extends AbstractService<SwPurchaseBase> impleme
         swPurchaseDetailMapper.updateBatch(swOrderDetails);
         return Result.newSuccess(flag);
     }
+
+
 
     private void convertDetailEntityTVo(SwPurOrderDetailResultVo swPurOrderDetailResultVo, SwPurchaseDetail swPurchaseDetail) {
         try {

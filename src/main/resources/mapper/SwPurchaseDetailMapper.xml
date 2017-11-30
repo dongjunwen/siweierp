@@ -41,6 +41,58 @@
     from sw_purchase_detail
     where pur_no = #{purNo,jdbcType=VARCHAR}
   </select>
+
+  <select id="countNum" resultType="java.lang.Integer">
+    select count(1) as countNum
+    from
+    sw_purchase_base as a
+    join sw_purchase_detail as b
+    on a.order_no=b.order_no
+    where 1=1
+    <if test="supplyCompNo!=null and supplyCompNo!=''">
+      and a.supply_comp_no=#{supplyCompNo,jdbcType=VARCHAR}
+    </if>
+    <if test="purNo!=null and purNo!=''">
+      and a.pur_no=#{purNo,jdbcType=VARCHAR}
+    </if>
+    <if test="purStatus!=null and purStatus!=''">
+      and a.pur_status=#{purStatus,jdbcType=VARCHAR}
+    </if>
+    <if test="startTime!=null and startTime!=''">
+      and a.pur_date &gt;= #{startTime,jdbcType=VARCHAR}
+    </if>
+    <if test="endTime!=null and endTime!=''">
+      and a.pur_date &lt;= #{endTime,jdbcType=VARCHAR}
+    </if>
+
+  </select>
+
+  <select id="findList" resultMap="BaseResultMap" >
+    select b.*
+    from
+    sw_purchase_base as a
+    join sw_purchase_detail as b
+    on a.order_no=b.order_no
+    where 1=1
+    <if test="supplyCompNo!=null and supplyCompNo!=''">
+      and a.supply_comp_no=#{supplyCompNo,jdbcType=VARCHAR}
+    </if>
+    <if test="purNo!=null and purNo!=''">
+      and a.pur_no=#{purNo,jdbcType=VARCHAR}
+    </if>
+    <if test="purStatus!=null and purStatus!=''">
+      and a.pur_status=#{purStatus,jdbcType=VARCHAR}
+    </if>
+    <if test="startTime!=null and startTime!=''">
+      and a.pur_date &gt;= #{startTime,jdbcType=VARCHAR}
+    </if>
+    <if test="endTime!=null and endTime!=''">
+      and a.pur_date &lt;= #{endTime,jdbcType=VARCHAR}
+    </if>
+    limit ${pageIndex},${pageSize}
+  </select>
+
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from sw_purchase_detail
     where id = #{id,jdbcType=INTEGER}
