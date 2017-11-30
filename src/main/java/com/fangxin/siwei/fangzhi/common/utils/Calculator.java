@@ -31,9 +31,9 @@ public class Calculator {
       try{
           BigDecimal s=longNum.add(widthNum);
           s=s.multiply(new BigDecimal(2));
-          expressStr.replace("c",longNum.toString());
-          expressStr.replace("k",widthNum.toString());
-          expressStr.replace("s1",s.toString());
+          expressStr=expressStr.replace("c",longNum.toString());
+          expressStr=expressStr.replace("k",widthNum.toString());
+          expressStr=expressStr.replace("s1",s.toString());
           List<String> expresslists =houzhui(expressStr);
           return calcResult(expresslists).multiply(reqNum);
       }catch (Exception e){

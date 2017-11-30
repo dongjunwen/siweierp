@@ -17,7 +17,7 @@ public class SwFormularResultVo {
     private BigDecimal formularPrice;
 
     private String formularType;
-
+    //计算值
     private BigDecimal calValue;
 
     public String getFormularNo() {
