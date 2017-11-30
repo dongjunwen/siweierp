@@ -30,6 +30,7 @@ import com.github.pagehelper.Page;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.Converter;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -152,6 +153,8 @@ public class SwOrderServiceImpl extends AbstractService<SwOrderBase> implements 
     }
 
 
+
+
     private void convertVoToEntityDetail(SwOrderDetail swOrderDetail, SwOrderDetailVo swOrderDetailVo) {
         try {
             BeanUtils.copyProperties(swOrderDetail,swOrderDetailVo);
@@ -212,6 +215,29 @@ public class SwOrderServiceImpl extends AbstractService<SwOrderBase> implements 
             swOrderBaseResultVos.add(swOrderBaseResultVo);
         }
         return swOrderBaseResultVos;
+    }
+
+    @Override
+    public Page<SwOrderDetailResultVo> findDetailList(Map<String, String> params) {
+        String pageIndexStr= StringUtils.isEmpty(params.get("currPage"))?"1":params.get("currPage");
+        Integer pageIndex=Integer.valueOf(pageIndexStr)-1;
+        params.put("pageIndex",pageIndex.toString());
+        Integer pageSize=Integer.valueOf( StringUtils.isEmpty(params.get("pageSize"))?"10":params.get("pageSize"));
+        params.put("pageSize",pageSize.toString());
+        int num=swOrderDetailMapper.countNum(params);
+        int pages=num%pageSize==0?num/pageSize:num/pageSize+1;
+        List<SwOrderDetail> swOrderDetails=swOrderDetailMapper.findList(params);
+        Page<SwOrderDetailResultVo> swOrderDetailResultVos=new Page<SwOrderDetailResultVo>();
+        swOrderDetailResultVos.setPageSize(pageSize);
+        swOrderDetailResultVos.setPageNum(pageIndex+1);
+        swOrderDetailResultVos.setPages(pages);
+        swOrderDetailResultVos.setTotal(num);
+        for(SwOrderDetail swOrderDetail:swOrderDetails){
+            SwOrderDetailResultVo swOrderDetailResultVo=new SwOrderDetailResultVo();
+            convertDetailEntityTVo(swOrderDetailResultVo,swOrderDetail);
+            swOrderDetailResultVos.add(swOrderDetailResultVo);
+        }
+        return swOrderDetailResultVos;
     }
 
     @Override

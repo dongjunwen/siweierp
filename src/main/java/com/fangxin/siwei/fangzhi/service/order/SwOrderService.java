@@ -6,6 +6,7 @@ import com.fangxin.siwei.fangzhi.vo.order.SwOrderModiVo;
 import com.fangxin.siwei.fangzhi.vo.order.SwOrderQueryVo;
 import com.fangxin.siwei.fangzhi.vo.order.SwOrderVo;
 import com.fangxin.siwei.fangzhi.vo.result.SwOrderBaseResultVo;
+import com.fangxin.siwei.fangzhi.vo.result.SwOrderDetailResultVo;
 import com.fangxin.siwei.fangzhi.vo.result.SwOrderResultVo;
 import com.github.pagehelper.Page;
 
@@ -46,4 +47,6 @@ public interface SwOrderService {
     Result<Integer> update(SwOrderModiVo swOrderModiVo);
 
     SwOrderResultVo getEntityByCond(SwOrderQueryVo swOrderQueryVo);
+
+    Page<SwOrderDetailResultVo> findDetailList(Map<String, String> params);
 }

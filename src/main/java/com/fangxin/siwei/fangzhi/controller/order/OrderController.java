@@ -15,6 +15,7 @@ import com.fangxin.siwei.fangzhi.vo.order.SwOrderModiVo;
 import com.fangxin.siwei.fangzhi.vo.order.SwOrderQueryVo;
 import com.fangxin.siwei.fangzhi.vo.order.SwOrderVo;
 import com.fangxin.siwei.fangzhi.vo.result.SwOrderBaseResultVo;
+import com.fangxin.siwei.fangzhi.vo.result.SwOrderDetailResultVo;
 import com.fangxin.siwei.fangzhi.vo.result.SwOrderResultVo;
 import com.github.pagehelper.Page;
 import io.swagger.annotations.*;
@@ -84,11 +85,27 @@ public class OrderController {
             @ApiImplicitParam(name = "startTime",value = "开始时间 YYYY-MM-DD格式",required = false,dataType = "string",paramType = "query"),//如果时间类型则可以打开
             @ApiImplicitParam(name = "endTime",value = "结束时间 YYYY-MM-DD格式",required = false,dataType = "string",paramType = "query"),
             @ApiImplicitParam(name = "filter",value = "通用表过滤器。发送JSON键/值对，如<code>{“key”:“value”}</code>。", paramType = "query",dataTypeClass = JSON.class)
-
     })
     public Result<PageUitls<SwOrderBaseResultVo>> findList(@RequestParam @ApiParam(hidden = true) Map<String,String> params){
         Page<SwOrderBaseResultVo> page =  swOrderService.findList(params);
         return Result.newSuccess(new PageUitls<SwOrderBaseResultVo>(page));
+    }
+
+    @ApiOperation(value = "订单合同详细列表")
+    @RequestMapping(value = "findDetailList",method = RequestMethod.GET)
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "currPage",value = "当前页",paramType = "query"),
+            @ApiImplicitParam(name = "sort",value = "排序 ASC 或 DESC",required = false,example = "asc/desc",paramType = "query"),
+            @ApiImplicitParam(name = "orderBy",value = "排序字段",required = false,example = "createdTime",paramType = "query"),
+            @ApiImplicitParam(name = "pageSize",value = "每页显示条数",required = false,example = "createdTime",paramType = "query"),
+            @ApiImplicitParam(name = "startTime",value = "开始时间 YYYY-MM-DD格式",required = false,dataType = "string",paramType = "query"),//如果时间类型则可以打开
+            @ApiImplicitParam(name = "endTime",value = "结束时间 YYYY-MM-DD格式",required = false,dataType = "string",paramType = "query"),
+            @ApiImplicitParam(name = "orderNo",value = "订单号",required = false,dataType = "string",paramType = "query"),
+            @ApiImplicitParam(name = "orderType",value = "订单类型",required = false,dataType = "string",paramType = "query")
+    })
+    public Result<PageUitls<SwOrderDetailResultVo>> findDetailList(@RequestParam @ApiParam(hidden = true) Map<String,String> params){
+        Page<SwOrderDetailResultVo> page =  swOrderService.findDetailList(params);
+        return Result.newSuccess(new PageUitls<SwOrderDetailResultVo>(page));
     }
 
 
