@@ -114,8 +114,10 @@ public class Common {
                 JSONObject filterOjb = JSON.parseObject(filter);
                 Set<String> strings = filterOjb.keySet();
                 for(String key : strings){
+                    String val=(String)filterOjb.get(key);
+                    boolean flag=StringUtils.isNotBlank(val);
                     if(Common.isObjProperty(key,classes)){//如果存在属性则加入到过滤条件中
-                        criteria.andEqualTo(key,filterOjb.get(key));
+                        if (flag) criteria.andEqualTo(key,filterOjb.get(key));
                     }else{
                         throw new RRException("不存在filter的"+key+"属性，请查看实体");
                     }
