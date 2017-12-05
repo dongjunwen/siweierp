@@ -118,7 +118,7 @@ public class StockInVerifyServiceImpl extends AbstractService<SwStockVerify> imp
     public Page<StockVerifyResultVo> findList(Map<String, String> params) {
         //日期查询条件
         params.put("timeCond1","create_time");
-        Condition serviceCondition = Common.getServiceCondition(params, SwOrderBase.class);
+        Condition serviceCondition = Common.getServiceCondition(params, SwStockVerify.class);
         Page<SwStockVerify> swStockIns = (Page)findByCondition(serviceCondition);
         Page<StockVerifyResultVo> stockInResultVos= new Page<StockVerifyResultVo>();
         stockInResultVos.setPageSize(swStockIns.getPageSize());

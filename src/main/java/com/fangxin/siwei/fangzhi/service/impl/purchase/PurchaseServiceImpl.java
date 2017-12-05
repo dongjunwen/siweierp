@@ -138,7 +138,7 @@ public class PurchaseServiceImpl extends AbstractService<SwPurchaseBase> impleme
     public Page<SwPurOrderBaseResultVo> findList(Map<String, String> params) {
         //日期查询条件
         params.put("timeCond1","pur_date");
-        Condition serviceCondition = Common.getServiceCondition(params, SwOrderBase.class);
+        Condition serviceCondition = Common.getServiceCondition(params, SwPurchaseBase.class);
         Page<SwPurchaseBase> swPurchaseBases = (Page)findByCondition(serviceCondition);
         Page<SwPurOrderBaseResultVo> swOrderBaseResultVos= new Page<SwPurOrderBaseResultVo>();
         swOrderBaseResultVos.setPageSize(swPurchaseBases.getPageSize());
