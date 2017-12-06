@@ -99,6 +99,7 @@ public class SysUserServiceImpl  implements SysUserService {
     @Override
     public String getUserNameById(String userNo) {
         SysUser sysUser=getUserById(userNo);
+        if(sysUser==null) return "";
         return sysUser.getUserName();
     }
 

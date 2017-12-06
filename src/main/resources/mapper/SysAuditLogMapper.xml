@@ -26,7 +26,7 @@
     from sys_audit_log
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <select id="querySysAuditLogsBySourceNo" parameterType="java.lang.String" >
+  <select id="querySysAuditLogsBySourceNo" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from sys_audit_log
