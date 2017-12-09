@@ -50,6 +50,8 @@ public class SwOrderDetail {
 
     private String materialPriceExpress;
 
+    private String materialSpec;
+
     private String materialUnit;
 
     private BigDecimal materialNum;
@@ -384,5 +386,13 @@ public class SwOrderDetail {
 
     public void setVersion(Integer version) {
         this.version = version;
+    }
+
+    public String getMaterialSpec() {
+        return materialSpec;
+    }
+
+    public void setMaterialSpec(String materialSpec) {
+        this.materialSpec = materialSpec;
     }
 }
