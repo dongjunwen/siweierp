@@ -78,10 +78,12 @@ public class PurchaseServiceImpl extends AbstractService<SwPurchaseBase> impleme
         List swOrderDetails=new ArrayList();
         BigDecimal totalNum=BigDecimal.ZERO;
         BigDecimal totalAmt=BigDecimal.ZERO;
+        int i=1;
         for(SwPurOrderDetailVo swPurOrderDetailVo:swPurOrderDetailVos){
             SwPurchaseDetail swPurchaseDetail=new SwPurchaseDetail();
             convertVoToEntityDetail(swPurchaseDetail,swPurOrderDetailVo);
             swPurchaseDetail.setPurNo(purNo);
+            swPurchaseDetail.setPurSeqNo(String.valueOf(i));
             swPurchaseDetail.setCreateNo(ShiroUtils.getCurrentUserNo());
             swPurchaseDetail.setCreateTime(new Date());
             swPurchaseDetail.setModiNo(ShiroUtils.getCurrentUserNo());
@@ -90,6 +92,7 @@ public class PurchaseServiceImpl extends AbstractService<SwPurchaseBase> impleme
             swOrderDetails.add(swPurchaseDetail);
             totalNum=totalNum.add(swPurchaseDetail.getNum());
             totalAmt=totalAmt.add(swPurchaseDetail.getAmt());
+            i++;
         }
         swPurchaseBase.setPurNum(totalNum);
         swPurchaseBase.setPurAmt(totalAmt);
