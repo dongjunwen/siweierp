@@ -24,6 +24,10 @@ public class SwPurOrderDetailResultVo {
 
     private String materialType;
 
+    private BigDecimal materialLong;
+
+    private BigDecimal materialWidth;
+
     private String spec;
 
     private String pattern;
@@ -196,5 +200,21 @@ public class SwPurOrderDetailResultVo {
 
     public void setModiTime(String modiTime) {
         this.modiTime = modiTime;
+    }
+
+    public BigDecimal getMaterialLong() {
+        return materialLong;
+    }
+
+    public void setMaterialLong(BigDecimal materialLong) {
+        this.materialLong = materialLong;
+    }
+
+    public BigDecimal getMaterialWidth() {
+        return materialWidth;
+    }
+
+    public void setMaterialWidth(BigDecimal materialWidth) {
+        this.materialWidth = materialWidth;
     }
 }

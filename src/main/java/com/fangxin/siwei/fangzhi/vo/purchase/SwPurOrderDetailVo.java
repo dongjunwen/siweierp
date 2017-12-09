@@ -30,6 +30,12 @@ public class SwPurOrderDetailVo {
     @Length(max = 32,message = "物料分类长度不能超过32")
     @ApiModelProperty(value = "物料分类",required =false )
     private String materialType;
+    @DecimalMin(value="0.01",message = "面料长度最小为0.01")
+    @ApiModelProperty(value = "面料长度",required =false )
+    private String materialLong;
+    @DecimalMin(value="0.01",message = "面料宽度最小为0.01")
+    @ApiModelProperty(value = "面料宽度",required =false )
+    private String materialWidth;
     @Length(max = 100,message = "规格长度不能超过100")
     @ApiModelProperty(value = "规格",required =false )
     private String spec;
@@ -130,6 +136,22 @@ public class SwPurOrderDetailVo {
 
     public void setNum(BigDecimal num) {
         this.num = num;
+    }
+
+    public String getMaterialLong() {
+        return materialLong;
+    }
+
+    public void setMaterialLong(String materialLong) {
+        this.materialLong = materialLong;
+    }
+
+    public String getMaterialWidth() {
+        return materialWidth;
+    }
+
+    public void setMaterialWidth(String materialWidth) {
+        this.materialWidth = materialWidth;
     }
 
     public BigDecimal getPrice() {

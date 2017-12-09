@@ -71,6 +71,9 @@ public class SwOrderDetailVo {
     @Length(max = 32,message = "面料公式不能超过32")
     @ApiModelProperty(value = "面料公式",required =false )
     private String materialPriceExpress;
+    @Length(max = 100,message = "面料规格不能超过100")
+    @ApiModelProperty(value = "面料规格",required =false )
+    private String materialSpec;
     @Length(max = 32,message = "面料单位不能超过32")
     @ApiModelProperty(value = "面料单位",required =false )
     private String materialUnit;
@@ -331,5 +334,13 @@ public class SwOrderDetailVo {
 
     public void setMaterialPriceName(String materialPriceName) {
         this.materialPriceName = materialPriceName;
+    }
+
+    public String getMaterialSpec() {
+        return materialSpec;
+    }
+
+    public void setMaterialSpec(String materialSpec) {
+        this.materialSpec = materialSpec;
     }
 }

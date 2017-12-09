@@ -10,6 +10,8 @@
     <result column="material_no" jdbcType="VARCHAR" property="materialNo" />
     <result column="material_name" jdbcType="VARCHAR" property="materialName" />
     <result column="material_type" jdbcType="VARCHAR" property="materialType" />
+    <result column="material_long" jdbcType="DECIMAL" property="materialLong" />
+    <result column="material_width" jdbcType="DECIMAL" property="materialWidth" />
     <result column="spec" jdbcType="VARCHAR" property="spec" />
     <result column="pattern" jdbcType="VARCHAR" property="pattern" />
     <result column="unit" jdbcType="VARCHAR" property="unit" />
@@ -24,7 +26,7 @@
     <result column="version" jdbcType="INTEGER" property="version" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, pur_no, pur_seq_no, order_no, order_seq_no, material_no, material_name, material_type, 
+    id, pur_no, pur_seq_no, order_no, order_seq_no, material_no, material_name, material_type, material_long,material_width,
     spec, pattern, unit, num, price, amt, memo, create_no, create_time, modi_no, modi_time, 
     version
   </sql>
@@ -100,14 +102,16 @@
   <insert id="insert" parameterType="com.fangxin.siwei.fangzhi.modal.SwPurchaseDetail">
     insert into sw_purchase_detail (id, pur_no, pur_seq_no, 
       order_no, order_seq_no, material_no, 
-      material_name, material_type, spec, 
+      material_name, material_type,material_long,material_width,spec,
       pattern, unit, num, 
       price, amt, memo, create_no, 
       create_time, modi_no, modi_time, 
       version)
     values (#{id,jdbcType=INTEGER}, #{purNo,jdbcType=VARCHAR}, #{purSeqNo,jdbcType=VARCHAR}, 
       #{orderNo,jdbcType=VARCHAR}, #{orderSeqNo,jdbcType=VARCHAR}, #{materialNo,jdbcType=VARCHAR}, 
-      #{materialName,jdbcType=VARCHAR}, #{materialType,jdbcType=VARCHAR}, #{spec,jdbcType=VARCHAR}, 
+      #{materialName,jdbcType=VARCHAR}, #{materialType,jdbcType=VARCHAR},
+      #{materialLong,jdbcType=DECIMAL}, #{materialWidth,jdbcType=DECIMAL},
+      #{spec,jdbcType=VARCHAR},
       #{pattern,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, #{num,jdbcType=DECIMAL}, 
       #{price,jdbcType=DECIMAL}, #{amt,jdbcType=DECIMAL}, #{memo,jdbcType=VARCHAR}, #{createNo,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=TIMESTAMP}, #{modiNo,jdbcType=VARCHAR}, #{modiTime,jdbcType=TIMESTAMP}, 
@@ -117,7 +121,7 @@
   <insert id="insertBatch" parameterType="java.util.List" >
       insert into sw_purchase_detail ( pur_no, pur_seq_no,
       order_no, order_seq_no, material_no,
-      material_name, material_type, spec,
+      material_name, material_type,material_long,material_width,spec,
       pattern, unit, num,
       price, amt, memo, create_no,
       create_time, modi_no, modi_time,
@@ -126,7 +130,9 @@
     <foreach collection="list" index="index" item="item" separator=",">
       ( #{item.purNo,jdbcType=VARCHAR}, #{item.purSeqNo,jdbcType=VARCHAR},
       #{item.orderNo,jdbcType=VARCHAR}, #{item.orderSeqNo,jdbcType=VARCHAR}, #{item.materialNo,jdbcType=VARCHAR},
-      #{item.materialName,jdbcType=VARCHAR}, #{item.materialType,jdbcType=VARCHAR}, #{item.spec,jdbcType=VARCHAR},
+      #{item.materialName,jdbcType=VARCHAR}, #{item.materialType,jdbcType=VARCHAR},
+      #{item.materialLong,jdbcType=DECIMAL},#{item.materialWith,jdbcType=DECIMAL},
+      #{item.spec,jdbcType=VARCHAR},
       #{item.pattern,jdbcType=VARCHAR}, #{item.unit,jdbcType=VARCHAR}, #{item.num,jdbcType=DECIMAL},
       #{item.price,jdbcType=DECIMAL}, #{item.amt,jdbcType=DECIMAL}, #{item.memo,jdbcType=VARCHAR}, #{item.createNo,jdbcType=VARCHAR},
       #{item.createTime,jdbcType=TIMESTAMP}, #{item.modiNo,jdbcType=VARCHAR}, #{item.modiTime,jdbcType=TIMESTAMP},
@@ -160,6 +166,12 @@
       </if>
       <if test="materialType != null">
         material_type,
+      </if>
+      <if test="materialLong != null">
+        material_long,
+      </if>
+      <if test="materialWidth != null">
+        material_width,
       </if>
       <if test="spec != null">
         spec,
@@ -223,6 +235,12 @@
       <if test="materialType != null">
         #{materialType,jdbcType=VARCHAR},
       </if>
+      <if test="materialLong != null">
+        #{materialLong,jdbcType=DECIMAL},
+      </if>
+      <if test="materialWidth != null">
+        #{materialWidth,jdbcType=DECIMAL},
+      </if>
       <if test="spec != null">
         #{spec,jdbcType=VARCHAR},
       </if>
@@ -279,6 +297,12 @@
           </if>
           <if test="item.materialType != null">
             material_type = #{item.materialType,jdbcType=VARCHAR},
+          </if>
+          <if test="item.materialLong != null">
+            material_long = #{item.materialLong,jdbcType=DECIMAL},
+          </if>
+          <if test="item.materialWidth != null">
+            material_width = #{item.materialWidth,jdbcType=DECIMAL},
           </if>
           <if test="item.spec != null">
             spec = #{item.spec,jdbcType=VARCHAR},
@@ -343,6 +367,12 @@
       <if test="materialType != null">
         material_type = #{materialType,jdbcType=VARCHAR},
       </if>
+      <if test="materialLong != null">
+        material_long = #{materialLong,jdbcType=DECIMAL},
+      </if>
+      <if test="materialWidth != null">
+        material_width = #{materialWidth,jdbcType=DECIMAL},
+      </if>
       <if test="spec != null">
         spec = #{spec,jdbcType=VARCHAR},
       </if>
@@ -391,6 +421,8 @@
       material_no = #{materialNo,jdbcType=VARCHAR},
       material_name = #{materialName,jdbcType=VARCHAR},
       material_type = #{materialType,jdbcType=VARCHAR},
+      material_long = #{materialLong,jdbcType=DECIMAL},
+      material_width = #{materialWidth,jdbcType=DECIMAL},
       spec = #{spec,jdbcType=VARCHAR},
       pattern = #{pattern,jdbcType=VARCHAR},
       unit = #{unit,jdbcType=VARCHAR},

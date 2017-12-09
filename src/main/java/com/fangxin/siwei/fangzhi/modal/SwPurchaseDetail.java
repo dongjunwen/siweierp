@@ -20,6 +20,10 @@ public class SwPurchaseDetail {
 
     private String materialType;
 
+    private BigDecimal materialLong;
+
+    private BigDecimal materialWidth;
+
     private String spec;
 
     private String pattern;
@@ -106,6 +110,22 @@ public class SwPurchaseDetail {
 
     public void setMaterialType(String materialType) {
         this.materialType = materialType == null ? null : materialType.trim();
+    }
+
+    public BigDecimal getMaterialLong() {
+        return materialLong;
+    }
+
+    public void setMaterialLong(BigDecimal materialLong) {
+        this.materialLong = materialLong;
+    }
+
+    public BigDecimal getMaterialWidth() {
+        return materialWidth;
+    }
+
+    public void setMaterialWidth(BigDecimal materialWidth) {
+        this.materialWidth = materialWidth;
     }
 
     public String getSpec() {
