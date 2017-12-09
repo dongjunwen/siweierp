@@ -53,6 +53,8 @@ public class SwOrderDetailResultVo {
 
     private String materialPriceExpress;
 
+    private String materialUnit;
+
     private BigDecimal materialNum;
 
     private BigDecimal materialPrice;
@@ -351,5 +353,13 @@ public class SwOrderDetailResultVo {
 
     public void setMaterialPriceName(String materialPriceName) {
         this.materialPriceName = materialPriceName;
+    }
+
+    public String getMaterialUnit() {
+        return materialUnit;
+    }
+
+    public void setMaterialUnit(String materialUnit) {
+        this.materialUnit = materialUnit;
     }
 }

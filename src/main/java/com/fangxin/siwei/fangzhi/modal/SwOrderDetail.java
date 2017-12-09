@@ -50,6 +50,8 @@ public class SwOrderDetail {
 
     private String materialPriceExpress;
 
+    private String materialUnit;
+
     private BigDecimal materialNum;
 
     private BigDecimal materialPrice;
@@ -254,6 +256,14 @@ public class SwOrderDetail {
 
     public void setMaterialPriceExpress(String materialPriceExpress) {
         this.materialPriceExpress = materialPriceExpress == null ? null : materialPriceExpress.trim();
+    }
+
+    public String getMaterialUnit() {
+        return materialUnit;
+    }
+
+    public void setMaterialUnit(String materialUnit) {
+        this.materialUnit = materialUnit;
     }
 
     public BigDecimal getMaterialNum() {
