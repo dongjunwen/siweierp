@@ -25,6 +25,7 @@
     <result column="material_price_name" jdbcType="VARCHAR" property="materialPriceName" />
     <result column="material_price_express" jdbcType="VARCHAR" property="materialPriceExpress" />
     <result column="material_spec" jdbcType="VARCHAR" property="materialSpec" />
+    <result column="material_pattern" jdbcType="VARCHAR" property="materialPattern" />
     <result column="material_unit" jdbcType="VARCHAR" property="materialUnit" />
     <result column="material_num" jdbcType="DECIMAL" property="materialNum" />
     <result column="material_price" jdbcType="DECIMAL" property="materialPrice" />
@@ -46,7 +47,7 @@
     id, order_no, order_seq_no, prod_no, prod_name, prod_type, prod_form, prod_long, 
     prod_width, prod_num, prod_unit, prod_price_no, prod_price_express,material_spec, prod_price, prod_amt,
     area, material_no, material_name, material_width, material_price_no, material_price_name,
-    material_price_express,material_unit,
+    material_price_express,material_unit,material_pattern,
     material_num, material_price, tech_no, tech_name, tech_price, tech_price_express, 
     memo, prod_price1, if_prod, cate_type, create_no, create_time, modi_no, modi_time, 
     version
@@ -125,7 +126,7 @@
       prod_price_express, prod_price, prod_amt, 
       area, material_no, material_name, 
       material_width, material_price_no,material_price_name,
-       material_price_express,material_spec,
+       material_price_express,material_spec,material_pattern,
        material_unit,material_num, material_price, tech_no,
       tech_name, tech_price, tech_price_express, 
       memo, prod_price1, if_prod, 
@@ -139,7 +140,7 @@
       #{prodPriceExpress,jdbcType=VARCHAR}, #{prodPrice,jdbcType=DECIMAL}, #{prodAmt,jdbcType=DECIMAL}, 
       #{area,jdbcType=VARCHAR}, #{materialNo,jdbcType=VARCHAR}, #{materialName,jdbcType=VARCHAR}, 
       #{materialWidth,jdbcType=DECIMAL}, #{materialPriceNo,jdbcType=VARCHAR}, #{materialPriceName,jdbcType=VARCHAR},
-      #{materialPriceExpress,jdbcType=VARCHAR},#{materialSpec,jdbcType=VARCHAR},
+      #{materialPriceExpress,jdbcType=VARCHAR},#{materialSpec,jdbcType=VARCHAR},#{material_pattern,jdbcType=VARCHAR},
       #{materialUnit,jdbcType=VARCHAR},#{materialNum,jdbcType=DECIMAL}, #{materialPrice,jdbcType=DECIMAL}, #{techNo,jdbcType=VARCHAR},
       #{techName,jdbcType=VARCHAR}, #{techPrice,jdbcType=DECIMAL}, #{techPriceExpress,jdbcType=VARCHAR}, 
       #{memo,jdbcType=VARCHAR}, #{prodPrice1,jdbcType=DECIMAL}, #{ifProd,jdbcType=CHAR}, 
@@ -155,7 +156,7 @@
       prod_price_express, prod_price, prod_amt,
       area, material_no, material_name,
       material_width, material_price_no,material_price_name,
-      material_price_express,material_spec,
+      material_price_express,material_spec,material_pattern,
       material_unit,material_num, material_price, tech_no,
       tech_name, tech_price, tech_price_express,
       memo, prod_price1, if_prod,
@@ -171,7 +172,7 @@
     #{item.prodPriceExpress,jdbcType=VARCHAR}, #{item.prodPrice,jdbcType=DECIMAL}, #{item.prodAmt,jdbcType=DECIMAL},
     #{item.area,jdbcType=VARCHAR}, #{item.materialNo,jdbcType=VARCHAR}, #{item.materialName,jdbcType=VARCHAR},
     #{item.materialWidth,jdbcType=DECIMAL}, #{item.materialPriceNo,jdbcType=VARCHAR}, #{item.materialPriceName,jdbcType=VARCHAR},
-    #{item.materialPriceExpress,jdbcType=VARCHAR},#{item.materialSpec,jdbcType=VARCHAR},
+    #{item.materialPriceExpress,jdbcType=VARCHAR},#{item.materialSpec,jdbcType=VARCHAR},#{item.materialPattern,jdbcType=VARCHAR},
     #{item.materialUnit,jdbcType=VARCHAR},#{item.materialNum,jdbcType=DECIMAL}, #{item.materialPrice,jdbcType=DECIMAL}, #{item.techNo,jdbcType=VARCHAR},
     #{item.techName,jdbcType=VARCHAR}, #{item.techPrice,jdbcType=DECIMAL}, #{item.techPriceExpress,jdbcType=VARCHAR},
     #{item.memo,jdbcType=VARCHAR}, #{item.prodPrice1,jdbcType=DECIMAL}, #{item.ifProd,jdbcType=CHAR},
@@ -243,6 +244,9 @@
         </if>
         <if test="item.materialSpec != null">
           material_spec = #{item.materialSpec,jdbcType=VARCHAR},
+        </if>
+        <if test="item.materialPattern != null">
+          material_pattern = #{item.materialPattern,jdbcType=VARCHAR},
         </if>
         <if test="item.materialUnit != null">
           material_unit = #{item.materialUnit,jdbcType=VARCHAR},
@@ -368,6 +372,9 @@
       <if test="materialSpec != null">
         material_spec,
       </if>
+      <if test="materialPattern != null">
+        material_pattern,
+      </if>
       <if test="materialUnit != null">
         material_unit,
       </if>
@@ -486,6 +493,9 @@
       </if>
       <if test="materialSpec != null">
         #{materialSpec,jdbcType=VARCHAR},
+      </if>
+      <if test="materialPattern != null">
+        #{materialPattern,jdbcType=VARCHAR},
       </if>
       <if test="materialUnit != null">
         #{materialUnit,jdbcType=VARCHAR},
@@ -606,6 +616,9 @@
       <if test="materialSpec != null">
         material_spec = #{materialSpec,jdbcType=VARCHAR},
       </if>
+      <if test="materialPattern != null">
+        material_pattern = #{materialPattern,jdbcType=VARCHAR},
+      </if>
       <if test="materialUnit != null">
         material_unit = #{materialUnit,jdbcType=VARCHAR},
       </if>
@@ -681,6 +694,7 @@
       material_price_name = #{materialPriceName,jdbcType=VARCHAR},
       material_price_express = #{materialPriceExpress,jdbcType=VARCHAR},
       material_spec = #{materialSpec,jdbcType=VARCHAR},
+      material_pattern = #{materialPattern,jdbcType=VARCHAR},
       material_unit = #{materialUnit,jdbcType=VARCHAR},
       material_num = #{materialNum,jdbcType=DECIMAL},
       material_price = #{materialPrice,jdbcType=DECIMAL},

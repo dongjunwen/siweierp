@@ -55,6 +55,8 @@ public class SwOrderDetailResultVo {
 
     private String materialSpec;
 
+    private String materialPattern;
+
     private String materialUnit;
 
     private BigDecimal materialNum;
@@ -371,5 +373,13 @@ public class SwOrderDetailResultVo {
 
     public void setMaterialSpec(String materialSpec) {
         this.materialSpec = materialSpec;
+    }
+
+    public String getMaterialPattern() {
+        return materialPattern;
+    }
+
+    public void setMaterialPattern(String materialPattern) {
+        this.materialPattern = materialPattern;
     }
 }
