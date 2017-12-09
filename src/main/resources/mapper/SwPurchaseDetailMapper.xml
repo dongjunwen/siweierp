@@ -131,7 +131,7 @@
       ( #{item.purNo,jdbcType=VARCHAR}, #{item.purSeqNo,jdbcType=VARCHAR},
       #{item.orderNo,jdbcType=VARCHAR}, #{item.orderSeqNo,jdbcType=VARCHAR}, #{item.materialNo,jdbcType=VARCHAR},
       #{item.materialName,jdbcType=VARCHAR}, #{item.materialType,jdbcType=VARCHAR},
-      #{item.materialLong,jdbcType=DECIMAL},#{item.materialWith,jdbcType=DECIMAL},
+      #{item.materialLong,jdbcType=DECIMAL},#{item.materialWidth,jdbcType=DECIMAL},
       #{item.spec,jdbcType=VARCHAR},
       #{item.pattern,jdbcType=VARCHAR}, #{item.unit,jdbcType=VARCHAR}, #{item.num,jdbcType=DECIMAL},
       #{item.price,jdbcType=DECIMAL}, #{item.amt,jdbcType=DECIMAL}, #{item.memo,jdbcType=VARCHAR}, #{item.createNo,jdbcType=VARCHAR},
