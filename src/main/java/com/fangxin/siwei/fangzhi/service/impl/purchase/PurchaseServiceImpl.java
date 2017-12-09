@@ -16,6 +16,7 @@ import com.fangxin.siwei.fangzhi.modal.*;
 import com.fangxin.siwei.fangzhi.service.AbstractService;
 import com.fangxin.siwei.fangzhi.service.audit.AuditingParam;
 import com.fangxin.siwei.fangzhi.service.audit.IAuditingService;
+import com.fangxin.siwei.fangzhi.service.impl.system.SysDictUtils;
 import com.fangxin.siwei.fangzhi.service.purchase.SwPurchaseService;
 import com.fangxin.siwei.fangzhi.vo.purchase.*;
 import com.fangxin.siwei.fangzhi.vo.result.SwOrderDetailResultVo;
@@ -37,10 +38,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @Date:2017/11/1 0001 15:11
@@ -151,6 +149,7 @@ public class PurchaseServiceImpl extends AbstractService<SwPurchaseBase> impleme
         for(SwPurchaseBase swPurchaseBase: swPurchaseBases){
             SwPurOrderBaseResultVo swPurOrderBaseResultVo=new SwPurOrderBaseResultVo();
             convertEntityTVo(swPurOrderBaseResultVo,swPurchaseBase);
+            swPurOrderBaseResultVo.setPurStatusName(SysDictUtils.getNameByUniq("PUR_STATUS",swPurOrderBaseResultVo.getPurStatus()));
             swOrderBaseResultVos.add(swPurOrderBaseResultVo);
         }
         return swOrderBaseResultVos;
@@ -277,6 +276,13 @@ public class PurchaseServiceImpl extends AbstractService<SwPurchaseBase> impleme
         List swOrderDetails=new ArrayList();
         BigDecimal totalNum=BigDecimal.ZERO;
         BigDecimal totalAmt=BigDecimal.ZERO;
+        Collections.sort(swPurOrderDetailVos, new Comparator<SwPurOrderDetailVo>() {
+            @Override
+            public int compare(SwPurOrderDetailVo o1, SwPurOrderDetailVo o2) {
+                return o1.getPurSeqNo().compareTo(o2.getPurSeqNo());
+            }
+        });
+        int i=1;
         for(SwPurOrderDetailVo swPurOrderDetailVo:swPurOrderDetailVos){
             SwPurchaseDetail swPurchaseDetail=new SwPurchaseDetail();
             convertVoToEntityDetail(swPurchaseDetail,swPurOrderDetailVo);
@@ -286,6 +292,11 @@ public class PurchaseServiceImpl extends AbstractService<SwPurchaseBase> impleme
             swOrderDetails.add(swPurchaseDetail);
             totalNum=totalNum.add(swPurchaseDetail.getNum());
             totalAmt=totalAmt.add(swPurchaseDetail.getAmt());
+            if(String.valueOf(Integer.MAX_VALUE).equals(swPurchaseDetail.getPurSeqNo())){
+                swPurchaseDetail.setPurSeqNo(String.valueOf(i));
+                swPurchaseDetailMapper.insertSelective(swPurchaseDetail);
+            }
+            i++;
         }
         swPurchaseBase.setPurNum(totalNum);
         swPurchaseBase.setPurAmt(totalAmt);

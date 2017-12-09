@@ -26,6 +26,7 @@ import com.github.pagehelper.Page;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.Converter;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,10 +76,12 @@ public class ReturnServiceImpl extends AbstractService<SwReturnBase> implements 
         List swOrderDetails=new ArrayList();
         BigDecimal totalNum=BigDecimal.ZERO;
         BigDecimal totalAmt=BigDecimal.ZERO;
+        int i=1;
         for(SwReturnDetailVo swReturnDetailVo:swReturnDetailVos){
             SwReturnDetail swReturnDetail=new SwReturnDetail();
             convertVoToEntityDetail(swReturnDetail,swReturnDetailVo);
             swReturnDetail.setReturnNo(returnNo);
+            swReturnDetail.setReturnSeqNo(String.valueOf(i));
             swReturnDetail.setCreateNo(ShiroUtils.getCurrentUserNo());
             swReturnDetail.setCreateTime(new Date());
             swReturnDetail.setModiNo(ShiroUtils.getCurrentUserNo());
@@ -87,6 +90,7 @@ public class ReturnServiceImpl extends AbstractService<SwReturnBase> implements 
             swOrderDetails.add(swReturnDetail);
             totalNum=totalNum.add(swReturnDetail.getNum()==null?BigDecimal.ZERO:swReturnDetail.getNum());
             totalAmt=totalAmt.add(swReturnDetail.getAmt()==null?BigDecimal.ZERO:swReturnDetail.getAmt());
+            i++;
         }
         swReturnBase.setReturnNum(totalNum);
         swReturnBase.setReturnAmt(totalAmt);
@@ -254,6 +258,7 @@ public class ReturnServiceImpl extends AbstractService<SwReturnBase> implements 
         List swOrderDetails=new ArrayList();
         BigDecimal totalNum=BigDecimal.ZERO;
         BigDecimal totalAmt=BigDecimal.ZERO;
+        int i=1;
         for(SwReturnDetailVo swReturnDetailVo:swReturnDetailVos){
             SwReturnDetail swReturnDetail=new SwReturnDetail();
             convertVoToEntityDetail(swReturnDetail,swReturnDetailVo);
@@ -263,6 +268,11 @@ public class ReturnServiceImpl extends AbstractService<SwReturnBase> implements 
             swOrderDetails.add(swReturnDetail);
             totalNum=totalNum.add(swReturnDetail.getNum());
             totalAmt=totalAmt.add(swReturnDetail.getAmt());
+            if(StringUtils.isBlank(swReturnDetail.getReturnSeqNo())){
+                swReturnDetail.setReturnSeqNo(String.valueOf(i));
+                swReturnDetailMapper.insertSelective(swReturnDetail);
+            }
+            i++;
         }
         swReturnBase.setReturnNum(totalNum);
         swReturnBase.setReturnAmt(totalAmt);

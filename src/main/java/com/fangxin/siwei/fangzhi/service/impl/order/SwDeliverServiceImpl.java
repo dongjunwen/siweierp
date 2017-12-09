@@ -25,6 +25,7 @@ import com.github.pagehelper.Page;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.Converter;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,10 +36,7 @@ import tk.mybatis.mapper.entity.Condition;
 import java.lang.reflect.InvocationTargetException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @Date:2017/10/26 0026 14:19
@@ -76,16 +74,19 @@ public class SwDeliverServiceImpl extends AbstractService<SwDeliverBase> impleme
         swDeliverBase.setVersion(0);
         List<SwDeliverDetailVo> swDeliverDetailVoList=swDeliverVo.getSwDeliverDetailVoList();
         List swDeliverDetails=new ArrayList();
+        int i=1;
         for(SwDeliverDetailVo swDeliverDetailVo:swDeliverDetailVoList){
             SwDeliverDetail swDeliverDetail=new SwDeliverDetail();
             convertVoToEntityDetail(swDeliverDetail,swDeliverDetailVo);
             swDeliverDetail.setDeliverNo(deliverNo);
+            swDeliverDetail.setDeliverSeqNo(String.valueOf(i));
             swDeliverDetail.setCreateNo(ShiroUtils.getCurrentUserNo());
             swDeliverDetail.setCreateTime(new Date());
             swDeliverDetail.setModiNo(ShiroUtils.getCurrentUserNo());
             swDeliverDetail.setModiTime(new Date());
             swDeliverDetail.setVersion(0);
             swDeliverDetails.add(swDeliverDetail);
+            i++;
         }
         int flag=swDeliverBaseMapper.insertSelective(swDeliverBase);
         swDeliverDetailMapper.insertBatch(swDeliverDetails);
@@ -104,6 +105,13 @@ public class SwDeliverServiceImpl extends AbstractService<SwDeliverBase> impleme
         swDeliverBase.setModiTime(new Date());
         List<SwDeliverDetailVo> swDeliverDetailVoList=swDeliverModiVo.getSwDeliverDetailVoList();
         List swDeliverDetails=new ArrayList();
+        Collections.sort(swDeliverDetailVoList, new Comparator<SwDeliverDetailVo>() {
+            @Override
+            public int compare(SwDeliverDetailVo o1, SwDeliverDetailVo o2) {
+                return o1.getDeliverSeqNo().compareTo(o2.getDeliverSeqNo());
+            }
+        });
+        int i=1;
         for(SwDeliverDetailVo swDeliverDetailVo:swDeliverDetailVoList){
             SwDeliverDetail swDeliverDetail=new SwDeliverDetail();
             convertVoToEntityDetail(swDeliverDetail,swDeliverDetailVo);
@@ -111,6 +119,11 @@ public class SwDeliverServiceImpl extends AbstractService<SwDeliverBase> impleme
             swDeliverDetail.setModiNo(ShiroUtils.getCurrentUserNo());
             swDeliverDetail.setModiTime(new Date());
             swDeliverDetails.add(swDeliverDetail);
+            if(StringUtils.isBlank(swDeliverDetail.getDeliverSeqNo())){
+                swDeliverDetail.setDeliverSeqNo(String.valueOf(i));
+                swDeliverDetailMapper.insertSelective(swDeliverDetail);
+            }
+            i++;
         }
         int flag=swDeliverBaseMapper.updateByDeliverNo(swDeliverBase);
         swDeliverDetailMapper.updateBatch(swDeliverDetails);

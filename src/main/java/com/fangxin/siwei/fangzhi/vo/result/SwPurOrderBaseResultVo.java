@@ -39,6 +39,8 @@ public class SwPurOrderBaseResultVo {
 
     private String purStatus;
 
+    private String purStatusName;
+
     private String memo;
 
     private String createNo;
@@ -207,5 +209,13 @@ public class SwPurOrderBaseResultVo {
 
     public void setModiTime(String modiTime) {
         this.modiTime = modiTime;
+    }
+
+    public String getPurStatusName() {
+        return purStatusName;
+    }
+
+    public void setPurStatusName(String purStatusName) {
+        this.purStatusName = purStatusName;
     }
 }

@@ -82,10 +82,12 @@ public class SwOrderServiceImpl extends AbstractService<SwOrderBase> implements 
         swOrderBase.setModiTime(new Date());
         List<SwOrderDetailVo> swOrderDetailVoList=swOrderVo.getSwOrderDetailVos();
         List swOrderDetails=new ArrayList();
+        int i=1;
         for(SwOrderDetailVo swOrderDetailVo:swOrderDetailVoList){
             SwOrderDetail swOrderDetail=new SwOrderDetail();
             convertVoToEntityDetail(swOrderDetail,swOrderDetailVo);
             swOrderDetail.setOrderNo(orderNo);
+            swOrderDetail.setOrderSeqNo(String.valueOf(i));
             swOrderDetail.setCreateNo(ShiroUtils.getCurrentUserNo());
             swOrderDetail.setCreateTime(new Date());
             swOrderDetail.setModiNo(ShiroUtils.getCurrentUserNo());
@@ -109,6 +111,7 @@ public class SwOrderServiceImpl extends AbstractService<SwOrderBase> implements 
         swOrderBase.setModiTime(new Date());
         List<SwOrderDetailVo> swOrderDetailVoList=swOrderModiVo.getSwOrderDetailVos();
         List swOrderDetails=new ArrayList();
+        int i=1;
         for(SwOrderDetailVo swOrderDetailVo:swOrderDetailVoList){
             SwOrderDetail swOrderDetail=new SwOrderDetail();
             convertVoToEntityDetail(swOrderDetail,swOrderDetailVo);
@@ -116,6 +119,11 @@ public class SwOrderServiceImpl extends AbstractService<SwOrderBase> implements 
             swOrderDetail.setModiNo(ShiroUtils.getCurrentUserNo());
             swOrderDetail.setModiTime(new Date());
             swOrderDetails.add(swOrderDetail);
+            if(StringUtils.isBlank(swOrderDetail.getOrderSeqNo())){
+                swOrderDetail.setOrderSeqNo(String.valueOf(i));
+                swOrderDetailMapper.insertSelective(swOrderDetail);
+            }
+            i++;
         }
         int flag=swOrderBaseMapper.updateByOrderNo(swOrderBase);
         swOrderDetailMapper.updateBatch(swOrderDetails);

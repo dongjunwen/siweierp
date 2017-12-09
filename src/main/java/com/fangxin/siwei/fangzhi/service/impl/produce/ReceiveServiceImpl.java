@@ -23,6 +23,7 @@ import com.github.pagehelper.Page;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.Converter;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,10 +34,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @Date:2017/11/7 0007 14:18
@@ -72,10 +70,12 @@ public class ReceiveServiceImpl extends AbstractService<SwReceiveBase> implement
         List<SwReceiveDetailVo> swReceiveDetailVoList=swReceiveVo.getSwReceiveDetailVoList();
         List swReceiveDetails=new ArrayList();
         BigDecimal totalNum=BigDecimal.ZERO;
+        int i=1;
         for(SwReceiveDetailVo swPurOrderDetailVo:swReceiveDetailVoList){
             SwReceiveDetail swReceiveDetail=new SwReceiveDetail();
             convertVoToEntityDetail(swReceiveDetail,swPurOrderDetailVo);
             swReceiveDetail.setRecvNo(purNo);
+            swReceiveDetail.setRecvSeqNo(String.valueOf(i));
             swReceiveDetail.setCreateNo(ShiroUtils.getCurrentUserNo());
             swReceiveDetail.setCreateTime(new Date());
             swReceiveDetail.setModiNo(ShiroUtils.getCurrentUserNo());
@@ -83,6 +83,7 @@ public class ReceiveServiceImpl extends AbstractService<SwReceiveBase> implement
             swReceiveDetail.setVersion(0);
             swReceiveDetails.add(swReceiveDetail);
             totalNum=totalNum.add(swReceiveDetail.getNum());
+            i++;
         }
         swReceiveBase.setNum(totalNum);
         int flag=swReceiveBaseMapper.insert(swReceiveBase);
@@ -244,6 +245,7 @@ public class ReceiveServiceImpl extends AbstractService<SwReceiveBase> implement
         List<SwReceiveDetailVo> swReceiveDetailVoList=swReceiveModiVo.getSwReceiveDetailVoList();
         List swReceiveDetails=new ArrayList();
         BigDecimal totalNum=BigDecimal.ZERO;
+        int i=1;
         for(SwReceiveDetailVo swPurOrderDetailVo:swReceiveDetailVoList){
             SwReceiveDetail swReceiveDetail=new SwReceiveDetail();
             convertVoToEntityDetail(swReceiveDetail,swPurOrderDetailVo);
@@ -252,6 +254,11 @@ public class ReceiveServiceImpl extends AbstractService<SwReceiveBase> implement
             swReceiveDetail.setModiTime(new Date());
             swReceiveDetails.add(swReceiveDetail);
             totalNum=totalNum.add(swReceiveDetail.getNum());
+            if(StringUtils.isBlank(swReceiveDetail.getRecvSeqNo())){
+                swReceiveDetail.setRecvSeqNo(String.valueOf(i));
+                swReceiveDetailMapper.insertSelective(swReceiveDetail);
+            }
+            i++;
         }
         swReceiveBase.setNum(totalNum);
         int flag=swReceiveBaseMapper.updateByReceiveNo(swReceiveBase);

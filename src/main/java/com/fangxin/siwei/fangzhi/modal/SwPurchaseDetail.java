@@ -1,5 +1,7 @@
 package com.fangxin.siwei.fangzhi.modal;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -65,7 +67,7 @@ public class SwPurchaseDetail {
     }
 
     public String getPurSeqNo() {
-        return purSeqNo;
+        return StringUtils.isBlank(this.purSeqNo)?String.valueOf(Integer.MAX_VALUE):this.purSeqNo;
     }
 
     public void setPurSeqNo(String purSeqNo) {
