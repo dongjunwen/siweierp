@@ -102,7 +102,8 @@ public class OrderController {
             @ApiImplicitParam(name = "endTime",value = "结束时间 YYYY-MM-DD格式",required = false,dataType = "string",paramType = "query"),
             @ApiImplicitParam(name = "orderNo",value = "订单号",required = false,dataType = "string",paramType = "query"),
             @ApiImplicitParam(name = "orderType",value = "订单类型",required = false,dataType = "string",paramType = "query"),
-            @ApiImplicitParam(name = "custCompNo",value = "客户编号",required = false,dataType = "string",paramType = "query")
+            @ApiImplicitParam(name = "custCompNo",value = "客户编号",required = false,dataType = "string",paramType = "query"),
+            @ApiImplicitParam(name = "orderStatus",value = "订单状态",required = false,dataType = "string",paramType = "query")
     })
     public Result<PageUitls<SwOrderDetailResultVo>> findDetailList(@RequestParam @ApiParam(hidden = true) Map<String,String> params){
         Page<SwOrderDetailResultVo> page =  swOrderService.findDetailList(params);
@@ -141,7 +142,7 @@ public class OrderController {
 
     @RequestMapping(value = "/queryDetail",method = RequestMethod.POST)
     @ApiOperation(value="获取订单详细信息", notes="根据客户编号、订单号等查询条件查询订单明细")
-    public Result<SwOrderResultVo> getUserById(@ApiParam(name = "swOrderQueryVo", value = "订单查询vo", required = true)
+    public Result<SwOrderResultVo> queryDetail(@ApiParam(name = "swOrderQueryVo", value = "订单查询vo", required = true)
                                                    @RequestBody SwOrderQueryVo swOrderQueryVo ){
         SwOrderResultVo swOrderResultVo = swOrderService.getEntityByCond(swOrderQueryVo);
         return Result.newSuccess(swOrderResultVo);

@@ -106,6 +106,9 @@
     <if test="orderNo!=null and orderNo!=''">
       and a.order_no=#{orderNo,jdbcType=VARCHAR}
     </if>
+    <if test="orderStatus!=null and orderStatus!=''">
+      and a.order_status=#{orderStatus,jdbcType=VARCHAR}
+    </if>
     <if test="orderType!=null and orderType!=''">
       and a.order_type=#{orderType,jdbcType=VARCHAR}
     </if>
