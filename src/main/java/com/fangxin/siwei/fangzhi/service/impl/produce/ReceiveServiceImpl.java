@@ -16,6 +16,7 @@ import com.fangxin.siwei.fangzhi.modal.*;
 import com.fangxin.siwei.fangzhi.service.AbstractService;
 import com.fangxin.siwei.fangzhi.service.audit.AuditingParam;
 import com.fangxin.siwei.fangzhi.service.audit.IAuditingService;
+import com.fangxin.siwei.fangzhi.service.impl.system.SysDictUtils;
 import com.fangxin.siwei.fangzhi.service.produce.SwReceiveService;
 import com.fangxin.siwei.fangzhi.vo.produce.*;
 import com.fangxin.siwei.fangzhi.vo.result.*;
@@ -146,6 +147,7 @@ public class ReceiveServiceImpl extends AbstractService<SwReceiveBase> implement
                 swReceiveBaseResultVo.setAuditName(sysAuditLog.getAuditUserName());
                 swReceiveBaseResultVo.setAuditDesc(sysAuditLog.getAuditDesc());
             }
+            swReceiveBaseResultVo.setRecvStatusName(SysDictUtils.getNameByUniq("RECV_STATUS",swReceiveBaseResultVo.getRecvStatus()));
             swOrderBaseResultVos.add(swReceiveBaseResultVo);
         }
         return swOrderBaseResultVos;

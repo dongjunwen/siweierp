@@ -19,6 +19,7 @@ import com.fangxin.siwei.fangzhi.modal.*;
 import com.fangxin.siwei.fangzhi.service.AbstractService;
 import com.fangxin.siwei.fangzhi.service.audit.AuditingParam;
 import com.fangxin.siwei.fangzhi.service.audit.IAuditingService;
+import com.fangxin.siwei.fangzhi.service.impl.system.SysDictUtils;
 import com.fangxin.siwei.fangzhi.service.purchase.SwReturnService;
 import com.fangxin.siwei.fangzhi.vo.purchase.*;
 import com.fangxin.siwei.fangzhi.vo.result.*;
@@ -145,6 +146,7 @@ public class ReturnServiceImpl extends AbstractService<SwReturnBase> implements 
                 swReturnBaseResultVo.setAuditName(sysAuditLog.getAuditUserName());
                 swReturnBaseResultVo.setAuditDesc(sysAuditLog.getAuditDesc());
             }
+            swReturnBaseResultVo.setReturnStatusName(SysDictUtils.getNameByUniq("RETURN_STATUS",swReturnBaseResultVo.getReturnStatus()));
             swReturnBaseResultVos.add(swReturnBaseResultVo);
         }
         return swReturnBaseResultVos;

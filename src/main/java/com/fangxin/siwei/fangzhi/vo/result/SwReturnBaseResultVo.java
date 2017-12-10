@@ -37,6 +37,8 @@ public class SwReturnBaseResultVo {
 
     private String returnStatus;
 
+    private String returnStatusName;
+
     private String memo;
 
     private String createNo;
@@ -217,5 +219,13 @@ public class SwReturnBaseResultVo {
 
     public void setAuditDesc(String auditDesc) {
         this.auditDesc = auditDesc;
+    }
+
+    public String getReturnStatusName() {
+        return returnStatusName;
+    }
+
+    public void setReturnStatusName(String returnStatusName) {
+        this.returnStatusName = returnStatusName;
     }
 }

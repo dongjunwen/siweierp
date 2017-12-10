@@ -16,6 +16,8 @@ public class SwReceiveBaseResultVo {
 
     private String recvStatus;
 
+    private String recvStatusName;
+
     private String useWay;
 
     private BigDecimal num;
@@ -132,6 +134,14 @@ public class SwReceiveBaseResultVo {
 
     public String getAuditDesc() {
         return auditDesc;
+    }
+
+    public String getRecvStatusName() {
+        return recvStatusName;
+    }
+
+    public void setRecvStatusName(String recvStatusName) {
+        this.recvStatusName = recvStatusName;
     }
 
     public void setAuditDesc(String auditDesc) {
