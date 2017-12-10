@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.math.BigDecimal;
 
@@ -21,6 +22,7 @@ public class SwPurOrderBaseVo {
     @Length(max = 32,message = "业务负责人长度不能超过32")
     @ApiModelProperty(value = "业务负责人",required =false )
     private String respName;
+    @NotNull(message = "供货商编号不能为空!")
     @Length(max = 32,message = "供货方编号长度不能超过32")
     @ApiModelProperty(value = "供货方编号",required =false )
     private String supplyCompNo;

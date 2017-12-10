@@ -24,6 +24,8 @@ public class SwPurOrderDetailResultVo {
 
     private String materialType;
 
+    private String materialTypeName;
+
     private BigDecimal materialLong;
 
     private BigDecimal materialWidth;
@@ -216,5 +218,13 @@ public class SwPurOrderDetailResultVo {
 
     public void setMaterialWidth(BigDecimal materialWidth) {
         this.materialWidth = materialWidth;
+    }
+
+    public String getMaterialTypeName() {
+        return materialTypeName;
+    }
+
+    public void setMaterialTypeName(String materialTypeName) {
+        this.materialTypeName = materialTypeName;
     }
 }
