@@ -1,5 +1,8 @@
 package com.fangxin.siwei.fangzhi.vo.purchase;
 
+import io.swagger.annotations.ApiModelProperty;
+import org.hibernate.validator.constraints.Length;
+
 import java.math.BigDecimal;
 
 /**
@@ -9,26 +12,38 @@ import java.math.BigDecimal;
  **/
 public class SwReturnDetailVo {
 
+    @ApiModelProperty(value = "退货单序号",required =false )
+    @Length(max = 32,message = "退货单序号长度不能超过32")
     private String returnSeqNo;
-
+    @ApiModelProperty(value = "采购单号",required =false )
+    @Length(max = 32,message = "采购单号长度不能超过32")
     private String purNo;
-
+    @ApiModelProperty(value = "采购单单序号",required =false )
+    @Length(max = 32,message = "采购单序号长度不能超过32")
     private String purSeqNo;
-
+    @ApiModelProperty(value = "订单序号",required =false )
+    @Length(max = 32,message = "订单长度不能超过32")
     private String orderNo;
-
+    @ApiModelProperty(value = "订单序号",required =false )
+    @Length(max = 32,message = "订单长度不能超过32")
     private String orderSeqNo;
-
+    @ApiModelProperty(value = "物料编号",required =false )
+    @Length(max = 32,message = "物料编号长度不能超过32")
     private String materialNo;
-
+    @ApiModelProperty(value = "物料名称",required =false )
+    @Length(max = 32,message = "物料名称长度不能超过32")
     private String materialName;
-
+    @ApiModelProperty(value = "物料类型",required =false )
+    @Length(max = 32,message = "物料类型不能超过32")
     private String materialType;
-
+    @ApiModelProperty(value = "规格",required =false )
+    @Length(max = 32,message = "规格不能超过32")
     private String spec;
-
+    @ApiModelProperty(value = "型号",required =false )
+    @Length(max = 32,message = "型号不能超过32")
     private String pattern;
-
+    @ApiModelProperty(value = "单位",required =false )
+    @Length(max = 32,message = "单位不能超过32")
     private String unit;
 
     private BigDecimal num;
