@@ -263,6 +263,8 @@ public class ReturnServiceImpl extends AbstractService<SwReturnBase> implements 
             SwReturnDetail swReturnDetail=new SwReturnDetail();
             convertVoToEntityDetail(swReturnDetail,swReturnDetailVo);
             swReturnDetail.setReturnNo(returnNo);
+            swReturnDetail.setCreateNo(ShiroUtils.getCurrentUserNo());
+            swReturnDetail.setCreateTime(new Date());
             swReturnDetail.setModiNo(ShiroUtils.getCurrentUserNo());
             swReturnDetail.setModiTime(new Date());
             totalNum=totalNum.add(swReturnDetail.getNum());

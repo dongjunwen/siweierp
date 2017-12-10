@@ -282,6 +282,8 @@ public class PurchaseServiceImpl extends AbstractService<SwPurchaseBase> impleme
             convertVoToEntityDetail(swPurchaseDetail,swPurOrderDetailVo);
             swPurchaseDetail.setPurNo(purNo);
             swPurchaseDetail.setPurSeqNo(String.valueOf(i));
+            swPurchaseDetail.setCreateNo(ShiroUtils.getCurrentUserNo());
+            swPurchaseDetail.setCreateTime(new Date());
             swPurchaseDetail.setModiNo(ShiroUtils.getCurrentUserNo());
             swPurchaseDetail.setModiTime(new Date());
             swOrderDetails.add(swPurchaseDetail);

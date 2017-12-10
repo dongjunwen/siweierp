@@ -116,6 +116,8 @@ public class SwOrderServiceImpl extends AbstractService<SwOrderBase> implements 
             SwOrderDetail swOrderDetail=new SwOrderDetail();
             convertVoToEntityDetail(swOrderDetail,swOrderDetailVo);
             swOrderDetail.setOrderNo(orderNo);
+            swOrderDetail.setCreateNo(ShiroUtils.getCurrentUserNo());
+            swOrderDetail.setCreateTime(new Date());
             swOrderDetail.setModiNo(ShiroUtils.getCurrentUserNo());
             swOrderDetail.setModiTime(new Date());
             swOrderDetail.setOrderSeqNo(String.valueOf(i));

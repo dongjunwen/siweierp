@@ -250,6 +250,8 @@ public class ReceiveServiceImpl extends AbstractService<SwReceiveBase> implement
             SwReceiveDetail swReceiveDetail=new SwReceiveDetail();
             convertVoToEntityDetail(swReceiveDetail,swPurOrderDetailVo);
             swReceiveDetail.setRecvNo(recvNo);
+            swReceiveDetail.setCreateNo(ShiroUtils.getCurrentUserNo());
+            swReceiveDetail.setCreateTime(new Date());
             swReceiveDetail.setModiNo(ShiroUtils.getCurrentUserNo());
             swReceiveDetail.setModiTime(new Date());
             totalNum=totalNum.add(swReceiveDetail.getNum());

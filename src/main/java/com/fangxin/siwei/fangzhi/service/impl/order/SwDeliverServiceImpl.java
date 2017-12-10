@@ -116,6 +116,8 @@ public class SwDeliverServiceImpl extends AbstractService<SwDeliverBase> impleme
             SwDeliverDetail swDeliverDetail=new SwDeliverDetail();
             convertVoToEntityDetail(swDeliverDetail,swDeliverDetailVo);
             swDeliverDetail.setDeliverNo(deliverNo);
+            swDeliverDetail.setCreateNo(ShiroUtils.getCurrentUserNo());
+            swDeliverDetail.setCreateTime(new Date());
             swDeliverDetail.setModiNo(ShiroUtils.getCurrentUserNo());
             swDeliverDetail.setModiTime(new Date());
             swDeliverDetail.setDeliverSeqNo(String.valueOf(i));
