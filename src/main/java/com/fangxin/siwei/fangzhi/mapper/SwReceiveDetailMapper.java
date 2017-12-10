@@ -22,4 +22,6 @@ public interface SwReceiveDetailMapper {
     List<SwReceiveDetail> selectByReceiveNo(String orderNo);
 
     void updateBatch(List swReceiveDetails);
+
+    void deleteByRecvNo(String recvNo);
 }

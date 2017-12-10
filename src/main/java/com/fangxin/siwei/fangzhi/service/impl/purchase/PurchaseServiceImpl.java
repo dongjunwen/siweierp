@@ -276,32 +276,24 @@ public class PurchaseServiceImpl extends AbstractService<SwPurchaseBase> impleme
         List swOrderDetails=new ArrayList();
         BigDecimal totalNum=BigDecimal.ZERO;
         BigDecimal totalAmt=BigDecimal.ZERO;
-        Collections.sort(swPurOrderDetailVos, new Comparator<SwPurOrderDetailVo>() {
-            @Override
-            public int compare(SwPurOrderDetailVo o1, SwPurOrderDetailVo o2) {
-                return o1.getPurSeqNo().compareTo(o2.getPurSeqNo());
-            }
-        });
         int i=1;
         for(SwPurOrderDetailVo swPurOrderDetailVo:swPurOrderDetailVos){
             SwPurchaseDetail swPurchaseDetail=new SwPurchaseDetail();
             convertVoToEntityDetail(swPurchaseDetail,swPurOrderDetailVo);
             swPurchaseDetail.setPurNo(purNo);
+            swPurchaseDetail.setPurSeqNo(String.valueOf(i));
             swPurchaseDetail.setModiNo(ShiroUtils.getCurrentUserNo());
             swPurchaseDetail.setModiTime(new Date());
             swOrderDetails.add(swPurchaseDetail);
             totalNum=totalNum.add(swPurchaseDetail.getNum());
             totalAmt=totalAmt.add(swPurchaseDetail.getAmt());
-            if(String.valueOf(Integer.MAX_VALUE).equals(swPurchaseDetail.getPurSeqNo())){
-                swPurchaseDetail.setPurSeqNo(String.valueOf(i));
-                swPurchaseDetailMapper.insertSelective(swPurchaseDetail);
-            }
             i++;
         }
         swPurchaseBase.setPurNum(totalNum);
         swPurchaseBase.setPurAmt(totalAmt);
         int flag=swPurchaseBaseMapper.updateByPurNo(swPurchaseBase);
-        swPurchaseDetailMapper.updateBatch(swOrderDetails);
+        swPurchaseDetailMapper.deleteByPurNo(purNo);
+        swPurchaseDetailMapper.insertBatch(swOrderDetails);
         return Result.newSuccess(flag);
     }
 

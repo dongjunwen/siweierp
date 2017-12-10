@@ -27,4 +27,6 @@ public interface SwPurchaseDetailMapper {
     int countNum(Map<String, String> params);
 
     List<SwPurchaseDetail> findList(Map<String, String> params);
+
+    void deleteByPurNo(String purNo);
 }

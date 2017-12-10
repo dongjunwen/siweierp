@@ -59,6 +59,9 @@
       #{item.version,jdbcType=INTEGER})
      </foreach>
   </insert>
+  <delete id="deleteByRetNo" parameterType="java.lang.String">
+    delete from sw_return_detail where return_no=#{returnNo,jdbcType=VARCHAR}
+  </delete>
 
   <update id="updateBatch" parameterType="java.util.List">
     <foreach collection="list" index="index" item="item" separator=";">

@@ -118,15 +118,13 @@ public class SwDeliverServiceImpl extends AbstractService<SwDeliverBase> impleme
             swDeliverDetail.setDeliverNo(deliverNo);
             swDeliverDetail.setModiNo(ShiroUtils.getCurrentUserNo());
             swDeliverDetail.setModiTime(new Date());
+            swDeliverDetail.setDeliverSeqNo(String.valueOf(i));
             swDeliverDetails.add(swDeliverDetail);
-            if(StringUtils.isBlank(swDeliverDetail.getDeliverSeqNo())){
-                swDeliverDetail.setDeliverSeqNo(String.valueOf(i));
-                swDeliverDetailMapper.insertSelective(swDeliverDetail);
-            }
             i++;
         }
         int flag=swDeliverBaseMapper.updateByDeliverNo(swDeliverBase);
-        swDeliverDetailMapper.updateBatch(swDeliverDetails);
+        swDeliverDetailMapper.deleteByDeliverNo(deliverNo);
+        swDeliverDetailMapper.insertBatch(swDeliverDetails);
         return Result.newSuccess(flag);
     }
 

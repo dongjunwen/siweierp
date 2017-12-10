@@ -265,19 +265,17 @@ public class ReturnServiceImpl extends AbstractService<SwReturnBase> implements 
             swReturnDetail.setReturnNo(returnNo);
             swReturnDetail.setModiNo(ShiroUtils.getCurrentUserNo());
             swReturnDetail.setModiTime(new Date());
-            swOrderDetails.add(swReturnDetail);
             totalNum=totalNum.add(swReturnDetail.getNum());
             totalAmt=totalAmt.add(swReturnDetail.getAmt());
-            if(StringUtils.isBlank(swReturnDetail.getReturnSeqNo())){
-                swReturnDetail.setReturnSeqNo(String.valueOf(i));
-                swReturnDetailMapper.insertSelective(swReturnDetail);
-            }
+            swReturnDetail.setReturnSeqNo(String.valueOf(i));
+            swOrderDetails.add(swReturnDetail);
             i++;
         }
         swReturnBase.setReturnNum(totalNum);
         swReturnBase.setReturnAmt(totalAmt);
         int flag=swReturnBaseMapper.updateByReturnNo(swReturnBase);
-        swReturnDetailMapper.updateBatch(swOrderDetails);
+        swReturnDetailMapper.deleteByRetNo(returnNo);
+        swReturnDetailMapper.insertBatch(swOrderDetails);
         return Result.newSuccess(flag);
     }
 

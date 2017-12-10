@@ -13,4 +13,6 @@ public interface SwReturnDetailMapper extends MyMapper<SwReturnDetail> {
     List<SwReturnDetail> selectByReturnNo(String orderNo);
 
     void updateBatch(List swOrderDetails);
+
+    void deleteByRetNo(String returnNo);
 }

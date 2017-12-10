@@ -67,7 +67,7 @@ public class SwPurchaseDetail {
     }
 
     public String getPurSeqNo() {
-        return StringUtils.isBlank(this.purSeqNo)?String.valueOf(Integer.MAX_VALUE):this.purSeqNo;
+        return purSeqNo;
     }
 
     public void setPurSeqNo(String purSeqNo) {

@@ -118,15 +118,13 @@ public class SwOrderServiceImpl extends AbstractService<SwOrderBase> implements 
             swOrderDetail.setOrderNo(orderNo);
             swOrderDetail.setModiNo(ShiroUtils.getCurrentUserNo());
             swOrderDetail.setModiTime(new Date());
+            swOrderDetail.setOrderSeqNo(String.valueOf(i));
             swOrderDetails.add(swOrderDetail);
-            if(StringUtils.isBlank(swOrderDetail.getOrderSeqNo())){
-                swOrderDetail.setOrderSeqNo(String.valueOf(i));
-                swOrderDetailMapper.insertSelective(swOrderDetail);
-            }
             i++;
         }
         int flag=swOrderBaseMapper.updateByOrderNo(swOrderBase);
-        swOrderDetailMapper.updateBatch(swOrderDetails);
+        swOrderDetailMapper.deleteByOrderNo(orderNo);
+        swOrderDetailMapper.insertBatch(swOrderDetails);
         return Result.newSuccess(flag);
     }
 

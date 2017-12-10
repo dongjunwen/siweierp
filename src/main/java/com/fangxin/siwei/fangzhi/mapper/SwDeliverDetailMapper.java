@@ -22,4 +22,6 @@ public interface SwDeliverDetailMapper {
     List<SwDeliverDetail> selectByDeliverNo(String orderNo);
 
     void updateBatch(List swDeliverDetails);
+
+    void deleteByDeliverNo(String deliverNo);
 }

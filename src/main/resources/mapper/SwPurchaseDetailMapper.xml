@@ -69,6 +69,10 @@
 
   </select>
 
+  <delete id="deleteByPurNo" parameterType="java.lang.String" >
+    delete from sw_purchase_detail where pur_no=#{purNo,jdbcType=VARCHAR}
+  </delete>
+
   <select id="findList" resultMap="BaseResultMap" >
     select b.*
     from

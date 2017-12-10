@@ -236,8 +236,8 @@ public class ReceiveServiceImpl extends AbstractService<SwReceiveBase> implement
         SwReceiveBaseModiVo swReceiveBaseModiVo= swReceiveModiVo.getSwReceiveBaseModiVo();
         SwReceiveBase swReceiveBase=new SwReceiveBase();
         convertVoToEntity(swReceiveBase,swReceiveBaseModiVo);
-        String purNo= swReceiveBaseModiVo.getReceiveNo();
-        swReceiveBase.setRecvNo(purNo);
+        String recvNo= swReceiveBaseModiVo.getReceiveNo();
+        swReceiveBase.setRecvNo(recvNo);
         swReceiveBase.setRecvDate(new Date());
         swReceiveBase.setRecvStatus(ReceiveStatus.WAIT_APPLY.getCode());
         swReceiveBase.setModiNo(ShiroUtils.getCurrentUserNo());
@@ -249,20 +249,18 @@ public class ReceiveServiceImpl extends AbstractService<SwReceiveBase> implement
         for(SwReceiveDetailVo swPurOrderDetailVo:swReceiveDetailVoList){
             SwReceiveDetail swReceiveDetail=new SwReceiveDetail();
             convertVoToEntityDetail(swReceiveDetail,swPurOrderDetailVo);
-            swReceiveDetail.setRecvNo(purNo);
+            swReceiveDetail.setRecvNo(recvNo);
             swReceiveDetail.setModiNo(ShiroUtils.getCurrentUserNo());
             swReceiveDetail.setModiTime(new Date());
-            swReceiveDetails.add(swReceiveDetail);
             totalNum=totalNum.add(swReceiveDetail.getNum());
-            if(StringUtils.isBlank(swReceiveDetail.getRecvSeqNo())){
-                swReceiveDetail.setRecvSeqNo(String.valueOf(i));
-                swReceiveDetailMapper.insertSelective(swReceiveDetail);
-            }
+            swReceiveDetail.setRecvSeqNo(String.valueOf(i));
+            swReceiveDetails.add(swReceiveDetail);
             i++;
         }
         swReceiveBase.setNum(totalNum);
         int flag=swReceiveBaseMapper.updateByReceiveNo(swReceiveBase);
-        swReceiveDetailMapper.updateBatch(swReceiveDetails);
+        swReceiveDetailMapper.deleteByRecvNo(recvNo);
+        swReceiveDetailMapper.insertBatch(swReceiveDetails);
         return Result.newSuccess(flag);
     }
 

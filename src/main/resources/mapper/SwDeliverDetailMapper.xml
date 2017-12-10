@@ -207,6 +207,9 @@
       </if>
     </trim>
   </insert>
+  <delete id="deleteByDeliverNo" parameterType="java.lang.String">
+    delete from sw_deliver_detail where deliver_no=#{deliverNo,jdbcType=VARCHAR}
+  </delete>
   <update id="updateBatch" parameterType="java.util.List">
     <foreach collection="list" index="index" item="item" separator=";">
       update sw_deliver_detail

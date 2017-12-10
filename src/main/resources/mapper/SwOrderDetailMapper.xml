@@ -89,6 +89,10 @@
 
   </select>
 
+  <delete id="deleteByOrderNo" parameterType="java.lang.String">
+    delete from sw_order_detail where order_no=#{orderNo,jdbcType=VARCHAR}
+  </delete>
+
   <select id="findList" resultMap="BaseResultMap" >
     select b.*
     from

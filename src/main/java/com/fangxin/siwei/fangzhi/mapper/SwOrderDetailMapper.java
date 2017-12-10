@@ -27,4 +27,6 @@ public interface SwOrderDetailMapper {
     int countNum(Map<String, String> params);
 
     List<SwOrderDetail> findList(Map<String, String> params);
+
+    void deleteByOrderNo(String orderNo);
 }
