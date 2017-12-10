@@ -75,6 +75,10 @@ public class SwOrderBaseResultVo {
 
     private String modiTime;
 
+    private String auditName;
+
+    private String auditDesc;
+
     public Integer getId() {
         return id;
     }
@@ -345,5 +349,21 @@ public class SwOrderBaseResultVo {
 
     public void setModiName(String modiName) {
         this.modiName = modiName;
+    }
+
+    public String getAuditName() {
+        return auditName;
+    }
+
+    public void setAuditName(String auditName) {
+        this.auditName = auditName;
+    }
+
+    public String getAuditDesc() {
+        return auditDesc;
+    }
+
+    public void setAuditDesc(String auditDesc) {
+        this.auditDesc = auditDesc;
     }
 }

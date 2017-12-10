@@ -140,6 +140,11 @@ public class ReturnServiceImpl extends AbstractService<SwReturnBase> implements 
         for(SwReturnBase swReturnBase: swReturnBases){
             SwReturnBaseResultVo swReturnBaseResultVo=new SwReturnBaseResultVo();
             convertEntityTVo(swReturnBaseResultVo,swReturnBase);
+            SysAuditLog sysAuditLog=auditingService.queryLastOperateSysAuditLogBySourceNo(swReturnBaseResultVo.getReturnNo());
+            if(sysAuditLog!=null){
+                swReturnBaseResultVo.setAuditName(sysAuditLog.getAuditUserName());
+                swReturnBaseResultVo.setAuditDesc(sysAuditLog.getAuditDesc());
+            }
             swReturnBaseResultVos.add(swReturnBaseResultVo);
         }
         return swReturnBaseResultVos;

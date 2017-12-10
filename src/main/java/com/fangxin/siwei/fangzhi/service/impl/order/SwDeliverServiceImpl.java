@@ -105,12 +105,6 @@ public class SwDeliverServiceImpl extends AbstractService<SwDeliverBase> impleme
         swDeliverBase.setModiTime(new Date());
         List<SwDeliverDetailVo> swDeliverDetailVoList=swDeliverModiVo.getSwDeliverDetailVoList();
         List swDeliverDetails=new ArrayList();
-        Collections.sort(swDeliverDetailVoList, new Comparator<SwDeliverDetailVo>() {
-            @Override
-            public int compare(SwDeliverDetailVo o1, SwDeliverDetailVo o2) {
-                return o1.getDeliverSeqNo().compareTo(o2.getDeliverSeqNo());
-            }
-        });
         int i=1;
         for(SwDeliverDetailVo swDeliverDetailVo:swDeliverDetailVoList){
             SwDeliverDetail swDeliverDetail=new SwDeliverDetail();
@@ -188,7 +182,7 @@ public class SwDeliverServiceImpl extends AbstractService<SwDeliverBase> impleme
             SysAuditLog sysAuditLog=auditingService.queryLastOperateSysAuditLogBySourceNo(swDeliverBaseResutVo.getDeliverNo());
             if(sysAuditLog!=null){
                 swDeliverBaseResutVo.setAuditName(sysAuditLog.getAuditUserName());
-                swDeliverBaseResutVo.setAuditDes(sysAuditLog.getAuditDesc());
+                swDeliverBaseResutVo.setAuditDesc(sysAuditLog.getAuditDesc());
             }
             swDeliverBaseResutVo.setCreateName(sysUserService.getUserNameById(swDeliverBaseResutVo.getCreateNo()));
             swDeliverBaseResutVo.setModiName(sysUserService.getUserNameById(swDeliverBaseResutVo.getModiNo()));

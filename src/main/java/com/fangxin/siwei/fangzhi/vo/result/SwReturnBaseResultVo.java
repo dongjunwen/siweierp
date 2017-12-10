@@ -47,6 +47,10 @@ public class SwReturnBaseResultVo {
 
     private String modiTime;
 
+    private String auditName;
+
+    private String auditDesc;
+
     public String getReturnNo() {
         return returnNo;
     }
@@ -197,5 +201,21 @@ public class SwReturnBaseResultVo {
 
     public void setModiTime(String modiTime) {
         this.modiTime = modiTime;
+    }
+
+    public String getAuditName() {
+        return auditName;
+    }
+
+    public void setAuditName(String auditName) {
+        this.auditName = auditName;
+    }
+
+    public String getAuditDesc() {
+        return auditDesc;
+    }
+
+    public void setAuditDesc(String auditDesc) {
+        this.auditDesc = auditDesc;
     }
 }

@@ -55,7 +55,7 @@ public class SwDeliverBaseResutVo {
 
     private String modiTime;
     //审核理由
-    private String auditDes;
+    private String auditDesc;
     //审核人
     private String auditName;
 
@@ -243,12 +243,12 @@ public class SwDeliverBaseResutVo {
         this.modiName = modiName;
     }
 
-    public String getAuditDes() {
-        return auditDes;
+    public String getAuditDesc() {
+        return auditDesc;
     }
 
-    public void setAuditDes(String auditDes) {
-        this.auditDes = auditDes;
+    public void setAuditDesc(String auditDesc) {
+        this.auditDesc = auditDesc;
     }
 
     public String getAuditName() {

@@ -141,6 +141,11 @@ public class ReceiveServiceImpl extends AbstractService<SwReceiveBase> implement
         for(SwReceiveBase swReceiveBase: swReceiveBases){
             SwReceiveBaseResultVo swReceiveBaseResultVo=new SwReceiveBaseResultVo();
             convertEntityTVo(swReceiveBaseResultVo,swReceiveBase);
+            SysAuditLog sysAuditLog=auditingService.queryLastOperateSysAuditLogBySourceNo(swReceiveBaseResultVo.getRecvNo());
+            if(sysAuditLog!=null){
+                swReceiveBaseResultVo.setAuditName(sysAuditLog.getAuditUserName());
+                swReceiveBaseResultVo.setAuditDesc(sysAuditLog.getAuditDesc());
+            }
             swOrderBaseResultVos.add(swReceiveBaseResultVo);
         }
         return swOrderBaseResultVos;

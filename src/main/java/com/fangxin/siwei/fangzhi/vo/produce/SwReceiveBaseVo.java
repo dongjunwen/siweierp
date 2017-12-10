@@ -19,6 +19,10 @@ public class SwReceiveBaseVo {
 
     private String memo;
 
+    private String auditName;
+
+    private String auditDesc;
+
     public String getRecver() {
         return recver;
     }
@@ -57,5 +61,21 @@ public class SwReceiveBaseVo {
 
     public void setMemo(String memo) {
         this.memo = memo;
+    }
+
+    public String getAuditName() {
+        return auditName;
+    }
+
+    public void setAuditName(String auditName) {
+        this.auditName = auditName;
+    }
+
+    public String getAuditDesc() {
+        return auditDesc;
+    }
+
+    public void setAuditDesc(String auditDesc) {
+        this.auditDesc = auditDesc;
     }
 }

@@ -24,11 +24,13 @@ public class SwReturnBaseVo {
 
     private String supplyAddr;
 
-
-
     private String returnReason;
 
     private String memo;
+
+    private String auditName;
+
+    private String auditDesc;
 
     public String getRespName() {
         return respName;
@@ -108,5 +110,21 @@ public class SwReturnBaseVo {
 
     public void setMemo(String memo) {
         this.memo = memo;
+    }
+
+    public String getAuditName() {
+        return auditName;
+    }
+
+    public void setAuditName(String auditName) {
+        this.auditName = auditName;
+    }
+
+    public String getAuditDesc() {
+        return auditDesc;
+    }
+
+    public void setAuditDesc(String auditDesc) {
+        this.auditDesc = auditDesc;
     }
 }

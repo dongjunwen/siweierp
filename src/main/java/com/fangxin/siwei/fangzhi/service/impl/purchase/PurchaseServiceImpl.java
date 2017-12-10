@@ -150,6 +150,11 @@ public class PurchaseServiceImpl extends AbstractService<SwPurchaseBase> impleme
             SwPurOrderBaseResultVo swPurOrderBaseResultVo=new SwPurOrderBaseResultVo();
             convertEntityTVo(swPurOrderBaseResultVo,swPurchaseBase);
             swPurOrderBaseResultVo.setPurStatusName(SysDictUtils.getNameByUniq("PUR_STATUS",swPurOrderBaseResultVo.getPurStatus()));
+            SysAuditLog sysAuditLog=auditingService.queryLastOperateSysAuditLogBySourceNo(swPurOrderBaseResultVo.getPurNo());
+            if(sysAuditLog!=null){
+                swPurOrderBaseResultVo.setAuditName(sysAuditLog.getAuditUserName());
+                swPurOrderBaseResultVo.setAuditDesc(sysAuditLog.getAuditDesc());
+            }
             swOrderBaseResultVos.add(swPurOrderBaseResultVo);
         }
         return swOrderBaseResultVos;

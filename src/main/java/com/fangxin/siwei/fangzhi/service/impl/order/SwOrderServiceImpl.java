@@ -12,10 +12,7 @@ import com.fangxin.siwei.fangzhi.common.utils.ShiroUtils;
 import com.fangxin.siwei.fangzhi.common.utils.UUIDUtils;
 import com.fangxin.siwei.fangzhi.mapper.SwOrderBaseMapper;
 import com.fangxin.siwei.fangzhi.mapper.SwOrderDetailMapper;
-import com.fangxin.siwei.fangzhi.modal.SwFormularInfo;
-import com.fangxin.siwei.fangzhi.modal.SwOrderBase;
-import com.fangxin.siwei.fangzhi.modal.SwOrderDetail;
-import com.fangxin.siwei.fangzhi.modal.SysAuditConfig;
+import com.fangxin.siwei.fangzhi.modal.*;
 import com.fangxin.siwei.fangzhi.service.AbstractService;
 import com.fangxin.siwei.fangzhi.service.audit.AuditingParam;
 import com.fangxin.siwei.fangzhi.service.audit.IAuditingService;
@@ -218,6 +215,11 @@ public class SwOrderServiceImpl extends AbstractService<SwOrderBase> implements 
             swOrderBaseResultVo.setSaleTypeName(SysDictUtils.getNameByUniq("SALE_TYPE",swOrderBaseResultVo.getSaleType()));
             swOrderBaseResultVo.setOrderTypeName(SysDictUtils.getNameByUniq("ORDER_TYPE",swOrderBaseResultVo.getOrderType()));
             swOrderBaseResultVo.setOrderStatusName(SysDictUtils.getNameByUniq("ORDER_STATUS",swOrderBaseResultVo.getOrderStatus()));
+            SysAuditLog sysAuditLog=auditingService.queryLastOperateSysAuditLogBySourceNo(swOrderBaseResultVo.getOrderNo());
+            if(sysAuditLog!=null){
+                swOrderBaseResultVo.setAuditName(sysAuditLog.getAuditUserName());
+                swOrderBaseResultVo.setAuditDesc(sysAuditLog.getAuditDesc());
+            }
             swOrderBaseResultVo.setCreateName(sysUserService.getUserNameById(swOrderBaseResultVo.getCreateNo()));
             swOrderBaseResultVo.setModiName(sysUserService.getUserNameById(swOrderBaseResultVo.getModiNo()));
             swOrderBaseResultVos.add(swOrderBaseResultVo);

@@ -51,6 +51,10 @@ public class SwPurOrderBaseResultVo {
 
     private String modiTime;
 
+    private String auditName;
+
+    private String auditDesc;
+
     public Integer getId() {
         return id;
     }
@@ -217,5 +221,21 @@ public class SwPurOrderBaseResultVo {
 
     public void setPurStatusName(String purStatusName) {
         this.purStatusName = purStatusName;
+    }
+
+    public String getAuditName() {
+        return auditName;
+    }
+
+    public void setAuditName(String auditName) {
+        this.auditName = auditName;
+    }
+
+    public String getAuditDesc() {
+        return auditDesc;
+    }
+
+    public void setAuditDesc(String auditDesc) {
+        this.auditDesc = auditDesc;
     }
 }
