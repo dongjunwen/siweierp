@@ -2,18 +2,26 @@ package com.fangxin.siwei.fangzhi.controller.stock;
 
 import com.alibaba.fastjson.JSON;
 import com.fangxin.siwei.fangzhi.common.result.Result;
+import com.fangxin.siwei.fangzhi.common.utils.FileUtil;
 import com.fangxin.siwei.fangzhi.common.utils.PageUitls;
 import com.fangxin.siwei.fangzhi.service.stock.SwStockInfoService;
 import com.fangxin.siwei.fangzhi.vo.result.StockVerifyResultVo;
 import com.fangxin.siwei.fangzhi.vo.result.SwStockInfoResultVo;
 import com.github.pagehelper.Page;
 import io.swagger.annotations.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.io.IOException;
 import java.util.Map;
 
 /**
@@ -25,6 +33,8 @@ import java.util.Map;
 @RequestMapping("/api/stockInfo")
 @Api(tags = "库存信息",description = "库存信息相关API")
 public class StockInfoController {
+    private static final Logger logger= LoggerFactory.getLogger(StockInfoController.class);
+
     @Resource
     SwStockInfoService swStockInfoService;
 
@@ -43,5 +53,17 @@ public class StockInfoController {
     public Result<PageUitls<SwStockInfoResultVo>> findList(@RequestParam @ApiParam(hidden = true) Map<String,String> params){
         Page<SwStockInfoResultVo> page =  swStockInfoService.findList(params);
         return Result.newSuccess(new PageUitls<SwStockInfoResultVo>(page));
+    }
+
+    @RequestMapping(value = "/downTemplate",method = RequestMethod.GET)
+    public ResponseEntity<byte[]> download() throws IOException {
+        String fileName="stockInfoTemplate.xls";
+        String dfileName= FileUtil.getRealPath()+"/static/template/"+fileName;
+        //dfileName = new String(dfileName.getBytes("gb2312"), "iso8859-1");
+        logger.info("下载路径:{}",fileName);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+        headers.setContentDispositionFormData("attachment", fileName);
+        return new ResponseEntity<byte[]>(FileUtil.readFileToByteArray(dfileName), headers, HttpStatus.CREATED);
     }
 }
