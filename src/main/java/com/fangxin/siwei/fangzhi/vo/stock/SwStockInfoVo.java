@@ -1,8 +1,8 @@
 package com.fangxin.siwei.fangzhi.vo.stock;
 
 import com.fangxin.siwei.fangzhi.common.excel.ExcelField;
+import io.swagger.annotations.ApiModelProperty;
 
-import java.math.BigDecimal;
 
 /**
  * @Date:2017/11/13 0013 10:52
@@ -10,11 +10,14 @@ import java.math.BigDecimal;
  * @Description：
  **/
 public class SwStockInfoVo {
+    @ApiModelProperty(value = "物料编号",required =true )
     @ExcelField(title = "物料编号",sort = 1)
     private String materialNo;
     @ExcelField(title = "物料名称",sort = 1)
+    @ApiModelProperty(value = "物料名称",required =false )
     private String materialName;
     @ExcelField(title = "数量",sort = 1)
+    @ApiModelProperty(value = "数量",required =true )
     private String num;
 
     public String getMaterialNo() {

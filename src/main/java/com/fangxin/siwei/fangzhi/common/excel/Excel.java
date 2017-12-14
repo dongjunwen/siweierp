@@ -1,11 +1,18 @@
 package com.fangxin.siwei.fangzhi.common.excel;
 
+import net.sf.jxls.exception.ParsePropertyException;
+import net.sf.jxls.transformer.XLSTransformer;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.*;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 建立编辑excel工具
@@ -155,6 +162,34 @@ public class Excel {
             }
         }
     }*/
+
+    /**
+     * 根据模板生成Excel文件.
+     * @param templateFileName 模板文件路径.
+     * @param list 模板中存放的数据.
+     * @param resultFileName 生成的文件路径.
+     */
+    public  void createExcel(String templateFileName, List<?> list, String resultFileName){
+        //创建XLSTransformer对象
+        XLSTransformer transformer = new XLSTransformer();
+        //获取java项目编译后根路径
+        URL url = this.getClass().getClassLoader().getResource("");
+        //得到模板文件路径
+        //String srcFilePath = url.getPath() + templateFileName;
+        Map<String,Object> beanParams = new HashMap<String,Object>();
+        beanParams.put("dataList", list);
+        //String destFilePath = url.getPath() + resultFileName;
+        try {
+            //生成Excel文件
+            transformer.transformXLS(templateFileName, beanParams, resultFileName);
+        } catch (ParsePropertyException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InvalidFormatException e) {
+            e.printStackTrace();
+        }
+    }
 
 
 }

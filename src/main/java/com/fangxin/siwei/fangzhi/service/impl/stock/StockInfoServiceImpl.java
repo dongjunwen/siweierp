@@ -12,8 +12,8 @@ import com.fangxin.siwei.fangzhi.service.AbstractService;
 import com.fangxin.siwei.fangzhi.service.base.SwMaterialInfoService;
 import com.fangxin.siwei.fangzhi.service.impl.system.SysDictUtils;
 import com.fangxin.siwei.fangzhi.service.stock.SwStockInfoService;
-import com.fangxin.siwei.fangzhi.vo.produce.SwWorkDetailVo;
 import com.fangxin.siwei.fangzhi.vo.result.SwStockInfoResultVo;
+import com.fangxin.siwei.fangzhi.vo.stock.SwStockInfoQueryVo;
 import com.fangxin.siwei.fangzhi.vo.stock.SwStockInfoVo;
 import com.github.pagehelper.Page;
 import org.slf4j.Logger;
@@ -73,22 +73,7 @@ public class StockInfoServiceImpl extends AbstractService<SwStockInfo> implement
         swStockInfoResultVos.setTotal(swStockIns.getTotal());
         for(SwStockInfo swStockInfo: swStockIns){
             SwStockInfoResultVo swStockInfoResultVo=new SwStockInfoResultVo();
-            swStockInfoResultVo.setMaterialNo(swStockInfo.getMaterialNo());
-            SwMaterialInfo swMaterialInfo=swMaterialInfoService.getEntityByNo(swStockInfo.getMaterialNo());
-            swStockInfoResultVo.setMaterialName(swMaterialInfo.getMaterialName());
-            swStockInfoResultVo.setMaterialLong(swMaterialInfo.getMaterialLong());
-            swStockInfoResultVo.setMaterialWidth(swMaterialInfo.getMaterialWidth());
-            swStockInfoResultVo.setMaterialType(swMaterialInfo.getMaterialType());
-            swStockInfoResultVo.setMaterialStock(swMaterialInfo.getMaterialStock());
-            SysDict sysDict=SysDictUtils.getValueByUniq(ConstantKey.MATERIAL_TYPE,swMaterialInfo.getMaterialType());
-            swStockInfoResultVo.setMaterialTypeName(sysDict.getDictName());
-            SysDict stocDict=SysDictUtils.getValueByUniq(ConstantKey.MATERIAL_STOCK,swMaterialInfo.getMaterialStock());
-            swStockInfoResultVo.setMaterialStockName(stocDict.getDictName());
-            swStockInfoResultVo.setPattern(swMaterialInfo.getPattern());
-            swStockInfoResultVo.setSpec(swMaterialInfo.getSpec());
-            swStockInfoResultVo.setUnit(swMaterialInfo.getUnit());
-            swStockInfoResultVo.setNum(swStockInfo.getNum());
-            swStockInfoResultVo.setModiTime(DateUtil.formatDateTime(swStockInfo.getModiTime()));
+            convertToVo(swStockInfo,swStockInfoResultVo);
             swStockInfoResultVos.add(swStockInfoResultVo);
         }
         return swStockInfoResultVos;
@@ -112,8 +97,6 @@ public class StockInfoServiceImpl extends AbstractService<SwStockInfo> implement
                 SwStockInfo swStockInfo=new SwStockInfo();
                 swStockInfo.setMaterialNo(swStockInfoVo.getMaterialNo());
                 swStockInfo.setNum(new BigDecimal(swStockInfoVo.getNum()));
-                swStockInfo.setModiTime(new Date());
-                swStockInfo.setVersion(0);
                 saveStock(swStockInfo);
             }
             logger.info("记录数据:{}成功!",saveFileName);
@@ -125,9 +108,52 @@ public class StockInfoServiceImpl extends AbstractService<SwStockInfo> implement
         }
     }
 
+    @Override
+    public Result<Integer> saveStockInfo(SwStockInfoVo swStockInfoVo) {
+        SwStockInfo swStockInfo=new SwStockInfo();
+        swStockInfo.setMaterialNo(swStockInfoVo.getMaterialNo());
+        swStockInfo.setNum(new BigDecimal(swStockInfoVo.getNum()));
+        return  Result.newSuccess( this.saveStock(swStockInfo));
+    }
+
+    @Override
+    public List<SwStockInfoResultVo> findCond(SwStockInfoQueryVo swStockInfoQueryVo) {
+        List<SwStockInfo>  swStockInfos=swStockInfoMapper.selecByCond(swStockInfoQueryVo);
+        List<SwStockInfoResultVo> swStockInfoResultVos=new ArrayList<>();
+        for(SwStockInfo swStockInfo: swStockInfos){
+            SwStockInfoResultVo swStockInfoResultVo=new SwStockInfoResultVo();
+            convertToVo(swStockInfo,swStockInfoResultVo);
+            swStockInfoResultVos.add(swStockInfoResultVo);
+        }
+        return swStockInfoResultVos;
+    }
+
+    private void convertToVo(SwStockInfo swStockInfo,SwStockInfoResultVo swStockInfoResultVo) {
+        swStockInfoResultVo.setMaterialNo(swStockInfo.getMaterialNo());
+        SwMaterialInfo swMaterialInfo=swMaterialInfoService.getEntityByNo(swStockInfo.getMaterialNo());
+        swStockInfoResultVo.setMaterialName(swMaterialInfo.getMaterialName());
+        swStockInfoResultVo.setMaterialLong(swMaterialInfo.getMaterialLong());
+        swStockInfoResultVo.setMaterialWidth(swMaterialInfo.getMaterialWidth());
+        swStockInfoResultVo.setMaterialType(swMaterialInfo.getMaterialType());
+        swStockInfoResultVo.setMaterialStock(swMaterialInfo.getMaterialStock());
+        SysDict sysDict=SysDictUtils.getValueByUniq(ConstantKey.MATERIAL_TYPE,swMaterialInfo.getMaterialType());
+        swStockInfoResultVo.setMaterialTypeName(sysDict.getDictName());
+        SysDict stocDict=SysDictUtils.getValueByUniq(ConstantKey.MATERIAL_STOCK,swMaterialInfo.getMaterialStock());
+        swStockInfoResultVo.setMaterialStockName(stocDict.getDictName());
+        swStockInfoResultVo.setPattern(swMaterialInfo.getPattern());
+        swStockInfoResultVo.setSpec(swMaterialInfo.getSpec());
+        swStockInfoResultVo.setUnit(swMaterialInfo.getUnit());
+        swStockInfoResultVo.setNum(swStockInfo.getNum());
+        swStockInfoResultVo.setModiTime(DateUtil.formatDateTime(swStockInfo.getModiTime()));
+    }
+
+    /**
+     * 直接覆盖
+     * @param swStockInfo
+     * @return
+     */
     public int saveStock(SwStockInfo swStockInfo) {
         int saveNum=0;
-        swStockInfo.setNum(swStockInfo.getNum());
         swStockInfo.setModiTime(new Date());
         SwStockInfo oldSwStockInfo=swStockInfoMapper.selectByMaterialNo(swStockInfo.getMaterialNo());
         if(oldSwStockInfo==null){
