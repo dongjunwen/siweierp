@@ -1,12 +1,15 @@
 package com.fangxin.siwei.fangzhi.controller.stock;
 
 import com.alibaba.fastjson.JSON;
+import com.fangxin.siwei.fangzhi.common.enums.ResultCode;
 import com.fangxin.siwei.fangzhi.common.result.Result;
 import com.fangxin.siwei.fangzhi.common.utils.FileUtil;
 import com.fangxin.siwei.fangzhi.common.utils.PageUitls;
 import com.fangxin.siwei.fangzhi.service.stock.SwStockInfoService;
+import com.fangxin.siwei.fangzhi.vo.produce.SwWorkDetailVo;
 import com.fangxin.siwei.fangzhi.vo.result.StockVerifyResultVo;
 import com.fangxin.siwei.fangzhi.vo.result.SwStockInfoResultVo;
+import com.fangxin.siwei.fangzhi.vo.stock.SwStockInfoVo;
 import com.github.pagehelper.Page;
 import io.swagger.annotations.*;
 import org.slf4j.Logger;
@@ -19,9 +22,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -65,5 +70,21 @@ public class StockInfoController {
         headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
         headers.setContentDispositionFormData("attachment", fileName);
         return new ResponseEntity<byte[]>(FileUtil.readFileToByteArray(dfileName), headers, HttpStatus.CREATED);
+    }
+
+    @RequestMapping(value = "import",method = RequestMethod.POST)
+    @ApiOperation(value="库存导入", notes="库存导入")
+    public Result<List<SwStockInfoVo>> importFile(@RequestParam(value="uploadFile")MultipartFile mFile){
+        try{
+            Result<List<SwStockInfoVo>> _result= swStockInfoService.batchImport(mFile);
+            if(!_result.isSuccess()){
+                return Result.newError(_result.getCode(),_result.getMessage());
+            }
+            logger.info("库存导入成功!");
+            return  _result;
+        }catch (Exception e){
+            logger.error("库存导入异常!{}",e);
+            return Result.newError(ResultCode.FAIL);
+        }
     }
 }

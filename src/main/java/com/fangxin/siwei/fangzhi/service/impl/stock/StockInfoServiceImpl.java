@@ -1,23 +1,32 @@
 package com.fangxin.siwei.fangzhi.service.impl.stock;
 
 import com.fangxin.siwei.fangzhi.common.constant.ConstantKey;
-import com.fangxin.siwei.fangzhi.common.utils.Common;
-import com.fangxin.siwei.fangzhi.common.utils.DateUtil;
+import com.fangxin.siwei.fangzhi.common.enums.ResultCode;
+import com.fangxin.siwei.fangzhi.common.excel.Excel;
+import com.fangxin.siwei.fangzhi.common.excel.ExcelSheet;
+import com.fangxin.siwei.fangzhi.common.result.Result;
+import com.fangxin.siwei.fangzhi.common.utils.*;
 import com.fangxin.siwei.fangzhi.mapper.SwStockInfoMapper;
-import com.fangxin.siwei.fangzhi.modal.SwMaterialInfo;
-import com.fangxin.siwei.fangzhi.modal.SwOrderBase;
-import com.fangxin.siwei.fangzhi.modal.SwStockInfo;
-import com.fangxin.siwei.fangzhi.modal.SysDict;
+import com.fangxin.siwei.fangzhi.modal.*;
 import com.fangxin.siwei.fangzhi.service.AbstractService;
 import com.fangxin.siwei.fangzhi.service.base.SwMaterialInfoService;
 import com.fangxin.siwei.fangzhi.service.impl.system.SysDictUtils;
 import com.fangxin.siwei.fangzhi.service.stock.SwStockInfoService;
+import com.fangxin.siwei.fangzhi.vo.produce.SwWorkDetailVo;
 import com.fangxin.siwei.fangzhi.vo.result.SwStockInfoResultVo;
+import com.fangxin.siwei.fangzhi.vo.stock.SwStockInfoVo;
 import com.github.pagehelper.Page;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import tk.mybatis.mapper.entity.Condition;
 
 import javax.annotation.Resource;
+import java.io.IOException;
+import java.io.InputStream;
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -29,6 +38,7 @@ import java.util.Map;
  **/
 @Service
 public class StockInfoServiceImpl extends AbstractService<SwStockInfo> implements SwStockInfoService {
+    private static  final Logger logger= LoggerFactory.getLogger(StockInfoServiceImpl.class);
     @Resource
     SwStockInfoMapper swStockInfoMapper;
     @Resource
@@ -82,5 +92,51 @@ public class StockInfoServiceImpl extends AbstractService<SwStockInfo> implement
             swStockInfoResultVos.add(swStockInfoResultVo);
         }
         return swStockInfoResultVos;
+    }
+
+    @Override
+    public Result<List<SwStockInfoVo>> batchImport(MultipartFile mFile) {
+        String originFileName=mFile.getOriginalFilename();
+        String prefix=originFileName.substring(originFileName.indexOf("."));
+        String saveFileName="/home/file/"+ UUIDUtils.genUUID("S")+prefix;
+        InputStream importFile= null;
+        try {
+            importFile = mFile.getInputStream();
+            FileUtil.saveFile(saveFileName,importFile);
+            logger.info("保存文件:{}成功!",saveFileName);
+            String keyValue = "物料编码:materialNo,物料名称:materialName,数量:num";
+            Excel excel = new Excel(saveFileName);
+            ExcelSheet sheet = excel.getSheet();
+            List<SwStockInfoVo> swStockInfoVos = sheet.getList(0, 0, keyValue).toObject(SwStockInfoVo.class);
+            for(SwStockInfoVo swStockInfoVo:swStockInfoVos){
+                SwStockInfo swStockInfo=new SwStockInfo();
+                swStockInfo.setMaterialNo(swStockInfoVo.getMaterialNo());
+                swStockInfo.setNum(new BigDecimal(swStockInfoVo.getNum()));
+                swStockInfo.setModiTime(new Date());
+                swStockInfo.setVersion(0);
+                saveStock(swStockInfo);
+            }
+            logger.info("记录数据:{}成功!",saveFileName);
+            FileUtil.delFile(saveFileName);
+            return Result.newSuccess(swStockInfoVos);
+        } catch (IOException e) {
+            logger.error("IO异常:{}"+e.getMessage());
+            return Result.newError(ResultCode.FAIL);
+        }
+    }
+
+    public int saveStock(SwStockInfo swStockInfo) {
+        int saveNum=0;
+        swStockInfo.setNum(swStockInfo.getNum());
+        swStockInfo.setModiTime(new Date());
+        SwStockInfo oldSwStockInfo=swStockInfoMapper.selectByMaterialNo(swStockInfo.getMaterialNo());
+        if(oldSwStockInfo==null){
+            swStockInfo.setVersion(0);
+            saveNum=swStockInfoMapper.insertSelective(swStockInfo);
+        }else{
+            swStockInfo.setVersion(oldSwStockInfo.getVersion());
+            saveNum=swStockInfoMapper.updateByNo(swStockInfo);
+        }
+        return  saveNum;
     }
 }

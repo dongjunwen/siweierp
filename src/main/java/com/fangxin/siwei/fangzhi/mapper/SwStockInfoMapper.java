@@ -8,4 +8,6 @@ public interface SwStockInfoMapper  extends MyMapper<SwStockInfo>{
     int addNum(SwStockInfo swStockInfo);
 
     SwStockInfo selectByMaterialNo(String materialNo);
+
+    int updateByNo(SwStockInfo swStockInfo);
 }
