@@ -26,6 +26,12 @@ public class SwDeliverDetail {
 
     private String prodForm;
 
+    private String prodUnit;
+
+    private String techNo;
+
+    private String techName;
+
     private BigDecimal prodLong;
 
     private BigDecimal prodWidth;
@@ -204,5 +210,29 @@ public class SwDeliverDetail {
 
     public void setVersion(Integer version) {
         this.version = version;
+    }
+
+    public String getProdUnit() {
+        return prodUnit;
+    }
+
+    public void setProdUnit(String prodUnit) {
+        this.prodUnit = prodUnit;
+    }
+
+    public String getTechNo() {
+        return techNo;
+    }
+
+    public void setTechNo(String techNo) {
+        this.techNo = techNo;
+    }
+
+    public String getTechName() {
+        return techName;
+    }
+
+    public void setTechName(String techName) {
+        this.techName = techName;
     }
 }

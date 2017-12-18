@@ -12,10 +12,13 @@
     <result column="prod_name" jdbcType="VARCHAR" property="prodName" />
     <result column="prod_type" jdbcType="VARCHAR" property="prodType" />
     <result column="prod_form" jdbcType="VARCHAR" property="prodForm" />
+    <result column="prod_unit" jdbcType="VARCHAR" property="prodUnit" />
     <result column="prod_long" jdbcType="DECIMAL" property="prodLong" />
     <result column="prod_width" jdbcType="DECIMAL" property="prodWidth" />
     <result column="prod_num" jdbcType="DECIMAL" property="prodNum" />
     <result column="prod_price" jdbcType="DECIMAL" property="prodPrice" />
+    <result column="tech_no" jdbcType="VARCHAR" property="techNo" />
+    <result column="tech_name" jdbcType="VARCHAR" property="techName" />
     <result column="memo" jdbcType="VARCHAR" property="memo" />
     <result column="create_no" jdbcType="VARCHAR" property="createNo" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
@@ -25,7 +28,8 @@
   </resultMap>
   <sql id="Base_Column_List">
     id, deliver_no, deliver_seq_no, order_no, order_seq_no, box_no, prod_no, prod_name,
-    prod_type, prod_form, prod_long, prod_width, prod_num, prod_price, memo, create_no, 
+    prod_type, prod_form,prod_unit, prod_long, prod_width, prod_num, prod_price, tech_no,tech_name,
+    memo, create_no,
     create_time, modi_no, modi_time, version
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -49,15 +53,15 @@
     insert into sw_deliver_detail (id, deliver_no, deliver_seq_no,
       order_no, order_seq_no, box_no, 
       prod_no, prod_name, prod_type, 
-      prod_form, prod_long, prod_width, 
-      prod_num, prod_price, memo, 
+      prod_form,prod_unit, prod_long, prod_width,
+      prod_num, prod_price,tech_no,tech_name, memo,
       create_no, create_time, modi_no, 
       modi_time, version)
     values (#{id,jdbcType=INTEGER}, #{deliverNo,jdbcType=VARCHAR}, #{deliverSeqNo,jdbcType=VARCHAR},
       #{orderNo,jdbcType=VARCHAR}, #{orderSeqNo,jdbcType=VARCHAR}, #{boxNo,jdbcType=VARCHAR}, 
       #{prodNo,jdbcType=VARCHAR}, #{prodName,jdbcType=VARCHAR}, #{prodType,jdbcType=VARCHAR}, 
-      #{prodForm,jdbcType=VARCHAR}, #{prodLong,jdbcType=DECIMAL}, #{prodWidth,jdbcType=DECIMAL}, 
-      #{prodNum,jdbcType=DECIMAL}, #{prodPrice,jdbcType=DECIMAL}, #{memo,jdbcType=VARCHAR}, 
+      #{prodForm,jdbcType=VARCHAR},#{prodUnit,jdbcType=VARCHAR}, #{prodLong,jdbcType=DECIMAL}, #{prodWidth,jdbcType=DECIMAL},
+      #{prodNum,jdbcType=DECIMAL}, #{prodPrice,jdbcType=DECIMAL}, #{item.techNo,jdbcType=VARCHAR},#{item.techName,jdbcType=VARCHAR},#{item.memo,jdbcType=VARCHAR},
       #{createNo,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{modiNo,jdbcType=VARCHAR}, 
       #{modiTime,jdbcType=TIMESTAMP}, #{version,jdbcType=INTEGER})
   </insert>
@@ -65,8 +69,8 @@
       insert into sw_deliver_detail ( deliver_no, deliver_seq_no,
       order_no, order_seq_no, box_no,
       prod_no, prod_name, prod_type,
-      prod_form, prod_long, prod_width,
-      prod_num, prod_price, memo,
+      prod_form,prod_unit, prod_long, prod_width,
+      prod_num, prod_price,tech_no,tech_name, memo,
       create_no, create_time, modi_no,
       modi_time, version)
     values
@@ -74,8 +78,8 @@
       ( #{item.deliverNo,jdbcType=VARCHAR}, #{item.deliverSeqNo,jdbcType=VARCHAR},
       #{item.orderNo,jdbcType=VARCHAR}, #{item.orderSeqNo,jdbcType=VARCHAR}, #{item.boxNo,jdbcType=VARCHAR},
       #{item.prodNo,jdbcType=VARCHAR}, #{item.prodName,jdbcType=VARCHAR}, #{item.prodType,jdbcType=VARCHAR},
-      #{item.prodForm,jdbcType=VARCHAR}, #{item.prodLong,jdbcType=DECIMAL}, #{item.prodWidth,jdbcType=DECIMAL},
-      #{item.prodNum,jdbcType=DECIMAL}, #{item.prodPrice,jdbcType=DECIMAL}, #{item.memo,jdbcType=VARCHAR},
+      #{item.prodForm,jdbcType=VARCHAR},#{item.prodUnit,jdbcType=VARCHAR}, #{item.prodLong,jdbcType=DECIMAL}, #{item.prodWidth,jdbcType=DECIMAL},
+      #{item.prodNum,jdbcType=DECIMAL}, #{item.prodPrice,jdbcType=DECIMAL}, #{item.techNo,jdbcType=VARCHAR},#{item.techName,jdbcType=VARCHAR},#{item.memo,jdbcType=VARCHAR},
       #{item.createNo,jdbcType=VARCHAR}, #{item.createTime,jdbcType=TIMESTAMP}, #{item.modiNo,jdbcType=VARCHAR},
       #{item.modiTime,jdbcType=TIMESTAMP}, #{item.version,jdbcType=INTEGER})
     </foreach>
@@ -113,6 +117,9 @@
       <if test="prodForm != null">
         prod_form,
       </if>
+      <if test="prodUit != null">
+        prod_Unit,
+      </if>
       <if test="prodLong != null">
         prod_long,
       </if>
@@ -124,6 +131,12 @@
       </if>
       <if test="prodPrice != null">
         prod_price,
+      </if>
+      <if test="techNo != null">
+        tech_no,
+      </if>
+      <if test="techName != null">
+        tech_name,
       </if>
       <if test="memo != null">
         memo,
@@ -175,6 +188,9 @@
       <if test="prodForm != null">
         #{prodForm,jdbcType=VARCHAR},
       </if>
+      <if test="prodUnit != null">
+        #{prodUnit,jdbcType=VARCHAR},
+      </if>
       <if test="prodLong != null">
         #{prodLong,jdbcType=DECIMAL},
       </if>
@@ -186,6 +202,12 @@
       </if>
       <if test="prodPrice != null">
         #{prodPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="techNo != null">
+        #{techNo,jdbcType=VARCHAR},
+      </if>
+      <if test="techName != null">
+        #{techName,jdbcType=VARCHAR},
       </if>
       <if test="memo != null">
         #{memo,jdbcType=VARCHAR},
@@ -236,6 +258,9 @@
         <if test="item.prodForm != null">
           prod_form = #{item.prodForm,jdbcType=VARCHAR},
         </if>
+        <if test="item.prodUnit != null">
+          prod_unit = #{item.prodUnit,jdbcType=VARCHAR},
+        </if>
         <if test="item.prodLong != null">
           prod_long = #{item.prodLong,jdbcType=DECIMAL},
         </if>
@@ -247,6 +272,12 @@
         </if>
         <if test="item.prodPrice != null">
           prod_price = #{item.prodPrice,jdbcType=DECIMAL},
+        </if>
+        <if test="item.techNo != null">
+          tech_no = #{item.techNo,jdbcType=VARCHAR},
+        </if>
+        <if test="item.techName != null">
+          tech_name = #{item.techName,jdbcType=VARCHAR},
         </if>
         <if test="item.memo != null">
           memo = #{item.memo,jdbcType=VARCHAR},
@@ -299,6 +330,9 @@
       <if test="prodForm != null">
         prod_form = #{prodForm,jdbcType=VARCHAR},
       </if>
+      <if test="prodUnit != null">
+        prod_unit = #{prodUnit,jdbcType=VARCHAR},
+      </if>
       <if test="prodLong != null">
         prod_long = #{prodLong,jdbcType=DECIMAL},
       </if>
@@ -310,6 +344,12 @@
       </if>
       <if test="prodPrice != null">
         prod_price = #{prodPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="techNo != null">
+        tech_no = #{techNo,jdbcType=VARCHAR},
+      </if>
+      <if test="techName != null">
+        tech_name = #{techName,jdbcType=VARCHAR},
       </if>
       <if test="memo != null">
         memo = #{memo,jdbcType=VARCHAR},
@@ -343,10 +383,13 @@
       prod_name = #{prodName,jdbcType=VARCHAR},
       prod_type = #{prodType,jdbcType=VARCHAR},
       prod_form = #{prodForm,jdbcType=VARCHAR},
+      prod_unit = #{prodUnit,jdbcType=VARCHAR},
       prod_long = #{prodLong,jdbcType=DECIMAL},
       prod_width = #{prodWidth,jdbcType=DECIMAL},
       prod_num = #{prodNum,jdbcType=DECIMAL},
       prod_price = #{prodPrice,jdbcType=DECIMAL},
+      tech_no = #{techNo,jdbcType=VARCHAR},
+      tech_name = #{techName,jdbcType=VARCHAR},
       memo = #{memo,jdbcType=VARCHAR},
       create_no = #{createNo,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},

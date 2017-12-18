@@ -30,6 +30,8 @@ public class SwDeliverDetailResutVo {
 
     private String prodForm;
 
+    private String prodUnit;
+
     private BigDecimal prodLong;
 
     private BigDecimal prodWidth;
@@ -37,6 +39,10 @@ public class SwDeliverDetailResutVo {
     private BigDecimal prodNum;
 
     private BigDecimal prodPrice;
+
+    private String techNo;
+
+    private String techName;
 
     private String memo;
 
@@ -198,5 +204,29 @@ public class SwDeliverDetailResutVo {
 
     public void setModiTime(String modiTime) {
         this.modiTime = modiTime;
+    }
+
+    public String getProdUnit() {
+        return prodUnit;
+    }
+
+    public void setProdUnit(String prodUnit) {
+        this.prodUnit = prodUnit;
+    }
+
+    public String getTechNo() {
+        return techNo;
+    }
+
+    public void setTechNo(String techNo) {
+        this.techNo = techNo;
+    }
+
+    public String getTechName() {
+        return techName;
+    }
+
+    public void setTechName(String techName) {
+        this.techName = techName;
     }
 }
