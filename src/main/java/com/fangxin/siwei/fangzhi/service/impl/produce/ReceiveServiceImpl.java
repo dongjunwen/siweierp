@@ -131,7 +131,7 @@ public class ReceiveServiceImpl extends AbstractService<SwReceiveBase> implement
     @Override
     public Page<SwReceiveBaseResultVo> findList(Map<String, String> params) {
         //日期查询条件
-        params.put("timeCond1","receive_date");
+        params.put("timeCond1","recv_date");
         Condition serviceCondition = Common.getServiceCondition(params, SwReceiveBase.class);
         Page<SwReceiveBase> swReceiveBases = (Page)findByCondition(serviceCondition);
         Page<SwReceiveBaseResultVo> swOrderBaseResultVos= new Page<SwReceiveBaseResultVo>();
@@ -208,8 +208,8 @@ public class ReceiveServiceImpl extends AbstractService<SwReceiveBase> implement
     private Result<SysAuditConfig> beginAudit(String sourceNo, SwReceiveAuditVo swReceiveAuditVo) {
         AuditingParam auditingParam=new AuditingParam();
         auditingParam.setSourceNo(sourceNo);
-        auditingParam.setAuditType(AuditTypeEnum.PURCHASE);
-        auditingParam.setCurrentStage(swReceiveAuditVo.getReceiveStatus().getCode());
+        auditingParam.setAuditType(AuditTypeEnum.RECEIVE);
+        auditingParam.setCurrentStage(swReceiveAuditVo.getRecvStatus().getCode());
         auditingParam.setAuditAction(swReceiveAuditVo.getAuditAction().getCode());
         auditingParam.setAuditUserNo(swReceiveAuditVo.getAuditUserNo());
         auditingParam.setAuditUserName(swReceiveAuditVo.getAuditUserName());
@@ -243,7 +243,7 @@ public class ReceiveServiceImpl extends AbstractService<SwReceiveBase> implement
         SwReceiveBaseModiVo swReceiveBaseModiVo= swReceiveModiVo.getSwReceiveBaseModiVo();
         SwReceiveBase swReceiveBase=new SwReceiveBase();
         convertVoToEntity(swReceiveBase,swReceiveBaseModiVo);
-        String recvNo= swReceiveBaseModiVo.getReceiveNo();
+        String recvNo= swReceiveBaseModiVo.getRecvNo();
         swReceiveBase.setRecvNo(recvNo);
         swReceiveBase.setRecvDate(new Date());
         swReceiveBase.setRecvStatus(ReceiveStatus.WAIT_APPLY.getCode());

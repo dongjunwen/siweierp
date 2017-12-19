@@ -29,7 +29,7 @@ public class SwReceiveAuditVo {
      * 当前状态
      */
     @ApiModelProperty(value = "当前状态",required =false )
-    private ReceiveStatus receiveStatus;
+    private ReceiveStatus recvStatus;
     @ApiModelProperty(value = "审核描述",required =false )
     private String auditDesc;
     private String auditUserNo;
@@ -51,12 +51,12 @@ public class SwReceiveAuditVo {
         this.auditAction = auditAction;
     }
 
-    public ReceiveStatus getReceiveStatus() {
-        return receiveStatus;
+    public ReceiveStatus getRecvStatus() {
+        return recvStatus;
     }
 
-    public void setReceiveStatus(ReceiveStatus receiveStatus) {
-        this.receiveStatus = receiveStatus;
+    public void setRecvStatus(ReceiveStatus recvStatus) {
+        this.recvStatus = recvStatus;
     }
 
     public String getAuditDesc() {

@@ -167,7 +167,7 @@
     </trim>
   </insert>
   <delete id="deleteByRecvNo" parameterType="java.lang.String">
-    DELETE from sw_receive_detail where recvNo=#{recvNo,jdbcType=VARCHAR}
+    DELETE from sw_receive_detail where recv_no=#{recvNo,jdbcType=VARCHAR}
   </delete>
   <update id="updateBatch" parameterType="java.util.List">
     <foreach collection="list" item="item" separator=";" index="index">

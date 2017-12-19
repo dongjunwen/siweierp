@@ -6,13 +6,13 @@ package com.fangxin.siwei.fangzhi.vo.produce;
  * @Description：
  **/
 public class SwReceiveBaseModiVo  extends  SwReceiveBaseVo{
-    private String receiveNo;
+    private String recvNo;
 
-    public String getReceiveNo() {
-        return receiveNo;
+    public String getRecvNo() {
+        return recvNo;
     }
 
-    public void setReceiveNo(String receiveNo) {
-        this.receiveNo = receiveNo;
+    public void setRecvNo(String recvNo) {
+        this.recvNo = recvNo;
     }
 }
