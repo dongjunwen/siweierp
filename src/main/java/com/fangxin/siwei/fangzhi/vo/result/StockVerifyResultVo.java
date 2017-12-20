@@ -34,6 +34,8 @@ public class StockVerifyResultVo {
 
     private String materialStock;
 
+    private String materialStockName;
+
     private BigDecimal num;
 
     private BigDecimal standNum;
@@ -45,6 +47,8 @@ public class StockVerifyResultVo {
     private String quality;
 
     private String status;
+
+    private String statusName;
 
     private String reason;
 
@@ -266,5 +270,21 @@ public class StockVerifyResultVo {
 
     public void setSupplyCompName(String supplyCompName) {
         this.supplyCompName = supplyCompName;
+    }
+
+    public String getStatusName() {
+        return statusName;
+    }
+
+    public void setStatusName(String statusName) {
+        this.statusName = statusName;
+    }
+
+    public String getMaterialStockName() {
+        return materialStockName;
+    }
+
+    public void setMaterialStockName(String materialStockName) {
+        this.materialStockName = materialStockName;
     }
 }
