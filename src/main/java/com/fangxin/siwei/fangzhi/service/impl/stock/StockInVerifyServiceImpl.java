@@ -17,6 +17,7 @@ import com.fangxin.siwei.fangzhi.service.audit.AuditingParam;
 import com.fangxin.siwei.fangzhi.service.audit.IAuditingService;
 import com.fangxin.siwei.fangzhi.service.base.SwCompanyInfoService;
 import com.fangxin.siwei.fangzhi.service.base.SwMaterialInfoService;
+import com.fangxin.siwei.fangzhi.service.impl.system.SysDictUtils;
 import com.fangxin.siwei.fangzhi.service.purchase.SwReturnService;
 import com.fangxin.siwei.fangzhi.service.stock.SwStockInVerifyService;
 import com.fangxin.siwei.fangzhi.service.stock.SwStockInfoService;
@@ -128,6 +129,8 @@ public class StockInVerifyServiceImpl extends AbstractService<SwStockVerify> imp
         for(SwStockVerify swStockVerify: swStockIns){
             StockVerifyResultVo swStockInResultVo=new StockVerifyResultVo();
             convertToResult(swStockInResultVo,swStockVerify);
+            swStockInResultVo.setStatusName(SysDictUtils.getNameByUniq("VERIFY_STATUS",swStockInResultVo.getStatus()));
+            swStockInResultVo.setMaterialStockName(SysDictUtils.getNameByUniq("MATERIAL_STOCK",swStockInResultVo.getMaterialStock()));
             swStockInResultVo.setCreateTime(DateUtil.formatDateTime(swStockVerify.getCreateTime()));
             swStockInResultVo.setModiTime(DateUtil.formatDateTime(swStockVerify.getModiTime()));
             stockInResultVos.add(swStockInResultVo);
