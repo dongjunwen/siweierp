@@ -52,6 +52,8 @@ public class StockVerifyResultVo {
 
     private String reason;
 
+    private String memo;
+
     private String createNo;
 
     private String createTime;
@@ -286,5 +288,13 @@ public class StockVerifyResultVo {
 
     public void setMaterialStockName(String materialStockName) {
         this.materialStockName = materialStockName;
+    }
+
+    public String getMemo() {
+        return memo;
+    }
+
+    public void setMemo(String memo) {
+        this.memo = memo;
     }
 }

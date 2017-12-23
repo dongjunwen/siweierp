@@ -243,6 +243,8 @@ CREATE TABLE `sw_order_base` (
 
 /*Data for the table `sw_order_base` */
 
+insert  into `sw_order_base`(`id`,`order_no`,`order_date`,`pay_way`,`good_date`,`finish_date`,`order_type`,`sale_type`,`order_status`,`memo`,`cust_comp_no`,`cust_comp_name`,`cust_contact_name`,`cust_mobile`,`cust_phone`,`cust_tax`,`cust_addr`,`supply_comp_no`,`supply_comp_name`,`supply_contact_name`,`supply_mobile`,`supply_phone`,`supply_tax`,`supply_addr`,`create_no`,`create_time`,`modi_no`,`modi_time`,`version`) values (1,'D-20171222135244-74230','2017-12-22','TEL_PAY','2017-12-01','2017-12-22','SIMPLE_ORDER','INNER_SALE','AUDIT_SUCCESS',NULL,'BJHY','北京好友科技','北京好友科技','0631-5769674','0631-5769674','0631-5769674','北京市中关村5号',NULL,'山东思维纺织','王芳芳','15166119377','0631-5769674','0631-5769674','山东省威海市环翠区羊亭裕林工业园5号','wangfangfang','2017-12-22 13:52:44','wangfangfang','2017-12-22 13:52:51',NULL);
+
 /*Table structure for table `sw_order_detail` */
 
 DROP TABLE IF EXISTS `sw_order_detail`;
@@ -293,6 +295,8 @@ CREATE TABLE `sw_order_detail` (
 
 /*Data for the table `sw_order_detail` */
 
+insert  into `sw_order_detail`(`id`,`order_no`,`order_seq_no`,`prod_no`,`prod_name`,`prod_type`,`prod_form`,`prod_long`,`prod_width`,`prod_num`,`prod_unit`,`prod_price_no`,`prod_price_express`,`prod_price`,`prod_amt`,`area`,`material_no`,`material_name`,`material_width`,`material_price_no`,`material_price_name`,`material_price_express`,`material_spec`,`material_pattern`,`material_unit`,`material_num`,`material_price`,`tech_no`,`tech_name`,`tech_price`,`tech_price_express`,`memo`,`prod_price1`,`if_prod`,`cate_type`,`create_no`,`create_time`,`modi_no`,`modi_time`,`version`) values (1,'D-20171222135244-74230','1','TBYD1','台布','超棉文艺复兴','圆','3.00','3.00','32.00','米',NULL,NULL,'3.00','96.00','桌','TBYD5','圆底台布','33.00','TB002','3.2米以上台布','(c+0.04)*s1+s1*2/333','超棉文艺复兴','圆','米','1169.60','2.00','TB002','3.2米以上台布','2.00','(c+0.04)*s1+s1*2/333',NULL,'3.00','3',NULL,'wangfangfang','2017-12-22 13:52:44','wangfangfang','2017-12-22 13:52:44',NULL);
+
 /*Table structure for table `sw_purchase_base` */
 
 DROP TABLE IF EXISTS `sw_purchase_base`;
@@ -323,6 +327,8 @@ CREATE TABLE `sw_purchase_base` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='采购单总表';
 
 /*Data for the table `sw_purchase_base` */
+
+insert  into `sw_purchase_base`(`id`,`pur_no`,`pur_date`,`expect_date`,`resp_name`,`supply_comp_no`,`supply_comp_name`,`supply_contact_name`,`supply_mobile`,`supply_phone`,`supply_tax`,`supply_addr`,`pur_amt`,`pur_num`,`pur_status`,`memo`,`create_no`,`create_time`,`modi_no`,`modi_time`,`version`) values (1,'C-20171222135319-01228','2017-12-22','2017-12-22','张三','ASDJ','ASDJ科技有限公司','齐威王','1233444','12122112','1221','12122222222222','2339.20','1169.60','AUDIT_SUCCESS',NULL,'wangfangfang','2017-12-22 13:53:20','wangfangfang','2017-12-22 13:53:29',0);
 
 /*Table structure for table `sw_purchase_detail` */
 
@@ -356,6 +362,8 @@ CREATE TABLE `sw_purchase_detail` (
 
 /*Data for the table `sw_purchase_detail` */
 
+insert  into `sw_purchase_detail`(`id`,`pur_no`,`pur_seq_no`,`order_no`,`order_seq_no`,`material_no`,`material_name`,`material_type`,`material_long`,`material_width`,`spec`,`pattern`,`unit`,`num`,`price`,`amt`,`memo`,`create_no`,`create_time`,`modi_no`,`modi_time`,`version`) values (1,'C-20171222135319-01228','1','D-20171222135244-74230','1','TBYD5','圆底台布',NULL,NULL,'33.00','超棉文艺复兴','圆','米','1169.60','2.00','2339.20','问问','wangfangfang','2017-12-22 13:53:20','wangfangfang','2017-12-22 13:53:20',0);
+
 /*Table structure for table `sw_receive_base` */
 
 DROP TABLE IF EXISTS `sw_receive_base`;
@@ -375,7 +383,7 @@ CREATE TABLE `sw_receive_base` (
   `modi_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   `version` int(11) DEFAULT '0' COMMENT '版本号',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='领料单总表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='领料单总表';
 
 /*Data for the table `sw_receive_base` */
 
@@ -400,7 +408,7 @@ CREATE TABLE `sw_receive_detail` (
   `modi_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   `version` int(11) DEFAULT '0' COMMENT '版本号',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='领料单明细表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='领料单明细表';
 
 /*Data for the table `sw_receive_detail` */
 
@@ -479,9 +487,11 @@ CREATE TABLE `sw_stock_info` (
   `modi_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   `version` int(11) DEFAULT '0' COMMENT '版本号',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8 COMMENT='库存表';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='库存表';
 
 /*Data for the table `sw_stock_info` */
+
+insert  into `sw_stock_info`(`id`,`material_no`,`num`,`modi_time`,`version`) values (1,'TBYD5','4678.40','2017-12-22 13:56:39',3),(2,'TBYD','0.00','2017-12-22 13:58:10',0);
 
 /*Table structure for table `sw_stock_verify` */
 
@@ -512,15 +522,18 @@ CREATE TABLE `sw_stock_verify` (
   `status` varchar(32) DEFAULT NULL COMMENT '检测状态',
   `reason` varchar(100) DEFAULT NULL COMMENT '不合格原因',
   `refuse_type` varchar(32) DEFAULT NULL COMMENT '不合格后续操作',
+  `memo` varchar(128) DEFAULT NULL COMMENT '备注',
   `create_no` varchar(32) DEFAULT NULL COMMENT '创建人',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `modi_no` varchar(32) DEFAULT NULL COMMENT '修改人',
   `modi_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   `version` int(11) DEFAULT '0' COMMENT '版本号',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8 COMMENT='入库单校验信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='入库单校验信息表';
 
 /*Data for the table `sw_stock_verify` */
+
+insert  into `sw_stock_verify`(`id`,`stk_in_no`,`source_type`,`source_no`,`source_seq_no`,`order_no`,`order_seq_no`,`supply_comp_no`,`supply_comp_name`,`material_no`,`material_name`,`material_type`,`spec`,`pattern`,`unit`,`material_stock`,`num`,`stand_num`,`mois_rate`,`weight`,`quality`,`status`,`reason`,`refuse_type`,`memo`,`create_no`,`create_time`,`modi_no`,`modi_time`,`version`) values (1,'S-20171222135341-56240','C','C-20171222135319-01228','1','D-20171222135244-74230','1','ASDJ','ASDJ科技有限公司','TBYD5','圆底台布',NULL,'超棉文艺复兴','圆','米','COTTON_STOCK','1169.60','1169.60',NULL,NULL,NULL,'STOCK_FINISH',NULL,NULL,NULL,'wangfangfang','2017-12-22 13:53:41','wangfangfang','2017-12-22 13:56:39',0),(2,'S-20171222135342-99823','C','C-20171222135319-01228','1','D-20171222135244-74230','1','ASDJ','ASDJ科技有限公司','TBYD5','圆底台布',NULL,'超棉文艺复兴','圆','米','COTTON_STOCK','1169.60','1169.60',NULL,NULL,NULL,'STOCK_FINISH',NULL,NULL,NULL,'wangfangfang','2017-12-22 13:53:42','wangfangfang','2017-12-22 13:56:15',0),(3,'S-20171222135342-18900','C','C-20171222135319-01228','1','D-20171222135244-74230','1','ASDJ','ASDJ科技有限公司','TBYD5','圆底台布',NULL,'超棉文艺复兴','圆','米','COTTON_STOCK','1169.60','1169.60',NULL,NULL,NULL,'STOCK_FINISH',NULL,NULL,NULL,'wangfangfang','2017-12-22 13:53:43','wangfangfang','2017-12-22 13:56:15',0),(4,'S-20171222135342-03578','C','C-20171222135319-01228','1','D-20171222135244-74230','1','ASDJ','ASDJ科技有限公司','TBYD5','圆底台布',NULL,'超棉文艺复兴','圆','米','COTTON_STOCK','1169.60','1169.60',NULL,NULL,NULL,'STOCK_FINISH',NULL,NULL,NULL,'wangfangfang','2017-12-22 13:53:43','wangfangfang','2017-12-22 13:56:15',0),(5,'S-20171222135657-95338',NULL,NULL,NULL,NULL,NULL,'ASDJ','ASDJ科技有限公司','TBYD','圆底台布','PROD','超棉文艺复兴','圆','米','PROD_STOCK','0.00','0.00',NULL,NULL,NULL,'STOCK_FINISH',NULL,NULL,NULL,'wangfangfang','2017-12-22 13:56:57','wangfangfang','2017-12-22 13:58:10',0),(6,'S-20171222140018-32198',NULL,NULL,NULL,NULL,NULL,'ASDJ','ASDJ科技有限公司','TBYD5','圆底台布','PROD','超棉文艺复兴','圆','米','COTTON_STOCK','0.00','0.00',NULL,NULL,NULL,'WAIT_VERIFY',NULL,NULL,NULL,'wangfangfang','2017-12-22 14:00:19','wangfangfang','2017-12-22 14:30:27',0);
 
 /*Table structure for table `sw_work_detail` */
 
@@ -591,9 +604,11 @@ CREATE TABLE `sys_audit_log` (
   `audit_time` datetime DEFAULT NULL COMMENT '审核时间',
   `audit_desc` varchar(128) DEFAULT NULL COMMENT '审核描述',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=176 DEFAULT CHARSET=utf8 COMMENT='审核日志表';
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COMMENT='审核日志表';
 
 /*Data for the table `sys_audit_log` */
+
+insert  into `sys_audit_log`(`id`,`source_no`,`audit_no`,`audit_type`,`audit_type_name`,`audit_action`,`audit_action_name`,`current_stage`,`next_stage`,`audit_user_no`,`audit_user_name`,`audit_time`,`audit_desc`) values (1,'D-20171222135244-74230','ORDER&APPLY&WAIT_APPLY','ORDER','订单审核','APPLY','发起申请','WAIT_APPLY','AUDIT01_SUCCESS','wangfangfang','王芳芳','2017-12-22 13:52:48',NULL),(2,'D-20171222135244-74230','ORDER&AUDIT_PASS&AUDIT01_SUCCESS','ORDER','订单审核','AUDIT_PASS','终审成功','AUDIT01_SUCCESS','AUDIT_SUCCESS','wangfangfang','王芳芳','2017-12-22 13:52:51',NULL),(3,'C-20171222135319-01228','PURCHASE&APPLY&WAIT_APPLY','PURCHASE','采购单审核','APPLY','发起申请','WAIT_APPLY','WAIT_AUDIT','wangfangfang','王芳芳','2017-12-22 13:53:24',NULL),(4,'C-20171222135319-01228','PURCHASE&AUDIT_PASS&WAIT_AUDIT','PURCHASE','采购单审核','AUDIT_PASS','初审成功','WAIT_AUDIT','AUDIT01_SUCCESS','wangfangfang','王芳芳','2017-12-22 13:53:26',NULL),(5,'C-20171222135319-01228','PURCHASE&AUDIT_PASS&AUDIT01_SUCCESS','PURCHASE','采购单审核','AUDIT_PASS','终审通过','AUDIT01_SUCCESS','AUDIT_SUCCESS','wangfangfang','王芳芳','2017-12-22 13:53:28',NULL),(6,'S-20171222135342-03578','STOCKVERIFY&AUDIT_PASS&WAIT_VERIFY','STOCKVERIFY','入库单校验','AUDIT_PASS','校验完毕','WAIT_VERIFY','STOCK_FINISH','wangfangfang','王芳芳','2017-12-22 13:56:15',NULL),(7,'S-20171222135342-18900','STOCKVERIFY&AUDIT_PASS&WAIT_VERIFY','STOCKVERIFY','入库单校验','AUDIT_PASS','校验完毕','WAIT_VERIFY','STOCK_FINISH','wangfangfang','王芳芳','2017-12-22 13:56:15',NULL),(8,'S-20171222135342-99823','STOCKVERIFY&AUDIT_PASS&WAIT_VERIFY','STOCKVERIFY','入库单校验','AUDIT_PASS','校验完毕','WAIT_VERIFY','STOCK_FINISH','wangfangfang','王芳芳','2017-12-22 13:56:15',NULL),(9,'S-20171222135341-56240','STOCKVERIFY&AUDIT_PASS&WAIT_VERIFY','STOCKVERIFY','入库单校验','AUDIT_PASS','校验完毕','WAIT_VERIFY','STOCK_FINISH','wangfangfang','王芳芳','2017-12-22 13:56:39',NULL),(10,'S-20171222135657-95338','STOCKVERIFY&AUDIT_PASS&WAIT_VERIFY','STOCKVERIFY','入库单校验','AUDIT_PASS','校验完毕','WAIT_VERIFY','STOCK_FINISH','wangfangfang','王芳芳','2017-12-22 13:58:10',NULL);
 
 /*Table structure for table `sys_dict` */
 
