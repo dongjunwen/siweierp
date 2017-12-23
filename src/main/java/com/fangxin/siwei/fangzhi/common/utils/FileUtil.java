@@ -19,7 +19,9 @@ public class FileUtil {
 
         FileOutputStream fileOutputStream=null;
         try {
-
+            String parentPath=savePath.substring(0,savePath.lastIndexOf("/"));
+            File f=new File(parentPath);
+            if(!f.exists()) f.createNewFile();
             fileOutputStream=new FileOutputStream(savePath);
             while((len=importFile.read(data))!=-1){
                 fileOutputStream.write(data);
