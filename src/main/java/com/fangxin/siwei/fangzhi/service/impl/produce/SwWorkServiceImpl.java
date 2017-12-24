@@ -67,17 +67,15 @@ public class SwWorkServiceImpl extends AbstractService<SwWorkDetail> implements 
                 String workNo= UUIDUtils.genUUID("I");
                 SwWorkDetail swWorkDetail=new SwWorkDetail();
                 String stepNo=SysDictUtils.getCodeByUniqName("STEP_NO",swWorkDetailVo.getStepName());
-                swWorkDetail.setStepNo(stepNo);
+                swWorkDetailVo.setWorkNo(workNo);
+                swWorkDetailVo.setStepNo(stepNo);
                 convertVoToEntity(swWorkDetail,swWorkDetailVo);
                 swWorkDetail.setCreateNo(ShiroUtils.getCurrentUserNo());
                 swWorkDetail.setCreateTime(new Date());
                 swWorkDetail.setModiNo(ShiroUtils.getCurrentUserNo());
                 swWorkDetail.setModiTime(new Date());
                 swWorkDetail.setVersion(0);
-                swWorkDetail.setWorkNo(workNo);
                 swWorkDetails.add(swWorkDetail);
-                swWorkDetailVo.setWorkNo(workNo);
-                swWorkDetailVo.setStepNo(stepNo);
             }
             swWorkDetailMapper.insertBatch(swWorkDetails);
             logger.info("记录数据:{}成功!",saveFileName);
