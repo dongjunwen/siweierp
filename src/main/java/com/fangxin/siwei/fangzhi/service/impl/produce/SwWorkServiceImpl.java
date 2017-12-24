@@ -152,15 +152,15 @@ public class SwWorkServiceImpl extends AbstractService<SwWorkDetail> implements 
         }
         String startTime = params.get("startTime");
         String endTime = params.get("endTime");
-        if(StringUtils.isNotBlank(startTime)&&StringUtils.isNotBlank(endTime)){
+        if(StringUtils.isNotEmpty(startTime)&&StringUtils.isNotEmpty(endTime)){
             startTime=startTime+" 00:00:00";
             endTime=endTime+" 23:59:59";
             params.put("startTime",startTime);
             params.put("endTime",endTime);
-        }else if(StringUtils.isNotBlank(startTime)){
+        }else if(StringUtils.isNotEmpty(startTime)){
             startTime=startTime+" 00:00:00";
             params.put("startTime",startTime);
-        }else if(StringUtils.isNotBlank(endTime)){
+        }else if(StringUtils.isNotEmpty(endTime)){
             endTime=endTime+" 23:59:59";
             params.put("endTime",endTime);
         }
