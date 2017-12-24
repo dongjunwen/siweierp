@@ -136,7 +136,7 @@ public class WorkContoller {
     public ResponseEntity<byte[]>  exportExcel(@RequestParam @ApiParam(hidden = true) Map<String,String> params)throws Exception {
         List<SwWorkDetailResultVo> swStockInfoResultVos = swWorkService.findCond(params);
         Excel excel=new Excel();
-        String fileName="workExportTemplate";
+        String fileName="workExportTemplate.xls";
         // String templateFileName= FileUtil.getRealPath()+"/static/template/"+fileName;
         InputStream inputStream = this.getClass().getResourceAsStream("/static/template/"+fileName);
         String prefix=fileName.substring(fileName.indexOf("."));
