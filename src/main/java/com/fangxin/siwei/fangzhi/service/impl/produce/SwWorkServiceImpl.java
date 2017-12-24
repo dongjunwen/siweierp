@@ -184,5 +184,11 @@ public class SwWorkServiceImpl extends AbstractService<SwWorkDetail> implements 
         return swWorkDetailResultVos;
     }
 
+    @Override
+    public Result<Integer> deleteByWorkNos(String workNos) {
+        Integer delNum=swWorkDetailMapper.deleleByWorkNos(workNos);
+        return Result.newSuccess(delNum);
+    }
+
 
 }

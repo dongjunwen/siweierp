@@ -11,4 +11,7 @@ public interface SwWorkDetailMapper extends MyMapper<SwWorkDetail> {
     void insertBatch(List<SwWorkDetail> swWorkDetails);
 
     List<SwWorkDetail> selectByCond(Map<String, String> params);
+
+    Integer deleleByWorkNos(String workNos);
+
 }
