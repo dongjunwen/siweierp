@@ -10,6 +10,7 @@ import com.fangxin.siwei.fangzhi.common.utils.UUIDUtils;
 import com.fangxin.siwei.fangzhi.common.validator.ValidatorUtil;
 import com.fangxin.siwei.fangzhi.common.validator.group.AddGroup;
 import com.fangxin.siwei.fangzhi.service.produce.SwWorkService;
+import com.fangxin.siwei.fangzhi.vo.produce.SwWorkDelVo;
 import com.fangxin.siwei.fangzhi.vo.produce.SwWorkDetailVo;
 import com.fangxin.siwei.fangzhi.vo.result.SwWorkDetailResultVo;
 import com.github.pagehelper.Page;
@@ -94,10 +95,10 @@ public class WorkContoller {
 
     @ApiOperation(value="删除工时", notes="删除工时")
     @RequestMapping(method = RequestMethod.DELETE)
-    @ApiImplicitParam(name = "workNos",value = "工时编号 以逗号分隔 ", required = true)
-    public Result<String> delete( @RequestBody  List<String> workNos){
+    @ApiImplicitParam(name = "workNos",value = "工时编号 ", required = true)
+    public Result<String> delete( @RequestBody SwWorkDelVo swWorkDelVo){
         try {
-            Result<Integer> result= swWorkService.deleteByWorkNos(workNos);
+            Result<Integer> result= swWorkService.deleteByWorkNos(swWorkDelVo.getWorkNos());
             if (!result.isSuccess()) {
                 return Result.newError(result.getCode(), result.getMessage());
             }
