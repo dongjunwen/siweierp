@@ -131,11 +131,11 @@ public class SwWorkServiceImpl extends AbstractService<SwWorkDetail> implements 
 
     @Override
     public Result<Integer> save(SwWorkDetailVo swWorkDetailVo) {
-        Integer id=swWorkDetailVo.getId();
+        String workNo=swWorkDetailVo.getWorkNo();
         SwWorkDetail swWorkDetail=new SwWorkDetail();
         convertVoToEntity(swWorkDetail,swWorkDetailVo);
-        if(id!=null){
-            swWorkDetailMapper.updateByPrimaryKeySelective(swWorkDetail);
+        if(StringUtils.isNotBlank(workNo)){
+            swWorkDetailMapper.updateByWorkNo(swWorkDetail);
         }else{
             swWorkDetailMapper.insertSelective(swWorkDetail);
         }
