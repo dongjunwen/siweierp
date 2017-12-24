@@ -107,24 +107,15 @@ public class SwWorkServiceImpl extends AbstractService<SwWorkDetail> implements 
         for(SwWorkDetail swWorkDetail: swWorkDetails){
             SwWorkDetailResultVo swWorkDetailResultVo=new SwWorkDetailResultVo();
             convertEntityTVo(swWorkDetailResultVo,swWorkDetail);
-            swWorkDetailResultVo.setWorkDate(DateUtil.formatDate(swWorkDetail.getWorkDate()));
             swWorkDetailResultVo.setCreateName(sysUserService.getUserNameById(swWorkDetailResultVo.getCreateNo()));
             swWorkDetailResultVo.setModiName(sysUserService.getUserNameById(swWorkDetailResultVo.getModiNo()));
-            swWorkDetailResultVo.setCreateTime(DateUtil.formatDateTime(swWorkDetail.getCreateTime()));
-            swWorkDetailResultVo.setModiTime(DateUtil.formatDateTime(swWorkDetail.getModiTime()));
             swWorkDetailResultVos.add(swWorkDetailResultVo);
         }
         return swWorkDetailResultVos;
     }
 
     private void convertEntityTVo(SwWorkDetailResultVo swWorkDetailResultVo, SwWorkDetail swWorkDetail) {
-        try {
-            BeanUtils.copyProperties(swWorkDetailResultVo,swWorkDetail);
-        }  catch (IllegalAccessException e) {
-            logger.error("工时查询转换语法异常:{}",e);
-        } catch (InvocationTargetException e) {
-            logger.error("工时查询目标转换异常:{}",e);
-        }
+            BeanUtilsEx.copyProperties(swWorkDetailResultVo,swWorkDetail);
     }
 
     @Override
