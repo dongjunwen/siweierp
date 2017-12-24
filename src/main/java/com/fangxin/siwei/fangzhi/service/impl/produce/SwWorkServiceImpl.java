@@ -137,7 +137,7 @@ public class SwWorkServiceImpl extends AbstractService<SwWorkDetail> implements 
         String workNo=swWorkDetailVo.getWorkNo();
         SwWorkDetail swWorkDetail=new SwWorkDetail();
         convertVoToEntity(swWorkDetail,swWorkDetailVo);
-        if(StringUtils.isNotBlank(workNo)){
+        if(StringUtils.isNotEmpty(workNo)){
             swWorkDetailMapper.updateByWorkNo(swWorkDetail);
         }else{
             swWorkDetailMapper.insertSelective(swWorkDetail);
