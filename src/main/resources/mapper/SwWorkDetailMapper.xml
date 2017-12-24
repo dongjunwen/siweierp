@@ -125,8 +125,12 @@
     </foreach>
   </insert>
 
-  <delete id="deleteByWorkNos" parameterType="java.lang.String" >
-    DELETE  from sw_work_detail where work_no in ( #{workNos,jdbcType=VARCHAR} );
+  <delete id="deleteByWorkNos" parameterType="java.util.List" >
+    DELETE  from sw_work_detail where 1=1
+     and work_no in
+    <foreach collection="list" index="index" item="workNo" open="(" separator="," close=")">
+      #{workNo}
+    </foreach>
   </delete>
 
 </mapper>

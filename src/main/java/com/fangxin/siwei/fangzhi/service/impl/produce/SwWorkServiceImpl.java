@@ -183,7 +183,7 @@ public class SwWorkServiceImpl extends AbstractService<SwWorkDetail> implements 
     public Result<Integer> deleteByWorkNos(List<String> workNoList) {
         String workNos=StringUtils.join(workNoList.toArray(),",");
         logger.info("删除工时单号:{}",workNos);
-        Integer delNum=swWorkDetailMapper.deleteByWorkNos(workNos);
+        Integer delNum=swWorkDetailMapper.deleteByWorkNos(workNoList);
         logger.info("删除工时数量:{}",delNum);
         return Result.newSuccess(delNum);
     }
