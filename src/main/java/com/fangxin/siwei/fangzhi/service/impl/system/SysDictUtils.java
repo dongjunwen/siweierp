@@ -28,6 +28,7 @@ public class SysDictUtils {
 
     private static Map<String,SysDict> dictCodeMap=new HashMap<String,SysDict>();
 
+    private static Map<String,SysDict> dictNameMap=new HashMap<String,SysDict>();
 
     @PostConstruct
     public void loadDict(){
@@ -35,6 +36,7 @@ public class SysDictUtils {
         List<SysDict> sysDictList=sysDictService.findAll();
         putDictTypeMap(sysDictList);
         putdictCodeMap(sysDictList);
+        putdictNameMap(sysDictList);
         logger.info("==================数据字典初始化End=========================");
     }
 
@@ -45,6 +47,17 @@ public class SysDictUtils {
     private void putdictCodeMap(List<SysDict> sysDictList) {
         for(SysDict sysDict:sysDictList){
             String key=sysDict.getDictType()+"-"+sysDict.getDictCode();
+            dictCodeMap.put(key,sysDict);
+        }
+    }
+
+    /**
+     * 按照type,code存储
+     * @param sysDictList
+     */
+    private void putdictNameMap(List<SysDict> sysDictList) {
+        for(SysDict sysDict:sysDictList){
+            String key=sysDict.getDictType()+"-"+sysDict.getDictName();
             dictCodeMap.put(key,sysDict);
         }
     }
@@ -80,5 +93,15 @@ public class SysDictUtils {
     public static String getNameByUniq(String dictType, String dictValue) {
         SysDict sysDict= getValueByUniq(dictType,dictValue);
         return sysDict.getDictName();
+    }
+
+    public static SysDict getCodeByName(String dictType,String dictName){
+        String key=dictType+"-"+dictName;
+        return  dictCodeMap.get(key);
+    }
+
+    public static String getCodeByUniqName(String dictType, String dictName) {
+        SysDict sysDict= getCodeByName(dictType,dictName);
+        return sysDict.getDictCode();
     }
 }

@@ -19,7 +19,11 @@ public interface SwWorkService {
 
     Page<SwWorkDetailResultVo> findList(Map<String, String> params);
 
-    Result<Integer>  deleteByIdstr(String ids);
-
     Result<Integer> save(SwWorkDetailVo swWorkDetailVo);
+
+    List<SwWorkDetailResultVo> findCond(Map<String, String> params);
+
+    Result<Integer> deleteByWorkNos(List<String> workNos);
+
+    Result<Integer> deleteByIdstr(String ids);
 }

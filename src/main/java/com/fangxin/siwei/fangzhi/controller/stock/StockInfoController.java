@@ -27,6 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
@@ -64,13 +65,14 @@ public class StockInfoController {
     @RequestMapping(value = "/downTemplate",method = RequestMethod.GET)
     public ResponseEntity<byte[]> download() throws IOException {
         String fileName="stockInfoTemplate.xls";
-        String dfileName= FileUtil.getRealPath()+"/static/template/"+fileName;
+       // String dfileName= FileUtil.getProjectPath()+"/static/template/"+fileName;
+        InputStream inputStream = this.getClass().getResourceAsStream("/static/template/"+fileName);
         //dfileName = new String(dfileName.getBytes("gb2312"), "iso8859-1");
         logger.info("下载路径:{}",fileName);
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
         headers.setContentDispositionFormData("attachment", fileName);
-        return new ResponseEntity<byte[]>(FileUtil.readFileToByteArray(dfileName), headers, HttpStatus.CREATED);
+        return new ResponseEntity<byte[]>(FileUtil.readFsToByteArray(inputStream), headers, HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "import",method = RequestMethod.POST)
@@ -106,15 +108,17 @@ public class StockInfoController {
 
     @ApiOperation(value = "库存信息导出Excel")
     @RequestMapping(value = "exportExcel",method = RequestMethod.GET)
-    public ResponseEntity<byte[]>  exportExcel(SwStockInfoQueryVo swStockInfoQueryVo)throws Exception {
-        List<SwStockInfoResultVo> swStockInfoResultVos = swStockInfoService.findCond(swStockInfoQueryVo);
+    @ApiImplicitParam(name = "filter",value = "通用表过滤器。发送JSON键/值对，如<code>{“key”:“value”}</code>。", paramType = "query",dataTypeClass = JSON.class)
+    public ResponseEntity<byte[]>  exportExcel(@RequestParam @ApiParam(hidden = true) Map<String,String> params)throws Exception {
+        List<SwStockInfoResultVo> swStockInfoResultVos = swStockInfoService.findCond(params);
         Excel excel=new Excel();
         String fileName="stockInfoExportTemplate.xls";
-        String templateFileName= FileUtil.getRealPath()+"/static/template/"+fileName;
+       // String templateFileName= FileUtil.getRealPath()+"/static/template/"+fileName;
+        InputStream inputStream = this.getClass().getResourceAsStream("/static/template/"+fileName);
         String prefix=fileName.substring(fileName.indexOf("."));
         String saveFileName=UUIDUtils.genUUID("SE")+prefix;
         String saveRealFileName="/home/file/"+saveFileName ;
-        excel.createExcel(templateFileName,swStockInfoResultVos,saveRealFileName);
+        excel.createExcel(inputStream,swStockInfoResultVos,saveRealFileName);
         logger.info("下载路径:{}",saveFileName);
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);

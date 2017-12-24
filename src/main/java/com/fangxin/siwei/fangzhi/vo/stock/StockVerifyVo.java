@@ -51,6 +51,9 @@ public class StockVerifyVo {
     private String supplyCompName;
 
     private String refuseType;
+
+    private String memo;
+
     public String getStkInNo() {
         return stkInNo;
     }
@@ -225,5 +228,13 @@ public class StockVerifyVo {
 
     public void setRefuseType(String refuseType) {
         this.refuseType = refuseType;
+    }
+
+    public String getMemo() {
+        return memo;
+    }
+
+    public void setMemo(String memo) {
+        this.memo = memo;
     }
 }

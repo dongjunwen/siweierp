@@ -1,23 +1,24 @@
 package com.fangxin.siwei.fangzhi.service.impl.produce;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.fangxin.siwei.fangzhi.common.enums.ResultCode;
 import com.fangxin.siwei.fangzhi.common.excel.Excel;
 import com.fangxin.siwei.fangzhi.common.excel.ExcelSheet;
+import com.fangxin.siwei.fangzhi.common.exception.RRException;
 import com.fangxin.siwei.fangzhi.common.result.Result;
 import com.fangxin.siwei.fangzhi.common.utils.*;
 import com.fangxin.siwei.fangzhi.mapper.SwWorkDetailMapper;
-import com.fangxin.siwei.fangzhi.modal.SwOrderBase;
-import com.fangxin.siwei.fangzhi.modal.SwReceiveBase;
 import com.fangxin.siwei.fangzhi.modal.SwWorkDetail;
 import com.fangxin.siwei.fangzhi.service.AbstractService;
+import com.fangxin.siwei.fangzhi.service.impl.system.SysDictUtils;
 import com.fangxin.siwei.fangzhi.service.produce.SwWorkService;
 import com.fangxin.siwei.fangzhi.service.system.SysUserService;
 import com.fangxin.siwei.fangzhi.vo.produce.SwWorkDetailVo;
-import com.fangxin.siwei.fangzhi.vo.result.SwReceiveBaseResultVo;
 import com.fangxin.siwei.fangzhi.vo.result.SwWorkDetailResultVo;
 import com.github.pagehelper.Page;
 import org.apache.commons.beanutils.BeanUtils;
-import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -65,13 +66,15 @@ public class SwWorkServiceImpl extends AbstractService<SwWorkDetail> implements 
             for(SwWorkDetailVo swWorkDetailVo:swWorkDetailVos){
                 String workNo= UUIDUtils.genUUID("I");
                 SwWorkDetail swWorkDetail=new SwWorkDetail();
+                String stepNo=SysDictUtils.getCodeByUniqName("STEP_NO",swWorkDetailVo.getStepName());
+                swWorkDetailVo.setWorkNo(workNo);
+                swWorkDetailVo.setStepNo(stepNo);
                 convertVoToEntity(swWorkDetail,swWorkDetailVo);
                 swWorkDetail.setCreateNo(ShiroUtils.getCurrentUserNo());
                 swWorkDetail.setCreateTime(new Date());
                 swWorkDetail.setModiNo(ShiroUtils.getCurrentUserNo());
                 swWorkDetail.setModiTime(new Date());
                 swWorkDetail.setVersion(0);
-                swWorkDetail.setWorkNo(workNo);
                 swWorkDetails.add(swWorkDetail);
             }
             swWorkDetailMapper.insertBatch(swWorkDetails);
@@ -85,19 +88,13 @@ public class SwWorkServiceImpl extends AbstractService<SwWorkDetail> implements 
     }
 
     private void convertVoToEntity(SwWorkDetail swWorkDetail,SwWorkDetailVo swWorkDetailVo) {
-        try {
-            BeanUtils.copyProperties(swWorkDetail,swWorkDetailVo);
-        } catch (IllegalAccessException e) {
-            logger.error("工时导入转换语法异常:{}",e);
-        } catch (InvocationTargetException e) {
-            logger.error("工时导入目标转换异常:{}",e);
-        }
+            BeanUtilsEx.copyProperties(swWorkDetail,swWorkDetailVo);
     }
 
     @Override
     public Page<SwWorkDetailResultVo> findList(Map<String, String> params) {
         //日期查询条件
-        params.put("timeCond1","receive_date");
+        params.put("timeCond1","work_date");
         Condition serviceCondition = Common.getServiceCondition(params, SwWorkDetail.class);
         Page<SwWorkDetail> swWorkDetails = (Page)findByCondition(serviceCondition);
         Page<SwWorkDetailResultVo> swWorkDetailResultVos= new Page<SwWorkDetailResultVo>();
@@ -108,6 +105,7 @@ public class SwWorkServiceImpl extends AbstractService<SwWorkDetail> implements 
         for(SwWorkDetail swWorkDetail: swWorkDetails){
             SwWorkDetailResultVo swWorkDetailResultVo=new SwWorkDetailResultVo();
             convertEntityTVo(swWorkDetailResultVo,swWorkDetail);
+            swWorkDetailResultVo.setWorkDate(DateUtil.formatDate(swWorkDetail.getWorkDate()));
             swWorkDetailResultVo.setCreateName(sysUserService.getUserNameById(swWorkDetailResultVo.getCreateNo()));
             swWorkDetailResultVo.setModiName(sysUserService.getUserNameById(swWorkDetailResultVo.getModiNo()));
             swWorkDetailResultVo.setCreateTime(DateUtil.formatDateTime(swWorkDetail.getCreateTime()));
@@ -118,13 +116,7 @@ public class SwWorkServiceImpl extends AbstractService<SwWorkDetail> implements 
     }
 
     private void convertEntityTVo(SwWorkDetailResultVo swWorkDetailResultVo, SwWorkDetail swWorkDetail) {
-        try {
-            BeanUtils.copyProperties(swWorkDetailResultVo,swWorkDetail);
-        }  catch (IllegalAccessException e) {
-            logger.error("工时查询转换语法异常:{}",e);
-        } catch (InvocationTargetException e) {
-            logger.error("工时查询目标转换异常:{}",e);
-        }
+            BeanUtilsEx.copyProperties(swWorkDetailResultVo,swWorkDetail);
     }
 
     @Override
@@ -134,15 +126,66 @@ public class SwWorkServiceImpl extends AbstractService<SwWorkDetail> implements 
 
     @Override
     public Result<Integer> save(SwWorkDetailVo swWorkDetailVo) {
-        Integer id=swWorkDetailVo.getId();
+        String workNo=swWorkDetailVo.getWorkNo();
         SwWorkDetail swWorkDetail=new SwWorkDetail();
         convertVoToEntity(swWorkDetail,swWorkDetailVo);
-        if(id!=null){
-            swWorkDetailMapper.updateByPrimaryKeySelective(swWorkDetail);
+        if(StringUtils.isNotEmpty(workNo)){
+            swWorkDetailMapper.updateByWorkNo(swWorkDetail);
         }else{
             swWorkDetailMapper.insertSelective(swWorkDetail);
         }
         return Result.newSuccess(1);
+    }
+
+    @Override
+    public List<SwWorkDetailResultVo> findCond(Map<String, String> params) {
+        String filter = params.get("filter");
+        if(StringUtils.isNotBlank(filter)){
+            try {
+                JSONObject filterOjb = JSON.parseObject(filter);
+                params.put("orderNo",filterOjb.getString("orderNo"));
+                params.put("userName",filterOjb.getString("userName"));
+                params.put("stepNo",filterOjb.getString("stepNo"));
+            }catch (Exception e){
+                throw new RRException("filter格式错误，请填写json格式");
+            }
+        }
+        String startTime = params.get("startTime");
+        String endTime = params.get("endTime");
+        if(StringUtils.isNotEmpty(startTime)&&StringUtils.isNotEmpty(endTime)){
+            startTime=startTime+" 00:00:00";
+            endTime=endTime+" 23:59:59";
+            params.put("startTime",startTime);
+            params.put("endTime",endTime);
+        }else if(StringUtils.isNotEmpty(startTime)){
+            startTime=startTime+" 00:00:00";
+            params.put("startTime",startTime);
+        }else if(StringUtils.isNotEmpty(endTime)){
+            endTime=endTime+" 23:59:59";
+            params.put("endTime",endTime);
+        }
+        List<SwWorkDetail>  swWorkDetails=swWorkDetailMapper.selectByCond(params);
+        List<SwWorkDetailResultVo> swWorkDetailResultVos=new ArrayList<>();
+        for(SwWorkDetail swWorkDetail: swWorkDetails){
+            SwWorkDetailResultVo swWorkDetailResultVo=new SwWorkDetailResultVo();
+            convertEntityTVo(swWorkDetailResultVo,swWorkDetail);
+            swWorkDetailResultVo.setWorkDate(DateUtil.formatDate(swWorkDetail.getWorkDate()));
+            swWorkDetailResultVo.setCreateName(sysUserService.getUserNameById(swWorkDetailResultVo.getCreateNo()));
+            swWorkDetailResultVo.setModiName(sysUserService.getUserNameById(swWorkDetailResultVo.getModiNo()));
+            swWorkDetailResultVo.setCreateTime(DateUtil.formatDateTime(swWorkDetail.getCreateTime()));
+            swWorkDetailResultVo.setModiTime(DateUtil.formatDateTime(swWorkDetail.getModiTime()));
+            swWorkDetailResultVos.add(swWorkDetailResultVo);
+        }
+        return swWorkDetailResultVos;
+    }
+
+    @Override
+    public Result<Integer> deleteByWorkNos(List<String> workNoList) {
+        String workNos=StringUtils.join(workNoList.toArray(),",");
+        logger.info("删除工时单号:{}",workNos);
+        Integer delNum=swWorkDetailMapper.deleteByWorkNos(workNoList);
+        logger.info("删除工时数量:{}",delNum);
+        return Result.newSuccess(delNum);
     }
 
 

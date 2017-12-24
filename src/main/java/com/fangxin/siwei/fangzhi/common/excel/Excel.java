@@ -165,6 +165,41 @@ public class Excel {
 
     /**
      * 根据模板生成Excel文件.
+     * @param inputStream 模板文件输入流.
+     * @param list 模板中存放的数据.
+     * @param resultFileName 生成的文件路径.
+     */
+    public  void createExcel(InputStream inputStream, List<?> list, String resultFileName){
+        //创建XLSTransformer对象
+        XLSTransformer transformer = new XLSTransformer();
+        //获取java项目编译后根路径
+        URL url = this.getClass().getClassLoader().getResource("");
+        //得到模板文件路径
+        //String srcFilePath = url.getPath() + templateFileName;
+        Map<String,Object> beanParams = new HashMap<String,Object>();
+        beanParams.put("dataList", list);
+        //String destFilePath = url.getPath() + resultFileName;
+        try {
+            //生成Excel文件
+            org.apache.poi.ss.usermodel.Workbook workbook = transformer.transformXLS(inputStream, beanParams);
+            OutputStream os = new BufferedOutputStream(new FileOutputStream(resultFileName));
+            workbook.write(os);
+            os.flush();
+            os.close();
+        } catch (ParsePropertyException e) {
+            e.printStackTrace();
+        } catch (InvalidFormatException e) {
+            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    /**
+     * 根据模板生成Excel文件.
      * @param templateFileName 模板文件路径.
      * @param list 模板中存放的数据.
      * @param resultFileName 生成的文件路径.

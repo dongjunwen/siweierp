@@ -48,6 +48,7 @@ public class SwStockVerify {
 
     private String reason;
 
+    private String memo;
 
     private String createNo;
 
@@ -296,5 +297,13 @@ public class SwStockVerify {
 
     public void setRefuseType(String refuseType) {
         this.refuseType = refuseType;
+    }
+
+    public String getMemo() {
+        return memo;
+    }
+
+    public void setMemo(String memo) {
+        this.memo = memo;
     }
 }
