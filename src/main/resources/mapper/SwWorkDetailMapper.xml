@@ -89,19 +89,19 @@
     from sw_work_detail
     where 1=1
     <if test="startTime!=null">
-      and  work_date &gt;= #{startTime,jdbcType="VARCHAR"}
+      and  work_date &gt;= #{startTime,jdbcType=VARCHAR}
     </if>
     <if test="endTime!=null">
-      and work_date &lt;= #{endTime,jdbcType="VARCHAR"}
+      and work_date &lt;= #{endTime,jdbcType=VARCHAR}
     </if>
     <if test="orderNo!=null">
-      and order_no = #{orderNo,jdbcType="VARCHAR" }
+      and order_no = #{orderNo,jdbcType=VARCHAR }
     </if>
     <if test="userName!=null">
-      and user_name = #{userName,jdbcType="VARCHAR" }
+      and user_name = #{userName,jdbcType=VARCHAR }
     </if>
     <if test="stepNo!=null">
-      and step_no = #{stepNo,jdbcType="VARCHAR" }
+      and step_no = #{stepNo,jdbcType=VARCHAR }
     </if>
    </select>
 
