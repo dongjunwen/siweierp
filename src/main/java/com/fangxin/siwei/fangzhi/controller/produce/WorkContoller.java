@@ -94,7 +94,7 @@ public class WorkContoller {
     }
 
     @ApiOperation(value="删除工时", notes="删除工时")
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(value = "delByWorkNos",method = RequestMethod.POST)
     @ApiParam(name = "swWorkDelVo ",value = "工时编号 swWorkDelVo", required = true)
     public Result<String> delete( @RequestBody SwWorkDelVo swWorkDelVo){
         try {
