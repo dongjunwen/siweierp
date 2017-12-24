@@ -13,7 +13,7 @@ public class SwWorkDetailVo {
     private Integer id;
     private String workNo;
     @ExcelField(title = "计件日期",sort = 1)
-    private Date workDate;
+    private String workDate;
     @ExcelField(title = "订单号",sort = 2)
     private String orderNo;
     @ExcelField(title = "订单序号",sort = 3)
@@ -36,7 +36,7 @@ public class SwWorkDetailVo {
     public SwWorkDetailVo() {
     }
 
-    public SwWorkDetailVo(Integer id, Date workDate, String orderNo, String orderSeqNo, String userNo, String userName, String stepNo, String stepName, String processNo, String processName, String unit, String num) {
+    public SwWorkDetailVo(Integer id, String workDate, String orderNo, String orderSeqNo, String userNo, String userName, String stepNo, String stepName, String processNo, String processName, String unit, String num) {
         this.id = id;
         this.workDate = workDate;
         this.orderNo = orderNo;
@@ -67,11 +67,11 @@ public class SwWorkDetailVo {
         this.workNo = workNo;
     }
 
-    public Date getWorkDate() {
+    public String getWorkDate() {
         return workDate;
     }
 
-    public void setWorkDate(Date workDate) {
+    public void setWorkDate(String workDate) {
         this.workDate = workDate;
     }
 

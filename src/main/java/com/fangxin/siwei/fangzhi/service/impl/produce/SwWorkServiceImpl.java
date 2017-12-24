@@ -80,6 +80,7 @@ public class SwWorkServiceImpl extends AbstractService<SwWorkDetail> implements 
                 swWorkDetail.setWorkNo(workNo);
                 swWorkDetails.add(swWorkDetail);
                 swWorkDetailVo.setWorkNo(workNo);
+                swWorkDetailVo.setWorkDate(DateUtil.formatDate(swWorkDetail.getWorkDate()));
             }
             swWorkDetailMapper.insertBatch(swWorkDetails);
             logger.info("记录数据:{}成功!",saveFileName);
