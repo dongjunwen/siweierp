@@ -96,7 +96,7 @@ public class SwWorkServiceImpl extends AbstractService<SwWorkDetail> implements 
     @Override
     public Page<SwWorkDetailResultVo> findList(Map<String, String> params) {
         //日期查询条件
-        params.put("timeCond1","receive_date");
+        params.put("timeCond1","work_date");
         Condition serviceCondition = Common.getServiceCondition(params, SwWorkDetail.class);
         Page<SwWorkDetail> swWorkDetails = (Page)findByCondition(serviceCondition);
         Page<SwWorkDetailResultVo> swWorkDetailResultVos= new Page<SwWorkDetailResultVo>();
