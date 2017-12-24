@@ -26,7 +26,7 @@
     process_name, unit, num, create_no, create_time, modi_no, modi_time, version
   </sql>
 
-  <select id="selectByCond" parameterType="java.util.Map">
+  <select id="selectByCond" resultMap="BaseResultMap" parameterType="java.util.Map">
       SELECT
       <include refid="Base_Column_List" />
     from sw_work_detail
