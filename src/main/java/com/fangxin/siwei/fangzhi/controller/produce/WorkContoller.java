@@ -134,7 +134,7 @@ public class WorkContoller {
     @RequestMapping(value = "exportExcel",method = RequestMethod.GET)
     @ApiImplicitParam(name = "filter",value = "通用表过滤器。发送JSON键/值对，如<code>{“key”:“value”}</code>。", paramType = "query",dataTypeClass = JSON.class)
     public ResponseEntity<byte[]>  exportExcel(@RequestParam @ApiParam(hidden = true) Map<String,String> params)throws Exception {
-        List<SwWorkDetailResultVo> swStockInfoResultVos = swWorkService.findCond(params);
+        List<SwWorkDetailResultVo> swWorkDetailResultVos = swWorkService.findCond(params);
         Excel excel=new Excel();
         String fileName="workExportTemplate.xls";
         // String templateFileName= FileUtil.getRealPath()+"/static/template/"+fileName;
@@ -142,7 +142,7 @@ public class WorkContoller {
         String prefix=fileName.substring(fileName.indexOf("."));
         String saveFileName= UUIDUtils.genUUID("WI")+prefix;
         String saveRealFileName="/home/file/"+saveFileName ;
-        excel.createExcel(inputStream,swStockInfoResultVos,saveRealFileName);
+        excel.createExcel(inputStream,swWorkDetailResultVos,saveRealFileName);
         logger.info("下载路径:{}",saveFileName);
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
