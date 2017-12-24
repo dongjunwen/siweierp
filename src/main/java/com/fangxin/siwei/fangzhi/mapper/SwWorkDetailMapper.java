@@ -14,4 +14,5 @@ public interface SwWorkDetailMapper extends MyMapper<SwWorkDetail> {
 
     Integer deleleByWorkNos(String workNos);
 
+    void updateByWorkNo(SwWorkDetail swWorkDetail);
 }

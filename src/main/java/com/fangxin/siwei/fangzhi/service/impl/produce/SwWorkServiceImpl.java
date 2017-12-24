@@ -11,6 +11,7 @@ import com.fangxin.siwei.fangzhi.common.utils.*;
 import com.fangxin.siwei.fangzhi.mapper.SwWorkDetailMapper;
 import com.fangxin.siwei.fangzhi.modal.SwWorkDetail;
 import com.fangxin.siwei.fangzhi.service.AbstractService;
+import com.fangxin.siwei.fangzhi.service.impl.system.SysDictUtils;
 import com.fangxin.siwei.fangzhi.service.produce.SwWorkService;
 import com.fangxin.siwei.fangzhi.service.system.SysUserService;
 import com.fangxin.siwei.fangzhi.vo.produce.SwWorkDetailVo;
@@ -65,6 +66,8 @@ public class SwWorkServiceImpl extends AbstractService<SwWorkDetail> implements 
             for(SwWorkDetailVo swWorkDetailVo:swWorkDetailVos){
                 String workNo= UUIDUtils.genUUID("I");
                 SwWorkDetail swWorkDetail=new SwWorkDetail();
+                String stepNo=SysDictUtils.getCodeByUniqName("STEP_NO",swWorkDetailVo.getStepNo());
+                swWorkDetail.setStepNo(stepNo);
                 convertVoToEntity(swWorkDetail,swWorkDetailVo);
                 swWorkDetail.setCreateNo(ShiroUtils.getCurrentUserNo());
                 swWorkDetail.setCreateTime(new Date());
@@ -74,7 +77,7 @@ public class SwWorkServiceImpl extends AbstractService<SwWorkDetail> implements 
                 swWorkDetail.setWorkNo(workNo);
                 swWorkDetails.add(swWorkDetail);
                 swWorkDetailVo.setWorkNo(workNo);
-                swWorkDetailVo.setWorkDate(DateUtil.formatDate(swWorkDetail.getWorkDate()));
+                swWorkDetailVo.setStepNo(stepNo);
             }
             swWorkDetailMapper.insertBatch(swWorkDetails);
             logger.info("记录数据:{}成功!",saveFileName);
