@@ -9,20 +9,14 @@ import com.fangxin.siwei.fangzhi.common.exception.RRException;
 import com.fangxin.siwei.fangzhi.common.result.Result;
 import com.fangxin.siwei.fangzhi.common.utils.*;
 import com.fangxin.siwei.fangzhi.mapper.SwWorkDetailMapper;
-import com.fangxin.siwei.fangzhi.modal.SwOrderBase;
-import com.fangxin.siwei.fangzhi.modal.SwReceiveBase;
-import com.fangxin.siwei.fangzhi.modal.SwStockInfo;
 import com.fangxin.siwei.fangzhi.modal.SwWorkDetail;
 import com.fangxin.siwei.fangzhi.service.AbstractService;
 import com.fangxin.siwei.fangzhi.service.produce.SwWorkService;
 import com.fangxin.siwei.fangzhi.service.system.SysUserService;
 import com.fangxin.siwei.fangzhi.vo.produce.SwWorkDetailVo;
-import com.fangxin.siwei.fangzhi.vo.result.SwReceiveBaseResultVo;
-import com.fangxin.siwei.fangzhi.vo.result.SwStockInfoResultVo;
 import com.fangxin.siwei.fangzhi.vo.result.SwWorkDetailResultVo;
 import com.github.pagehelper.Page;
 import org.apache.commons.beanutils.BeanUtils;
-import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -93,13 +87,7 @@ public class SwWorkServiceImpl extends AbstractService<SwWorkDetail> implements 
     }
 
     private void convertVoToEntity(SwWorkDetail swWorkDetail,SwWorkDetailVo swWorkDetailVo) {
-        try {
-            BeanUtils.copyProperties(swWorkDetail,swWorkDetailVo);
-        } catch (IllegalAccessException e) {
-            logger.error("工时导入转换语法异常:{}",e);
-        } catch (InvocationTargetException e) {
-            logger.error("工时导入目标转换异常:{}",e);
-        }
+            BeanUtilsEx.copyProperties(swWorkDetail,swWorkDetailVo);
     }
 
     @Override
