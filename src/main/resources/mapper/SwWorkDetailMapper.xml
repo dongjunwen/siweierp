@@ -126,7 +126,7 @@
   </insert>
 
   <delete id="deleleByWorkNos">
-    DELETE  from sw_work_detail where work_no in #{deleleByWorkNos,jdbcType=VARCHAR}
+    DELETE  from sw_work_detail where work_no in ( #{deleleByWorkNos,jdbcType=VARCHAR} );
   </delete>
 
 </mapper>
