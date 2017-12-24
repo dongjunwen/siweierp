@@ -48,7 +48,8 @@ public class WorkContoller {
     /** restful api 增删改查*/
     @RequestMapping(method = RequestMethod.POST)
     @ApiOperation(value="工时保存", notes="工时保存")
-    public Result<String> create(@ApiParam(name = "swWorkDetailVo", value = "工时信息实体 swWorkDetailVo", required = true) @RequestBody SwWorkDetailVo swWorkDetailVo){
+    @ApiParam(name = "swWorkDetailVo", value = "工时信息实体 swWorkDetailVo", required = true)
+    public Result<String> create(@RequestBody SwWorkDetailVo swWorkDetailVo){
         ValidatorUtil.validateEntity(swWorkDetailVo, AddGroup.class);//校验
         try{
             Result<Integer> _result= swWorkService.save(swWorkDetailVo);
@@ -92,9 +93,9 @@ public class WorkContoller {
     }
 
     @ApiOperation(value="删除工时", notes="删除工时")
-    @RequestMapping(value = "/{workNos}",method = RequestMethod.DELETE)
-    @ApiImplicitParam(name = "workNos",value = "工时编号 以逗号分隔 ", required = true, dataType = "string",paramType = "path")
-    public Result<String> delete(@PathVariable("workNos") String workNos){
+    @RequestMapping(method = RequestMethod.DELETE)
+    @ApiImplicitParam(name = "workNos",value = "工时编号 以逗号分隔 ", required = true)
+    public Result<String> delete( @RequestBody  List<String> workNos){
         try {
             Result<Integer> result= swWorkService.deleteByWorkNos(workNos);
             if (!result.isSuccess()) {
