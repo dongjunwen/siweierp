@@ -96,7 +96,7 @@ public class WorkContoller {
     }
 
     @ApiOperation(value="删除工时", notes="删除工时")
-    @RequestMapping(value = "{idworkNoss}",method = RequestMethod.DELETE)
+    @RequestMapping(value = "{workNos}",method = RequestMethod.DELETE)
     @ApiImplicitParam(name = "workNos",value = "工时编号 以逗号分隔 ")
     public Result<String> delete(@PathVariable("workNos") String workNos){
         try {
