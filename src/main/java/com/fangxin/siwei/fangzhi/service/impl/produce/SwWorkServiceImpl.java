@@ -107,8 +107,11 @@ public class SwWorkServiceImpl extends AbstractService<SwWorkDetail> implements 
         for(SwWorkDetail swWorkDetail: swWorkDetails){
             SwWorkDetailResultVo swWorkDetailResultVo=new SwWorkDetailResultVo();
             convertEntityTVo(swWorkDetailResultVo,swWorkDetail);
+            swWorkDetailResultVo.setWorkDate(DateUtil.formatDate(swWorkDetail.getWorkDate()));
             swWorkDetailResultVo.setCreateName(sysUserService.getUserNameById(swWorkDetailResultVo.getCreateNo()));
             swWorkDetailResultVo.setModiName(sysUserService.getUserNameById(swWorkDetailResultVo.getModiNo()));
+            swWorkDetailResultVo.setCreateTime(DateUtil.formatDateTime(swWorkDetail.getCreateTime()));
+            swWorkDetailResultVo.setModiTime(DateUtil.formatDateTime(swWorkDetail.getModiTime()));
             swWorkDetailResultVos.add(swWorkDetailResultVo);
         }
         return swWorkDetailResultVos;

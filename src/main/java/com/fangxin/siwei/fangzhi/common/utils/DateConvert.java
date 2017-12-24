@@ -19,7 +19,9 @@ public class DateConvert implements Converter {
             return null;
         }
         if (value instanceof Date) {
-            return value;
+            DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            return sdf.format(value);
+           // return value;
         }
         if (value instanceof Long) {
             Long longValue = (Long) value;

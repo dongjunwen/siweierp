@@ -1,11 +1,14 @@
 package com.fangxin.siwei.fangzhi.common.utils;
 
+import com.fangxin.siwei.fangzhi.modal.SwWorkDetail;
+import com.fangxin.siwei.fangzhi.vo.result.SwWorkDetailResultVo;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.ConvertUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Date;
 
 /**
  * @Date:2017/12/24 0024 14:08
@@ -27,5 +30,12 @@ public class BeanUtilsEx extends BeanUtils {
            logger.error("扩展BeanUtils.copyProperties支持data类型:" + e.getMessage());
             e.printStackTrace();
         }
+    }
+
+    public static void main(String[] args) {
+        SwWorkDetailResultVo swWorkDetailResultVo=new SwWorkDetailResultVo();
+        SwWorkDetail swWorkDetail=new SwWorkDetail();
+        swWorkDetail.setModiTime(new Date());
+        BeanUtilsEx.copyProperties(swWorkDetailResultVo,swWorkDetail);
     }
 }
