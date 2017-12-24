@@ -37,7 +37,7 @@
     where  material_no = #{materialNo,jdbcType=VARCHAR} and version = #{version,jdbcType=INTEGER}
   </update>
 
-  <select id="selecByCond" resultMap="BaseResultMap" parameterType="com.fangxin.siwei.fangzhi.vo.stock.SwStockInfoQueryVo">
+  <select id="selecByCond" resultMap="BaseResultMap" parameterType="java.util.Map">
     SELECT a.*
     FROM sw_stock_info AS a JOIN sw_material_info AS b ON a.material_no=b.material_no
     where 1=1
@@ -51,6 +51,38 @@
       and    material_stock = #{materialStock,jdbcType=VARCHAR}
     </if>
 
+  </select>
+  <select id="countByCondition" resultType="java.lang.Integer" parameterType="java.util.Map">
+    SELECT count(a.id) as num
+    FROM sw_stock_info AS a JOIN sw_material_info AS b ON a.material_no=b.material_no
+    where 1=1
+    <if test="materialNo!=null and materialNo!=''" >
+      and    material_no = #{materialNo,jdbcType=VARCHAR}
+    </if>
+    <if test="materialType!=null and materialType!=''" >
+      and    material_type = #{materialType,jdbcType=VARCHAR}
+    </if>
+    <if test="materialStock!=null and materialStock!=''" >
+      and    material_stock = #{materialStock,jdbcType=VARCHAR}
+    </if>
+
+  </select>
+
+
+  <select id="findList" resultMap="BaseResultMap" parameterType="java.util.Map">
+    SELECT a.*
+    FROM sw_stock_info AS a JOIN sw_material_info AS b ON a.material_no=b.material_no
+    where 1=1
+    <if test="materialNo!=null and materialNo!=''" >
+      and    material_no = #{materialNo,jdbcType=VARCHAR}
+    </if>
+    <if test="materialType!=null and materialType!=''" >
+      and    material_type = #{materialType,jdbcType=VARCHAR}
+    </if>
+    <if test="materialStock!=null and materialStock!=''" >
+      and    material_stock = #{materialStock,jdbcType=VARCHAR}
+    </if>
+    limit ${startIndex},${endIndex}
   </select>
 
 

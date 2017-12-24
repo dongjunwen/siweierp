@@ -26,6 +26,28 @@
     process_name, unit, num, create_no, create_time, modi_no, modi_time, version
   </sql>
 
+  <select id="selectByCond" parameterType="java.util.Map">
+      SELECT
+      <include refid="Base_Column_List" />
+    from sw_work_detail
+    where 1=1
+    <if test="startTime!=null" >
+      and  work_date &gt;= #{startTime,jdbcType="VARCHAR"}
+    </if>
+    <if test="endTime!=null" >
+      and work_date &lt;= #{endTime,jdbcType="VARCHAR"}
+    </if>
+    <if test="orderNo!=null" >
+      and order_no = #{orderNo,jdbcType="VARCHAR" }
+    </if>
+    <if test="userName!=null" >
+      and user_name = #{userName,jdbcType="VARCHAR" }
+    </if>
+    <if test="stepNo!=null" >
+      and step_no = #{stepNo,jdbcType="VARCHAR" }
+    </if>
+   </select>
+
   <insert id="insertBatch" parameterType="java.util.List">
     insert into sw_work_detail ( work_no, work_date,
     order_no, order_seq_no, user_no,

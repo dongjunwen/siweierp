@@ -11,6 +11,7 @@ import java.util.Date;
  **/
 public class SwWorkDetailVo {
     private Integer id;
+    private String workNo;
     @ExcelField(title = "计件日期",sort = 1)
     private Date workDate;
     @ExcelField(title = "订单号",sort = 2)
@@ -56,6 +57,14 @@ public class SwWorkDetailVo {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getWorkNo() {
+        return workNo;
+    }
+
+    public void setWorkNo(String workNo) {
+        this.workNo = workNo;
     }
 
     public Date getWorkDate() {

@@ -104,7 +104,7 @@ public class FileUtil {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        logger.info("realPath={}",realPath);
         return realPath;
     }
 

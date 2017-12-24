@@ -1,9 +1,12 @@
 package com.fangxin.siwei.fangzhi.service.impl.stock;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.fangxin.siwei.fangzhi.common.constant.ConstantKey;
 import com.fangxin.siwei.fangzhi.common.enums.ResultCode;
 import com.fangxin.siwei.fangzhi.common.excel.Excel;
 import com.fangxin.siwei.fangzhi.common.excel.ExcelSheet;
+import com.fangxin.siwei.fangzhi.common.exception.RRException;
 import com.fangxin.siwei.fangzhi.common.result.Result;
 import com.fangxin.siwei.fangzhi.common.utils.*;
 import com.fangxin.siwei.fangzhi.mapper.SwStockInfoMapper;
@@ -16,6 +19,7 @@ import com.fangxin.siwei.fangzhi.vo.result.SwStockInfoResultVo;
 import com.fangxin.siwei.fangzhi.vo.stock.SwStockInfoQueryVo;
 import com.fangxin.siwei.fangzhi.vo.stock.SwStockInfoVo;
 import com.github.pagehelper.Page;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -26,10 +30,7 @@ import javax.annotation.Resource;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @Date:2017/11/7 0007 16:36
@@ -64,13 +65,41 @@ public class StockInfoServiceImpl extends AbstractService<SwStockInfo> implement
     @Override
     public Page<SwStockInfoResultVo> findList(Map<String, String> params) {
         //日期查询条件
-        Condition serviceCondition = Common.getServiceCondition(params, SwStockInfo.class);
-        Page<SwStockInfo> swStockIns = (Page)findByCondition(serviceCondition);
+        //Condition serviceCondition = Common.getServiceCondition(params, SwStockInfo.class);
+       // Page<SwStockInfo> swStockIns = (Page)findByCondition(serviceCondition);
+        int pageNum = 1;    //当前页默认为1
+        int pageSize = 5;   //默认每页显示5条
+        String pageNumStr =  params.get("currPage");
+        String pageSizeStr = params.get("pageSize");
+        if(StringUtils.isNotBlank(pageNumStr)){
+            pageNum = Integer.parseInt(pageNumStr);
+        }
+        if(StringUtils.isNotBlank(pageSizeStr)){
+            pageSize = Integer.parseInt(pageSizeStr);
+        }
+        String filter = params.get("filter");
+        if(StringUtils.isNotBlank(filter)){
+            try {
+                JSONObject filterOjb = JSON.parseObject(filter);
+                params.put("materialNo",filterOjb.getString("materialNo"));
+                params.put("materialStock",filterOjb.getString("materialStock"));
+                params.put("materialType",filterOjb.getString("materialType"));
+            }catch (Exception e){
+                throw new RRException("filter格式错误，请填写json格式");
+            }
+        }
+        int startIndex=(pageNum-1)*pageSize;
+        int endIndex=(pageNum-1)*pageSize+pageSize;
+        params.put("startIndex",String.valueOf(startIndex));
+        params.put("endIndex",String.valueOf(endIndex));
+        int total=swStockInfoMapper.countByCondition(params);
+        List<SwStockInfo> swStockIns=swStockInfoMapper.findList(params);
+        int pages=total%pageSize==0?total/pageSize:total/pageSize+1;
         Page<SwStockInfoResultVo> swStockInfoResultVos= new Page<SwStockInfoResultVo>();
-        swStockInfoResultVos.setPageSize(swStockIns.getPageSize());
-        swStockInfoResultVos.setPageNum(swStockIns.getPageNum());
-        swStockInfoResultVos.setPages(swStockIns.getPages());
-        swStockInfoResultVos.setTotal(swStockIns.getTotal());
+        swStockInfoResultVos.setPageSize(pageSize);
+        swStockInfoResultVos.setPageNum(pageNum);
+        swStockInfoResultVos.setPages(pages);
+        swStockInfoResultVos.setTotal(total);
         for(SwStockInfo swStockInfo: swStockIns){
             SwStockInfoResultVo swStockInfoResultVo=new SwStockInfoResultVo();
             convertToVo(swStockInfo,swStockInfoResultVo);
@@ -117,8 +146,19 @@ public class StockInfoServiceImpl extends AbstractService<SwStockInfo> implement
     }
 
     @Override
-    public List<SwStockInfoResultVo> findCond(SwStockInfoQueryVo swStockInfoQueryVo) {
-        List<SwStockInfo>  swStockInfos=swStockInfoMapper.selecByCond(swStockInfoQueryVo);
+    public List<SwStockInfoResultVo> findCond(Map<String, String> params) {
+        String filter = params.get("filter");
+        if(StringUtils.isNotBlank(filter)){
+            try {
+                JSONObject filterOjb = JSON.parseObject(filter);
+                params.put("materialNo",filterOjb.getString("materialNo"));
+                params.put("materialStock",filterOjb.getString("materialStock"));
+                params.put("materialType",filterOjb.getString("materialType"));
+            }catch (Exception e){
+                throw new RRException("filter格式错误，请填写json格式");
+            }
+        }
+        List<SwStockInfo>  swStockInfos=swStockInfoMapper.selecByCond(params);
         List<SwStockInfoResultVo> swStockInfoResultVos=new ArrayList<>();
         for(SwStockInfo swStockInfo: swStockInfos){
             SwStockInfoResultVo swStockInfoResultVo=new SwStockInfoResultVo();

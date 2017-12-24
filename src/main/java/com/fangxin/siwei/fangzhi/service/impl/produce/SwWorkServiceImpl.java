@@ -1,23 +1,29 @@
 package com.fangxin.siwei.fangzhi.service.impl.produce;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.fangxin.siwei.fangzhi.common.enums.ResultCode;
 import com.fangxin.siwei.fangzhi.common.excel.Excel;
 import com.fangxin.siwei.fangzhi.common.excel.ExcelSheet;
+import com.fangxin.siwei.fangzhi.common.exception.RRException;
 import com.fangxin.siwei.fangzhi.common.result.Result;
 import com.fangxin.siwei.fangzhi.common.utils.*;
 import com.fangxin.siwei.fangzhi.mapper.SwWorkDetailMapper;
 import com.fangxin.siwei.fangzhi.modal.SwOrderBase;
 import com.fangxin.siwei.fangzhi.modal.SwReceiveBase;
+import com.fangxin.siwei.fangzhi.modal.SwStockInfo;
 import com.fangxin.siwei.fangzhi.modal.SwWorkDetail;
 import com.fangxin.siwei.fangzhi.service.AbstractService;
 import com.fangxin.siwei.fangzhi.service.produce.SwWorkService;
 import com.fangxin.siwei.fangzhi.service.system.SysUserService;
 import com.fangxin.siwei.fangzhi.vo.produce.SwWorkDetailVo;
 import com.fangxin.siwei.fangzhi.vo.result.SwReceiveBaseResultVo;
+import com.fangxin.siwei.fangzhi.vo.result.SwStockInfoResultVo;
 import com.fangxin.siwei.fangzhi.vo.result.SwWorkDetailResultVo;
 import com.github.pagehelper.Page;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -73,6 +79,7 @@ public class SwWorkServiceImpl extends AbstractService<SwWorkDetail> implements 
                 swWorkDetail.setVersion(0);
                 swWorkDetail.setWorkNo(workNo);
                 swWorkDetails.add(swWorkDetail);
+                swWorkDetailVo.setWorkNo(workNo);
             }
             swWorkDetailMapper.insertBatch(swWorkDetails);
             logger.info("记录数据:{}成功!",saveFileName);
@@ -108,6 +115,7 @@ public class SwWorkServiceImpl extends AbstractService<SwWorkDetail> implements 
         for(SwWorkDetail swWorkDetail: swWorkDetails){
             SwWorkDetailResultVo swWorkDetailResultVo=new SwWorkDetailResultVo();
             convertEntityTVo(swWorkDetailResultVo,swWorkDetail);
+            swWorkDetailResultVo.setWorkDate(DateUtil.formatDate(swWorkDetail.getWorkDate()));
             swWorkDetailResultVo.setCreateName(sysUserService.getUserNameById(swWorkDetailResultVo.getCreateNo()));
             swWorkDetailResultVo.setModiName(sysUserService.getUserNameById(swWorkDetailResultVo.getModiNo()));
             swWorkDetailResultVo.setCreateTime(DateUtil.formatDateTime(swWorkDetail.getCreateTime()));
@@ -143,6 +151,48 @@ public class SwWorkServiceImpl extends AbstractService<SwWorkDetail> implements 
             swWorkDetailMapper.insertSelective(swWorkDetail);
         }
         return Result.newSuccess(1);
+    }
+
+    @Override
+    public List<SwWorkDetailResultVo> findCond(Map<String, String> params) {
+        String filter = params.get("filter");
+        if(StringUtils.isNotBlank(filter)){
+            try {
+                JSONObject filterOjb = JSON.parseObject(filter);
+                params.put("orderNo",filterOjb.getString("orderNo"));
+                params.put("userName",filterOjb.getString("userName"));
+                params.put("stepNo",filterOjb.getString("stepNo"));
+            }catch (Exception e){
+                throw new RRException("filter格式错误，请填写json格式");
+            }
+        }
+        String startTime = params.get("startTime");
+        String endTime = params.get("endTime");
+        if(StringUtils.isNotBlank(startTime)&&StringUtils.isNotBlank(endTime)){
+            startTime=startTime+" 00:00:00";
+            endTime=endTime+" 23:59:59";
+            params.put("startTime",startTime);
+            params.put("endTime",endTime);
+        }else if(StringUtils.isNotBlank(startTime)){
+            startTime=startTime+" 00:00:00";
+            params.put("startTime",startTime);
+        }else if(StringUtils.isNotBlank(endTime)){
+            endTime=endTime+" 23:59:59";
+            params.put("endTime",endTime);
+        }
+        List<SwWorkDetail>  swWorkDetails=swWorkDetailMapper.selectByCond(params);
+        List<SwWorkDetailResultVo> swWorkDetailResultVos=new ArrayList<>();
+        for(SwWorkDetail swWorkDetail: swWorkDetails){
+            SwWorkDetailResultVo swWorkDetailResultVo=new SwWorkDetailResultVo();
+            convertEntityTVo(swWorkDetailResultVo,swWorkDetail);
+            swWorkDetailResultVo.setWorkDate(DateUtil.formatDate(swWorkDetail.getWorkDate()));
+            swWorkDetailResultVo.setCreateName(sysUserService.getUserNameById(swWorkDetailResultVo.getCreateNo()));
+            swWorkDetailResultVo.setModiName(sysUserService.getUserNameById(swWorkDetailResultVo.getModiNo()));
+            swWorkDetailResultVo.setCreateTime(DateUtil.formatDateTime(swWorkDetail.getCreateTime()));
+            swWorkDetailResultVo.setModiTime(DateUtil.formatDateTime(swWorkDetail.getModiTime()));
+            swWorkDetailResultVos.add(swWorkDetailResultVo);
+        }
+        return swWorkDetailResultVos;
     }
 
 

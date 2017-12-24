@@ -2,15 +2,18 @@ package com.fangxin.siwei.fangzhi.controller.produce;
 
 import com.alibaba.fastjson.JSON;
 import com.fangxin.siwei.fangzhi.common.enums.ResultCode;
+import com.fangxin.siwei.fangzhi.common.excel.Excel;
 import com.fangxin.siwei.fangzhi.common.result.Result;
 import com.fangxin.siwei.fangzhi.common.utils.FileUtil;
 import com.fangxin.siwei.fangzhi.common.utils.PageUitls;
+import com.fangxin.siwei.fangzhi.common.utils.UUIDUtils;
 import com.fangxin.siwei.fangzhi.common.validator.ValidatorUtil;
 import com.fangxin.siwei.fangzhi.common.validator.group.AddGroup;
 import com.fangxin.siwei.fangzhi.service.produce.SwWorkService;
 import com.fangxin.siwei.fangzhi.vo.produce.SwWorkDetailVo;
 import com.fangxin.siwei.fangzhi.vo.purchase.SwPurOrderModiVo;
 import com.fangxin.siwei.fangzhi.vo.result.SwPurOrderBaseResultVo;
+import com.fangxin.siwei.fangzhi.vo.result.SwStockInfoResultVo;
 import com.fangxin.siwei.fangzhi.vo.result.SwWorkDetailResultVo;
 import com.fangxin.siwei.fangzhi.vo.system.SysDictVo;
 import com.github.pagehelper.Page;
@@ -126,5 +129,25 @@ public class WorkContoller {
         return Result.newSuccess(new PageUitls<SwWorkDetailResultVo>(page));
     }
 
+
+    @ApiOperation(value = "工时信息导出Excel")
+    @RequestMapping(value = "exportExcel",method = RequestMethod.GET)
+    @ApiImplicitParam(name = "filter",value = "通用表过滤器。发送JSON键/值对，如<code>{“key”:“value”}</code>。", paramType = "query",dataTypeClass = JSON.class)
+    public ResponseEntity<byte[]>  exportExcel(@RequestParam @ApiParam(hidden = true) Map<String,String> params)throws Exception {
+        List<SwWorkDetailResultVo> swStockInfoResultVos = swWorkService.findCond(params);
+        Excel excel=new Excel();
+        String fileName="workExportTemplate";
+        // String templateFileName= FileUtil.getRealPath()+"/static/template/"+fileName;
+        InputStream inputStream = this.getClass().getResourceAsStream("/static/template/"+fileName);
+        String prefix=fileName.substring(fileName.indexOf("."));
+        String saveFileName= UUIDUtils.genUUID("WI")+prefix;
+        String saveRealFileName="/home/file/"+saveFileName ;
+        excel.createExcel(inputStream,swStockInfoResultVos,saveRealFileName);
+        logger.info("下载路径:{}",saveFileName);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+        headers.setContentDispositionFormData("attachment", saveFileName);
+        return new ResponseEntity<byte[]>(FileUtil.readFileToByteArray(saveRealFileName), headers, HttpStatus.CREATED);
+    }
 
 }

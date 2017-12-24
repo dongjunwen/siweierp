@@ -22,4 +22,6 @@ public interface SwWorkService {
     Result<Integer>  deleteByIdstr(String ids);
 
     Result<Integer> save(SwWorkDetailVo swWorkDetailVo);
+
+    List<SwWorkDetailResultVo> findCond(Map<String, String> params);
 }
