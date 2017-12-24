@@ -21,7 +21,7 @@ public class FileUtil {
         try {
             String parentPath=savePath.substring(0,savePath.lastIndexOf("/"));
             File f=new File(parentPath);
-            if(!f.exists()) f.createNewFile();
+            if(!f.exists()) f.mkdirs();
             fileOutputStream=new FileOutputStream(savePath);
             while((len=importFile.read(data))!=-1){
                 fileOutputStream.write(data);
@@ -56,6 +56,19 @@ public class FileUtil {
         byte[] buffer = new byte[0];
         try {
             InputStream fis = new BufferedInputStream(new FileInputStream(fileName));
+            buffer = new byte[fis.available()];
+            fis.read(buffer);
+            fis.close();
+            return  buffer;
+        } catch (IOException e) {
+            logger.error("读取文件异常:{}",e);
+        }
+        return null;
+    }
+
+    public static byte[] readFsToByteArray(InputStream fis) {
+        byte[] buffer = new byte[0];
+        try {
             buffer = new byte[fis.available()];
             fis.read(buffer);
             fis.close();

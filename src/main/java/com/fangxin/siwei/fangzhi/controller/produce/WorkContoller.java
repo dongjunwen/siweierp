@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
@@ -81,13 +82,14 @@ public class WorkContoller {
     @RequestMapping(value = "/downTemplate",method = RequestMethod.GET)
     public ResponseEntity<byte[]> download() throws IOException {
         String fileName="workTemplate.xls";
-        String dfileName=FileUtil.getRealPath()+"/static/template/"+fileName;
+        //String dfileName=FileUtil.getRealPath()+"/static/template/"+fileName;
+        InputStream inputStream = this.getClass().getResourceAsStream("/static/template/"+fileName);
          //dfileName = new String(dfileName.getBytes("gb2312"), "iso8859-1");
         logger.info("下载路径:{}",fileName);
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
         headers.setContentDispositionFormData("attachment", fileName);
-        return new ResponseEntity<byte[]>(FileUtil.readFileToByteArray(dfileName), headers, HttpStatus.CREATED);
+        return new ResponseEntity<byte[]>(FileUtil.readFsToByteArray(inputStream), headers, HttpStatus.CREATED);
     }
 
     @ApiOperation(value="删除工时", notes="删除工时")
