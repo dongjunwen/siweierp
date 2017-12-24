@@ -181,7 +181,9 @@ public class SwWorkServiceImpl extends AbstractService<SwWorkDetail> implements 
 
     @Override
     public Result<Integer> deleteByWorkNos(String workNos) {
+        logger.info("删除工时单号:{}",workNos);
         Integer delNum=swWorkDetailMapper.deleteByWorkNos(workNos);
+        logger.info("删除工时数量:{}",delNum);
         return Result.newSuccess(delNum);
     }
 
