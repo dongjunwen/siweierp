@@ -21,6 +21,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
@@ -47,8 +48,8 @@ public class SysUserServiceImpl  implements SysUserService {
     SysUserRoleMapper sysUserRoleMapper;
 
     @Override
+    @Transactional
     public Result<Integer> createUser(SysUserVo sysUserVo) {
-
         SysUser _sysUser=sysUserMapper.selectByUserNo(sysUserVo.getUserNo());
         if(_sysUser!=null){
             return  Result.newError(ResultCode.COMMON_DATA_EXISTS.getCode(),"账户已存在!");
@@ -60,7 +61,16 @@ public class SysUserServiceImpl  implements SysUserService {
         sysUser.setCreateTime(new Date());
         sysUser.setModiNo(ShiroUtils.getCurrentUserNo());
         sysUser.setModiTime(new Date());
-        return Result.newSuccess(sysUserMapper.insertSelective(sysUser));
+        SwDepartEmployee swDepartEmployee=new SwDepartEmployee();
+        swDepartEmployee.setDepartNo(sysUserVo.getDepartNo());
+        swDepartEmployee.setUserNo(sysUserVo.getUserNo());
+        try{
+            swDepartEmployeeMapper.insertSelective(swDepartEmployee);
+            sysUserMapper.insertSelective(sysUser);
+        }catch (Exception e){
+            throw new RRException("创建用户异常!");
+        }
+        return Result.newSuccess(1);
     }
 
     @Override
@@ -154,6 +164,29 @@ public class SysUserServiceImpl  implements SysUserService {
         sysUser.setUserNo(oldSysUser.getUserNo());
         String signPass1=MD5Util.getMD5(sysUserModiVo.getPasswordNew1());
         sysUser.setPassword(signPass1);
+        return Result.newSuccess(sysUserMapper.updateByUserNo(sysUser));
+    }
+
+    /**
+     * 启用|禁用用户
+     * @param userNo
+     * @return
+     */
+    @Override
+    public Result<Integer> operUser(String userNo) {
+        SysUser _sysUser=sysUserMapper.selectByUserNo(userNo);
+        if(_sysUser==null){
+            return  Result.newError(ResultCode.COMMON_DATA_NOT_EXISTS.getCode(),"账户不存在!");
+        }
+        SysUser sysUser=new SysUser();
+        sysUser.setUserNo(userNo);
+        if("Y".equals(_sysUser.getStatus())){
+            sysUser.setStatus("N");
+        }else{
+            sysUser.setStatus("Y");
+        }
+        sysUser.setModiNo(ShiroUtils.getCurrentUserNo());
+        sysUser.setModiTime(new Date());
         return Result.newSuccess(sysUserMapper.updateByUserNo(sysUser));
     }
 

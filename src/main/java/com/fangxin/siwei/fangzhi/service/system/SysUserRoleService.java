@@ -1,8 +1,11 @@
 package com.fangxin.siwei.fangzhi.service.system;
 
+import com.fangxin.siwei.fangzhi.common.result.Result;
 import com.fangxin.siwei.fangzhi.common.utils.MyMapper;
 import com.fangxin.siwei.fangzhi.modal.SysRole;
 import com.fangxin.siwei.fangzhi.modal.SysUserRole;
+import com.fangxin.siwei.fangzhi.vo.result.SysUserRoleResultVo;
+import com.fangxin.siwei.fangzhi.vo.system.SysUserRoleVo;
 
 import java.util.List;
 
@@ -13,4 +16,12 @@ import java.util.List;
  **/
 public interface SysUserRoleService  {
     List<SysUserRole> selectByUserNo(String userNo);
+
+    List<SysUserRoleResultVo> getEntityByUserNo(String userNo);
+
+    Result<Integer> deleteByIds(String ids);
+
+    Result<Integer> delete(String id);
+
+    Result<Integer> create(SysUserRoleVo sysUserRoleVo);
 }

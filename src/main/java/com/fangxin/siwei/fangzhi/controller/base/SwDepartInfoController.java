@@ -35,8 +35,8 @@ public class SwDepartInfoController {
     /** restful api 增删改查*/
     @RequestMapping(method = RequestMethod.POST)
     @ApiOperation(value="创建部门", notes="根据部门对象创建部门")
-    //@ApiImplicitParam(name = "swDepartInfoVo", value = "部门信息实体 swDepartInfoVo",dataTypeClass = swDepartInfoVo.class)
-    public Result<String> create(@ApiParam(name = "swDepartInfoVo", value = "部门信息实体 swDepartInfoVo", required = true) @RequestBody SwDepartInfoVo swDepartInfoVo){
+    @ApiParam(name = "swDepartInfoVo", value = "部门信息实体 swDepartInfoVo", required = true)
+    public Result<String> create( @RequestBody SwDepartInfoVo swDepartInfoVo){
         ValidatorUtil.validateEntity(swDepartInfoVo, AddGroup.class);//校验
         try{
             Result<Integer> _result= swDepartInfoService.create(swDepartInfoVo);

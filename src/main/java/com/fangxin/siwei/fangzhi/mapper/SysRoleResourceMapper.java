@@ -9,4 +9,6 @@ public interface SysRoleResourceMapper extends MyMapper<SysRoleResource>{
 
 
     List<SysRoleResource> selectByUserNo(String userNo);
+
+    SysRoleResource selectByRoleCodeAndSourceNo(String roleCode, String sourceNo);
 }
