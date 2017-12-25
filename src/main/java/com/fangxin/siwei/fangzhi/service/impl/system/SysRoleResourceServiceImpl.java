@@ -39,7 +39,7 @@ public class SysRoleResourceServiceImpl implements SysRoleResourceService {
     public Result<Integer> create(SysRoleResourceVo sysRoleResourceVo) {
         SysRoleResource oldSysRoleResource=sysRoleResourceMapper.selectByRoleCodeAndSourceNo(sysRoleResourceVo.getRoleCode(),sysRoleResourceVo.getSourceNo());;
         if(oldSysRoleResource!=null){
-            return  Result.newError(ResultCode.COMMON_DATA_EXISTS.getCode(),"角色对应的字眼已存在!");
+            return  Result.newError(ResultCode.COMMON_DATA_EXISTS.getCode(),"角色已经拥有该资源权限!");
         }
         SysRoleResource sysRoleResource=new SysRoleResource();
         sysRoleResource.setRoleCode(sysRoleResourceVo.getRoleCode());
