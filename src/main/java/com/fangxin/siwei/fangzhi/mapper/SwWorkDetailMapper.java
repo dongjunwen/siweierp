@@ -12,7 +12,7 @@ public interface SwWorkDetailMapper extends MyMapper<SwWorkDetail> {
 
     List<SwWorkDetail> selectByCond(Map<String, String> params);
 
-    Integer deleteByWorkNos(List<String> workNos);
+    Integer deleteByWorkNos(String[] workNos);
 
     void updateByWorkNo(SwWorkDetail swWorkDetail);
 }

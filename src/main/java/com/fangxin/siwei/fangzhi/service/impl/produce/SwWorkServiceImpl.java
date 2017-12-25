@@ -28,6 +28,7 @@ import tk.mybatis.mapper.entity.Condition;
 import javax.annotation.Resource;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -180,10 +181,10 @@ public class SwWorkServiceImpl extends AbstractService<SwWorkDetail> implements 
     }
 
     @Override
-    public Result<Integer> deleteByWorkNos(List<String> workNoList) {
-        String workNos=StringUtils.join(workNoList.toArray(),",");
+    public Result<Integer> deleteByWorkNos(String workNos) {
         logger.info("删除工时单号:{}",workNos);
-        Integer delNum=swWorkDetailMapper.deleteByWorkNos(workNoList);
+        String[] workNoArray= workNos.split(",");
+        Integer delNum=swWorkDetailMapper.deleteByWorkNos(workNoArray);
         logger.info("删除工时数量:{}",delNum);
         return Result.newSuccess(delNum);
     }
