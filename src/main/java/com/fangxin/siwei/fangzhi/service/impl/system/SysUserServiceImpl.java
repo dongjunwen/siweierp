@@ -61,15 +61,7 @@ public class SysUserServiceImpl  implements SysUserService {
         sysUser.setCreateTime(new Date());
         sysUser.setModiNo(ShiroUtils.getCurrentUserNo());
         sysUser.setModiTime(new Date());
-        SwDepartEmployee swDepartEmployee=new SwDepartEmployee();
-        swDepartEmployee.setDepartNo(sysUserVo.getDepartNo());
-        swDepartEmployee.setUserNo(sysUserVo.getUserNo());
-        try{
-            swDepartEmployeeMapper.insertSelective(swDepartEmployee);
-            sysUserMapper.insertSelective(sysUser);
-        }catch (Exception e){
-            throw new RRException("创建用户异常!");
-        }
+        sysUserMapper.insertSelective(sysUser);
         return Result.newSuccess(1);
     }
 
