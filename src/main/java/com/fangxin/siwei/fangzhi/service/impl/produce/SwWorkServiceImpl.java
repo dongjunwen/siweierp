@@ -67,7 +67,14 @@ public class SwWorkServiceImpl extends AbstractService<SwWorkDetail> implements 
             for(SwWorkDetailVo swWorkDetailVo:swWorkDetailVos){
                 String workNo= UUIDUtils.genUUID("I");
                 SwWorkDetail swWorkDetail=new SwWorkDetail();
-                String stepNo=SysDictUtils.getCodeByUniqName("STEP_NO",swWorkDetailVo.getStepName());
+                String stepNo="";
+                String stepName=swWorkDetailVo.getStepName();
+                try{
+                    stepNo=SysDictUtils.getCodeByUniqName("STEP_NO",stepName);
+                }catch (NullPointerException e){
+                    throw new RRException("没有该流程["+stepName+"]请联系管理员维护!");
+                }
+
                 swWorkDetailVo.setWorkNo(workNo);
                 swWorkDetailVo.setStepNo(stepNo);
                 convertVoToEntity(swWorkDetail,swWorkDetailVo);
