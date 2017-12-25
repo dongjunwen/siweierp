@@ -261,10 +261,9 @@
       <if test="modiTime != null">
         modi_time = #{modiTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="version != null">
-        version = #{version,jdbcType=INTEGER},
-      </if>
+      version = version+1,
     </set>
     where user_no = #{userNo,jdbcType=VARCHAR}
+    and  version = #{version,jdbcType=INTEGER}
   </update>
 </mapper>

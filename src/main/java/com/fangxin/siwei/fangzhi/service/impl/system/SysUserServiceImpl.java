@@ -81,6 +81,7 @@ public class SysUserServiceImpl  implements SysUserService {
         convertVoToEntity(sysUser,sysUserVo);
         sysUser.setModiNo(ShiroUtils.getCurrentUserNo());
         sysUser.setModiTime(new Date());
+        sysUser.setVersion(_sysUser.getVersion());
         return Result.newSuccess(sysUserMapper.updateByUserNo(sysUser));
     }
 
@@ -156,6 +157,7 @@ public class SysUserServiceImpl  implements SysUserService {
         sysUser.setUserNo(oldSysUser.getUserNo());
         String signPass1=MD5Util.getMD5(sysUserModiVo.getPasswordNew1());
         sysUser.setPassword(signPass1);
+        sysUser.setVersion(oldSysUser.getVersion());
         return Result.newSuccess(sysUserMapper.updateByUserNo(sysUser));
     }
 
@@ -179,6 +181,7 @@ public class SysUserServiceImpl  implements SysUserService {
         }
         sysUser.setModiNo(ShiroUtils.getCurrentUserNo());
         sysUser.setModiTime(new Date());
+        sysUser.setVersion(_sysUser.getVersion());
         return Result.newSuccess(sysUserMapper.updateByUserNo(sysUser));
     }
 

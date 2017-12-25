@@ -13,6 +13,7 @@ import com.fangxin.siwei.fangzhi.service.base.SwDepartEmployeeService;
 import com.fangxin.siwei.fangzhi.vo.base.SwDepartEmployeeVo;
 import com.fangxin.siwei.fangzhi.vo.result.SysDepartEmployeeResultVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ import java.util.List;
  * @Author lu.dong
  * @Description：
  **/
+@Service
 public class SwDepartEmployeeServiceImpl implements SwDepartEmployeeService {
 
     @Autowired

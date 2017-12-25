@@ -68,7 +68,7 @@ public class SysUserController {
         }
     }
 
-    @RequestMapping(value = "/{userNo}",method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{userNo}",method = RequestMethod.PUT)
     @ApiOperation(value="启用|禁用用户", notes="根据url的用户编号来启用禁用用户")
     @ApiImplicitParam(name = "userNo", value = "用户编号", required = true, dataType = "string",paramType = "path")
     public Result<String>  operUser(@PathVariable("userNo")String userNo){
