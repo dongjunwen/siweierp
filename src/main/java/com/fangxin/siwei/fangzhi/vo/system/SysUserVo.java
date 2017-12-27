@@ -15,6 +15,7 @@ import java.util.Date;
  **/
 @ApiModel(value = "用户操作实体 SysUserVo")
 public class SysUserVo implements Serializable {
+
     @NotBlank(message = "登录号不能为空",groups = {AddGroup.class})
     @ApiModelProperty(value = "登录号",required =true )
     private String userNo;

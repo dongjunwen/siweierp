@@ -18,6 +18,24 @@
     id, role_code, role_name, status, if_admin, memo, create_no, create_time, modi_no, 
     modi_time, version
   </sql>
+
+  <select id="selectByRoleCode" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sys_role
+    where role_code = #{roleCode,jdbcType=VARCHAR}
+  </select>
+
+  <select id="findRoleLike" >
+    select
+    <include refid="Base_Column_List" />
+    from sys_role
+    where 1=1
+    and (
+      role_code like CONCAT (#{condStr},'%') or
+      role_name like CONCAT (#{condStr},'%')
+    )
+  </select>
  <!-- <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

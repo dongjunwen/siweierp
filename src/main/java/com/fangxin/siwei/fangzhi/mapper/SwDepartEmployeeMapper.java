@@ -1,6 +1,7 @@
 package com.fangxin.siwei.fangzhi.mapper;
 
 import com.fangxin.siwei.fangzhi.modal.SwDepartEmployee;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -18,4 +19,6 @@ public interface SwDepartEmployeeMapper {
     int updateByPrimaryKey(SwDepartEmployee record);
 
     List<SwDepartEmployee> selectByUserNo(String loginNo);
+
+    SwDepartEmployee selectByUserNoAndDepartNo(@Param("userNo") String userNo, @Param("departNo")String departNo);
 }

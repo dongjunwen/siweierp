@@ -21,6 +21,14 @@
     from sw_depart_employee
     where id = #{id,jdbcType=INTEGER}
   </select>
+
+  <select id="selectByUserNoAndDepartNo" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sw_depart_employee
+    where user_no = #{userNo,jdbcType=VARCHAR}
+    and depart_no = #{departNo,jdbcType=VARCHAR}
+  </select>
   <select id="selectByUserNo" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
       a.id, a.depart_no, a.user_no,b.depart_name, a.create_no, a.create_time, a.modi_no, a.modi_time, a.version

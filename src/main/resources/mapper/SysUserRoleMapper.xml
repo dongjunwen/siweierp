@@ -22,6 +22,14 @@
     where a.user_no = #{userNo,jdbcType=VARCHAR}
   </select>
 
+  <select id="selectByUserNoAndRoleCode" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sys_user_role
+    where user_no = #{userNo,jdbcType=VARCHAR}
+    and role_code=#{roleCode,jdbcType=VARCHAR}
+  </select>
+
 
  <!--
   <update id="updateByPrimaryKeySelective" parameterType="com.fangxin.siwei.fangzhi.modal.SysUserRole">

@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface SysRoleMapper extends MyMapper<SysRole> {
 
+    SysRole selectByRoleCode(String roleCode);
 
-    List<SysRole> selectByUserNo(String userNo);
+    List<SysRole> findRoleLike(String condStr);
 }

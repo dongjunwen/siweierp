@@ -128,7 +128,7 @@
   <delete id="deleteByWorkNos" parameterType="java.util.List" >
     DELETE  from sw_work_detail where 1=1
      and work_no in
-    <foreach collection="list" index="index" item="workNo" open="(" separator="," close=")">
+    <foreach collection="array" index="index" item="workNo" open="(" separator="," close=")">
       #{workNo}
     </foreach>
   </delete>

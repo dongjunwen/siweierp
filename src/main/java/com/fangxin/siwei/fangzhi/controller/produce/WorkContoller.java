@@ -94,11 +94,11 @@ public class WorkContoller {
     }
 
     @ApiOperation(value="删除工时", notes="删除工时")
-    @RequestMapping(value = "delByWorkNos",method = RequestMethod.POST)
-    @ApiParam(name = "swWorkDelVo ",value = "工时编号 swWorkDelVo", required = true)
-    public Result<String> delete( @RequestBody SwWorkDelVo swWorkDelVo){
+    @RequestMapping(value = "/{workNos}",method = RequestMethod.DELETE)
+    @ApiParam(name = "workNos ",value = "工时编号,逗号分隔 workNos", required = true)
+    public Result<String> delete(@PathVariable("workNos") String workNos){
         try {
-            Result<Integer> result= swWorkService.deleteByWorkNos(swWorkDelVo.getWorkNos());
+            Result<Integer> result= swWorkService.deleteByWorkNos(workNos);
             if (!result.isSuccess()) {
                 return Result.newError(result.getCode(), result.getMessage());
             }

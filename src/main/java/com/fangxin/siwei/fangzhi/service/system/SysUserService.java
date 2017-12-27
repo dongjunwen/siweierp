@@ -56,4 +56,6 @@ public interface SysUserService {
     SysUserResultVo getUserInfoByNo(String loginNo);
 
     Result<Integer> modiPass(SysUserModiVo sysUserModiVo);
+
+    Result<Integer> operUser(String userNo);
 }

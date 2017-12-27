@@ -34,7 +34,8 @@ public class SysUserController {
 
     @RequestMapping(method = RequestMethod.POST)
     @ApiOperation(value="创建用户", notes="根据User对象创建用户")
-    public Result<String> createUser(@ApiParam(name = "sysUserVo", value = "用户操作实体 sysUserVo",required = true) @RequestBody SysUserVo sysUserVo){
+    @ApiParam(name = "sysUserVo", value = "用户操作实体 sysUserVo",required = true)
+    public Result<String> createUser(@RequestBody SysUserVo sysUserVo){
         ValidatorUtil.validateEntity(sysUserVo, AddGroup.class);//校验用户实体字段，
         try{
             Result<Integer> _result=sysUserService.createUser(sysUserVo);
@@ -65,6 +66,22 @@ public class SysUserController {
             logger.error("用户修改异常!{}", e);
             return Result.newError(ResultCode.FAIL);
         }
+    }
+
+    @RequestMapping(value = "/{userNo}",method = RequestMethod.PUT)
+    @ApiOperation(value="启用|禁用用户", notes="根据url的用户编号来启用禁用用户")
+    @ApiImplicitParam(name = "userNo", value = "用户编号", required = true, dataType = "string",paramType = "path")
+    public Result<String>  operUser(@PathVariable("userNo")String userNo){
+        try {
+            Result<Integer> _result =  sysUserService.operUser(userNo);
+            if (!_result.isSuccess()) {
+                return Result.newError(_result.getCode(), _result.getMessage());
+            }
+        }catch (Exception e){
+            logger.error("启用|禁用用户异常!{}", e);
+            return Result.newError(ResultCode.FAIL);
+        }
+        return Result.newSuccess("启用|禁用用户成功");
     }
 
     @RequestMapping(value = "/{userNo}",method = RequestMethod.DELETE)

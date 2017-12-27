@@ -23,7 +23,7 @@ public interface SwWorkService {
 
     List<SwWorkDetailResultVo> findCond(Map<String, String> params);
 
-    Result<Integer> deleteByWorkNos(List<String> workNos);
+    Result<Integer> deleteByWorkNos(String workNos);
 
     Result<Integer> deleteByIdstr(String ids);
 }
