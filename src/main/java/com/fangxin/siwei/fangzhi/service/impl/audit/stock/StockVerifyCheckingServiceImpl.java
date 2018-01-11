@@ -22,9 +22,14 @@ public class StockVerifyCheckingServiceImpl implements IAuditCheckingService {
     @Resource
     SwStockVerifyMapper swStockVerifyMapper;
 
-    @Override
+   /* @Override
     public AuditTypeEnum getAuditType() {
         return AuditTypeEnum.STOCKVERIFY;
+    }*/
+
+    @Override
+    public boolean matches(AuditTypeEnum auditTypeEnum) {
+        return AuditTypeEnum.STOCKVERIFY.equals(auditTypeEnum);
     }
 
     @Override

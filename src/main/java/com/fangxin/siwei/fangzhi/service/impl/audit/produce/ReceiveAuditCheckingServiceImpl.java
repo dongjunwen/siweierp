@@ -22,9 +22,14 @@ public class ReceiveAuditCheckingServiceImpl implements IAuditCheckingService {
     @Resource
     SwReceiveBaseMapper swReceiveBaseMapper;
 
-    @Override
+  /*  @Override
     public AuditTypeEnum getAuditType() {
         return AuditTypeEnum.RECEIVE;
+    }*/
+
+    @Override
+    public boolean matches(AuditTypeEnum auditTypeEnum) {
+        return AuditTypeEnum.RECEIVE.equals(auditTypeEnum);
     }
 
     @Override

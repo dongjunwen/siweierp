@@ -22,9 +22,14 @@ public class ReturnAuditCheckingServiceImpl implements IAuditCheckingService {
     @Resource
     SwReturnBaseMapper swReturnBaseMapper;
 
-    @Override
+   /* @Override
     public AuditTypeEnum getAuditType() {
         return AuditTypeEnum.RETURN;
+    }*/
+
+    @Override
+    public boolean matches(AuditTypeEnum auditTypeEnum) {
+        return AuditTypeEnum.RETURN.equals(auditTypeEnum);
     }
 
     @Override
