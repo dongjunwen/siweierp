@@ -22,9 +22,14 @@ public class DeliverAuditCheckingServiceImpl implements IAuditCheckingService {
     @Resource
     SwDeliverBaseMapper swDeliverBaseMapper;
 
-    @Override
-    public AuditTypeEnum getAuditType() {
+    //废弃 含义不清
+   /* public AuditTypeEnum getAuditType() {
         return AuditTypeEnum.DELIVER;
+    }*/
+
+    @Override
+    public boolean matches(AuditTypeEnum auditTypeEnum) {
+        return  AuditTypeEnum.DELIVER.equals(auditTypeEnum);
     }
 
     @Override

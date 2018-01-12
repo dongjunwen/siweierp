@@ -218,6 +218,13 @@
 			<version>1.0.6</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/net.bull.javamelody/javamelody-core -->
+		<dependency>
+			<groupId>net.bull.javamelody</groupId>
+			<artifactId>javamelody-core</artifactId>
+			<version>1.70.0</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>

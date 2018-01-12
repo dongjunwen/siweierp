@@ -15,7 +15,7 @@ import com.fangxin.siwei.fangzhi.common.result.Result;
  */
 public interface IAuditCheckingService {
 
-	AuditTypeEnum getAuditType();
+	boolean matches(AuditTypeEnum auditTypeEnum);
 
 	/**
 	 * 审核检查流程

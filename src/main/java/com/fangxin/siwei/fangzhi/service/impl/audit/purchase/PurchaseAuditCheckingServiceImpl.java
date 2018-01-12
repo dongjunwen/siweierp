@@ -22,9 +22,14 @@ public class PurchaseAuditCheckingServiceImpl implements IAuditCheckingService {
     @Resource
     SwPurchaseBaseMapper swPurchaseBaseMapper;
 
-    @Override
+   /* @Override
     public AuditTypeEnum getAuditType() {
         return AuditTypeEnum.PURCHASE;
+    }*/
+
+    @Override
+    public boolean matches(AuditTypeEnum auditTypeEnum) {
+        return AuditTypeEnum.PURCHASE.equals(auditTypeEnum);
     }
 
     @Override

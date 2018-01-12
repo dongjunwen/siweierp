@@ -20,9 +20,13 @@ public class OrderAuditCheckingServiceImpl implements IAuditCheckingService {
     @Resource
     SwOrderBaseMapper swOrderBaseMapper;
 
-    @Override
-    public AuditTypeEnum getAuditType() {
+  /*public AuditTypeEnum getAuditType() {
         return AuditTypeEnum.ORDER;
+    }*/
+
+    @Override
+    public boolean matches(AuditTypeEnum auditTypeEnum) {
+        return AuditTypeEnum.ORDER.equals(auditTypeEnum);
     }
 
     @Override
