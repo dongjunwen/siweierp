@@ -29,6 +29,7 @@ public class DruidConfig {
         //登录查看信息的账号密码.
         servletRegistrationBean.addInitParameter("loginUsername", "admin");
         servletRegistrationBean.addInitParameter("loginPassword", "admin");
+        servletRegistrationBean.addInitParameter("logSlowSql", "true");
 
         return servletRegistrationBean;
     }
