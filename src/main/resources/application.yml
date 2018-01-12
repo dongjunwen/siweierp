@@ -8,10 +8,10 @@
       ##   java: ERROR
    ##  file: /home/logs/sw-erp-service.log
 ## Server
-server:
-  port: 8082
-  tomcat:
-      uriEncoding: UTF-8
+##server:
+ ## port: 8082
+  ## tomcat:
+   ##   uriEncoding: UTF-8
 ## Session 管理 暂不用redis
 spring.session.store-type: none
 ## 数据库访问配置
