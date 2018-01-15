@@ -13,12 +13,12 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class TomcatConfig extends TomcatEmbeddedServletContainerFactory{
-    public EmbeddedServletContainer getEmbeddedServletContainer(ServletContextInitializer... initializers)
+   /* public EmbeddedServletContainer getEmbeddedServletContainer(ServletContextInitializer... initializers)
     {
         //设置端口
         this.setPort(8082);
         return super.getEmbeddedServletContainer(initializers);
-    }
+    }*/
 
     protected void customizeConnector(Connector connector)
     {

@@ -2,8 +2,6 @@ package com.fangxin.siwei.fangzhi.config;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
-import redis.clients.jedis.JedisPool;
-import redis.clients.jedis.JedisPoolConfig;
 
 //@Configuration
 public class RedisConfig {
@@ -18,14 +16,14 @@ public class RedisConfig {
      */
    // @Bean(name = "jedis.pool")
    // @Autowired
-    public JedisPool jedisPool(@Qualifier("redis.pool.config") JedisPoolConfig config,
+ /*   public JedisPool jedisPool(@Qualifier("redis.pool.config") JedisPoolConfig config,
                                @Value("${spring.redis.host}") String host,
                                @Value("${spring.redis.timeout}") int timeout,
                                @Value("${spring.redis.port}") int port,
                                @Value("${spring.redis.password}") String password) {
         JedisPool jedisPool = new JedisPool(config, host, port, timeout, password);
         return jedisPool;
-    }
+    }*/
 
     /**
      * 配置jedis数据库连接池
@@ -37,7 +35,7 @@ public class RedisConfig {
      * @return
      */
   //  @Bean(name = "redis.pool.config")
-    public JedisPoolConfig jedisPoolConfig(@Value("${spring.redis.pool.maxIdle}") int maxIdle,
+   /* public JedisPoolConfig jedisPoolConfig(@Value("${spring.redis.pool.maxIdle}") int maxIdle,
                                            @Value("${spring.redis.pool.max-active}") int maxActive,
                                            @Value("${spring.redis.pool.max-wait}") int maxWait,
                                            @Value("${spring.redis.pool.min-idle}") int minIdle) {
@@ -47,6 +45,6 @@ public class RedisConfig {
         config.setMaxWaitMillis(maxWait);
         config.setMinIdle(minIdle);
         return config;
-    }
+    }*/
 
 }  
