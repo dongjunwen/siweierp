@@ -25,9 +25,9 @@ public class TomcatConfig extends TomcatEmbeddedServletContainerFactory{
         super.customizeConnector(connector);
         Http11NioProtocol protocol = (Http11NioProtocol)connector.getProtocolHandler();
         //设置最大连接数
-        protocol.setMaxConnections(5000);
+        protocol.setMaxConnections(150);
         //设置最大线程数
-        protocol.setMaxThreads(5000);
+        protocol.setMaxThreads(50);
         protocol.setConnectionTimeout(5000);
     }
 }

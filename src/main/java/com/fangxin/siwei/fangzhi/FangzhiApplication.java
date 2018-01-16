@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
 @EnableAutoConfiguration
-@ServletComponentScan
 @EnableTransactionManagement
 @EnableAdminServer
 @MapperScan("com.fangxin.siwei.fangzhi.mapper")
