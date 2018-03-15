@@ -20,4 +20,8 @@ public interface SwStockInfoMapper  extends MyMapper<SwStockInfo>{
     int countByCondition(Map<String, String> params);
 
     List<SwStockInfo> findList(Map<String, String> params);
+
+    int batchAdd(List<SwStockInfo> swStockInfos);
+
+    List<SwStockInfo> selectByList(List<SwStockInfo> swStockInfos);
 }

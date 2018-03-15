@@ -27,4 +27,6 @@ public interface SwStockInfoService {
     Result<Integer> saveStockInfo(SwStockInfoVo swStockInfoVo);
 
     List<SwStockInfoResultVo> findCond(Map<String, String> params);
+
+    Result<Integer> batchAdd(List<SwStockInfo> swStockInfos);
 }

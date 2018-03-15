@@ -55,7 +55,6 @@ public class StockInfoServiceImpl extends AbstractService<SwStockInfo> implement
             swStockInfo.setVersion(0);
             saveNum=swStockInfoMapper.insertSelective(swStockInfo);
         }else{
-
             swStockInfo.setVersion(oldSwStockInfo.getVersion());
             saveNum=swStockInfoMapper.addNum(swStockInfo);
         }
@@ -166,6 +165,25 @@ public class StockInfoServiceImpl extends AbstractService<SwStockInfo> implement
             swStockInfoResultVos.add(swStockInfoResultVo);
         }
         return swStockInfoResultVos;
+    }
+
+    @Override
+    public Result<Integer> batchAdd(List<SwStockInfo> swStockInfos) {
+        List<SwStockInfo> oldSwStockInfos=swStockInfoMapper.selectByList(swStockInfos);
+        for(SwStockInfo swStockInfo:swStockInfos){
+            swStockInfo.setVersion(findVersionByMaterialNo(swStockInfo.getMaterialNo(),oldSwStockInfos));
+            swStockInfo.setModiTime(new Date());
+        }
+        return Result.newSuccess(swStockInfoMapper.batchAdd(swStockInfos));
+    }
+
+    private int findVersionByMaterialNo(String materialNo, List<SwStockInfo> oldSwStockInfos) {
+        for(SwStockInfo swStockInfo:oldSwStockInfos){
+            if(swStockInfo.getMaterialNo().equals(materialNo)){
+                return swStockInfo.getVersion();
+            }
+        }
+        return 0;
     }
 
     private void convertToVo(SwStockInfo swStockInfo,SwStockInfoResultVo swStockInfoResultVo) {

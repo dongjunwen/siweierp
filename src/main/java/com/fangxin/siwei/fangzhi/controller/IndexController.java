@@ -6,11 +6,9 @@ import com.fangxin.siwei.fangzhi.common.utils.ShiroUtils;
 import com.fangxin.siwei.fangzhi.common.validator.Assert;
 import com.fangxin.siwei.fangzhi.common.validator.ValidatorUtil;
 import com.fangxin.siwei.fangzhi.common.validator.group.AddGroup;
-import com.fangxin.siwei.fangzhi.modal.SysUser;
 import com.fangxin.siwei.fangzhi.service.system.SysUserService;
 import com.fangxin.siwei.fangzhi.vo.result.SysUserResultVo;
 import com.fangxin.siwei.fangzhi.vo.system.SysUserModiVo;
-import com.fangxin.siwei.fangzhi.vo.system.SysUserVo;
 import io.swagger.annotations.*;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -18,18 +16,12 @@ import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import springfox.documentation.annotations.ApiIgnore;
-
-import java.util.Date;
 
 /**
  * author:lu.dong

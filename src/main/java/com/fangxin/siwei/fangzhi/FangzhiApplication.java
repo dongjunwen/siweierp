@@ -5,14 +5,18 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.web.servlet.ServletComponentScan;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-@SpringBootApplication
+@SpringBootApplication(
+		exclude = { DataSourceAutoConfiguration.class }
+)
 @EnableAutoConfiguration
-@EnableTransactionManagement
 @EnableAdminServer
-@MapperScan("com.fangxin.siwei.fangzhi.mapper")
+@EnableTransactionManagement
+@ComponentScan("com.fangxin.siwei.fangzhi")
 public class FangzhiApplication {
 
 	public static void main(String[] args) {

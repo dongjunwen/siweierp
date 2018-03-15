@@ -31,7 +31,7 @@
   </select>
 
 
-  <select id="selectListByUserNo" parameterType="java.util.List" resultMap="BaseResultMap">
+  <select id="selectListByUserNo" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
     a.source_no, a.source_name, a.fh_source_no, a.source_type, a.req_url, a.rsource_icon, a.sort_order,a.level
     FROM sys_resource AS a

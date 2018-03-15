@@ -3,12 +3,20 @@ package com.fangxin.siwei.fangzhi.config;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.support.http.StatViewServlet;
 import com.alibaba.druid.support.http.WebStatFilter;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
@@ -18,8 +26,13 @@ import java.sql.SQLException;
  * deuid 管理网址 /druid/
  */
 @Configuration
+@MapperScan(basePackages = DruidConfig.PACKAGE,sqlSessionFactoryRef = "sqlSessionFactory")
 public class DruidConfig {
     private static final String DB_PREFIX = "spring.datasource";
+    // 精确到 master 目录，以便跟其他数据源隔离
+    static final String PACKAGE = "com.fangxin.siwei.fangzhi.mapper";
+    static final String MAPPER_LOCATION = "classpath*:mapper/*.xml";
+
     @Bean
     public ServletRegistrationBean druidServlet() {
 
@@ -74,6 +87,21 @@ public class DruidConfig {
         private int maxPoolPreparedStatementPerConnectionSize;
         private String filters;
         private String connectionProperties;
+
+        @Bean(name = "sqlSessionFactory")
+        @Primary
+        public SqlSessionFactory masterSqlSessionFactory(@Qualifier("dataSource") DataSource dataSource)
+                throws Exception {
+            final SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
+            sessionFactory.setDataSource(dataSource);
+            sessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver()
+                    .getResources(MAPPER_LOCATION));
+            return sessionFactory.getObject();
+        }
+        @Bean(name = "transactionManager")
+        public PlatformTransactionManager transactionManagers() {
+            return new DataSourceTransactionManager(dataSource());
+        }
 
         @Bean //声明其为Bean实例
         @Primary //在同样的DataSource中，首先使用被标注的DataSource

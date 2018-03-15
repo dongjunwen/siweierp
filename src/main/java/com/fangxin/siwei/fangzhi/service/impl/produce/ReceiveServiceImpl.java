@@ -18,17 +18,18 @@ import com.fangxin.siwei.fangzhi.service.audit.AuditingParam;
 import com.fangxin.siwei.fangzhi.service.audit.IAuditingService;
 import com.fangxin.siwei.fangzhi.service.impl.system.SysDictUtils;
 import com.fangxin.siwei.fangzhi.service.produce.SwReceiveService;
+import com.fangxin.siwei.fangzhi.service.stock.SwStockInfoService;
 import com.fangxin.siwei.fangzhi.vo.produce.*;
 import com.fangxin.siwei.fangzhi.vo.result.*;
 import com.github.pagehelper.Page;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.Converter;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Condition;
 
 import java.lang.reflect.InvocationTargetException;
@@ -52,6 +53,8 @@ public class ReceiveServiceImpl extends AbstractService<SwReceiveBase> implement
     SwReceiveDetailMapper swReceiveDetailMapper;
     @Autowired
     IAuditingService auditingService;
+    @Autowired
+    SwStockInfoService swStockInfoService;
 
 
     @Override
@@ -172,6 +175,7 @@ public class ReceiveServiceImpl extends AbstractService<SwReceiveBase> implement
     }
 
     @Override
+    @Transactional
     public Result<Integer> audit(SwReceiveAuditVo swReceiveAuditVo) {
         Result _orderAudit=Result.newSuccess();
         List<String> orderNos=swReceiveAuditVo.getOrderNos();
@@ -187,6 +191,7 @@ public class ReceiveServiceImpl extends AbstractService<SwReceiveBase> implement
         }catch (Exception e){
             logger.error("[领料单审核]发生异常!e:{}",e);
             _orderAudit.setErrorCode(ResultCode.FAIL);
+            throw  new RRException(ResultCode.FAIL.getCode(),e.getMessage());
         }
         return _orderAudit;
     }
@@ -201,6 +206,18 @@ public class ReceiveServiceImpl extends AbstractService<SwReceiveBase> implement
             swReceiveBase.setModiNo(swReceiveAuditVo.getAuditUserNo());
             swReceiveBase.setModiTime(new Date());
             swReceiveBaseMapper.updateByReceiveNo(swReceiveBase);
+            if(ReceiveStatus.AUDIT_SUCCESS.getCode().equals(sysAuditConfig.getNextStage())){//领料成功
+                List<SwReceiveDetail> swReceiveDetails=swReceiveDetailMapper.selectByReceiveNo(orderNo);
+                List<SwStockInfo> swStockInfos=new ArrayList<>();
+                for(SwReceiveDetail swReceiveDetail:swReceiveDetails){
+                    SwStockInfo swStockInfo=new SwStockInfo();
+                    swStockInfo.setMaterialNo(swReceiveDetail.getMaterialNo());
+                    BigDecimal subNum=BigDecimal.ZERO.subtract(swReceiveDetail.getNum());
+                    swStockInfo.setNum(subNum);
+                    swStockInfos.add(swStockInfo);
+                }
+                swStockInfoService.batchAdd(swStockInfos);//领料通过则减少库存
+            }
         }
         return _result;
     }
