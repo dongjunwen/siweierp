@@ -15,12 +15,14 @@ server:
 spring.session.store-type: none
 ## 数据库访问配置
 spring:
+    transaction:
+      rollback-on-commit-failure: true
     datasource:
         driver-class-name: com.mysql.jdbc.Driver
         url: jdbc:mysql://127.0.0.1:3306/sw_db?useSSL=false&useUnicode=true&characterEncoding=utf8&allowMultiQueries=true
         username: root
         password: root
-       # password: root_!@#123QWE
+        #password: root_!@#123QWE
         # 使用druid数据源
         type: com.alibaba.druid.pool.DruidDataSource
         # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙

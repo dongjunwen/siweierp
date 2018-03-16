@@ -32,6 +32,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Condition;
 
+import javax.annotation.Resource;
 import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
 import java.text.ParseException;
@@ -55,7 +56,6 @@ public class ReceiveServiceImpl extends AbstractService<SwReceiveBase> implement
     IAuditingService auditingService;
     @Autowired
     SwStockInfoService swStockInfoService;
-
 
     @Override
     public Result<Integer> create(SwReceiveVo swReceiveVo) {
@@ -180,46 +180,40 @@ public class ReceiveServiceImpl extends AbstractService<SwReceiveBase> implement
         Result _orderAudit=Result.newSuccess();
         List<String> orderNos=swReceiveAuditVo.getOrderNos();
         try{
-            Result<SysAuditConfig> _resultAudit=null;
             for(String orderNo:orderNos){
-                _resultAudit=singleAudit(orderNo,swReceiveAuditVo);
-                if(!_resultAudit.isSuccess()){
-                    break;
+                Result<SysAuditConfig> _result=beginAudit(orderNo,swReceiveAuditVo);
+                if(_result.isSuccess()){
+                    SysAuditConfig sysAuditConfig=_result.getData();
+                    auditSingle(orderNo,sysAuditConfig.getNextStage(),swReceiveAuditVo.getAuditUserNo());
                 }
             }
-            _orderAudit.setError(_resultAudit.getCode(),_resultAudit.getMessage());
         }catch (Exception e){
             logger.error("[领料单审核]发生异常!e:{}",e);
             _orderAudit.setErrorCode(ResultCode.FAIL);
-            throw  new RRException(ResultCode.FAIL.getCode(),e.getMessage());
+            throw new RRException(ResultCode.FAIL.getCode(),e.getMessage());
         }
         return _orderAudit;
     }
 
-    private Result<SysAuditConfig> singleAudit(String orderNo, SwReceiveAuditVo swReceiveAuditVo) {
-        Result<SysAuditConfig> _result=beginAudit(orderNo,swReceiveAuditVo);
-        if(_result.isSuccess()){
-            SysAuditConfig sysAuditConfig=_result.getData();
-            SwReceiveBase swReceiveBase=new SwReceiveBase();
-            swReceiveBase.setRecvNo(orderNo);
-            swReceiveBase.setRecvStatus(sysAuditConfig.getNextStage());
-            swReceiveBase.setModiNo(swReceiveAuditVo.getAuditUserNo());
-            swReceiveBase.setModiTime(new Date());
-            swReceiveBaseMapper.updateByReceiveNo(swReceiveBase);
-            if(ReceiveStatus.AUDIT_SUCCESS.getCode().equals(sysAuditConfig.getNextStage())){//领料成功
-                List<SwReceiveDetail> swReceiveDetails=swReceiveDetailMapper.selectByReceiveNo(orderNo);
-                List<SwStockInfo> swStockInfos=new ArrayList<>();
-                for(SwReceiveDetail swReceiveDetail:swReceiveDetails){
-                    SwStockInfo swStockInfo=new SwStockInfo();
-                    swStockInfo.setMaterialNo(swReceiveDetail.getMaterialNo());
-                    BigDecimal subNum=BigDecimal.ZERO.subtract(swReceiveDetail.getNum());
-                    swStockInfo.setNum(subNum);
-                    swStockInfos.add(swStockInfo);
-                }
-                swStockInfoService.batchAdd(swStockInfos);//领料通过则减少库存
+    public void auditSingle(String orderNo,String recvStatus,String userNo){
+        SwReceiveBase swReceiveBase=new SwReceiveBase();
+        swReceiveBase.setRecvNo(orderNo);
+        swReceiveBase.setRecvStatus(recvStatus);
+        swReceiveBase.setModiNo(userNo);
+        swReceiveBase.setModiTime(new Date());
+        swReceiveBaseMapper.updateByReceiveNo(swReceiveBase);
+        if(ReceiveStatus.AUDIT_SUCCESS.getCode().equals(recvStatus)){//领料成功
+            List<SwReceiveDetail> swReceiveDetails=swReceiveDetailMapper.selectByReceiveNo(orderNo);
+            List<SwStockInfo> swStockInfos=new ArrayList<>();
+            for(SwReceiveDetail swReceiveDetail:swReceiveDetails){
+                SwStockInfo swStockInfo=new SwStockInfo();
+                swStockInfo.setMaterialNo(swReceiveDetail.getMaterialNo());
+                BigDecimal subNum=BigDecimal.ZERO.subtract(swReceiveDetail.getNum());
+                swStockInfo.setNum(subNum);
+                swStockInfos.add(swStockInfo);
             }
+            swStockInfoService.batchAdd(swStockInfos);//领料通过则减少库存
         }
-        return _result;
     }
 
     private Result<SysAuditConfig> beginAudit(String sourceNo, SwReceiveAuditVo swReceiveAuditVo) {
