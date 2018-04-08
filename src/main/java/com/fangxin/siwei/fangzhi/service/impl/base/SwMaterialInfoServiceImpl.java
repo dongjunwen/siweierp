@@ -89,8 +89,8 @@ public class SwMaterialInfoServiceImpl extends AbstractService<SwMaterialInfo> i
         Page<SwMaterialInfoResultVo> swMaterialInfoResultVos=new Page<>();
         swMaterialInfoResultVos.setTotal(swMaterialInfos.getTotal());
         swMaterialInfoResultVos.setPages(swMaterialInfos.getPages());
-        swMaterialInfoResultVos.setPageSize(swMaterialInfoResultVos.getPageSize());
-        swMaterialInfoResultVos.setPageNum(swMaterialInfoResultVos.getPageNum());
+        swMaterialInfoResultVos.setPageSize(swMaterialInfos.getPageSize());
+        swMaterialInfoResultVos.setPageNum(swMaterialInfos.getPageNum());
         for(SwMaterialInfo swMaterialInfo:swMaterialInfos){
             SwMaterialInfoResultVo swMaterialInfoResultVo=new SwMaterialInfoResultVo();
             convertVoToResultVo(swMaterialInfoResultVo,swMaterialInfo);
