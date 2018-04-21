@@ -26,9 +26,15 @@ public class SwOrderDetailVo {
     @Length(max = 32,message = "品种不能超过32")
     @ApiModelProperty(value = "品种",required =false )
     private String prodType;
+    @Length(max = 100,message = "型号不能超过100")
+    @ApiModelProperty(value = "型号",required =false )
+    private String prodPattern;
     @Length(max = 32,message = "形状不能超过32")
     @ApiModelProperty(value = "形状",required =false )
     private String prodForm;
+    @Length(max = 4,message = "色号不能超过4")
+    @ApiModelProperty(value = "色号",required =false )
+    private String prodColorNo;
     @Length(max = 32,message = "长不能超过32")
     @ApiModelProperty(value = "长",required =false )
     private BigDecimal prodLong;
@@ -353,5 +359,21 @@ public class SwOrderDetailVo {
 
     public void setMaterialPattern(String materialPattern) {
         this.materialPattern = materialPattern;
+    }
+
+    public String getProdPattern() {
+        return prodPattern;
+    }
+
+    public void setProdPattern(String prodPattern) {
+        this.prodPattern = prodPattern;
+    }
+
+    public String getProdColorNo() {
+        return prodColorNo;
+    }
+
+    public void setProdColorNo(String prodColorNo) {
+        this.prodColorNo = prodColorNo;
     }
 }

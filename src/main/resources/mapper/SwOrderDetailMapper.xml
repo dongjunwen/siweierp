@@ -9,6 +9,8 @@
     <result column="prod_name" jdbcType="VARCHAR" property="prodName" />
     <result column="prod_type" jdbcType="VARCHAR" property="prodType" />
     <result column="prod_form" jdbcType="VARCHAR" property="prodForm" />
+    <result column="prod_pattern" jdbcType="VARCHAR" property="prodPattern" />
+    <result column="prod_color_no" jdbcType="VARCHAR" property="prodColorNo" />
     <result column="prod_long" jdbcType="DECIMAL" property="prodLong" />
     <result column="prod_width" jdbcType="DECIMAL" property="prodWidth" />
     <result column="prod_num" jdbcType="DECIMAL" property="prodNum" />
@@ -44,7 +46,7 @@
     <result column="version" jdbcType="INTEGER" property="version" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, order_no, order_seq_no, prod_no, prod_name, prod_type, prod_form, prod_long, 
+    id, order_no, order_seq_no, prod_no, prod_name, prod_type, prod_form,prod_pattern,prod_color_no, prod_long,
     prod_width, prod_num, prod_unit, prod_price_no, prod_price_express,material_spec, prod_price, prod_amt,
     area, material_no, material_name, material_width, material_price_no, material_price_name,
     material_price_express,material_unit,material_pattern,
@@ -131,7 +133,7 @@
   <insert id="insert" parameterType="com.fangxin.siwei.fangzhi.modal.SwOrderDetail">
     insert into sw_order_detail (id, order_no, order_seq_no, 
       prod_no, prod_name, prod_type, 
-      prod_form, prod_long, prod_width, 
+      prod_form,  prod_pattern, prod_color_no,prod_long, prod_width,
       prod_num, prod_unit, prod_price_no, 
       prod_price_express, prod_price, prod_amt, 
       area, material_no, material_name, 
@@ -145,7 +147,8 @@
       )
     values (#{id,jdbcType=INTEGER}, #{orderNo,jdbcType=VARCHAR}, #{orderSeqNo,jdbcType=VARCHAR}, 
       #{prodNo,jdbcType=VARCHAR}, #{prodName,jdbcType=VARCHAR}, #{prodType,jdbcType=VARCHAR}, 
-      #{prodForm,jdbcType=VARCHAR}, #{prodLong,jdbcType=DECIMAL}, #{prodWidth,jdbcType=DECIMAL}, 
+      #{prodForm,jdbcType=VARCHAR},  #{prodPattern,jdbcType=VARCHAR},  #{prodColorNo,jdbcType=VARCHAR},
+      #{prodLong,jdbcType=DECIMAL}, #{prodWidth,jdbcType=DECIMAL},
       #{prodNum,jdbcType=DECIMAL}, #{prodUnit,jdbcType=VARCHAR}, #{prodPriceNo,jdbcType=VARCHAR}, 
       #{prodPriceExpress,jdbcType=VARCHAR}, #{prodPrice,jdbcType=DECIMAL}, #{prodAmt,jdbcType=DECIMAL}, 
       #{area,jdbcType=VARCHAR}, #{materialNo,jdbcType=VARCHAR}, #{materialName,jdbcType=VARCHAR}, 
@@ -161,7 +164,7 @@
   <insert id="insertBatch" parameterType="java.util.List" >
      insert into sw_order_detail ( order_no, order_seq_no,
       prod_no, prod_name, prod_type,
-      prod_form, prod_long, prod_width,
+      prod_form,  prod_pattern, prod_color_no,prod_long, prod_width,
       prod_num, prod_unit, prod_price_no,
       prod_price_express, prod_price, prod_amt,
       area, material_no, material_name,
@@ -177,7 +180,8 @@
     <foreach collection="list" index="index" item="item" separator=",">
       (  #{item.orderNo,jdbcType=VARCHAR}, #{item.orderSeqNo,jdbcType=VARCHAR},
     #{item.prodNo,jdbcType=VARCHAR}, #{item.prodName,jdbcType=VARCHAR}, #{item.prodType,jdbcType=VARCHAR},
-    #{item.prodForm,jdbcType=VARCHAR}, #{item.prodLong,jdbcType=DECIMAL}, #{item.prodWidth,jdbcType=DECIMAL},
+    #{item.prodForm,jdbcType=VARCHAR},#{item.prodPattern,jdbcType=VARCHAR},#{item.prodColorNo,jdbcType=VARCHAR},
+    #{item.prodLong,jdbcType=DECIMAL}, #{item.prodWidth,jdbcType=DECIMAL},
     #{item.prodNum,jdbcType=DECIMAL}, #{item.prodUnit,jdbcType=VARCHAR}, #{item.prodPriceNo,jdbcType=VARCHAR},
     #{item.prodPriceExpress,jdbcType=VARCHAR}, #{item.prodPrice,jdbcType=DECIMAL}, #{item.prodAmt,jdbcType=DECIMAL},
     #{item.area,jdbcType=VARCHAR}, #{item.materialNo,jdbcType=VARCHAR}, #{item.materialName,jdbcType=VARCHAR},
@@ -206,6 +210,12 @@
         </if>
         <if test="item.prodForm != null">
           prod_form = #{item.prodForm,jdbcType=VARCHAR},
+        </if>
+        <if test="item.prodPattern != null">
+          prod_pattern = #{item.prodPattern,jdbcType=VARCHAR},
+        </if>
+        <if test="item.prodColorNo != null">
+          prod_color_no = #{item.prodColorNo,jdbcType=VARCHAR},
         </if>
         <if test="item.prodLong != null">
           prod_long = #{item.prodLong,jdbcType=DECIMAL},

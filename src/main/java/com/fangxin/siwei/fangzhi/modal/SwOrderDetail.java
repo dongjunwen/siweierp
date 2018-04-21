@@ -19,6 +19,8 @@ public class SwOrderDetail {
     private String prodType;
 
     private String prodForm;
+    private String prodPattern;
+    private String prodColorNo;
 
     private BigDecimal prodLong;
 
@@ -404,5 +406,21 @@ public class SwOrderDetail {
 
     public void setMaterialPattern(String materialPattern) {
         this.materialPattern = materialPattern;
+    }
+
+    public String getProdPattern() {
+        return prodPattern;
+    }
+
+    public void setProdPattern(String prodPattern) {
+        this.prodPattern = prodPattern;
+    }
+
+    public String getProdColorNo() {
+        return prodColorNo;
+    }
+
+    public void setProdColorNo(String prodColorNo) {
+        this.prodColorNo = prodColorNo;
     }
 }
