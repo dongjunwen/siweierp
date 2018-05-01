@@ -11,6 +11,7 @@ import com.fangxin.siwei.fangzhi.mapper.SwMaterialInfoMapper;
 import com.fangxin.siwei.fangzhi.modal.SwMaterialInfo;
 import com.fangxin.siwei.fangzhi.service.AbstractService;
 import com.fangxin.siwei.fangzhi.service.base.SwMaterialInfoService;
+import com.fangxin.siwei.fangzhi.service.impl.system.SysDictUtils;
 import com.fangxin.siwei.fangzhi.vo.base.SwMaterialInfoVo;
 import com.fangxin.siwei.fangzhi.vo.result.SwMaterialInfoResultVo;
 import com.github.pagehelper.Page;
@@ -22,6 +23,7 @@ import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Condition;
 
 import java.lang.reflect.InvocationTargetException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -91,6 +93,7 @@ public class SwMaterialInfoServiceImpl extends AbstractService<SwMaterialInfo> i
         swMaterialInfoResultVos.setPages(swMaterialInfos.getPages());
         swMaterialInfoResultVos.setPageSize(swMaterialInfos.getPageSize());
         swMaterialInfoResultVos.setPageNum(swMaterialInfos.getPageNum());
+        BigDecimal taxRate=new BigDecimal(SysDictUtils.getValueByUniq("TAX_RATE","TAX_RATE").getDictValue());
         for(SwMaterialInfo swMaterialInfo:swMaterialInfos){
             SwMaterialInfoResultVo swMaterialInfoResultVo=new SwMaterialInfoResultVo();
             convertVoToResultVo(swMaterialInfoResultVo,swMaterialInfo);
@@ -100,6 +103,9 @@ public class SwMaterialInfoServiceImpl extends AbstractService<SwMaterialInfo> i
             }else{
                 swMaterialInfoResultVo.setMaterialTypeName(swMaterialInfo.getMaterialType());
             }
+            BigDecimal price=swMaterialInfo.getPrice();
+            BigDecimal taxPrice=price.multiply(BigDecimal.ONE.add(taxRate));
+            swMaterialInfo.setTaxPrice(taxPrice);
             swMaterialInfoResultVo.setCreateTime(DateUtil.formatDateTime(swMaterialInfo.getCreateTime()));
             swMaterialInfoResultVo.setModiTime(DateUtil.formatDateTime(swMaterialInfo.getModiTime()));
             swMaterialInfoResultVos.add(swMaterialInfoResultVo);
@@ -121,7 +127,14 @@ public class SwMaterialInfoServiceImpl extends AbstractService<SwMaterialInfo> i
 
     @Override
     public List<SwMaterialInfo> findMaterialLike(String condStr) {
-        return swMaterialInfoMapper.findMaterialLike(condStr);
+        List<SwMaterialInfo> swMaterialInfos=swMaterialInfoMapper.findMaterialLike(condStr);
+        BigDecimal taxRate=new BigDecimal(SysDictUtils.getValueByUniq("TAX_RATE","TAX_RATE").getDictValue());
+        for(SwMaterialInfo swMaterialInfo:swMaterialInfos){
+            BigDecimal price=swMaterialInfo.getPrice();
+            BigDecimal taxPrice=price.multiply(BigDecimal.ONE.add(taxRate));
+            swMaterialInfo.setTaxPrice(taxPrice);
+        }
+        return swMaterialInfos;
     }
 
     private void convertVoToEntity(SwMaterialInfo swMaterialInfo, SwMaterialInfoVo swMaterialInfoVo) {

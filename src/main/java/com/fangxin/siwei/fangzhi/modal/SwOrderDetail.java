@@ -36,7 +36,11 @@ public class SwOrderDetail {
 
     private BigDecimal prodPrice;
 
+    private BigDecimal prodTaxPrice;
+
     private BigDecimal prodAmt;
+
+    private BigDecimal prodTaxAmt;
 
     private String area;
 
@@ -422,5 +426,21 @@ public class SwOrderDetail {
 
     public void setProdColorNo(String prodColorNo) {
         this.prodColorNo = prodColorNo;
+    }
+
+    public BigDecimal getProdTaxPrice() {
+        return prodTaxPrice;
+    }
+
+    public void setProdTaxPrice(BigDecimal prodTaxPrice) {
+        this.prodTaxPrice = prodTaxPrice;
+    }
+
+    public BigDecimal getProdTaxAmt() {
+        return prodTaxAmt;
+    }
+
+    public void setProdTaxAmt(BigDecimal prodTaxAmt) {
+        this.prodTaxAmt = prodTaxAmt;
     }
 }

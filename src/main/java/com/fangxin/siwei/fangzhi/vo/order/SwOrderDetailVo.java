@@ -55,8 +55,12 @@ public class SwOrderDetailVo {
     private String prodPriceExpress;*/
     @ApiModelProperty(value = "单价",required =false )
     private BigDecimal prodPrice;
+    @ApiModelProperty(value = "含税单价",required =false )
+    private BigDecimal prodTaxPrice;
     @ApiModelProperty(value = "金额",required =false )
     private BigDecimal prodAmt;
+    @ApiModelProperty(value = "金额",required =false )
+    private BigDecimal prodTaxAmt;
     @Length(max = 64,message = "区域不能超过64")
     @ApiModelProperty(value = "区域",required =false )
     private String area;
@@ -375,5 +379,21 @@ public class SwOrderDetailVo {
 
     public void setProdColorNo(String prodColorNo) {
         this.prodColorNo = prodColorNo;
+    }
+
+    public BigDecimal getProdTaxPrice() {
+        return prodTaxPrice;
+    }
+
+    public void setProdTaxPrice(BigDecimal prodTaxPrice) {
+        this.prodTaxPrice = prodTaxPrice;
+    }
+
+    public BigDecimal getProdTaxAmt() {
+        return prodTaxAmt;
+    }
+
+    public void setProdTaxAmt(BigDecimal prodTaxAmt) {
+        this.prodTaxAmt = prodTaxAmt;
     }
 }

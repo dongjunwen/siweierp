@@ -20,7 +20,11 @@ public class SwMaterialInfo {
 
     private String unit;
 
+    private String techArt;
+
     private BigDecimal price;
+
+    private BigDecimal taxPrice;
 
     private String memo;
 
@@ -174,5 +178,21 @@ public class SwMaterialInfo {
 
     public void setMaterialWidth(BigDecimal materialWidth) {
         this.materialWidth = materialWidth;
+    }
+
+    public BigDecimal getTaxPrice() {
+        return taxPrice;
+    }
+
+    public void setTaxPrice(BigDecimal taxPrice) {
+        this.taxPrice = taxPrice;
+    }
+
+    public String getTechArt() {
+        return techArt;
+    }
+
+    public void setTechArt(String techArt) {
+        this.techArt = techArt;
     }
 }
