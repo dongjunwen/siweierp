@@ -19,13 +19,16 @@ public class SysUserVo implements Serializable {
     @NotBlank(message = "登录号不能为空",groups = {AddGroup.class})
     @ApiModelProperty(value = "登录号",required =true )
     private String userNo;
+    @NotBlank(message = "姓名不能为空",groups = {AddGroup.class})
+    @ApiModelProperty(value = "姓名",required =true )
+    private String userName;
     @NotBlank(message = "登录密码不能为空",groups = {AddGroup.class})
     @ApiModelProperty(value = "登录密码",required = true)
     private String password;
     @ApiModelProperty(value = "昵称",required = false)
     private String nickName;
     @ApiModelProperty(value = "手机号",required = false)
-    private Integer phoneNum;
+    private String phoneNum;
     @ApiModelProperty(value = "邮箱地址",required = false)
     private String emailAddr;
     @ApiModelProperty(value = "备注",required = false)
@@ -39,6 +42,14 @@ public class SysUserVo implements Serializable {
 
     public void setUserNo(String userNo) {
         this.userNo = userNo;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPassword() {
@@ -57,11 +68,11 @@ public class SysUserVo implements Serializable {
         this.nickName = nickName;
     }
 
-    public Integer getPhoneNum() {
+    public String getPhoneNum() {
         return phoneNum;
     }
 
-    public void setPhoneNum(Integer phoneNum) {
+    public void setPhoneNum(String phoneNum) {
         this.phoneNum = phoneNum;
     }
 

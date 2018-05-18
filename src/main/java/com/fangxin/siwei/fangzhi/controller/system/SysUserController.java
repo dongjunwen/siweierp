@@ -56,10 +56,10 @@ public class SysUserController {
     @RequestMapping(value = "updateUser",method = RequestMethod.PUT)
     @ApiOperation(value="修改用户", notes="根据User对象修改用户")
     //@ApiImplicitParam(name = "sysUserVo", value = "用户操作实体 sysUserVo",dataTypeClass = SysUserVo.class)
-    public Result<String> updateUser(@ApiParam(name = "sysUserVo", value = "用户操作实体 sysUserVo",required = true)@RequestBody SysUserVo sysUserVo) {
+    @ApiParam(name = "sysUserVo", value = "用户操作实体 sysUserVo",required = true)
+    public Result<String> updateUser(@RequestBody SysUserVo sysUserVo) {
         ValidatorUtil.validateEntity(sysUserVo, AddGroup.class);//校验用户实体字段，
         try {
-            sysUserVo.setLastLoginTime(new Date());
             Result<Integer> _result = sysUserService.updateUser(sysUserVo);
             if (!_result.isSuccess()) {
                 return Result.newError(_result.getCode(), _result.getMessage());

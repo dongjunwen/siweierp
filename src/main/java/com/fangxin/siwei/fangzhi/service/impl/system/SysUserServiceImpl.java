@@ -57,7 +57,7 @@ public class SysUserServiceImpl extends AbstractService<SysUser> implements SysU
         }
         SysUser sysUser=new SysUser();
         convertVoToEntity(sysUser,sysUserVo);
-        sysUser.setPassword(MD5Util.getMD5(sysUser.getPassword()));
+        sysUser.setPassword(MD5Util.getMD5("123456"));
         sysUser.setCreateNo(ShiroUtils.getCurrentUserNo());
         sysUser.setCreateTime(new Date());
         sysUser.setModiNo(ShiroUtils.getCurrentUserNo());
