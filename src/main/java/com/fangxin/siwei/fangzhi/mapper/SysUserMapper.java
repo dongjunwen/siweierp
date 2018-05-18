@@ -1,19 +1,10 @@
 package com.fangxin.siwei.fangzhi.mapper;
 
+import com.fangxin.siwei.fangzhi.common.utils.MyMapper;
 import com.fangxin.siwei.fangzhi.modal.SysUser;
 
-public interface SysUserMapper  {
-    int deleteByPrimaryKey(Integer id);
+public interface SysUserMapper extends MyMapper<SysUser> {
 
-    int insert(SysUser record);
-
-    int insertSelective(SysUser record);
-
-    SysUser selectByPrimaryKey(Integer id);
-
-    int updateByPrimaryKeySelective(SysUser record);
-
-    int updateByPrimaryKey(SysUser record);
 
     SysUser selectByUserNo(String userNo);
 

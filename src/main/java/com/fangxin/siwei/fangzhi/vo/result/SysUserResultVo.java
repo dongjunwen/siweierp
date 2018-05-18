@@ -21,6 +21,10 @@ public class SysUserResultVo {
     private String phoneNum;
     @ApiModelProperty(value = "邮箱地址")
     private String emailAddr;
+    @ApiModelProperty(value = "用户状态")
+    private String status;
+    @ApiModelProperty(value = "用户状态名称")
+    private String statusName;
     @ApiModelProperty(value = "角色编码")
     private String roleCode;
     @ApiModelProperty(value = "角色名称")
@@ -110,5 +114,21 @@ public class SysUserResultVo {
 
     public void setSwCompInfoResultVo(SwCompInfoResultVo swCompInfoResultVo) {
         this.swCompInfoResultVo = swCompInfoResultVo;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getStatusName() {
+        return statusName;
+    }
+
+    public void setStatusName(String statusName) {
+        this.statusName = statusName;
     }
 }

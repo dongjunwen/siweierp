@@ -3,29 +3,30 @@ package com.fangxin.siwei.fangzhi.service.impl.system;
 import com.fangxin.siwei.fangzhi.common.enums.ResultCode;
 import com.fangxin.siwei.fangzhi.common.exception.RRException;
 import com.fangxin.siwei.fangzhi.common.result.Result;
+import com.fangxin.siwei.fangzhi.common.utils.Common;
 import com.fangxin.siwei.fangzhi.common.utils.MD5Util;
 import com.fangxin.siwei.fangzhi.common.utils.ShiroUtils;
 import com.fangxin.siwei.fangzhi.mapper.*;
-import com.fangxin.siwei.fangzhi.modal.SwCompanyInfo;
-import com.fangxin.siwei.fangzhi.modal.SwDepartEmployee;
-import com.fangxin.siwei.fangzhi.modal.SysUser;
-import com.fangxin.siwei.fangzhi.modal.SysUserRole;
+import com.fangxin.siwei.fangzhi.modal.*;
+import com.fangxin.siwei.fangzhi.service.AbstractService;
 import com.fangxin.siwei.fangzhi.service.system.SysUserService;
-import com.fangxin.siwei.fangzhi.vo.base.SwCompInfoVo;
 import com.fangxin.siwei.fangzhi.vo.result.SwCompInfoResultVo;
 import com.fangxin.siwei.fangzhi.vo.result.SysUserResultVo;
 import com.fangxin.siwei.fangzhi.vo.system.SysUserModiVo;
 import com.fangxin.siwei.fangzhi.vo.system.SysUserVo;
-import org.apache.commons.beanutils.BeanUtils;
+import com.github.pagehelper.Page;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import tk.mybatis.mapper.entity.Condition;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Date:2017/10/19 0019 15:08
@@ -33,7 +34,7 @@ import java.util.List;
  * @Description：
  **/
 @Service
-public class SysUserServiceImpl  implements SysUserService {
+public class SysUserServiceImpl extends AbstractService<SysUser> implements SysUserService {
     private static  final Logger logger=LoggerFactory.getLogger(SysUserServiceImpl.class);
 
     @Autowired
@@ -185,16 +186,26 @@ public class SysUserServiceImpl  implements SysUserService {
         return Result.newSuccess(sysUserMapper.updateByUserNo(sysUser));
     }
 
-    private void convertVoToEntity(SysUser sysUser,SysUserVo sysUserVo) {
-        try {
-           BeanUtils.copyProperties(sysUser,sysUserVo);
-        } catch (IllegalAccessException e) {
-            logger.error("sysUser转换语法错误:{}",e);
-            throw new RRException(ResultCode.COMMON_PARAM_INVALID.getMessage());
-        } catch (InvocationTargetException e) {
-            logger.error("sysUser转换目标错误:{}",e);
-            throw new RRException(ResultCode.COMMON_PARAM_INVALID.getMessage());
+    @Override
+    public Page<SysUserResultVo> findList(Map<String, String> params) {
+        Condition serviceCondition = Common.getServiceCondition(params, SysUser.class);
+        Page<SysUser> sysUsers = (Page<SysUser>)findByCondition(serviceCondition);
+        Page<SysUserResultVo> sysUserResultVos=new Page<SysUserResultVo>();
+        sysUserResultVos.setTotal(sysUsers.getTotal());
+        sysUserResultVos.setPages(sysUsers.getPages());
+        sysUserResultVos.setPageSize(sysUsers.getPageSize());
+        sysUserResultVos.setPageNum(sysUsers.getPageNum());
+        for(SysUser sysUser:sysUsers){
+            SysUserResultVo sysUserResultVo=new SysUserResultVo();
+            BeanUtils.copyProperties(sysUser,sysUserResultVo);
+            sysUserResultVo.setStatusName(SysDictUtils.getNameByUniq("STATUS",sysUser.getStatus()));
+            sysUserResultVos.add(sysUserResultVo);
         }
+        return sysUserResultVos;
+    }
+
+    private void convertVoToEntity(SysUser sysUser,SysUserVo sysUserVo) {
+           BeanUtils.copyProperties(sysUserVo,sysUser);
     }
 
 }

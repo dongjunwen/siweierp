@@ -5,6 +5,9 @@ import com.fangxin.siwei.fangzhi.modal.SysUser;
 import com.fangxin.siwei.fangzhi.vo.result.SysUserResultVo;
 import com.fangxin.siwei.fangzhi.vo.system.SysUserModiVo;
 import com.fangxin.siwei.fangzhi.vo.system.SysUserVo;
+import com.github.pagehelper.Page;
+
+import java.util.Map;
 
 /**
  * @Date:2017/10/19 0019 15:07
@@ -58,4 +61,6 @@ public interface SysUserService {
     Result<Integer> modiPass(SysUserModiVo sysUserModiVo);
 
     Result<Integer> operUser(String userNo);
+
+    Page<SysUserResultVo> findList(Map<String, String> params);
 }
