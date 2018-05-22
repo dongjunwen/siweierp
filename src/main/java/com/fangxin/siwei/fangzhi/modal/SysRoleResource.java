@@ -11,7 +11,7 @@ public class SysRoleResource {
 
     private String sourceNo;
 
-    private String sourceName;
+  /*  private String sourceName;
 
     private String fhSourceNo;
 
@@ -21,7 +21,7 @@ public class SysRoleResource {
 
     private String rsourceIcon;
 
-    private Integer sortOrder;
+    private Integer sortOrder;*/
 
     private String createNo;
 
@@ -97,51 +97,5 @@ public class SysRoleResource {
         this.version = version;
     }
 
-    public String getSourceName() {
-        return sourceName;
-    }
 
-    public void setSourceName(String sourceName) {
-        this.sourceName = sourceName;
-    }
-
-    public String getFhSourceNo() {
-        return fhSourceNo;
-    }
-
-    public void setFhSourceNo(String fhSourceNo) {
-        this.fhSourceNo = fhSourceNo;
-    }
-
-    public String getSourceType() {
-        return sourceType;
-    }
-
-    public void setSourceType(String sourceType) {
-        this.sourceType = sourceType;
-    }
-
-    public String getReqUrl() {
-        return reqUrl;
-    }
-
-    public void setReqUrl(String reqUrl) {
-        this.reqUrl = reqUrl;
-    }
-
-    public String getRsourceIcon() {
-        return rsourceIcon;
-    }
-
-    public void setRsourceIcon(String rsourceIcon) {
-        this.rsourceIcon = rsourceIcon;
-    }
-
-    public Integer getSortOrder() {
-        return sortOrder;
-    }
-
-    public void setSortOrder(Integer sortOrder) {
-        this.sortOrder = sortOrder;
-    }
 }

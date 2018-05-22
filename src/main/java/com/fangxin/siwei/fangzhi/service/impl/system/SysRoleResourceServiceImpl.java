@@ -2,14 +2,17 @@ package com.fangxin.siwei.fangzhi.service.impl.system;
 
 import com.fangxin.siwei.fangzhi.common.enums.ResultCode;
 import com.fangxin.siwei.fangzhi.common.result.Result;
+import com.fangxin.siwei.fangzhi.common.utils.Common;
 import com.fangxin.siwei.fangzhi.common.utils.ShiroUtils;
 import com.fangxin.siwei.fangzhi.mapper.SysResourceMapper;
 import com.fangxin.siwei.fangzhi.mapper.SysRoleResourceMapper;
 import com.fangxin.siwei.fangzhi.modal.SysResource;
 import com.fangxin.siwei.fangzhi.modal.SysRoleResource;
+import com.fangxin.siwei.fangzhi.service.AbstractService;
 import com.fangxin.siwei.fangzhi.service.system.SysRoleResourceService;
 import com.fangxin.siwei.fangzhi.vo.result.SysRoleResourceResultVo;
 import com.fangxin.siwei.fangzhi.vo.system.SysRoleResourceVo;
+import com.github.pagehelper.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Condition;
@@ -18,6 +21,7 @@ import tk.mybatis.mapper.entity.Example;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Date:2017/10/23 0023 16:18
@@ -25,7 +29,7 @@ import java.util.List;
  * @Description：
  **/
 @Service
-public class SysRoleResourceServiceImpl implements SysRoleResourceService {
+public class SysRoleResourceServiceImpl extends AbstractService<SysRoleResource> implements SysRoleResourceService {
     @Autowired
     SysRoleResourceMapper sysRoleResourceMapper;
     @Autowired
@@ -54,7 +58,7 @@ public class SysRoleResourceServiceImpl implements SysRoleResourceService {
 
     @Override
     public Result<Integer> delete(String id) {
-        return Result.newSuccess(sysRoleResourceMapper.deleteByPrimaryKey(id));
+        return Result.newSuccess(sysRoleResourceMapper.deleteByPrimaryKey(Integer.valueOf(id)));
     }
 
     @Override
@@ -77,7 +81,26 @@ public class SysRoleResourceServiceImpl implements SysRoleResourceService {
     }
 
     @Override
-    public Result<Integer> deleteByIds(String ids) {
+    public Page<SysRoleResourceResultVo> findList(Map<String, String> params) {
+        Condition serviceCondition = Common.getServiceCondition(params, SysRoleResource.class);
+        Page<SysRoleResource> sysRoleResources = (Page<SysRoleResource>) findByCondition(serviceCondition);
+        Page<SysRoleResourceResultVo> sysRoleResourceResultVos=new Page<>();
+        sysRoleResourceResultVos.setTotal(sysRoleResources.getTotal());
+        sysRoleResourceResultVos.setPages(sysRoleResources.getPages());
+        sysRoleResourceResultVos.setPageSize(sysRoleResources.getPageSize());
+        sysRoleResourceResultVos.setPageNum(sysRoleResources.getPageNum());
+        for(SysRoleResource sysRoleResource:sysRoleResources){
+            SysRoleResourceResultVo sysRoleResourceResultVo=new SysRoleResourceResultVo();
+            sysRoleResourceResultVo.setId(sysRoleResource.getId());
+            sysRoleResourceResultVo.setRoleCode(sysRoleResource.getRoleCode());
+            sysRoleResourceResultVo.setSourceNo(sysRoleResource.getSourceNo());
+            sysRoleResourceResultVos.add(sysRoleResourceResultVo);
+        }
+        return  sysRoleResourceResultVos;
+    }
+
+    @Override
+    public Result<Integer> deleteByIdstr(String ids) {
         return Result.newSuccess(sysRoleResourceMapper.deleteByIds(ids));
     }
 }
