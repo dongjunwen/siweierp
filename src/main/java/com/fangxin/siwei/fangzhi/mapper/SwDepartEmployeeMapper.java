@@ -21,4 +21,6 @@ public interface SwDepartEmployeeMapper {
     List<SwDepartEmployee> selectByUserNo(String loginNo);
 
     SwDepartEmployee selectByUserNoAndDepartNo(@Param("userNo") String userNo, @Param("departNo")String departNo);
+
+    void deleteByUserNo(String userNo);
 }

@@ -34,6 +34,10 @@ public class SysUserVo implements Serializable {
     @ApiModelProperty(value = "备注",required = false)
     private String memo;
     private Date lastLoginTime;
+    @ApiModelProperty(value = "角色代码",required = false)
+    private String roleCode;
+    @ApiModelProperty(value = "部门编号",required = false)
+    private String departNo;
 
 
     public String getUserNo() {
@@ -98,5 +102,21 @@ public class SysUserVo implements Serializable {
 
     public void setLastLoginTime(Date lastLoginTime) {
         this.lastLoginTime = lastLoginTime;
+    }
+
+    public String getRoleCode() {
+        return roleCode;
+    }
+
+    public void setRoleCode(String roleCode) {
+        this.roleCode = roleCode;
+    }
+
+    public String getDepartNo() {
+        return departNo;
+    }
+
+    public void setDepartNo(String departNo) {
+        this.departNo = departNo;
     }
 }

@@ -17,4 +17,6 @@ public interface SwDepartEmployeeService {
     Result<Integer> delete(String id);
 
     List<SysDepartEmployeeResultVo> getEntityByUserNo(String userNo);
+
+    void deleteByUserNo(String userNo);
 }

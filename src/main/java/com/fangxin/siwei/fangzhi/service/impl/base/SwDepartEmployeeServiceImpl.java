@@ -70,4 +70,11 @@ public class SwDepartEmployeeServiceImpl implements SwDepartEmployeeService {
         }
         return sysDepartEmployeeResultVos;
     }
+
+    @Override
+    public void deleteByUserNo(String userNo) {
+        swDepartEmployeeMapper.deleteByUserNo(userNo);
+    }
+
+
 }

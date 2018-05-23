@@ -55,6 +55,11 @@ public class SysUserRoleServiceImpl implements SysUserRoleService {
     }
 
     @Override
+    public void deleteByUserNo(String userNo) {
+        sysUserRoleMapper.deleteByUserNo(userNo);
+    }
+
+    @Override
     public List<SysUserRoleResultVo> getEntityByUserNo(String userNo) {
         List<SysUserRole> sysUserRoles=selectByUserNo(userNo);
         List<SysUserRoleResultVo> sysUserRoleResultVos=new ArrayList<>();

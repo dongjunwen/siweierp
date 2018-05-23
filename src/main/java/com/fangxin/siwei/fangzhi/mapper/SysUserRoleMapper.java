@@ -11,4 +11,6 @@ public interface SysUserRoleMapper extends MyMapper<SysUserRole>{
     List<SysUserRole> selectByUserNo(String userNo);
 
     SysUserRole selectByUserNoAndRoleCode(@Param("userNo") String userNo, @Param("roleCode")String roleCode);
+
+    void deleteByUserNo(String userNo);
 }

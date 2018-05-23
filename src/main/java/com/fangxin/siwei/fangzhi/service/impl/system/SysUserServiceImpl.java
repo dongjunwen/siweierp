@@ -9,12 +9,17 @@ import com.fangxin.siwei.fangzhi.common.utils.ShiroUtils;
 import com.fangxin.siwei.fangzhi.mapper.*;
 import com.fangxin.siwei.fangzhi.modal.*;
 import com.fangxin.siwei.fangzhi.service.AbstractService;
+import com.fangxin.siwei.fangzhi.service.base.SwDepartEmployeeService;
+import com.fangxin.siwei.fangzhi.service.system.SysUserRoleService;
 import com.fangxin.siwei.fangzhi.service.system.SysUserService;
+import com.fangxin.siwei.fangzhi.vo.base.SwDepartEmployeeVo;
 import com.fangxin.siwei.fangzhi.vo.result.SwCompInfoResultVo;
 import com.fangxin.siwei.fangzhi.vo.result.SysUserResultVo;
 import com.fangxin.siwei.fangzhi.vo.system.SysUserModiVo;
+import com.fangxin.siwei.fangzhi.vo.system.SysUserRoleVo;
 import com.fangxin.siwei.fangzhi.vo.system.SysUserVo;
 import com.github.pagehelper.Page;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -47,6 +52,10 @@ public class SysUserServiceImpl extends AbstractService<SysUser> implements SysU
     SwCompanyInfoMapper swCompanyInfoMapper;
     @Autowired
     SysUserRoleMapper sysUserRoleMapper;
+    @Autowired
+    SysUserRoleService sysUserRoleService;
+    @Autowired
+    SwDepartEmployeeService swDepartEmployeeService;
 
     @Override
     @Transactional
@@ -63,7 +72,27 @@ public class SysUserServiceImpl extends AbstractService<SysUser> implements SysU
         sysUser.setModiNo(ShiroUtils.getCurrentUserNo());
         sysUser.setModiTime(new Date());
         sysUserMapper.insertSelective(sysUser);
+        saveExtendInfo(sysUserVo);
         return Result.newSuccess(1);
+    }
+
+    private void saveExtendInfo(SysUserVo sysUserVo) {
+        if(StringUtils.isNotEmpty(sysUserVo.getRoleCode())){
+            SysUserRoleVo sysUserRoleVo=new SysUserRoleVo();
+            sysUserRoleVo.setUserNo(sysUserVo.getUserNo());
+            sysUserRoleVo.setRoleCode(sysUserVo.getRoleCode());
+            //目前支持一个用户一种角色
+            sysUserRoleService.deleteByUserNo(sysUserVo.getUserNo());
+            sysUserRoleService.create(sysUserRoleVo);
+        }
+        if(StringUtils.isNotEmpty(sysUserVo.getDepartNo())){
+            SwDepartEmployeeVo swDepartEmployeeVo=new SwDepartEmployeeVo();
+            swDepartEmployeeVo.setUserNo(sysUserVo.getUserNo());
+            swDepartEmployeeVo.setDepartNo(sysUserVo.getDepartNo());
+            //目前支持一个用户一个部门
+            swDepartEmployeeService.deleteByUserNo(sysUserVo.getUserNo());
+            swDepartEmployeeService.create(swDepartEmployeeVo);
+        }
     }
 
     @Override
@@ -83,6 +112,8 @@ public class SysUserServiceImpl extends AbstractService<SysUser> implements SysU
         sysUser.setModiNo(ShiroUtils.getCurrentUserNo());
         sysUser.setModiTime(new Date());
         sysUser.setVersion(_sysUser.getVersion());
+        saveExtendInfo(sysUserVo);
+
         return Result.newSuccess(sysUserMapper.updateByUserNo(sysUser));
     }
 
@@ -117,12 +148,12 @@ public class SysUserServiceImpl extends AbstractService<SysUser> implements SysU
         sysUserResultVo.setEmailAddr(sysUser.getEmailAddr());
         sysUserResultVo.setPhoneNum(sysUser.getPhoneNum());
         List<SysUserRole> sysUserRoles=sysUserRoleMapper.selectByUserNo(loginNo);
-        if(sysUserRoles!=null){
+        if(sysUserRoles!=null && sysUserRoles.size()>=1){
             sysUserResultVo.setRoleCode(sysUserRoles.get(0).getRoleCode());
             sysUserResultVo.setRoleName(sysUserRoles.get(0).getRoleName());
         }
         List<SwDepartEmployee> swDepartEmployees=swDepartEmployeeMapper.selectByUserNo(loginNo);
-        if(swDepartEmployees!=null){
+        if(swDepartEmployees!=null && swDepartEmployees.size()>=1){
             sysUserResultVo.setDepartNo(swDepartEmployees.get(0).getDepartNo());
             sysUserResultVo.setDepartName(swDepartEmployees.get(0).getDepartName());
         }
@@ -199,6 +230,12 @@ public class SysUserServiceImpl extends AbstractService<SysUser> implements SysU
             SysUserResultVo sysUserResultVo=new SysUserResultVo();
             BeanUtils.copyProperties(sysUser,sysUserResultVo);
             sysUserResultVo.setStatusName(SysDictUtils.getNameByUniq("STATUS",sysUser.getStatus()));
+            List<SwDepartEmployee> swDepartEmployees=swDepartEmployeeMapper.selectByUserNo(sysUserResultVo.getUserNo());
+            if(swDepartEmployees!=null && swDepartEmployees.size()>=1)
+            sysUserResultVo.setDepartNo(swDepartEmployees.get(0).getDepartNo());
+            List<SysUserRole> sysUserRoles=sysUserRoleMapper.selectByUserNo(sysUserResultVo.getUserNo());
+            if(sysUserRoles!=null && sysUserRoles.size()>=1)
+            sysUserResultVo.setRoleCode(sysUserRoles.get(0).getRoleCode());
             sysUserResultVos.add(sysUserResultVo);
         }
         return sysUserResultVos;

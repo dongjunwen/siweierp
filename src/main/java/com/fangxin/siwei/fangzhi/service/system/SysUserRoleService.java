@@ -24,4 +24,6 @@ public interface SysUserRoleService  {
     Result<Integer> delete(String id);
 
     Result<Integer> create(SysUserRoleVo sysUserRoleVo);
+
+    void deleteByUserNo(String userNo);
 }

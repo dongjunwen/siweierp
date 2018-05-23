@@ -36,6 +36,10 @@
     where user_no = #{userNo,jdbcType=VARCHAR}
   </select>
 
+  <delete id="deleteByUserNo" parameterType="java.lang.String">
+     delete from sw_depart_employee
+    where user_no = #{userNo,jdbcType=VARCHAR}
+  </delete>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from sw_depart_employee
     where id = #{id,jdbcType=INTEGER}

@@ -9,4 +9,5 @@ public interface SwDepartInfoMapper extends MyMapper<SwDepartInfo> {
     SwDepartInfo selectByDepartNo(String departNo);
 
     int updateByCompNo(SwDepartInfo swDepartInfo);
+
 }

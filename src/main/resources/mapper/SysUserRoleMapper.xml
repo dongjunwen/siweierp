@@ -30,6 +30,10 @@
     and role_code=#{roleCode,jdbcType=VARCHAR}
   </select>
 
+  <delete id="deleteByUserNo" parameterType="java.lang.String">
+    delete from sys_user_role  where user_no = #{userNo,jdbcType=VARCHAR}
+  </delete>
+
 
  <!--
   <update id="updateByPrimaryKeySelective" parameterType="com.fangxin.siwei.fangzhi.modal.SysUserRole">
