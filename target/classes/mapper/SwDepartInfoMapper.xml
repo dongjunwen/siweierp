@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fangxin.siwei.fangzhi.mapper.SwDepartInfoMapper">
+  <resultMap id="BaseResultMap" type="com.fangxin.siwei.fangzhi.modal.SwDepartInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="depart_no" jdbcType="VARCHAR" property="departNo" />
+    <result column="depart_name" jdbcType="VARCHAR" property="departName" />
+    <result column="fh_depart_no" jdbcType="VARCHAR" property="fhDepartNo" />
+    <result column="comp_no" jdbcType="VARCHAR" property="compNo" />
+    <result column="memo" jdbcType="VARCHAR" property="memo" />
+    <result column="create_no" jdbcType="VARCHAR" property="createNo" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="modi_no" jdbcType="VARCHAR" property="modiNo" />
+    <result column="modi_time" jdbcType="TIMESTAMP" property="modiTime" />
+    <result column="version" jdbcType="INTEGER" property="version" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, depart_no, depart_name, fh_depart_no, comp_no, memo, create_no, create_time, 
+    modi_no, modi_time, version
+  </sql>
+  <select id="selectByDepartNo" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List" />
+    from sw_depart_info
+    where depart_no = #{departNo,jdbcType=VARCHAR}
+  </select>
+
+  <update id="updateByCompNo" parameterType="com.fangxin.siwei.fangzhi.modal.SwDepartInfo">
+    update sw_depart_info
+    <set>
+
+      <if test="departName != null">
+        depart_name = #{departName,jdbcType=VARCHAR},
+      </if>
+      <if test="fhDepartNo != null">
+        fh_depart_no = #{fhDepartNo,jdbcType=VARCHAR},
+      </if>
+      <if test="compNo != null">
+        comp_no = #{compNo,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        memo = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="createNo != null">
+        create_no = #{createNo,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modiNo != null">
+        modi_no = #{modiNo,jdbcType=VARCHAR},
+      </if>
+      <if test="modiTime != null">
+        modi_time = #{modiTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=INTEGER},
+      </if>
+    </set>
+    where
+    depart_no = #{departNo,jdbcType=VARCHAR}
+  </update>
+
+</mapper>

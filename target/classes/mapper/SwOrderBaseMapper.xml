@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fangxin.siwei.fangzhi.mapper.SwOrderBaseMapper">
+  <resultMap id="BaseResultMap" type="com.fangxin.siwei.fangzhi.modal.SwOrderBase">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="order_no" jdbcType="VARCHAR" property="orderNo" />
+    <result column="order_date" jdbcType="DATE" property="orderDate" />
+    <result column="pay_way" jdbcType="VARCHAR" property="payWay" />
+    <result column="good_date" jdbcType="DATE" property="goodDate" />
+    <result column="finish_date" jdbcType="DATE" property="finishDate" />
+    <result column="order_type" jdbcType="VARCHAR" property="orderType" />
+    <result column="sale_type" jdbcType="VARCHAR" property="saleType" />
+    <result column="order_status" jdbcType="VARCHAR" property="orderStatus" />
+    <result column="memo" jdbcType="VARCHAR" property="memo" />
+    <result column="cust_comp_no" jdbcType="VARCHAR" property="custCompNo" />
+    <result column="cust_comp_name" jdbcType="VARCHAR" property="custCompName" />
+    <result column="cust_contact_name" jdbcType="VARCHAR" property="custContactName" />
+    <result column="cust_mobile" jdbcType="VARCHAR" property="custMobile" />
+    <result column="cust_phone" jdbcType="VARCHAR" property="custPhone" />
+    <result column="cust_tax" jdbcType="VARCHAR" property="custTax" />
+    <result column="cust_addr" jdbcType="VARCHAR" property="custAddr" />
+    <result column="supply_comp_no" jdbcType="VARCHAR" property="supplyCompNo" />
+    <result column="supply_comp_name" jdbcType="VARCHAR" property="supplyCompName" />
+    <result column="supply_contact_name" jdbcType="VARCHAR" property="supplyContactName" />
+    <result column="supply_mobile" jdbcType="VARCHAR" property="supplyMobile" />
+    <result column="supply_phone" jdbcType="VARCHAR" property="supplyPhone" />
+    <result column="supply_tax" jdbcType="VARCHAR" property="supplyTax" />
+    <result column="supply_addr" jdbcType="VARCHAR" property="supplyAddr" />
+    <result column="create_no" jdbcType="VARCHAR" property="createNo" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="modi_no" jdbcType="VARCHAR" property="modiNo" />
+    <result column="modi_time" jdbcType="TIMESTAMP" property="modiTime" />
+    <result column="version" jdbcType="INTEGER" property="version" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, order_no, order_date, pay_way, good_date, finish_date, order_type, sale_type, 
+    order_status, memo, cust_comp_no, cust_comp_name, cust_contact_name, cust_mobile, 
+    cust_phone, cust_tax, cust_addr, supply_comp_no, supply_comp_name, supply_contact_name, 
+    supply_mobile, supply_phone, supply_tax, supply_addr, create_no, create_time, modi_no,
+    modi_time, version
+  </sql>
+  <select id="selectByOrderNo" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sw_order_base
+    where order_no = #{orderNo,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByCond"  parameterType="com.fangxin.siwei.fangzhi.modal.SwOrderBase" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sw_order_base
+    where order_no = #{orderNo,jdbcType=VARCHAR}
+    and   cust_comp_no = #{custCompNo,jdbcType=VARCHAR}
+  </select>
+  <update id="updateByOrderNo" parameterType="com.fangxin.siwei.fangzhi.modal.SwOrderBase">
+    update sw_order_base
+    <set>
+      <if test="orderDate != null">
+        order_date = #{orderDate,jdbcType=DATE},
+      </if>
+      <if test="payWay != null">
+        pay_way = #{payWay,jdbcType=VARCHAR},
+      </if>
+      <if test="goodDate != null">
+        good_date = #{goodDate,jdbcType=DATE},
+      </if>
+      <if test="finishDate != null">
+        finish_date = #{finishDate,jdbcType=DATE},
+      </if>
+      <if test="orderType != null">
+        order_type = #{orderType,jdbcType=VARCHAR},
+      </if>
+      <if test="saleType != null">
+        sale_type = #{saleType,jdbcType=VARCHAR},
+      </if>
+      <if test="orderStatus != null">
+        order_status = #{orderStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        memo = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="custCompNo != null">
+        cust_comp_no = #{custCompNo,jdbcType=VARCHAR},
+      </if>
+      <if test="custCompName != null">
+        cust_comp_name = #{custCompName,jdbcType=VARCHAR},
+      </if>
+      <if test="custContactName != null">
+        cust_contact_name = #{custContactName,jdbcType=VARCHAR},
+      </if>
+      <if test="custMobile != null">
+        cust_mobile = #{custMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="custPhone != null">
+        cust_phone = #{custPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="custTax != null">
+        cust_tax = #{custTax,jdbcType=VARCHAR},
+      </if>
+      <if test="custAddr != null">
+        cust_addr = #{custAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="supplyCompNo != null">
+        supply_comp_no = #{supplyCompNo,jdbcType=VARCHAR},
+      </if>
+      <if test="supplyCompName != null">
+        supply_comp_name = #{supplyCompName,jdbcType=VARCHAR},
+      </if>
+      <if test="supplyContactName != null">
+        supply_contact_name = #{supplyContactName,jdbcType=VARCHAR},
+      </if>
+      <if test="supplyMobile != null">
+        supply_mobile = #{supplyMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="supplyPhone != null">
+        supply_phone = #{supplyPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="supplyTax != null">
+        supply_tax = #{supplyTax,jdbcType=VARCHAR},
+      </if>
+      <if test="supplyAddr != null">
+        supply_addr = #{supplyAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="createNo != null">
+        create_no = #{createNo,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modiNo != null">
+        modi_no = #{modiNo,jdbcType=VARCHAR},
+      </if>
+      <if test="modiTime != null">
+        modi_time = #{modiTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=INTEGER},
+      </if>
+    </set>
+    where  order_no = #{orderNo,jdbcType=VARCHAR}
+  </update>
+  <!--<select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sw_order_base
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sw_order_base
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fangxin.siwei.fangzhi.modal.SwOrderBase">
+    insert into sw_order_base (id, order_no, order_date, 
+      pay_way, good_date, finish_date, 
+      order_type, sale_type, order_status, 
+      memo, cust_comp_no, cust_comp_name, 
+      cust_contact_name, cust_mobile, cust_phone, 
+      cust_tax, cust_addr, supply_comp_no, 
+      supply_comp_name, supply_contact_name, supply_mobile, 
+      supply_phone, supply_tax, supply_addr, 
+      create_no, create_time, modi_no, 
+      modi_time, version)
+    values (#{id,jdbcType=INTEGER}, #{orderNo,jdbcType=VARCHAR}, #{orderDate,jdbcType=DATE}, 
+      #{payWay,jdbcType=VARCHAR}, #{goodDate,jdbcType=DATE}, #{finishDate,jdbcType=DATE}, 
+      #{orderType,jdbcType=VARCHAR}, #{saleType,jdbcType=VARCHAR}, #{orderStatus,jdbcType=VARCHAR}, 
+      #{memo,jdbcType=VARCHAR}, #{custCompNo,jdbcType=VARCHAR}, #{custCompName,jdbcType=VARCHAR}, 
+      #{custContactName,jdbcType=VARCHAR}, #{custMobile,jdbcType=VARCHAR}, #{custPhone,jdbcType=VARCHAR}, 
+      #{custTax,jdbcType=VARCHAR}, #{custAddr,jdbcType=VARCHAR}, #{supplyCompNo,jdbcType=VARCHAR}, 
+      #{supplyCompName,jdbcType=VARCHAR}, #{supplyContactName,jdbcType=VARCHAR}, #{supplyMobile,jdbcType=VARCHAR}, 
+      #{supplyPhone,jdbcType=VARCHAR}, #{supplyTax,jdbcType=VARCHAR}, #{supplyAddr,jdbcType=VARCHAR}, 
+      #{createNo,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{modiNo,jdbcType=VARCHAR}, 
+      #{modiTime,jdbcType=TIMESTAMP}, #{version,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fangxin.siwei.fangzhi.modal.SwOrderBase">
+    insert into sw_order_base
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="orderNo != null">
+        order_no,
+      </if>
+      <if test="orderDate != null">
+        order_date,
+      </if>
+      <if test="payWay != null">
+        pay_way,
+      </if>
+      <if test="goodDate != null">
+        good_date,
+      </if>
+      <if test="finishDate != null">
+        finish_date,
+      </if>
+      <if test="orderType != null">
+        order_type,
+      </if>
+      <if test="saleType != null">
+        sale_type,
+      </if>
+      <if test="orderStatus != null">
+        order_status,
+      </if>
+      <if test="memo != null">
+        memo,
+      </if>
+      <if test="custCompNo != null">
+        cust_comp_no,
+      </if>
+      <if test="custCompName != null">
+        cust_comp_name,
+      </if>
+      <if test="custContactName != null">
+        cust_contact_name,
+      </if>
+      <if test="custMobile != null">
+        cust_mobile,
+      </if>
+      <if test="custPhone != null">
+        cust_phone,
+      </if>
+      <if test="custTax != null">
+        cust_tax,
+      </if>
+      <if test="custAddr != null">
+        cust_addr,
+      </if>
+      <if test="supplyCompNo != null">
+        supply_comp_no,
+      </if>
+      <if test="supplyCompName != null">
+        supply_comp_name,
+      </if>
+      <if test="supplyContactName != null">
+        supply_contact_name,
+      </if>
+      <if test="supplyMobile != null">
+        supply_mobile,
+      </if>
+      <if test="supplyPhone != null">
+        supply_phone,
+      </if>
+      <if test="supplyTax != null">
+        supply_tax,
+      </if>
+      <if test="supplyAddr != null">
+        supply_addr,
+      </if>
+      <if test="createNo != null">
+        create_no,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="modiNo != null">
+        modi_no,
+      </if>
+      <if test="modiTime != null">
+        modi_time,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="orderNo != null">
+        #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="orderDate != null">
+        #{orderDate,jdbcType=DATE},
+      </if>
+      <if test="payWay != null">
+        #{payWay,jdbcType=VARCHAR},
+      </if>
+      <if test="goodDate != null">
+        #{goodDate,jdbcType=DATE},
+      </if>
+      <if test="finishDate != null">
+        #{finishDate,jdbcType=DATE},
+      </if>
+      <if test="orderType != null">
+        #{orderType,jdbcType=VARCHAR},
+      </if>
+      <if test="saleType != null">
+        #{saleType,jdbcType=VARCHAR},
+      </if>
+      <if test="orderStatus != null">
+        #{orderStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="custCompNo != null">
+        #{custCompNo,jdbcType=VARCHAR},
+      </if>
+      <if test="custCompName != null">
+        #{custCompName,jdbcType=VARCHAR},
+      </if>
+      <if test="custContactName != null">
+        #{custContactName,jdbcType=VARCHAR},
+      </if>
+      <if test="custMobile != null">
+        #{custMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="custPhone != null">
+        #{custPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="custTax != null">
+        #{custTax,jdbcType=VARCHAR},
+      </if>
+      <if test="custAddr != null">
+        #{custAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="supplyCompNo != null">
+        #{supplyCompNo,jdbcType=VARCHAR},
+      </if>
+      <if test="supplyCompName != null">
+        #{supplyCompName,jdbcType=VARCHAR},
+      </if>
+      <if test="supplyContactName != null">
+        #{supplyContactName,jdbcType=VARCHAR},
+      </if>
+      <if test="supplyMobile != null">
+        #{supplyMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="supplyPhone != null">
+        #{supplyPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="supplyTax != null">
+        #{supplyTax,jdbcType=VARCHAR},
+      </if>
+      <if test="supplyAddr != null">
+        #{supplyAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="createNo != null">
+        #{createNo,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modiNo != null">
+        #{modiNo,jdbcType=VARCHAR},
+      </if>
+      <if test="modiTime != null">
+        #{modiTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fangxin.siwei.fangzhi.modal.SwOrderBase">
+    update sw_order_base
+    <set>
+      <if test="orderNo != null">
+        order_no = #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="orderDate != null">
+        order_date = #{orderDate,jdbcType=DATE},
+      </if>
+      <if test="payWay != null">
+        pay_way = #{payWay,jdbcType=VARCHAR},
+      </if>
+      <if test="goodDate != null">
+        good_date = #{goodDate,jdbcType=DATE},
+      </if>
+      <if test="finishDate != null">
+        finish_date = #{finishDate,jdbcType=DATE},
+      </if>
+      <if test="orderType != null">
+        order_type = #{orderType,jdbcType=VARCHAR},
+      </if>
+      <if test="saleType != null">
+        sale_type = #{saleType,jdbcType=VARCHAR},
+      </if>
+      <if test="orderStatus != null">
+        order_status = #{orderStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        memo = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="custCompNo != null">
+        cust_comp_no = #{custCompNo,jdbcType=VARCHAR},
+      </if>
+      <if test="custCompName != null">
+        cust_comp_name = #{custCompName,jdbcType=VARCHAR},
+      </if>
+      <if test="custContactName != null">
+        cust_contact_name = #{custContactName,jdbcType=VARCHAR},
+      </if>
+      <if test="custMobile != null">
+        cust_mobile = #{custMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="custPhone != null">
+        cust_phone = #{custPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="custTax != null">
+        cust_tax = #{custTax,jdbcType=VARCHAR},
+      </if>
+      <if test="custAddr != null">
+        cust_addr = #{custAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="supplyCompNo != null">
+        supply_comp_no = #{supplyCompNo,jdbcType=VARCHAR},
+      </if>
+      <if test="supplyCompName != null">
+        supply_comp_name = #{supplyCompName,jdbcType=VARCHAR},
+      </if>
+      <if test="supplyContactName != null">
+        supply_contact_name = #{supplyContactName,jdbcType=VARCHAR},
+      </if>
+      <if test="supplyMobile != null">
+        supply_mobile = #{supplyMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="supplyPhone != null">
+        supply_phone = #{supplyPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="supplyTax != null">
+        supply_tax = #{supplyTax,jdbcType=VARCHAR},
+      </if>
+      <if test="supplyAddr != null">
+        supply_addr = #{supplyAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="createNo != null">
+        create_no = #{createNo,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modiNo != null">
+        modi_no = #{modiNo,jdbcType=VARCHAR},
+      </if>
+      <if test="modiTime != null">
+        modi_time = #{modiTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fangxin.siwei.fangzhi.modal.SwOrderBase">
+    update sw_order_base
+    set order_no = #{orderNo,jdbcType=VARCHAR},
+      order_date = #{orderDate,jdbcType=DATE},
+      pay_way = #{payWay,jdbcType=VARCHAR},
+      good_date = #{goodDate,jdbcType=DATE},
+      finish_date = #{finishDate,jdbcType=DATE},
+      order_type = #{orderType,jdbcType=VARCHAR},
+      sale_type = #{saleType,jdbcType=VARCHAR},
+      order_status = #{orderStatus,jdbcType=VARCHAR},
+      memo = #{memo,jdbcType=VARCHAR},
+      cust_comp_no = #{custCompNo,jdbcType=VARCHAR},
+      cust_comp_name = #{custCompName,jdbcType=VARCHAR},
+      cust_contact_name = #{custContactName,jdbcType=VARCHAR},
+      cust_mobile = #{custMobile,jdbcType=VARCHAR},
+      cust_phone = #{custPhone,jdbcType=VARCHAR},
+      cust_tax = #{custTax,jdbcType=VARCHAR},
+      cust_addr = #{custAddr,jdbcType=VARCHAR},
+      supply_comp_no = #{supplyCompNo,jdbcType=VARCHAR},
+      supply_comp_name = #{supplyCompName,jdbcType=VARCHAR},
+      supply_contact_name = #{supplyContactName,jdbcType=VARCHAR},
+      supply_mobile = #{supplyMobile,jdbcType=VARCHAR},
+      supply_phone = #{supplyPhone,jdbcType=VARCHAR},
+      supply_tax = #{supplyTax,jdbcType=VARCHAR},
+      supply_addr = #{supplyAddr,jdbcType=VARCHAR},
+      create_no = #{createNo,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modi_no = #{modiNo,jdbcType=VARCHAR},
+      modi_time = #{modiTime,jdbcType=TIMESTAMP},
+      version = #{version,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>-->
+</mapper>

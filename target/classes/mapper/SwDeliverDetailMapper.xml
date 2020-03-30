@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fangxin.siwei.fangzhi.mapper.SwDeliverDetailMapper">
+  <resultMap id="BaseResultMap" type="com.fangxin.siwei.fangzhi.modal.SwDeliverDetail">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="deliver_no" jdbcType="VARCHAR" property="deliverNo" />
+    <result column="deliver_seq_no" jdbcType="VARCHAR" property="deliverSeqNo" />
+    <result column="order_no" jdbcType="VARCHAR" property="orderNo" />
+    <result column="order_seq_no" jdbcType="VARCHAR" property="orderSeqNo" />
+    <result column="box_no" jdbcType="VARCHAR" property="boxNo" />
+    <result column="prod_no" jdbcType="VARCHAR" property="prodNo" />
+    <result column="prod_name" jdbcType="VARCHAR" property="prodName" />
+    <result column="prod_type" jdbcType="VARCHAR" property="prodType" />
+    <result column="prod_form" jdbcType="VARCHAR" property="prodForm" />
+    <result column="prod_unit" jdbcType="VARCHAR" property="prodUnit" />
+    <result column="prod_long" jdbcType="DECIMAL" property="prodLong" />
+    <result column="prod_width" jdbcType="DECIMAL" property="prodWidth" />
+    <result column="prod_num" jdbcType="DECIMAL" property="prodNum" />
+    <result column="prod_price" jdbcType="DECIMAL" property="prodPrice" />
+    <result column="tech_no" jdbcType="VARCHAR" property="techNo" />
+    <result column="tech_name" jdbcType="VARCHAR" property="techName" />
+    <result column="memo" jdbcType="VARCHAR" property="memo" />
+    <result column="create_no" jdbcType="VARCHAR" property="createNo" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="modi_no" jdbcType="VARCHAR" property="modiNo" />
+    <result column="modi_time" jdbcType="TIMESTAMP" property="modiTime" />
+    <result column="version" jdbcType="INTEGER" property="version" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, deliver_no, deliver_seq_no, order_no, order_seq_no, box_no, prod_no, prod_name,
+    prod_type, prod_form,prod_unit, prod_long, prod_width, prod_num, prod_price, tech_no,tech_name,
+    memo, create_no,
+    create_time, modi_no, modi_time, version
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sw_deliver_detail
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectByDeliverNo" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sw_deliver_detail
+    where deliver_no = #{deliverNo,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sw_deliver_detail
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fangxin.siwei.fangzhi.modal.SwDeliverDetail">
+    insert into sw_deliver_detail (id, deliver_no, deliver_seq_no,
+      order_no, order_seq_no, box_no, 
+      prod_no, prod_name, prod_type, 
+      prod_form,prod_unit, prod_long, prod_width,
+      prod_num, prod_price,tech_no,tech_name, memo,
+      create_no, create_time, modi_no, 
+      modi_time, version)
+    values (#{id,jdbcType=INTEGER}, #{deliverNo,jdbcType=VARCHAR}, #{deliverSeqNo,jdbcType=VARCHAR},
+      #{orderNo,jdbcType=VARCHAR}, #{orderSeqNo,jdbcType=VARCHAR}, #{boxNo,jdbcType=VARCHAR}, 
+      #{prodNo,jdbcType=VARCHAR}, #{prodName,jdbcType=VARCHAR}, #{prodType,jdbcType=VARCHAR}, 
+      #{prodForm,jdbcType=VARCHAR},#{prodUnit,jdbcType=VARCHAR}, #{prodLong,jdbcType=DECIMAL}, #{prodWidth,jdbcType=DECIMAL},
+      #{prodNum,jdbcType=DECIMAL}, #{prodPrice,jdbcType=DECIMAL}, #{item.techNo,jdbcType=VARCHAR},#{item.techName,jdbcType=VARCHAR},#{item.memo,jdbcType=VARCHAR},
+      #{createNo,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{modiNo,jdbcType=VARCHAR}, 
+      #{modiTime,jdbcType=TIMESTAMP}, #{version,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertBatch" parameterType="java.util.List">
+      insert into sw_deliver_detail ( deliver_no, deliver_seq_no,
+      order_no, order_seq_no, box_no,
+      prod_no, prod_name, prod_type,
+      prod_form,prod_unit, prod_long, prod_width,
+      prod_num, prod_price,tech_no,tech_name, memo,
+      create_no, create_time, modi_no,
+      modi_time, version)
+    values
+    <foreach collection="list" index="index" separator="," item="item">
+      ( #{item.deliverNo,jdbcType=VARCHAR}, #{item.deliverSeqNo,jdbcType=VARCHAR},
+      #{item.orderNo,jdbcType=VARCHAR}, #{item.orderSeqNo,jdbcType=VARCHAR}, #{item.boxNo,jdbcType=VARCHAR},
+      #{item.prodNo,jdbcType=VARCHAR}, #{item.prodName,jdbcType=VARCHAR}, #{item.prodType,jdbcType=VARCHAR},
+      #{item.prodForm,jdbcType=VARCHAR},#{item.prodUnit,jdbcType=VARCHAR}, #{item.prodLong,jdbcType=DECIMAL}, #{item.prodWidth,jdbcType=DECIMAL},
+      #{item.prodNum,jdbcType=DECIMAL}, #{item.prodPrice,jdbcType=DECIMAL}, #{item.techNo,jdbcType=VARCHAR},#{item.techName,jdbcType=VARCHAR},#{item.memo,jdbcType=VARCHAR},
+      #{item.createNo,jdbcType=VARCHAR}, #{item.createTime,jdbcType=TIMESTAMP}, #{item.modiNo,jdbcType=VARCHAR},
+      #{item.modiTime,jdbcType=TIMESTAMP}, #{item.version,jdbcType=INTEGER})
+    </foreach>
+  </insert>
+  <insert id="insertSelective" parameterType="com.fangxin.siwei.fangzhi.modal.SwDeliverDetail">
+    insert into sw_deliver_detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="deliverNo != null">
+        deliver_no,
+      </if>
+      <if test="deliverSeqNo != null">
+        deliver_seq_no,
+      </if>
+      <if test="orderNo != null">
+        order_no,
+      </if>
+      <if test="orderSeqNo != null">
+        order_seq_no,
+      </if>
+      <if test="boxNo != null">
+        box_no,
+      </if>
+      <if test="prodNo != null">
+        prod_no,
+      </if>
+      <if test="prodName != null">
+        prod_name,
+      </if>
+      <if test="prodType != null">
+        prod_type,
+      </if>
+      <if test="prodForm != null">
+        prod_form,
+      </if>
+      <if test="prodUit != null">
+        prod_Unit,
+      </if>
+      <if test="prodLong != null">
+        prod_long,
+      </if>
+      <if test="prodWidth != null">
+        prod_width,
+      </if>
+      <if test="prodNum != null">
+        prod_num,
+      </if>
+      <if test="prodPrice != null">
+        prod_price,
+      </if>
+      <if test="techNo != null">
+        tech_no,
+      </if>
+      <if test="techName != null">
+        tech_name,
+      </if>
+      <if test="memo != null">
+        memo,
+      </if>
+      <if test="createNo != null">
+        create_no,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="modiNo != null">
+        modi_no,
+      </if>
+      <if test="modiTime != null">
+        modi_time,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="deliverNo != null">
+        #{deliverNo,jdbcType=VARCHAR},
+      </if>
+      <if test="deliverSeqNo != null">
+        #{deliverSeqNo,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNo != null">
+        #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="orderSeqNo != null">
+        #{orderSeqNo,jdbcType=VARCHAR},
+      </if>
+      <if test="boxNo != null">
+        #{boxNo,jdbcType=VARCHAR},
+      </if>
+      <if test="prodNo != null">
+        #{prodNo,jdbcType=VARCHAR},
+      </if>
+      <if test="prodName != null">
+        #{prodName,jdbcType=VARCHAR},
+      </if>
+      <if test="prodType != null">
+        #{prodType,jdbcType=VARCHAR},
+      </if>
+      <if test="prodForm != null">
+        #{prodForm,jdbcType=VARCHAR},
+      </if>
+      <if test="prodUnit != null">
+        #{prodUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="prodLong != null">
+        #{prodLong,jdbcType=DECIMAL},
+      </if>
+      <if test="prodWidth != null">
+        #{prodWidth,jdbcType=DECIMAL},
+      </if>
+      <if test="prodNum != null">
+        #{prodNum,jdbcType=DECIMAL},
+      </if>
+      <if test="prodPrice != null">
+        #{prodPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="techNo != null">
+        #{techNo,jdbcType=VARCHAR},
+      </if>
+      <if test="techName != null">
+        #{techName,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="createNo != null">
+        #{createNo,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modiNo != null">
+        #{modiNo,jdbcType=VARCHAR},
+      </if>
+      <if test="modiTime != null">
+        #{modiTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <delete id="deleteByDeliverNo" parameterType="java.lang.String">
+    delete from sw_deliver_detail where deliver_no=#{deliverNo,jdbcType=VARCHAR}
+  </delete>
+  <update id="updateBatch" parameterType="java.util.List">
+    <foreach collection="list" index="index" item="item" separator=";">
+      update sw_deliver_detail
+      <set>
+
+        <if test="item.orderNo != null">
+          order_no = #{item.orderNo,jdbcType=VARCHAR},
+        </if>
+        <if test="item.orderSeqNo != null">
+          order_seq_no = #{item.orderSeqNo,jdbcType=VARCHAR},
+        </if>
+        <if test="item.boxNo != null">
+          box_no = #{item.boxNo,jdbcType=VARCHAR},
+        </if>
+        <if test="item.prodNo != null">
+          prod_no = #{item.prodNo,jdbcType=VARCHAR},
+        </if>
+        <if test="item.prodName != null">
+          prod_name = #{item.prodName,jdbcType=VARCHAR},
+        </if>
+        <if test="item.prodType != null">
+          prod_type = #{item.prodType,jdbcType=VARCHAR},
+        </if>
+        <if test="item.prodForm != null">
+          prod_form = #{item.prodForm,jdbcType=VARCHAR},
+        </if>
+        <if test="item.prodUnit != null">
+          prod_unit = #{item.prodUnit,jdbcType=VARCHAR},
+        </if>
+        <if test="item.prodLong != null">
+          prod_long = #{item.prodLong,jdbcType=DECIMAL},
+        </if>
+        <if test="item.prodWidth != null">
+          prod_width = #{item.prodWidth,jdbcType=DECIMAL},
+        </if>
+        <if test="item.prodNum != null">
+          prod_num = #{item.prodNum,jdbcType=DECIMAL},
+        </if>
+        <if test="item.prodPrice != null">
+          prod_price = #{item.prodPrice,jdbcType=DECIMAL},
+        </if>
+        <if test="item.techNo != null">
+          tech_no = #{item.techNo,jdbcType=VARCHAR},
+        </if>
+        <if test="item.techName != null">
+          tech_name = #{item.techName,jdbcType=VARCHAR},
+        </if>
+        <if test="item.memo != null">
+          memo = #{item.memo,jdbcType=VARCHAR},
+        </if>
+        <if test="item.createNo != null">
+          create_no = #{item.createNo,jdbcType=VARCHAR},
+        </if>
+        <if test="item.createTime != null">
+          create_time = #{item.createTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="item.modiNo != null">
+          modi_no = #{item.modiNo,jdbcType=VARCHAR},
+        </if>
+        <if test="item.modiTime != null">
+          modi_time = #{item.modiTime,jdbcType=TIMESTAMP},
+        </if>
+      </set>
+      where
+        deliver_no = #{item.deliverNo,jdbcType=VARCHAR}
+        and deliver_seq_no = #{item.deliverSeqNo,jdbcType=VARCHAR}
+    </foreach>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fangxin.siwei.fangzhi.modal.SwDeliverDetail">
+    update sw_deliver_detail
+    <set>
+      <if test="deliverNo != null">
+        deliver_no = #{deliverNo,jdbcType=VARCHAR},
+      </if>
+      <if test="deliverSeqNo != null">
+        deliver_seq_no = #{deliverSeqNo,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNo != null">
+        order_no = #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="orderSeqNo != null">
+        order_seq_no = #{orderSeqNo,jdbcType=VARCHAR},
+      </if>
+      <if test="boxNo != null">
+        box_no = #{boxNo,jdbcType=VARCHAR},
+      </if>
+      <if test="prodNo != null">
+        prod_no = #{prodNo,jdbcType=VARCHAR},
+      </if>
+      <if test="prodName != null">
+        prod_name = #{prodName,jdbcType=VARCHAR},
+      </if>
+      <if test="prodType != null">
+        prod_type = #{prodType,jdbcType=VARCHAR},
+      </if>
+      <if test="prodForm != null">
+        prod_form = #{prodForm,jdbcType=VARCHAR},
+      </if>
+      <if test="prodUnit != null">
+        prod_unit = #{prodUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="prodLong != null">
+        prod_long = #{prodLong,jdbcType=DECIMAL},
+      </if>
+      <if test="prodWidth != null">
+        prod_width = #{prodWidth,jdbcType=DECIMAL},
+      </if>
+      <if test="prodNum != null">
+        prod_num = #{prodNum,jdbcType=DECIMAL},
+      </if>
+      <if test="prodPrice != null">
+        prod_price = #{prodPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="techNo != null">
+        tech_no = #{techNo,jdbcType=VARCHAR},
+      </if>
+      <if test="techName != null">
+        tech_name = #{techName,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        memo = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="createNo != null">
+        create_no = #{createNo,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modiNo != null">
+        modi_no = #{modiNo,jdbcType=VARCHAR},
+      </if>
+      <if test="modiTime != null">
+        modi_time = #{modiTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fangxin.siwei.fangzhi.modal.SwDeliverDetail">
+    update sw_deliver_detail
+    set deliver_no = #{deliverNo,jdbcType=VARCHAR},
+      deliver_seq_no = #{deliverSeqNo,jdbcType=VARCHAR},
+      order_no = #{orderNo,jdbcType=VARCHAR},
+      order_seq_no = #{orderSeqNo,jdbcType=VARCHAR},
+      box_no = #{boxNo,jdbcType=VARCHAR},
+      prod_no = #{prodNo,jdbcType=VARCHAR},
+      prod_name = #{prodName,jdbcType=VARCHAR},
+      prod_type = #{prodType,jdbcType=VARCHAR},
+      prod_form = #{prodForm,jdbcType=VARCHAR},
+      prod_unit = #{prodUnit,jdbcType=VARCHAR},
+      prod_long = #{prodLong,jdbcType=DECIMAL},
+      prod_width = #{prodWidth,jdbcType=DECIMAL},
+      prod_num = #{prodNum,jdbcType=DECIMAL},
+      prod_price = #{prodPrice,jdbcType=DECIMAL},
+      tech_no = #{techNo,jdbcType=VARCHAR},
+      tech_name = #{techName,jdbcType=VARCHAR},
+      memo = #{memo,jdbcType=VARCHAR},
+      create_no = #{createNo,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modi_no = #{modiNo,jdbcType=VARCHAR},
+      modi_time = #{modiTime,jdbcType=TIMESTAMP},
+      version = #{version,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

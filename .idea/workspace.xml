@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="94407d58-acea-45c8-8849-d0fb2d841bbc" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_config.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fangxin/siwei/fangzhi/FangzhiApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fangxin/siwei/fangzhi/FangzhiApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fangxin/siwei/fangzhi/common/utils/ShiroUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fangxin/siwei/fangzhi/common/utils/ShiroUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fangxin/siwei/fangzhi/shiro/AccessFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fangxin/siwei/fangzhi/shiro/AccessFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/doc/sw_db.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/doc/sw_db.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/4.3.6/0.4a676dbe61da4bea0a75.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/4.3.6/1.5b32861561f1f30cf0bf.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/4.3.6/10.daec7c217d71106c24d7.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/4.3.6/11.a6662ab0b23c386f3ca3.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/4.3.6/12.6ac04eb609232092b9e7.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/4.3.6/13.5cfd18960caa396993be.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/4.3.6/14.65e2ca92701dbb073d53.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/4.3.6/15.485d6dc2d7e391c49c2c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/4.3.6/16.7baac061751647ba58bc.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/4.3.6/17.45465b36be29690f41c5.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/4.3.6/18.5a63b1c8a6d256a49104.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/4.3.6/19.ec155fa5ac13366c6cd1.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/4.3.6/2.35af1073dbe295503f55.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/4.3.6/20.e4656d971c21dc35b2eb.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/4.3.6/21.0df425c72f1949ad0d7f.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/4.3.6/22.ffa1fae560a7af7199ea.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/4.3.6/23.a7b8baf06bd39c2072ef.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/4.3.6/24.d289482fd189b7ade43c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/4.3.6/25.fe2ef36f013bcce7e9ae.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/4.3.6/26.c54ca255d40bca563dd0.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/4.3.6/27.ad925ade5016c81de3ef.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/4.3.6/28.397ac54e9e8944301345.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/4.3.6/29.cdc5d3a261258bf2068f.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/4.3.6/3.db0cd29bb0b567890b7e.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/4.3.6/30.8621609e848d67ab66f5.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/4.3.6/31.d90899c3d5bc2bb3b481.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/4.3.6/32.48611f62c7b00d32687f.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/4.3.6/33.060fede9c72ca5be2d64.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/4.3.6/34.5869ee39ad673b25461c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/4.3.6/35.0e75cb10dda2846413f0.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/4.3.6/36.2cd4c9849e30895a514e.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/4.3.6/37.ccfd19d4270e19125ab0.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/4.3.6/38.1fd9b027f62d2685743c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/4.3.6/4.9f48d7fd4de3c4a9089a.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/4.3.6/5.b29f498c0ad5a35b5a5a.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/4.3.6/6.0e6656fac88f84604576.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/4.3.6/7.1c1b511bd602d7b5884b.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/4.3.6/7.dd48a626236b2624b7c5.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/4.3.6/8.85c48d58a818872c9287.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/4.3.6/9.2ee0bd208474affc5d20.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/4.3.6/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/4.3.6/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.html" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
+  </component>
+  <component name="CoverageViewManager">
+    <option name="myElementSize" value="92" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="localRepository" value="E:\repository" />
+        <option name="mavenHome" value="D:/apache/apache-maven-3.5.2" />
+        <option name="userSettingsFile" value="D:\apache\apache-maven-3.5.2\conf\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="1" />
+  </component>
+  <component name="ProjectId" id="1Zpfmmxbjt7zxRJrQjxGLakLhnZ" />
+  <component name="PropertiesComponent">
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelOrder2" value="2" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RequestMappingsPanelWidth2" value="75" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="SearchEverywhereHistoryKey" value="SysUserMapper&#9;FILE&#9;file://E:/mycode/siweierp/src/main/java/com/fangxin/siwei/fangzhi/mapper/SysUserMapper.java&#10;IndexController&#9;FILE&#9;file://E:/mycode/siweierp/src/main/java/com/fangxin/siwei/fangzhi/controller/IndexController.java&#10;SysUserServiceImpl&#9;FILE&#9;file://E:/mycode/siweierp/src/main/java/com/fangxin/siwei/fangzhi/service/impl/system/SysUserServiceImpl.java&#10;SwMaterialInfoMapper&#9;PSI&#9;JAVA://com.fangxin.siwei.fangzhi.mapper.SwMaterialInfoMapper&#10;Re&#9;PSI&#9;JAVA://com.fangxin.siwei.fangzhi.common.enums.ReceiveStatus" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../siweiweb" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="MavenSettings" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.FangzhiApplication">
+    <configuration default="true" type="Applet">
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MD5Util" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.fangxin.siwei.fangzhi.common.utils.MD5Util" />
+      <module name="siweierp" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.fangxin.siwei.fangzhi.common.utils.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="FangzhiApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="siweierp" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.fangxin.siwei.fangzhi.FangzhiApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="TestNG">
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType">
+      <module name="" />
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
+      <option name="PROGRAM_PARAMETERS" />
+      <predefined_log_file enabled="true" id="idea.log" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.MD5Util" />
+      <item itemvalue="Spring Boot.FangzhiApplication" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.MD5Util" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="94407d58-acea-45c8-8849-d0fb2d841bbc" name="Default" comment="" />
+      <created>1515567919195</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1515567919195</updated>
+      <workItem from="1515567921194" duration="3928000" />
+      <workItem from="1515651035816" duration="613000" />
+      <workItem from="1515726208077" duration="8800000" />
+      <workItem from="1515749881325" duration="4447000" />
+      <workItem from="1515754385217" duration="590000" />
+      <workItem from="1515980767239" duration="69000" />
+      <workItem from="1515982474767" duration="147000" />
+      <workItem from="1516003045224" duration="7009000" />
+      <workItem from="1516067358864" duration="3531000" />
+      <workItem from="1516172617343" duration="619000" />
+      <workItem from="1516329700168" duration="1860000" />
+      <workItem from="1516585467078" duration="1717000" />
+      <workItem from="1516587897742" duration="596000" />
+      <workItem from="1516603415569" duration="6051000" />
+      <workItem from="1517218291874" duration="1714000" />
+      <workItem from="1517296629543" duration="640000" />
+      <workItem from="1517302597463" duration="667000" />
+      <workItem from="1517455452305" duration="1286000" />
+      <workItem from="1517467515904" duration="1881000" />
+      <workItem from="1517540517306" duration="637000" />
+      <workItem from="1517561477489" duration="843000" />
+      <workItem from="1518151058595" duration="652000" />
+      <workItem from="1518339721268" duration="382000" />
+      <workItem from="1519350219454" duration="650000" />
+      <workItem from="1520405325586" duration="2904000" />
+      <workItem from="1520410188912" duration="609000" />
+      <workItem from="1520478605565" duration="2871000" />
+      <workItem from="1520561982982" duration="3166000" />
+      <workItem from="1520573127540" duration="7000" />
+      <workItem from="1520822057665" duration="832000" />
+      <workItem from="1520831881026" duration="12000" />
+      <workItem from="1520837243327" duration="2153000" />
+      <workItem from="1520906363484" duration="714000" />
+      <workItem from="1521091714492" duration="6528000" />
+      <workItem from="1521163070341" duration="5877000" />
+      <workItem from="1521622542756" duration="2946000" />
+      <workItem from="1521683088181" duration="651000" />
+      <workItem from="1523154640409" duration="5937000" />
+      <workItem from="1523238254600" duration="1097000" />
+      <workItem from="1523242451528" duration="10721000" />
+      <workItem from="1523329772811" duration="3243000" />
+      <workItem from="1523346273225" duration="1828000" />
+      <workItem from="1524482757094" duration="3257000" />
+      <workItem from="1524808644343" duration="768000" />
+      <workItem from="1525658350829" duration="170000" />
+      <workItem from="1526553099828" duration="9860000" />
+      <workItem from="1526886037367" duration="10424000" />
+      <workItem from="1527055563887" duration="3724000" />
+      <workItem from="1527661425493" duration="617000" />
+      <workItem from="1528080413999" duration="4336000" />
+      <workItem from="1528105557318" duration="137000" />
+      <workItem from="1528106708813" duration="45000" />
+      <workItem from="1528107009885" duration="1022000" />
+      <workItem from="1528163928658" duration="1215000" />
+      <workItem from="1528176586939" duration="48000" />
+      <workItem from="1531731326167" duration="759000" />
+      <workItem from="1585541119899" duration="7882000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/fangxin/siwei/fangzhi/controller/IndexController.java</url>
+          <line>108</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/fangxin/siwei/fangzhi/controller/IndexController.java</url>
+          <line>109</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/fangxin/siwei/fangzhi/shiro/MyShiroRealm.java</url>
+          <line>64</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/fangxin/siwei/fangzhi/shiro/MyShiroRealm.java</url>
+          <line>78</line>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/siweierp$FangzhiApplication.ic" NAME="FangzhiApplication Coverage Results" MODIFIED="1585545210055" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>Spring</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>siweierp</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.6" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>Maven: com.alibaba:druid:1.1.2</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>
