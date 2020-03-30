@@ -6,3 +6,5 @@ target
 *.iml
 release.properties
 pom.xml.releaseBackup
+/target
+/.idea
