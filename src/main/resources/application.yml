@@ -19,18 +19,18 @@ spring:
       rollback-on-commit-failure: true
     datasource:
         driver-class-name: com.mysql.jdbc.Driver
-        #url: jdbc:mysql://127.0.0.1:3306/sw_db?useSSL=false&useUnicode=true&characterEncoding=utf8&allowMultiQueries=true
-        #password: root
-        url: jdbc:mysql://111.231.141.23:3306/sw_db?useSSL=false&useUnicode=true&characterEncoding=utf8&allowMultiQueries=true
+        url: jdbc:mysql://127.0.0.1:3306/sw_db?useSSL=false&useUnicode=true&characterEncoding=utf8&allowMultiQueries=true
+        password: '!@#123Qwe'
+      #url: jdbc:mysql://111.231.141.23:3306/sw_db?useSSL=false&useUnicode=true&characterEncoding=utf8&allowMultiQueries=true
         username: root
-        password: root_!@#123QWE
+      # password: root_!@#123QWE
         # 使用druid数据源
         type: com.alibaba.druid.pool.DruidDataSource
         # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
         filters: stat,wall,log4j
         # 初始化大小，最小，最大
         initialSize: 5
-        minIdle: 1
+        minIdle: 5
         maxActive: 20
         # 配置获取连接等待超时的时间
         maxWait: 60000
@@ -38,9 +38,9 @@ spring:
         timeBetweenEvictionRunsMillis: 60000
         # 配置一个连接在池中最小生存的时间，单位是毫秒
         minEvictableIdleTimeMillis: 300000
-        validationQuery: SELECT 1 FROM DUA
+        validationQuery: SELECT 1 FROM DUAL
         testWhileIdle: true
-        testOnBorrow: false
+        testOnBorrow: true
         testOnReturn: false
         # 打开PSCache，并且指定每个连接上PSCache的大小
         poolPreparedStatements: true

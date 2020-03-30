@@ -47,7 +47,8 @@ public class AccessFilter extends AuthorizationFilter {
         Map<String, Object> map = new HashMap<String, Object>();
         httpResponse = WebUtils.toHttp(response);
         httpRequest = WebUtils.toHttp(request);
-       /* if(isLoginRequest(httpRequest, httpResponse)){
+
+        /*if(isLoginRequest(httpRequest, httpResponse)){
             return true;
         }*/
         if(ShiroUtils.isLogin()){

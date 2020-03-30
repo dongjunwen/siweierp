@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 )*/
 @SpringBootApplication
 @EnableAutoConfiguration
-@EnableAdminServer
+//@EnableAdminServer
 @EnableTransactionManagement
 @ComponentScan("com.fangxin.siwei.fangzhi")
 public class FangzhiApplication {
