@@ -1,0 +1,8 @@
+.*
+!.gitignore
+!.gitkeep
+!.gitlab-ci.yml
+target
+*.iml
+release.properties
+pom.xml.releaseBackup
